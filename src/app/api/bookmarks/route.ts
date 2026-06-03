@@ -1,0 +1,178 @@
+import { NextRequest, NextResponse } from "next/server";
+import { prisma } from "@/lib/prisma";
+import { extractMetadata } from "@/lib/metadata";
+import { categorizeBookmark } from "@/lib/deepseek";
+import { auth } from "@/lib/auth";
+
+// Create bookmark (with metadata extraction + AI categorization)
+export async function POST(req: NextRequest) {
+  try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+    const userId = session.user.id;
+
+    const { url, title: customTitle, description: customDescription } = await req.json();
+
+    if (!url) {
+      return NextResponse.json({ error: "URL is required" }, { status: 400 });
+    }
+
+    // Step 1: Extract metadata
+    let title = "";
+    let description = "";
+    let coverImage = "";
+    let favicon = "";
+    let siteName = "";
+    let contentType = "webpage";
+    let metadata: Record<string, unknown> = {};
+
+    try {
+      const extracted = await extractMetadata(url);
+      title = extracted.title;
+      description = extracted.description || "";
+      coverImage = extracted.coverImage || "";
+      favicon = extracted.favicon || "";
+      siteName = extracted.siteName || "";
+      contentType = extracted.contentType;
+      metadata = extracted.specifics as Record<string, unknown>;
+    } catch {
+      try {
+        const parsed = new URL(url);
+        title = parsed.hostname + parsed.pathname;
+        siteName = parsed.hostname;
+      } catch {
+        title = url;
+      }
+    }
+
+    // Step 2: AI categorization
+    let aiTags: string[] = [];
+    let aiCategory = "";
+    let aiSummary = "";
+
+    try {
+      const aiResult = await categorizeBookmark({
+        title,
+        description,
+        siteName,
+        contentType,
+      });
+      aiTags = aiResult.tags || [];
+      aiCategory = aiResult.category || "";
+      aiSummary = aiResult.summary || "";
+    } catch (err) {
+      console.error("AI categorization failed:", err);
+    }
+
+    // Step 3: Upsert tags (scoped to user)
+    const tagRecords = await Promise.all(
+      aiTags.map(async (tagName) => {
+        const slug = tagName.toLowerCase().replace(/\s+/g, "-");
+        return prisma.tag.upsert({
+          where: { userId_slug: { userId, slug } },
+          update: {},
+          create: { name: tagName, slug, userId },
+        });
+      })
+    );
+
+    // Step 4: Find or create category (only top level)
+    let categoryId: string | null = null;
+    if (aiCategory) {
+      const topCategory = aiCategory.split(">")[0].trim();
+      const catSlug = topCategory.toLowerCase().replace(/\s+/g, "-");
+      const category = await prisma.category.upsert({
+        where: { slug: catSlug },
+        update: {},
+        create: { name: topCategory, slug: catSlug, order: 0 },
+      });
+      categoryId = category.id;
+    }
+
+    // Step 5: Create bookmark
+    const bookmark = await prisma.bookmark.create({
+      data: {
+        url,
+        title: customTitle || title,
+        description: customDescription || description || aiSummary || "",
+        coverImage,
+        favicon,
+        siteName,
+        contentType,
+        metadata: JSON.stringify(metadata),
+        aiSummary,
+        categoryId,
+        userId,
+        tags: {
+          create: tagRecords.map((tag) => ({
+            tagId: tag.id,
+          })),
+        },
+      },
+      include: {
+        tags: { include: { tag: true } },
+        category: true,
+      },
+    });
+
+    return NextResponse.json(bookmark, { status: 201 });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Failed to create bookmark";
+    console.error("Create bookmark error:", err);
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}
+
+// List bookmarks with pagination, filtering, and search
+export async function GET(req: NextRequest) {
+  try {
+    const session = await auth();
+    if (!session?.user?.id) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
+    const { searchParams } = new URL(req.url);
+    const page = parseInt(searchParams.get("page") || "1");
+    const limit = parseInt(searchParams.get("limit") || "20");
+    const status = searchParams.get("status") || undefined;
+    const categoryId = searchParams.get("categoryId") || undefined;
+    const search = searchParams.get("q") || undefined;
+
+    const where: Record<string, unknown> = { userId: session.user.id };
+
+    if (status) where.status = status;
+    if (categoryId) where.categoryId = categoryId;
+    if (search) {
+      where.OR = [
+        { title: { contains: search } },
+        { description: { contains: search } },
+        { aiSummary: { contains: search } },
+        { tags: { some: { tag: { name: { contains: search } } } } },
+      ];
+    }
+
+    const [bookmarks, total] = await Promise.all([
+      prisma.bookmark.findMany({
+        where,
+        include: {
+          tags: { include: { tag: true } },
+          category: true,
+        },
+        orderBy: [{ order: "asc" }, { createdAt: "desc" }],
+        skip: (page - 1) * limit,
+        take: limit,
+      }),
+      prisma.bookmark.count({ where }),
+    ]);
+
+    return NextResponse.json({
+      data: bookmarks,
+      pagination: { page, limit, total, totalPages: Math.ceil(total / limit) },
+    });
+  } catch (err) {
+    const message = err instanceof Error ? err.message : "Failed to fetch bookmarks";
+    return NextResponse.json({ error: message }, { status: 500 });
+  }
+}

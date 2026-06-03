@@ -1,0 +1,59 @@
+{
+  "version": 1,
+  "skills": {
+    "feedback-mastery": {
+      "source": "softaworks/agent-toolkit",
+      "sourceType": "github",
+      "skillPath": "skills/feedback-mastery/SKILL.md",
+      "computedHash": "29e2af48dc587059f389287ae51ba0ecd7b9c853223ddb9f679834edd91e5cae"
+    },
+    "find-skills": {
+      "source": "vercel-labs/skills",
+      "sourceType": "github",
+      "skillPath": "skills/find-skills/SKILL.md",
+      "computedHash": "645b891da1edbae76ab79c7b088d4e73397464f8396edaf773c0e01971ce75d6"
+    },
+    "frontend-design": {
+      "source": "anthropics/skills",
+      "sourceType": "github",
+      "skillPath": "skills/frontend-design/SKILL.md",
+      "computedHash": "516bd2154eb843a8240e43d5b285229129853114ad7075a5e141e1c08e408c84"
+    },
+    "git-guardrails-claude-code": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/misc/git-guardrails-claude-code/SKILL.md",
+      "computedHash": "a04bf71be9abc44ca3b00e2f1740b37d2e471abadd20d43a31bccff7135baedf"
+    },
+    "grill-me": {
+      "source": "mattpocock/skills",
+      "sourceType": "github",
+      "skillPath": "skills/productivity/grill-me/SKILL.md",
+      "computedHash": "daf64ca15f4fa081a6747766db538e2dbd1131725ed4fcdd3d538dc62c7035ba"
+    },
+    "host-panel": {
+      "source": "wyattowalsh/agents",
+      "sourceType": "github",
+      "skillPath": "skills/host-panel/SKILL.md",
+      "computedHash": "16d7d1bef45c96e302a09b27558199a0dafebc0b1dfe2a5266145538e12bcb25"
+    },
+    "quiz-creator": {
+      "source": "szeyu/vibe-study-skills",
+      "sourceType": "github",
+      "skillPath": "skills/quiz-creator/SKILL.md",
+      "computedHash": "f241d7e18f2f7e79dca4943e19814b2988dd6c465b6c202a5e74304097bb84ba"
+    },
+    "socratic": {
+      "source": "neurofoo/agent-skills",
+      "sourceType": "github",
+      "skillPath": "socratic/SKILL.md",
+      "computedHash": "b669e487a62291cc83c70f7cfc7466fb5d51c5e6a9ba9c5cc3fb3d79c4ec404b"
+    },
+    "vercel-react-best-practices": {
+      "source": "vercel-labs/agent-skills",
+      "sourceType": "github",
+      "skillPath": "skills/react-best-practices/SKILL.md",
+      "computedHash": "ca7b0c0c6e5f2750043f7f0cd72d16ac4e2abc48f9b5500d047a4b77a2506212"
+    }
+  }
+}
