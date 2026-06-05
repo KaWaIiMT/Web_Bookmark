@@ -24,6 +24,7 @@ import { MasonryGallery } from "@/components/MasonryGallery";
 import { TimelineView } from "@/components/TimelineView";
 import { DashboardView } from "@/components/DashboardView";
 import { WeeklyReport } from "@/components/WeeklyReport";
+import { VoiceSearch } from "@/components/VoiceSearch";
 import { useRouter } from "next/navigation";
 import type { BookmarkData, PaginatedResponse, ViewType } from "@/lib/types";
 
@@ -217,11 +218,17 @@ export default function Home() {
           <div className="flex-1 max-w-md relative ml-2">
             <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--foreground)]/15" />
             <Input
-              placeholder="搜索书签..."
+              placeholder={searchQuery ? undefined : "搜索书签..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
-              className="pl-10 h-9 rounded-xl bg-[var(--input)] border-0 focus:bg-[var(--card)] focus:ring-2 focus:ring-[var(--accent)]/10 text-[13px] font-sans placeholder:text-[var(--foreground)]/20"
+              className="pl-10 pr-10 h-9 rounded-xl bg-[var(--input)] border-0 focus:bg-[var(--card)] focus:ring-2 focus:ring-[var(--accent)]/10 text-[13px] font-sans placeholder:text-[var(--foreground)]/20"
             />
+            <div className="absolute right-2.5 top-1/2 -translate-y-1/2">
+              <VoiceSearch
+                onResult={(text) => setSearchQuery(text)}
+                className="p-1 rounded-lg text-[var(--foreground)]/25 hover:text-[var(--accent)] hover:bg-[var(--accent)]/5 transition-all"
+              />
+            </div>
           </div>
 
           {/* View tabs */}
