@@ -60,7 +60,7 @@ export interface PaginatedResponse<T> {
   };
 }
 
-export type ViewType = "grid" | "gallery" | "dashboard" | "timeline" | "weekly";
+export type ViewType = "grid" | "gallery" | "discover" | "learning-path" | "dashboard" | "timeline" | "weekly";
 
 export interface TimelineGroup {
   year: number;

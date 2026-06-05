@@ -60,7 +60,10 @@ export const ModelName = {
   BookmarkTag: 'BookmarkTag',
   Category: 'Category',
   Collection: 'Collection',
-  CollectionBookmark: 'CollectionBookmark'
+  CollectionBookmark: 'CollectionBookmark',
+  LearningPath: 'LearningPath',
+  LearningPathItem: 'LearningPathItem',
+  PathNote: 'PathNote'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -137,6 +140,7 @@ export const BookmarkScalarFieldEnum = {
   metadata: 'metadata',
   aiSummary: 'aiSummary',
   shareToken: 'shareToken',
+  embedding: 'embedding',
   status: 'status',
   categoryId: 'categoryId',
   userId: 'userId',
@@ -199,6 +203,48 @@ export const CollectionBookmarkScalarFieldEnum = {
 } as const
 
 export type CollectionBookmarkScalarFieldEnum = (typeof CollectionBookmarkScalarFieldEnum)[keyof typeof CollectionBookmarkScalarFieldEnum]
+
+
+export const LearningPathScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  description: 'description',
+  targetTags: 'targetTags',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  completedAt: 'completedAt'
+} as const
+
+export type LearningPathScalarFieldEnum = (typeof LearningPathScalarFieldEnum)[keyof typeof LearningPathScalarFieldEnum]
+
+
+export const LearningPathItemScalarFieldEnum = {
+  id: 'id',
+  pathId: 'pathId',
+  bookmarkId: 'bookmarkId',
+  order: 'order',
+  stage: 'stage',
+  difficulty: 'difficulty',
+  estimatedMinutes: 'estimatedMinutes',
+  isOptional: 'isOptional',
+  isCompleted: 'isCompleted',
+  completedAt: 'completedAt'
+} as const
+
+export type LearningPathItemScalarFieldEnum = (typeof LearningPathItemScalarFieldEnum)[keyof typeof LearningPathItemScalarFieldEnum]
+
+
+export const PathNoteScalarFieldEnum = {
+  id: 'id',
+  itemId: 'itemId',
+  content: 'content',
+  type: 'type',
+  createdAt: 'createdAt'
+} as const
+
+export type PathNoteScalarFieldEnum = (typeof PathNoteScalarFieldEnum)[keyof typeof PathNoteScalarFieldEnum]
 
 
 export const SortOrder = {

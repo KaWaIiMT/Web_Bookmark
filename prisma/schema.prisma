@@ -18,6 +18,7 @@ model User {
   bookmarks     Bookmark[]
   collections   Collection[]
   tags          Tag[]
+  learningPaths LearningPath[]
   createdAt     DateTime     @default(now())
 }
 
@@ -67,6 +68,7 @@ model Bookmark {
   metadata    String?
   aiSummary   String?
   shareToken  String?             @unique
+  embedding   String?
   status      String              @default("unread")
   categoryId  String?
   category    Category?           @relation(fields: [categoryId], references: [id])
@@ -74,6 +76,7 @@ model Bookmark {
   user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   tags        BookmarkTag[]
   collections CollectionBookmark[]
+  pathItems   LearningPathItem[]
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
   readAt      DateTime?
@@ -134,4 +137,46 @@ model CollectionBookmark {
   addedAt      DateTime   @default(now())
 
   @@id([collectionId, bookmarkId])
+}
+
+model LearningPath {
+  id          String   @id @default(cuid())
+  userId      String
+  title       String
+  description String?
+  targetTags  String?   // JSON array of tag names
+  status      String   @default("active")
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  completedAt DateTime?
+
+  user  User               @relation(fields: [userId], references: [id], onDelete: Cascade)
+  items LearningPathItem[]
+}
+
+model LearningPathItem {
+  id               String   @id @default(cuid())
+  pathId           String
+  bookmarkId       String
+  order            Int
+  stage            String?
+  difficulty       String?
+  estimatedMinutes Int?
+  isOptional       Boolean  @default(false)
+  isCompleted      Boolean  @default(false)
+  completedAt      DateTime?
+
+  path     LearningPath @relation(fields: [pathId], references: [id], onDelete: Cascade)
+  bookmark Bookmark     @relation(fields: [bookmarkId], references: [id], onDelete: Cascade)
+  notes    PathNote[]
+}
+
+model PathNote {
+  id        String   @id @default(cuid())
+  itemId    String
+  content   String
+  type      String   @default("takeaway")
+  createdAt DateTime @default(now())
+
+  item LearningPathItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
 }

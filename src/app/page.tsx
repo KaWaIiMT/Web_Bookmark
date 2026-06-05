@@ -24,6 +24,9 @@ import { MasonryGallery } from "@/components/MasonryGallery";
 import { TimelineView } from "@/components/TimelineView";
 import { DashboardView } from "@/components/DashboardView";
 import { WeeklyReport } from "@/components/WeeklyReport";
+import { DiscoverView } from "@/components/DiscoverView";
+import { LearningPathListView } from "@/components/LearningPathListView";
+import { LearningPathDetailView } from "@/components/LearningPathDetailView";
 import { VoiceSearch } from "@/components/VoiceSearch";
 import { useRouter } from "next/navigation";
 import type { BookmarkData, PaginatedResponse, ViewType } from "@/lib/types";
@@ -49,6 +52,7 @@ export default function Home() {
   const [cardRect, setCardRect] = useState<DOMRect | null>(null);
   const [activeCollection, setActiveCollection] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<ViewType>("grid");
+  const [selectedPathId, setSelectedPathId] = useState<string | null>(null);
 
   const fetchBookmarks = useCallback(async (signal?: AbortSignal) => {
     setLoading(true);
@@ -338,9 +342,29 @@ export default function Home() {
             <TimelineView onCardClick={handleCardClick} />
           )}
 
+          {/* Discover: self-contained data fetching */}
+          {activeView === "discover" && (
+            <DiscoverView onCardClick={handleCardClick} />
+          )}
+
           {/* Dashboard: self-contained data fetching */}
           {activeView === "dashboard" && (
             <DashboardView />
+          )}
+
+          {/* Learning path: list or detail view */}
+          {activeView === "learning-path" && (
+            selectedPathId ? (
+              <LearningPathDetailView
+                pathId={selectedPathId}
+                onBack={() => setSelectedPathId(null)}
+              />
+            ) : (
+              <LearningPathListView
+                onSelectPath={setSelectedPathId}
+                onCreateNew={() => {}}
+              />
+            )
           )}
 
           {/* Weekly report: self-contained data fetching */}
@@ -393,6 +417,15 @@ export default function Home() {
           setDeleteTarget(bookmarks.find((b) => b.id === id) || null);
         }}
         onShare={handleShare}
+        onSelectBookmark={(id) => {
+          // "Infinite exploration" — switch detail to the recommended bookmark
+          const bm = bookmarks.find((b) => b.id === id);
+          if (bm) {
+            setSelectedBookmark(bm);
+            // Card rect is stale; use a small center-of-screen rect for a subtle animation
+            setCardRect(null);
+          }
+        }}
       />
     </div>
   );

@@ -195,6 +195,7 @@ export type UserWhereInput = {
   bookmarks?: Prisma.BookmarkListRelationFilter
   collections?: Prisma.CollectionListRelationFilter
   tags?: Prisma.TagListRelationFilter
+  learningPaths?: Prisma.LearningPathListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -209,6 +210,7 @@ export type UserOrderByWithRelationInput = {
   bookmarks?: Prisma.BookmarkOrderByRelationAggregateInput
   collections?: Prisma.CollectionOrderByRelationAggregateInput
   tags?: Prisma.TagOrderByRelationAggregateInput
+  learningPaths?: Prisma.LearningPathOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -226,6 +228,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   bookmarks?: Prisma.BookmarkListRelationFilter
   collections?: Prisma.CollectionListRelationFilter
   tags?: Prisma.TagListRelationFilter
+  learningPaths?: Prisma.LearningPathListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -264,6 +267,7 @@ export type UserCreateInput = {
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
   tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -278,6 +282,7 @@ export type UserUncheckedCreateInput = {
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -292,6 +297,7 @@ export type UserUpdateInput = {
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
   tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -306,6 +312,7 @@ export type UserUncheckedUpdateInput = {
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -453,6 +460,20 @@ export type UserUpdateOneRequiredWithoutCollectionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutCollectionsInput, Prisma.UserUpdateWithoutCollectionsInput>, Prisma.UserUncheckedUpdateWithoutCollectionsInput>
 }
 
+export type UserCreateNestedOneWithoutLearningPathsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLearningPathsInput, Prisma.UserUncheckedCreateWithoutLearningPathsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLearningPathsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutLearningPathsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutLearningPathsInput, Prisma.UserUncheckedCreateWithoutLearningPathsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutLearningPathsInput
+  upsert?: Prisma.UserUpsertWithoutLearningPathsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutLearningPathsInput, Prisma.UserUpdateWithoutLearningPathsInput>, Prisma.UserUncheckedUpdateWithoutLearningPathsInput>
+}
+
 export type UserCreateWithoutAccountsInput = {
   id?: string
   name?: string | null
@@ -464,6 +485,7 @@ export type UserCreateWithoutAccountsInput = {
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
   tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -477,6 +499,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -506,6 +529,7 @@ export type UserUpdateWithoutAccountsInput = {
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
   tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -519,6 +543,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -532,6 +557,7 @@ export type UserCreateWithoutSessionsInput = {
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
   tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -545,6 +571,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -574,6 +601,7 @@ export type UserUpdateWithoutSessionsInput = {
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
   tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -587,6 +615,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBookmarksInput = {
@@ -600,6 +629,7 @@ export type UserCreateWithoutBookmarksInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
   tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBookmarksInput = {
@@ -613,6 +643,7 @@ export type UserUncheckedCreateWithoutBookmarksInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBookmarksInput = {
@@ -642,6 +673,7 @@ export type UserUpdateWithoutBookmarksInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
   tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBookmarksInput = {
@@ -655,6 +687,7 @@ export type UserUncheckedUpdateWithoutBookmarksInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTagsInput = {
@@ -668,6 +701,7 @@ export type UserCreateWithoutTagsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTagsInput = {
@@ -681,6 +715,7 @@ export type UserUncheckedCreateWithoutTagsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTagsInput = {
@@ -710,6 +745,7 @@ export type UserUpdateWithoutTagsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTagsInput = {
@@ -723,6 +759,7 @@ export type UserUncheckedUpdateWithoutTagsInput = {
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
   collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCollectionsInput = {
@@ -736,6 +773,7 @@ export type UserCreateWithoutCollectionsInput = {
   sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
   bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
   tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCollectionsInput = {
@@ -749,6 +787,7 @@ export type UserUncheckedCreateWithoutCollectionsInput = {
   sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
   bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCollectionsInput = {
@@ -778,6 +817,7 @@ export type UserUpdateWithoutCollectionsInput = {
   sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
   bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
   tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCollectionsInput = {
@@ -790,6 +830,79 @@ export type UserUncheckedUpdateWithoutCollectionsInput = {
   accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
   sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
   bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutLearningPathsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutLearningPathsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  image?: string | null
+  createdAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutLearningPathsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutLearningPathsInput, Prisma.UserUncheckedCreateWithoutLearningPathsInput>
+}
+
+export type UserUpsertWithoutLearningPathsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutLearningPathsInput, Prisma.UserUncheckedUpdateWithoutLearningPathsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutLearningPathsInput, Prisma.UserUncheckedCreateWithoutLearningPathsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutLearningPathsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutLearningPathsInput, Prisma.UserUncheckedUpdateWithoutLearningPathsInput>
+}
+
+export type UserUpdateWithoutLearningPathsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutLearningPathsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
   tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
 }
 
@@ -804,6 +917,7 @@ export type UserCountOutputType = {
   bookmarks: number
   collections: number
   tags: number
+  learningPaths: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -812,6 +926,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   bookmarks?: boolean | UserCountOutputTypeCountBookmarksArgs
   collections?: boolean | UserCountOutputTypeCountCollectionsArgs
   tags?: boolean | UserCountOutputTypeCountTagsArgs
+  learningPaths?: boolean | UserCountOutputTypeCountLearningPathsArgs
 }
 
 /**
@@ -859,6 +974,13 @@ export type UserCountOutputTypeCountTagsArgs<ExtArgs extends runtime.Types.Exten
   where?: Prisma.TagWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountLearningPathsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.LearningPathWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -872,6 +994,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   bookmarks?: boolean | Prisma.User$bookmarksArgs<ExtArgs>
   collections?: boolean | Prisma.User$collectionsArgs<ExtArgs>
   tags?: boolean | Prisma.User$tagsArgs<ExtArgs>
+  learningPaths?: boolean | Prisma.User$learningPathsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -909,6 +1032,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   bookmarks?: boolean | Prisma.User$bookmarksArgs<ExtArgs>
   collections?: boolean | Prisma.User$collectionsArgs<ExtArgs>
   tags?: boolean | Prisma.User$tagsArgs<ExtArgs>
+  learningPaths?: boolean | Prisma.User$learningPathsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -922,6 +1046,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     bookmarks: Prisma.$BookmarkPayload<ExtArgs>[]
     collections: Prisma.$CollectionPayload<ExtArgs>[]
     tags: Prisma.$TagPayload<ExtArgs>[]
+    learningPaths: Prisma.$LearningPathPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1329,6 +1454,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   bookmarks<T extends Prisma.User$bookmarksArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$bookmarksArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$BookmarkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   collections<T extends Prisma.User$collectionsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$collectionsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$CollectionPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   tags<T extends Prisma.User$tagsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$tagsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$TagPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  learningPaths<T extends Prisma.User$learningPathsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$learningPathsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LearningPathPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -1872,6 +1998,30 @@ export type User$tagsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs 
   take?: number
   skip?: number
   distinct?: Prisma.TagScalarFieldEnum | Prisma.TagScalarFieldEnum[]
+}
+
+/**
+ * User.learningPaths
+ */
+export type User$learningPathsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the LearningPath
+   */
+  select?: Prisma.LearningPathSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the LearningPath
+   */
+  omit?: Prisma.LearningPathOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.LearningPathInclude<ExtArgs> | null
+  where?: Prisma.LearningPathWhereInput
+  orderBy?: Prisma.LearningPathOrderByWithRelationInput | Prisma.LearningPathOrderByWithRelationInput[]
+  cursor?: Prisma.LearningPathWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.LearningPathScalarFieldEnum | Prisma.LearningPathScalarFieldEnum[]
 }
 
 /**

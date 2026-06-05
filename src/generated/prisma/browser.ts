@@ -67,3 +67,18 @@ export type Collection = Prisma.CollectionModel
  * 
  */
 export type CollectionBookmark = Prisma.CollectionBookmarkModel
+/**
+ * Model LearningPath
+ * 
+ */
+export type LearningPath = Prisma.LearningPathModel
+/**
+ * Model LearningPathItem
+ * 
+ */
+export type LearningPathItem = Prisma.LearningPathItemModel
+/**
+ * Model PathNote
+ * 
+ */
+export type PathNote = Prisma.PathNoteModel

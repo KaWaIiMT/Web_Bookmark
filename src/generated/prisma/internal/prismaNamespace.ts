@@ -393,7 +393,10 @@ export const ModelName = {
   BookmarkTag: 'BookmarkTag',
   Category: 'Category',
   Collection: 'Collection',
-  CollectionBookmark: 'CollectionBookmark'
+  CollectionBookmark: 'CollectionBookmark',
+  LearningPath: 'LearningPath',
+  LearningPathItem: 'LearningPathItem',
+  PathNote: 'PathNote'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -409,7 +412,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "bookmark" | "tag" | "bookmarkTag" | "category" | "collection" | "collectionBookmark"
+    modelProps: "user" | "account" | "session" | "verificationToken" | "bookmark" | "tag" | "bookmarkTag" | "category" | "collection" | "collectionBookmark" | "learningPath" | "learningPathItem" | "pathNote"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1153,6 +1156,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    LearningPath: {
+      payload: Prisma.$LearningPathPayload<ExtArgs>
+      fields: Prisma.LearningPathFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LearningPathFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LearningPathFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathPayload>
+        }
+        findFirst: {
+          args: Prisma.LearningPathFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LearningPathFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathPayload>
+        }
+        findMany: {
+          args: Prisma.LearningPathFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathPayload>[]
+        }
+        create: {
+          args: Prisma.LearningPathCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathPayload>
+        }
+        createMany: {
+          args: Prisma.LearningPathCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LearningPathCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathPayload>[]
+        }
+        delete: {
+          args: Prisma.LearningPathDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathPayload>
+        }
+        update: {
+          args: Prisma.LearningPathUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathPayload>
+        }
+        deleteMany: {
+          args: Prisma.LearningPathDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LearningPathUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LearningPathUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathPayload>[]
+        }
+        upsert: {
+          args: Prisma.LearningPathUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathPayload>
+        }
+        aggregate: {
+          args: Prisma.LearningPathAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLearningPath>
+        }
+        groupBy: {
+          args: Prisma.LearningPathGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LearningPathGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LearningPathCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LearningPathCountAggregateOutputType> | number
+        }
+      }
+    }
+    LearningPathItem: {
+      payload: Prisma.$LearningPathItemPayload<ExtArgs>
+      fields: Prisma.LearningPathItemFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.LearningPathItemFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathItemPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.LearningPathItemFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathItemPayload>
+        }
+        findFirst: {
+          args: Prisma.LearningPathItemFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathItemPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.LearningPathItemFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathItemPayload>
+        }
+        findMany: {
+          args: Prisma.LearningPathItemFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathItemPayload>[]
+        }
+        create: {
+          args: Prisma.LearningPathItemCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathItemPayload>
+        }
+        createMany: {
+          args: Prisma.LearningPathItemCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.LearningPathItemCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathItemPayload>[]
+        }
+        delete: {
+          args: Prisma.LearningPathItemDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathItemPayload>
+        }
+        update: {
+          args: Prisma.LearningPathItemUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathItemPayload>
+        }
+        deleteMany: {
+          args: Prisma.LearningPathItemDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.LearningPathItemUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.LearningPathItemUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathItemPayload>[]
+        }
+        upsert: {
+          args: Prisma.LearningPathItemUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$LearningPathItemPayload>
+        }
+        aggregate: {
+          args: Prisma.LearningPathItemAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateLearningPathItem>
+        }
+        groupBy: {
+          args: Prisma.LearningPathItemGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LearningPathItemGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.LearningPathItemCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.LearningPathItemCountAggregateOutputType> | number
+        }
+      }
+    }
+    PathNote: {
+      payload: Prisma.$PathNotePayload<ExtArgs>
+      fields: Prisma.PathNoteFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.PathNoteFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathNotePayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.PathNoteFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathNotePayload>
+        }
+        findFirst: {
+          args: Prisma.PathNoteFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathNotePayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.PathNoteFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathNotePayload>
+        }
+        findMany: {
+          args: Prisma.PathNoteFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathNotePayload>[]
+        }
+        create: {
+          args: Prisma.PathNoteCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathNotePayload>
+        }
+        createMany: {
+          args: Prisma.PathNoteCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.PathNoteCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathNotePayload>[]
+        }
+        delete: {
+          args: Prisma.PathNoteDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathNotePayload>
+        }
+        update: {
+          args: Prisma.PathNoteUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathNotePayload>
+        }
+        deleteMany: {
+          args: Prisma.PathNoteDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.PathNoteUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.PathNoteUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathNotePayload>[]
+        }
+        upsert: {
+          args: Prisma.PathNoteUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$PathNotePayload>
+        }
+        aggregate: {
+          args: Prisma.PathNoteAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregatePathNote>
+        }
+        groupBy: {
+          args: Prisma.PathNoteGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PathNoteGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.PathNoteCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.PathNoteCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1250,6 +1475,7 @@ export const BookmarkScalarFieldEnum = {
   metadata: 'metadata',
   aiSummary: 'aiSummary',
   shareToken: 'shareToken',
+  embedding: 'embedding',
   status: 'status',
   categoryId: 'categoryId',
   userId: 'userId',
@@ -1312,6 +1538,48 @@ export const CollectionBookmarkScalarFieldEnum = {
 } as const
 
 export type CollectionBookmarkScalarFieldEnum = (typeof CollectionBookmarkScalarFieldEnum)[keyof typeof CollectionBookmarkScalarFieldEnum]
+
+
+export const LearningPathScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  title: 'title',
+  description: 'description',
+  targetTags: 'targetTags',
+  status: 'status',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt',
+  completedAt: 'completedAt'
+} as const
+
+export type LearningPathScalarFieldEnum = (typeof LearningPathScalarFieldEnum)[keyof typeof LearningPathScalarFieldEnum]
+
+
+export const LearningPathItemScalarFieldEnum = {
+  id: 'id',
+  pathId: 'pathId',
+  bookmarkId: 'bookmarkId',
+  order: 'order',
+  stage: 'stage',
+  difficulty: 'difficulty',
+  estimatedMinutes: 'estimatedMinutes',
+  isOptional: 'isOptional',
+  isCompleted: 'isCompleted',
+  completedAt: 'completedAt'
+} as const
+
+export type LearningPathItemScalarFieldEnum = (typeof LearningPathItemScalarFieldEnum)[keyof typeof LearningPathItemScalarFieldEnum]
+
+
+export const PathNoteScalarFieldEnum = {
+  id: 'id',
+  itemId: 'itemId',
+  content: 'content',
+  type: 'type',
+  createdAt: 'createdAt'
+} as const
+
+export type PathNoteScalarFieldEnum = (typeof PathNoteScalarFieldEnum)[keyof typeof PathNoteScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1490,6 +1758,9 @@ export type GlobalOmitConfig = {
   category?: Prisma.CategoryOmit
   collection?: Prisma.CollectionOmit
   collectionBookmark?: Prisma.CollectionBookmarkOmit
+  learningPath?: Prisma.LearningPathOmit
+  learningPathItem?: Prisma.LearningPathItemOmit
+  pathNote?: Prisma.PathNoteOmit
 }
 
 /* Types for Logging */

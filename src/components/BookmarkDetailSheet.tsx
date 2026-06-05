@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import { RelatedBookmarks } from "@/components/RelatedBookmarks";
 import { cn } from "@/lib/utils";
 import type { BookmarkData } from "@/lib/types";
 
@@ -31,6 +32,7 @@ interface BookmarkDetailSheetProps {
   onStatusChange: (id: string, status: string) => void;
   onDelete: (id: string) => void;
   onShare?: (id: string) => void;
+  onSelectBookmark?: (id: string) => void;
 }
 
 export function BookmarkDetailSheet({
@@ -41,6 +43,7 @@ export function BookmarkDetailSheet({
   onStatusChange,
   onDelete,
   onShare,
+  onSelectBookmark,
 }: BookmarkDetailSheetProps) {
   return (
     <AnimatePresence>
@@ -209,6 +212,12 @@ export function BookmarkDetailSheet({
                     </div>
                   </div>
                 )}
+
+                {/* Related Recommendations */}
+                <RelatedBookmarks
+                  bookmarkId={bookmark.id}
+                  onSelect={(id) => onSelectBookmark?.(id)}
+                />
 
                 <Separator className="bg-[var(--border)]" />
 
