@@ -1,5 +1,6 @@
 "use client";
 
+import React from "react";
 import { cn } from "@/lib/utils";
 import type { MatrixSection } from "@/lib/comparisons";
 
@@ -46,7 +47,7 @@ export function CompareMatrix({ sections, bookmarkLabels }: CompareMatrixProps) 
           </thead>
           <tbody>
             {sections.map((section) => (
-              <>
+              <React.Fragment key={section.title}>
                 {/* Section header */}
                 <tr key={section.title} className="bg-[var(--muted)]/50">
                   <td
@@ -78,7 +79,7 @@ export function CompareMatrix({ sections, bookmarkLabels }: CompareMatrixProps) 
                     })}
                   </tr>
                 ))}
-              </>
+              </React.Fragment>
             ))}
           </tbody>
         </table>

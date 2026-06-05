@@ -87,7 +87,7 @@ export default function Home() {
     const controller = new AbortController();
     fetchBookmarks(controller.signal);
     return () => {
-      try { controller.abort(); } catch {}
+      try { controller.abort(); } catch { /* ignore — already aborted */ }
     };
   }, [fetchBookmarks, isReady, activeView]);
 
