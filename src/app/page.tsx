@@ -27,6 +27,7 @@ import { WeeklyReport } from "@/components/WeeklyReport";
 import { DiscoverView } from "@/components/DiscoverView";
 import { LearningPathListView } from "@/components/LearningPathListView";
 import { LearningPathDetailView } from "@/components/LearningPathDetailView";
+import { CompareView } from "@/components/CompareView";
 import { VoiceSearch } from "@/components/VoiceSearch";
 import { useRouter } from "next/navigation";
 import type { BookmarkData, PaginatedResponse, ViewType } from "@/lib/types";
@@ -365,6 +366,11 @@ export default function Home() {
                 onCreateNew={() => {}}
               />
             )
+          )}
+
+          {/* Compare: self-contained data fetching */}
+          {activeView === "compare" && (
+            <CompareView onBack={() => setActiveView("grid")} />
           )}
 
           {/* Weekly report: self-contained data fetching */}
