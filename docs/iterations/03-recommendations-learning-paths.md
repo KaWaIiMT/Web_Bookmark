@@ -48,9 +48,13 @@
 - `src/components/DiscoverView.tsx` — 跨领域/Trending/每日精选三模式
 - 顶部 ViewTabs 新增「发现」和「学习路径」两个标签
 
-### 4. 横向对比（本次迭代开始实现）
+### 4. 横向对比（AI 深度分析）
 
-详见 `docs/功能开发/04-横向对比.md`。
+- `src/lib/comparisons.ts` — AI 对比分析引擎（DeepSeek V4 Flash，五维度评分）
+- `src/app/api/comparisons/route.ts` — POST 2-5 篇书签对比，返回雷达图 + 矩阵表 + 评语
+- `src/components/CompareView.tsx` — 主视图（书签选择 → AI 分析 → 结果展示 → Markdown 导出）
+- `src/components/CompareRadar.tsx` — Recharts RadarChart 五维度雷达图
+- `src/components/CompareMatrix.tsx` — 对比矩阵表（分组展示 + 差异单元格红/黄高亮）
 
 ---
 
