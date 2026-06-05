@@ -9,10 +9,10 @@ import { cn } from "@/lib/utils";
 import type { BookmarkData } from "@/lib/types";
 
 const STATUS_CONFIG: Record<string, { label: string; icon: typeof Clock; className: string; dotColor: string }> = {
-  unread: { label: "待读", icon: Clock, className: "bg-amber-100/60 text-amber-700 border-amber-200/40", dotColor: "bg-amber-400" },
+  unread: { label: "待读", icon: Clock, className: "bg-amber-100/60 text-amber-700 border-amber-200/40 dark:bg-amber-500/10 dark:text-amber-400 dark:border-amber-500/20", dotColor: "bg-amber-400" },
   reading: { label: "在读", icon: BookOpen, className: "bg-[#b76e4b]/10 text-[#b76e4b] border-[#b76e4b]/20", dotColor: "bg-[#b76e4b]" },
-  read: { label: "已读", icon: CheckCircle2, className: "bg-emerald-100/60 text-emerald-700 border-emerald-200/40", dotColor: "bg-emerald-400" },
-  archived: { label: "归档", icon: Archive, className: "bg-zinc-100/60 text-zinc-400 border-zinc-200/40", dotColor: "bg-zinc-300" },
+  read: { label: "已读", icon: CheckCircle2, className: "bg-emerald-100/60 text-emerald-700 border-emerald-200/40 dark:bg-emerald-500/10 dark:text-emerald-400 dark:border-emerald-500/20", dotColor: "bg-emerald-400" },
+  archived: { label: "归档", icon: Archive, className: "bg-zinc-100/60 text-zinc-400 border-zinc-200/40 dark:bg-zinc-500/10 dark:text-zinc-500 dark:border-zinc-500/20", dotColor: "bg-zinc-300" },
 };
 
 function safeURL(url: string): string {
@@ -46,7 +46,7 @@ export function BookmarkDetailSheet({
         <>
           {/* Backdrop */}
           <motion.div
-            className="fixed inset-0 z-40 bg-[#2c2c2c]/5 backdrop-blur-sm"
+            className="fixed inset-0 z-40 bg-[var(--foreground)]/5 backdrop-blur-sm"
             initial={{ opacity: 0 }}
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
@@ -56,7 +56,7 @@ export function BookmarkDetailSheet({
 
           {/* Expanding card -> detail panel */}
           <motion.div
-            className="fixed z-50 bg-[#f5f3f0]/95 backdrop-blur-xl border-l border-[#2c2c2c]/[0.04] shadow-[0_20px_60px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col"
+            className="fixed z-50 bg-[var(--background)]/95 backdrop-blur-xl border-l border-[var(--border)] shadow-[0_20px_60px_rgba(0,0,0,0.08)] overflow-hidden flex flex-col"
             initial={
               cardRect
                 ? {
@@ -109,7 +109,7 @@ export function BookmarkDetailSheet({
           >
             {/* Cover Image */}
             {bookmark.coverImage && (
-              <div className="aspect-video bg-[#e8e4df] shrink-0">
+              <div className="aspect-video bg-[var(--muted)] shrink-0">
                 <img
                   src={bookmark.coverImage.startsWith("//") ? `https:${bookmark.coverImage}` : bookmark.coverImage}
                   alt={bookmark.title}
@@ -123,9 +123,9 @@ export function BookmarkDetailSheet({
             {/* Close button */}
             <button
               onClick={onClose}
-              className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-[#2c2c2c]/5 hover:bg-[#2c2c2c]/10 flex items-center justify-center transition-colors"
+              className="absolute top-4 right-4 z-10 h-8 w-8 rounded-full bg-[var(--foreground)]/5 hover:bg-[var(--foreground)]/10 flex items-center justify-center transition-colors"
             >
-              <X className="h-4 w-4 text-[#2c2c2c]/50" />
+              <X className="h-4 w-4 text-[var(--foreground)]/50" />
             </button>
 
             <div className="flex-1 overflow-y-auto">
@@ -136,16 +136,16 @@ export function BookmarkDetailSheet({
                     {bookmark.favicon && (
                       <img src={bookmark.favicon} alt="" className="h-4 w-4 rounded-sm" />
                     )}
-                    <span className="text-[12px] text-[#2c2c2c]/35 font-sans">
+                    <span className="text-[12px] text-[var(--foreground)]/35 font-sans">
                       {bookmark.siteName || safeURL(bookmark.url)}
                     </span>
                     <span className="flex-1" />
-                    <Badge variant="outline" className="text-[10px] rounded-full border-[#2c2c2c]/[0.04] text-[#2c2c2c]/30 font-normal">
+                    <Badge variant="outline" className="text-[10px] rounded-full border-[var(--border)] text-[var(--foreground)]/30 font-normal">
                       {contentTypeLabels[bookmark.contentType] || "网页"}
                     </Badge>
                   </div>
 
-                  <h2 className="text-[20px] font-semibold leading-snug text-[#2c2c2c] font-display">
+                  <h2 className="text-[20px] font-semibold leading-snug text-[var(--foreground)] font-display">
                     {bookmark.title}
                   </h2>
                 </div>
@@ -162,7 +162,7 @@ export function BookmarkDetailSheet({
                           "flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11px] border font-sans transition-all cursor-pointer",
                           bookmark.status === key
                             ? conf.className
-                            : "border-transparent text-[#2c2c2c]/30 hover:bg-white/50 hover:text-[#2c2c2c]/50"
+                            : "border-transparent text-[var(--foreground)]/30 hover:bg-[var(--card)] hover:text-[var(--foreground)]/50"
                         )}
                       >
                         <Icon className="h-3 w-3" />
@@ -172,13 +172,13 @@ export function BookmarkDetailSheet({
                   })}
                 </div>
 
-                <Separator className="bg-[#2c2c2c]/[0.03]" />
+                <Separator className="bg-[var(--border)]" />
 
                 {/* AI Summary */}
                 {bookmark.aiSummary && (
                   <div>
-                    <p className="text-[10px] font-medium text-[#b76e4b] uppercase tracking-widest mb-2 font-sans">AI 摘要</p>
-                    <p className="text-[14px] text-[#2c2c2c]/50 leading-relaxed font-sans">
+                    <p className="text-[10px] font-medium text-[var(--accent)] uppercase tracking-widest mb-2 font-sans">AI 摘要</p>
+                    <p className="text-[14px] text-[var(--foreground)]/50 leading-relaxed font-sans">
                       {bookmark.aiSummary}
                     </p>
                   </div>
@@ -187,8 +187,8 @@ export function BookmarkDetailSheet({
                 {/* Description */}
                 {bookmark.description && (
                   <div>
-                    <p className="text-[10px] font-medium text-[#2c2c2c]/25 uppercase tracking-widest mb-2 font-sans">描述</p>
-                    <p className="text-[13px] text-[#2c2c2c]/45 leading-relaxed font-sans">
+                    <p className="text-[10px] font-medium text-[var(--foreground)]/25 uppercase tracking-widest mb-2 font-sans">描述</p>
+                    <p className="text-[13px] text-[var(--foreground)]/45 leading-relaxed font-sans">
                       {bookmark.description}
                     </p>
                   </div>
@@ -197,10 +197,10 @@ export function BookmarkDetailSheet({
                 {/* Tags */}
                 {bookmark.tags.length > 0 && (
                   <div>
-                    <p className="text-[10px] font-medium text-[#2c2c2c]/25 uppercase tracking-widest mb-2 font-sans">标签</p>
+                    <p className="text-[10px] font-medium text-[var(--foreground)]/25 uppercase tracking-widest mb-2 font-sans">标签</p>
                     <div className="flex flex-wrap gap-1.5">
                       {bookmark.tags.map(({ tag }) => (
-                        <Badge key={tag.id} variant="secondary" className="text-[11px] px-2.5 py-1 rounded-lg bg-white/60 border-0 text-[#2c2c2c]/45 font-normal font-sans">
+                        <Badge key={tag.id} variant="secondary" className="text-[11px] px-2.5 py-1 rounded-lg bg-[var(--card)] border-0 text-[var(--foreground)]/45 font-normal font-sans">
                           {tag.name}
                         </Badge>
                       ))}
@@ -208,17 +208,17 @@ export function BookmarkDetailSheet({
                   </div>
                 )}
 
-                <Separator className="bg-[#2c2c2c]/[0.03]" />
+                <Separator className="bg-[var(--border)]" />
 
                 {/* Meta */}
                 <div className="space-y-2">
-                  <div className="flex items-center gap-2 text-[11px] text-[#2c2c2c]/25 font-sans">
+                  <div className="flex items-center gap-2 text-[11px] text-[var(--foreground)]/25 font-sans">
                     <Calendar className="h-3 w-3" />
                     收藏于 {new Date(bookmark.createdAt).toLocaleDateString("zh-CN", { year: "numeric", month: "long", day: "numeric" })}
                   </div>
-                  <div className="flex items-center gap-2 text-[11px] text-[#2c2c2c]/25 font-sans">
+                  <div className="flex items-center gap-2 text-[11px] text-[var(--foreground)]/25 font-sans">
                     <MapPin className="h-3 w-3" />
-                    <a href={bookmark.url} target="_blank" rel="noopener noreferrer" className="hover:text-[#b76e4b] transition-colors text-[#2c2c2c]/30">
+                    <a href={bookmark.url} target="_blank" rel="noopener noreferrer" className="hover:text-[var(--accent)] transition-colors text-[var(--foreground)]/30">
                       {safeURL(bookmark.url)}
                     </a>
                   </div>
@@ -227,11 +227,11 @@ export function BookmarkDetailSheet({
             </div>
 
             {/* Bottom actions */}
-            <div className="p-4 border-t border-[#2c2c2c]/[0.04] flex gap-2 shrink-0 bg-[#f5f3f0]/80 backdrop-blur-xl">
+            <div className="p-4 border-t border-[var(--border)] flex gap-2 shrink-0 bg-[var(--background)]/80 backdrop-blur-xl">
               <Button
                 variant="outline"
                 onClick={() => window.open(bookmark.url, "_blank")}
-                className="flex-1 rounded-xl text-[13px] border-[#2c2c2c]/[0.06] bg-white/60 hover:bg-white text-[#2c2c2c] font-sans h-10"
+                className="flex-1 rounded-xl text-[13px] border-[var(--border)] bg-[var(--card)] hover:bg-[var(--muted)] text-[var(--foreground)] font-sans h-10"
               >
                 <ExternalLink className="h-3.5 w-3.5 mr-1.5 opacity-50" />
                 打开链接

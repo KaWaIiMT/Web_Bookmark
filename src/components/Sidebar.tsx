@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { Bookmark, Hash, Clock, BookOpen, CheckCircle2, Archive, Plus, Folder, Share2 } from "lucide-react";
+import { Bookmark, Hash, Clock, BookOpen, CheckCircle2, Archive, Plus, Folder } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
@@ -92,13 +92,13 @@ export function Sidebar({
   };
 
   return (
-    <aside className="w-60 shrink-0 flex flex-col h-full bg-[#f5f3f0]/80 backdrop-blur-xl border-r border-[#2c2c2c]/[0.04]">
+    <aside className="w-60 shrink-0 flex flex-col h-full bg-[var(--sidebar)] backdrop-blur-xl border-r border-[var(--sidebar-border)]">
       {/* Logo area */}
       <div className="px-5 pt-5 pb-2">
-        <h2 className="font-display text-lg font-bold text-[#2c2c2c] tracking-tight leading-none">
+        <h2 className="font-display text-lg font-bold text-[var(--foreground)] tracking-tight leading-none">
           MarkBox
         </h2>
-        <p className="text-[11px] text-[#2c2c2c]/35 mt-1 font-sans">
+        <p className="text-[11px] text-[var(--foreground)]/35 mt-1 font-sans">
           AI 智能书签管理
         </p>
       </div>
@@ -106,7 +106,7 @@ export function Sidebar({
       {/* Add Bookmark Button */}
       <div className="px-4 pt-3 pb-4">
         <Button
-          className="w-full gap-2 font-medium rounded-xl bg-[#b76e4b] hover:bg-[#a05d3d] text-white shadow-none text-[13px] h-9 transition-all duration-200 hover:shadow-[0_4px_20px_rgba(183,110,75,0.25)]"
+          className="w-full gap-2 font-medium rounded-xl bg-[var(--accent)] hover:bg-[var(--accent)]/85 text-white shadow-none text-[13px] h-9 transition-all duration-200 hover:shadow-[0_4px_20px_rgba(183,110,75,0.25)]"
           onClick={onAddClick}
         >
           <Plus className="h-4 w-4" />
@@ -115,18 +115,18 @@ export function Sidebar({
       </div>
 
       {/* Thin separator */}
-      <div className="mx-4 h-px bg-[#2c2c2c]/[0.04]" />
+      <div className="mx-4 h-px bg-[var(--border)]" />
 
       <ScrollArea className="flex-1">
         {/* Collections */}
         <div className="px-3 pt-4 pb-1">
           <div className="flex items-center justify-between px-3 mb-1.5">
-            <p className="text-[10px] font-medium text-[#2c2c2c]/25 uppercase tracking-widest font-sans">
+            <p className="text-[10px] font-medium text-[var(--foreground)]/25 uppercase tracking-widest font-sans">
               收藏夹
             </p>
             <button
               onClick={() => setAddingCol(!addingCol)}
-              className="text-[#2c2c2c]/20 hover:text-[#2c2c2c]/40 transition-colors"
+              className="text-[var(--foreground)]/20 hover:text-[var(--foreground)]/40 transition-colors"
             >
               <Plus className="h-3 w-3" />
             </button>
@@ -138,13 +138,13 @@ export function Sidebar({
                 value={newColName}
                 onChange={(e) => setNewColName(e.target.value)}
                 onKeyDown={(e) => e.key === "Enter" && handleCreateCollection()}
-                className="h-7 text-[12px] rounded-lg bg-white/60 border-0 font-sans"
+                className="h-7 text-[12px] rounded-lg bg-[var(--card)] border-0 font-sans"
                 autoFocus
               />
               <Button
                 onClick={handleCreateCollection}
                 disabled={!newColName.trim()}
-                className="h-7 rounded-lg bg-[#b76e4b] hover:bg-[#a05d3d] text-white text-[11px] px-2 font-sans"
+                className="h-7 rounded-lg bg-[var(--accent)] hover:bg-[var(--accent)]/85 text-white text-[11px] px-2 font-sans"
               >
                 创建
               </Button>
@@ -157,22 +157,22 @@ export function Sidebar({
               className={cn(
                 "w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] transition-all duration-200",
                 activeCollection === col.id
-                  ? "bg-white/60 text-[#2c2c2c] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
-                  : "text-[#2c2c2c]/45 hover:bg-white/30 hover:text-[#2c2c2c]/65"
+                  ? "bg-[var(--sidebar-item)] text-[var(--foreground)] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
+                  : "text-[var(--foreground)]/45 hover:bg-[var(--sidebar-item-hover)] hover:text-[var(--foreground)]/65"
               )}
             >
               <Folder className="h-3.5 w-3.5 opacity-50 shrink-0" />
               <span className="truncate flex-1 text-left">{col.name}</span>
-              <span className="text-[10px] text-[#2c2c2c]/20 shrink-0">{col._count.bookmarks}</span>
+              <span className="text-[10px] text-[var(--foreground)]/20 shrink-0">{col._count.bookmarks}</span>
             </button>
           ))}
         </div>
 
-        <div className="mx-4 h-px bg-[#2c2c2c]/[0.04] mt-2" />
+        <div className="mx-4 h-px bg-[var(--border)] mt-2" />
 
         {/* Status Filter */}
         <div className="px-3 pt-3 pb-1">
-          <p className="px-3 mb-1.5 text-[10px] font-medium text-[#2c2c2c]/25 uppercase tracking-widest font-sans">
+          <p className="px-3 mb-1.5 text-[10px] font-medium text-[var(--foreground)]/25 uppercase tracking-widest font-sans">
             状态
           </p>
           <button
@@ -180,8 +180,8 @@ export function Sidebar({
             className={cn(
               "w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] transition-all duration-200",
               !activeStatus && !activeCollection
-                ? "bg-white/60 text-[#2c2c2c] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
-                : "text-[#2c2c2c]/45 hover:bg-white/30 hover:text-[#2c2c2c]/65"
+                ? "bg-[var(--sidebar-item)] text-[var(--foreground)] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
+                : "text-[var(--foreground)]/45 hover:bg-[var(--sidebar-item-hover)] hover:text-[var(--foreground)]/65"
             )}
           >
             <Bookmark className="h-3.5 w-3.5 opacity-50" />
@@ -197,8 +197,8 @@ export function Sidebar({
                 className={cn(
                   "w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] transition-all duration-200",
                   isActive
-                    ? "bg-white/60 text-[#2c2c2c] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
-                    : "text-[#2c2c2c]/45 hover:bg-white/30 hover:text-[#2c2c2c]/65"
+                    ? "bg-[var(--sidebar-item)] text-[var(--foreground)] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
+                    : "text-[var(--foreground)]/45 hover:bg-[var(--sidebar-item-hover)] hover:text-[var(--foreground)]/65"
                 )}
               >
                 <Icon className="h-3.5 w-3.5" style={{ color: isActive ? opt.color : undefined, opacity: isActive ? 1 : 0.4 }} />
@@ -210,7 +210,7 @@ export function Sidebar({
 
         {/* Categories */}
         <div className="px-3 pt-3 pb-4">
-          <p className="px-3 mb-1.5 text-[10px] font-medium text-[#2c2c2c]/25 uppercase tracking-widest font-sans">
+          <p className="px-3 mb-1.5 text-[10px] font-medium text-[var(--foreground)]/25 uppercase tracking-widest font-sans">
             分类
           </p>
           <button
@@ -218,8 +218,8 @@ export function Sidebar({
             className={cn(
               "w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] transition-all duration-200",
               !activeCategory
-                ? "bg-white/60 text-[#2c2c2c] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
-                : "text-[#2c2c2c]/45 hover:bg-white/30 hover:text-[#2c2c2c]/65"
+                ? "bg-[var(--sidebar-item)] text-[var(--foreground)] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
+                : "text-[var(--foreground)]/45 hover:bg-[var(--sidebar-item-hover)] hover:text-[var(--foreground)]/65"
             )}
           >
             <Hash className="h-3.5 w-3.5 opacity-50" />
@@ -232,8 +232,8 @@ export function Sidebar({
               className={cn(
                 "w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] transition-all duration-200 justify-between",
                 activeCategory === cat.id
-                  ? "bg-white/60 text-[#2c2c2c] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
-                  : "text-[#2c2c2c]/45 hover:bg-white/30 hover:text-[#2c2c2c]/65"
+                  ? "bg-[var(--sidebar-item)] text-[var(--foreground)] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
+                  : "text-[var(--foreground)]/45 hover:bg-[var(--sidebar-item-hover)] hover:text-[var(--foreground)]/65"
               )}
             >
               <span className="flex items-center gap-2.5">
@@ -246,8 +246,8 @@ export function Sidebar({
       </ScrollArea>
 
       {/* Footer */}
-      <div className="px-4 py-3 border-t border-[#2c2c2c]/[0.04]">
-        <p className="text-[10px] text-[#2c2c2c]/20 text-center tracking-wider font-sans">
+      <div className="px-4 py-3 border-t border-[var(--border)]">
+        <p className="text-[10px] text-[var(--foreground)]/20 text-center tracking-wider font-sans">
           MarkBox
         </p>
       </div>

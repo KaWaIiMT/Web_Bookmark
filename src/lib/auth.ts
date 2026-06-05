@@ -4,6 +4,20 @@ import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import type { NextAuthConfig } from "next-auth";
 
+const proxyUrl = process.env.HTTP_PROXY || process.env.HTTPS_PROXY;
+
+// Patch global fetch through proxy before NextAuth initializes
+if (proxyUrl) {
+  try {
+    // eslint-disable-next-line @typescript-eslint/no-var-requires
+    const undici = require("undici") as typeof import("undici");
+    undici.setGlobalDispatcher(new undici.ProxyAgent(proxyUrl));
+    console.log("[auth] undici ProxyAgent set to", proxyUrl);
+  } catch {
+    console.warn("[auth] Failed to set undici ProxyAgent, OAuth may fail behind GFW");
+  }
+}
+
 export const authConfig: NextAuthConfig = {
   adapter: PrismaAdapter(prisma),
   providers: [GitHub],

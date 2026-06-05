@@ -58,3 +58,32 @@ export interface PaginatedResponse<T> {
     totalPages: number;
   };
 }
+
+export type ViewType = "grid" | "gallery" | "dashboard" | "timeline" | "weekly";
+
+export interface TimelineGroup {
+  year: number;
+  month: number;
+  label: string;
+  bookmarks: BookmarkData[];
+}
+
+export interface TimelineResponse {
+  groups: TimelineGroup[];
+}
+
+export interface WeeklyReportData {
+  thisWeek: {
+    total: number;
+    byStatus: { unread: number; reading: number; read: number; archived: number };
+    topTags: { name: string; color: string | null; count: number }[];
+  };
+  lastWeek: {
+    total: number;
+  };
+  comparison: {
+    delta: number;
+    percentage: number;
+  };
+  weekLabel: string;
+}

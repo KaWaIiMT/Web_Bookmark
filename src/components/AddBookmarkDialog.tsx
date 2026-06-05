@@ -188,17 +188,17 @@ export function AddBookmarkDialog({
         onOpenChange(open);
       }}
     >
-      <DialogContent className="sm:max-w-lg max-h-[85vh] rounded-2xl border border-[#2c2c2c]/[0.04] shadow-[0_20px_60px_rgba(0,0,0,0.06)] bg-white/95 backdrop-blur-xl p-0 gap-0 overflow-hidden flex flex-col">
+      <DialogContent className="sm:max-w-lg max-h-[85vh] rounded-2xl border border-[var(--border)] shadow-[0_20px_60px_rgba(0,0,0,0.06)] bg-[var(--popover)] backdrop-blur-xl p-0 gap-0 overflow-hidden flex flex-col">
         {/* Header */}
         <div className="flex flex-col px-6 pt-5 pb-0 shrink-0">
           <DialogHeader>
-            <DialogTitle className="flex items-center gap-2 text-[17px] font-semibold text-[#2c2c2c] font-display">
-              <div className="h-7 w-7 rounded-xl bg-[#b76e4b]/10 flex items-center justify-center">
-                <Sparkles className="h-4 w-4 text-[#b76e4b]" />
+            <DialogTitle className="flex items-center gap-2 text-[17px] font-semibold text-[var(--foreground)] font-display">
+              <div className="h-7 w-7 rounded-xl bg-[var(--accent)]/10 flex items-center justify-center">
+                <Sparkles className="h-4 w-4 text-[var(--accent)]" />
               </div>
               {editBookmark ? "编辑书签" : "添加书签"}
             </DialogTitle>
-            <DialogDescription className="text-[13px] text-[#2c2c2c]/35 mt-1 ml-9 font-sans">
+            <DialogDescription className="text-[13px] text-[var(--muted-foreground)] mt-1 ml-9 font-sans">
               {editBookmark ? "修改书签的标题和描述" : "粘贴链接，AI 自动提取摘要并整理分类"}
             </DialogDescription>
           </DialogHeader>
@@ -210,26 +210,26 @@ export function AddBookmarkDialog({
             <div className="space-y-4">
               <div className="flex gap-2">
                 <div className="flex-1 relative">
-                  <Link className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[#2c2c2c]/15" />
+                  <Link className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--foreground)]/15" />
                   <Input
                     placeholder="粘贴 URL..."
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
                     onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
-                    className="pl-10 h-11 rounded-xl bg-[#f5f3f0] border-0 focus:bg-white focus:ring-2 focus:ring-[#b76e4b]/15 text-[14px] font-sans"
+                    className="pl-10 h-11 rounded-xl bg-[var(--muted)] border-0 focus:bg-[var(--card)] focus:ring-2 focus:ring-[var(--accent)]/15 text-[14px] font-sans"
                     autoFocus
                   />
                 </div>
                 <Button
                   onClick={handleSubmit}
                   disabled={!url.trim()}
-                  className="rounded-xl bg-[#b76e4b] hover:bg-[#a05d3d] text-white h-11 px-5 text-[13px] font-medium shadow-none transition-all duration-200 hover:shadow-[0_4px_16px_rgba(183,110,75,0.2)] font-sans"
+                  className="rounded-xl bg-[var(--accent)] hover:bg-[var(--accent)]/85 text-white h-11 px-5 text-[13px] font-medium shadow-none transition-all duration-200 hover:shadow-[0_4px_16px_rgba(183,110,75,0.2)] font-sans"
                 >
                   收藏
                 </Button>
               </div>
               {error && (
-                <p className="text-[13px] text-red-400 bg-red-50 rounded-xl px-3 py-2 font-sans">{error}</p>
+                <p className="text-[13px] text-red-400 bg-red-50 dark:bg-red-500/5 rounded-xl px-3 py-2 font-sans">{error}</p>
               )}
             </div>
           )}
@@ -237,14 +237,14 @@ export function AddBookmarkDialog({
           {/* Step: Extracting / Categorizing */}
           {(step === "extracting" || step === "categorizing") && (
             <div className="flex flex-col items-center py-10 gap-4">
-              <div className="h-12 w-12 rounded-2xl bg-[#f5f3f0] flex items-center justify-center">
-                <Loader2 className="h-6 w-6 animate-spin text-[#b76e4b]" />
+              <div className="h-12 w-12 rounded-2xl bg-[var(--muted)] flex items-center justify-center">
+                <Loader2 className="h-6 w-6 animate-spin text-[var(--accent)]" />
               </div>
               <div className="text-center">
-                <p className="font-medium text-[14px] text-[#2c2c2c] font-sans">
+                <p className="font-medium text-[14px] text-[var(--foreground)] font-sans">
                   {step === "extracting" ? "正在获取网页信息..." : "AI 正在分析内容..."}
                 </p>
-                <p className="text-[12px] text-[#2c2c2c]/30 mt-1 font-sans">
+                <p className="text-[12px] text-[var(--muted-foreground)] mt-1 font-sans">
                   {step === "extracting" ? "提取标题、封面、站点信息" : "生成标签、分类和摘要"}
                 </p>
               </div>
@@ -257,7 +257,7 @@ export function AddBookmarkDialog({
               <div className="space-y-4">
                 {/* Cover image */}
                 {metadata.coverImage && (
-                  <div className="aspect-video rounded-xl overflow-hidden bg-[#f5f3f0]">
+                  <div className="aspect-video rounded-xl overflow-hidden bg-[var(--muted)]">
                     <img
                       src={metadata.coverImage.startsWith("//") ? `https:${metadata.coverImage}` : metadata.coverImage}
                       alt="封面"
@@ -274,8 +274,8 @@ export function AddBookmarkDialog({
                     {metadata.favicon && (
                       <img src={metadata.favicon} alt="" className="h-4 w-4 rounded-sm" />
                     )}
-                    <span className="text-[12px] text-[#2c2c2c]/30 font-sans">{metadata.siteName}</span>
-                    <Badge variant="outline" className="text-[10px] rounded-full border-[#2c2c2c]/[0.04] text-[#2c2c2c]/30 font-normal font-sans">
+                    <span className="text-[12px] text-[var(--foreground)]/30 font-sans">{metadata.siteName}</span>
+                    <Badge variant="outline" className="text-[10px] rounded-full border-[var(--border)] text-[var(--foreground)]/30 font-normal font-sans">
                       {contentTypeLabels[metadata.contentType] || "网页"}
                     </Badge>
                   </div>
@@ -283,40 +283,40 @@ export function AddBookmarkDialog({
                   <Input
                     value={customTitle}
                     onChange={(e) => setCustomTitle(e.target.value)}
-                    className="text-[15px] font-semibold text-[#2c2c2c] border-0 bg-[#f5f3f0] rounded-xl h-11 font-sans"
+                    className="text-[15px] font-semibold text-[var(--foreground)] border-0 bg-[var(--muted)] rounded-xl h-11 font-sans"
                     placeholder="标题"
                   />
 
                   <Textarea
                     value={customDescription}
                     onChange={(e) => setCustomDescription(e.target.value)}
-                    className="text-[13px] text-[#2c2c2c]/50 resize-none border-0 bg-[#f5f3f0] rounded-xl min-h-[60px] font-sans"
+                    className="text-[13px] text-[var(--foreground)]/50 resize-none border-0 bg-[var(--muted)] rounded-xl min-h-[60px] font-sans"
                     placeholder="描述"
                   />
                 </div>
 
                 {/* AI result */}
                 {aiResult && (
-                  <div className="bg-[#f5f3f0] rounded-xl p-4 space-y-2.5">
-                    <p className="text-[11px] font-medium text-[#b76e4b] flex items-center gap-1.5 font-sans">
+                  <div className="bg-[var(--muted)] rounded-xl p-4 space-y-2.5">
+                    <p className="text-[11px] font-medium text-[var(--accent)] flex items-center gap-1.5 font-sans">
                       <Sparkles className="h-3 w-3" /> AI 整理结果
                     </p>
                     {aiResult.tags.length > 0 && (
                       <div className="flex flex-wrap gap-1.5">
                         {aiResult.tags.map((tag) => (
-                          <Badge key={tag} variant="secondary" className="text-[11px] px-2.5 py-1 rounded-lg bg-white border-0 text-[#2c2c2c]/45 font-normal font-sans">
+                          <Badge key={tag} variant="secondary" className="text-[11px] px-2.5 py-1 rounded-lg bg-[var(--card)] border-0 text-[var(--foreground)]/45 font-normal font-sans">
                             {tag}
                           </Badge>
                         ))}
                       </div>
                     )}
                     {aiResult.category && (
-                      <p className="text-[12px] text-[#2c2c2c]/45 font-sans">
+                      <p className="text-[12px] text-[var(--foreground)]/45 font-sans">
                         📁 建议分类：{aiResult.category}
                       </p>
                     )}
                     {aiResult.summary && (
-                      <p className="text-[12px] text-[#2c2c2c]/45 leading-relaxed font-sans">
+                      <p className="text-[12px] text-[var(--foreground)]/45 leading-relaxed font-sans">
                         {aiResult.summary}
                       </p>
                     )}
@@ -327,7 +327,7 @@ export function AddBookmarkDialog({
                 <div className="flex gap-2 pt-1">
                   <Button
                     onClick={handleSave}
-                    className="flex-1 rounded-xl bg-[#b76e4b] hover:bg-[#a05d3d] text-white h-11 text-[13px] font-medium shadow-none transition-all duration-200 hover:shadow-[0_4px_16px_rgba(183,110,75,0.2)] font-sans"
+                    className="flex-1 rounded-xl bg-[var(--accent)] hover:bg-[var(--accent)]/85 text-white h-11 text-[13px] font-medium shadow-none transition-all duration-200 hover:shadow-[0_4px_16px_rgba(183,110,75,0.2)] font-sans"
                     disabled={step === "saving"}
                   >
                     {step === "saving" ? (
@@ -339,12 +339,12 @@ export function AddBookmarkDialog({
                       "确认收藏"
                     )}
                   </Button>
-                  <Button variant="ghost" onClick={reset} className="rounded-xl text-[13px] text-[#2c2c2c]/30 hover:text-[#2c2c2c]/50 hover:bg-[#f5f3f0] font-sans">
+                  <Button variant="ghost" onClick={reset} className="rounded-xl text-[13px] text-[var(--foreground)]/30 hover:text-[var(--foreground)]/50 hover:bg-[var(--muted)] font-sans">
                     取消
                   </Button>
                 </div>
                 {error && (
-                  <p className="text-[13px] text-red-400 bg-red-50 rounded-xl px-3 py-2 font-sans">{error}</p>
+                  <p className="text-[13px] text-red-400 bg-red-50 dark:bg-red-500/5 rounded-xl px-3 py-2 font-sans">{error}</p>
                 )}
               </div>
             </ScrollArea>

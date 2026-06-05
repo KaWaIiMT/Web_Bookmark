@@ -138,12 +138,18 @@ export async function GET(req: NextRequest) {
     const limit = parseInt(searchParams.get("limit") || "20");
     const status = searchParams.get("status") || undefined;
     const categoryId = searchParams.get("categoryId") || undefined;
+    const collectionId = searchParams.get("collectionId") || undefined;
+    const contentType = searchParams.get("contentType") || undefined;
     const search = searchParams.get("q") || undefined;
 
     const where: Record<string, unknown> = { userId: session.user.id };
 
     if (status) where.status = status;
     if (categoryId) where.categoryId = categoryId;
+    if (contentType) where.contentType = contentType;
+    if (collectionId) {
+      where.collections = { some: { collectionId } };
+    }
     if (search) {
       where.OR = [
         { title: { contains: search } },
