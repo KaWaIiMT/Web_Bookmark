@@ -20,7 +20,13 @@ if (proxyUrl) {
 
 export const authConfig: NextAuthConfig = {
   adapter: PrismaAdapter(prisma),
-  providers: [GitHub],
+  providers: [
+    GitHub({
+      authorization: {
+        params: { prompt: "consent" },
+      },
+    }),
+  ],
   pages: {
     signIn: "/login",
   },
