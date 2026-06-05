@@ -63,7 +63,9 @@ export const ModelName = {
   CollectionBookmark: 'CollectionBookmark',
   LearningPath: 'LearningPath',
   LearningPathItem: 'LearningPathItem',
-  PathNote: 'PathNote'
+  PathNote: 'PathNote',
+  HotnessTracker: 'HotnessTracker',
+  HotnessSnapshot: 'HotnessSnapshot'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -245,6 +247,34 @@ export const PathNoteScalarFieldEnum = {
 } as const
 
 export type PathNoteScalarFieldEnum = (typeof PathNoteScalarFieldEnum)[keyof typeof PathNoteScalarFieldEnum]
+
+
+export const HotnessTrackerScalarFieldEnum = {
+  id: 'id',
+  bookmarkId: 'bookmarkId',
+  sourceType: 'sourceType',
+  enabled: 'enabled',
+  lastCheckedAt: 'lastCheckedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type HotnessTrackerScalarFieldEnum = (typeof HotnessTrackerScalarFieldEnum)[keyof typeof HotnessTrackerScalarFieldEnum]
+
+
+export const HotnessSnapshotScalarFieldEnum = {
+  id: 'id',
+  trackerId: 'trackerId',
+  timestamp: 'timestamp',
+  stars: 'stars',
+  forks: 'forks',
+  openIssues: 'openIssues',
+  views: 'views',
+  likes: 'likes',
+  httpStatus: 'httpStatus',
+  snapshot: 'snapshot'
+} as const
+
+export type HotnessSnapshotScalarFieldEnum = (typeof HotnessSnapshotScalarFieldEnum)[keyof typeof HotnessSnapshotScalarFieldEnum]
 
 
 export const SortOrder = {

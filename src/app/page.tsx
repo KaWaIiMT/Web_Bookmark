@@ -28,6 +28,7 @@ import { DiscoverView } from "@/components/DiscoverView";
 import { LearningPathListView } from "@/components/LearningPathListView";
 import { LearningPathDetailView } from "@/components/LearningPathDetailView";
 import { CompareView } from "@/components/CompareView";
+import { ActivityView } from "@/components/ActivityView";
 import { VoiceSearch } from "@/components/VoiceSearch";
 import { useRouter } from "next/navigation";
 import type { BookmarkData, PaginatedResponse, ViewType } from "@/lib/types";
@@ -397,6 +398,11 @@ export default function Home() {
           {/* Compare: self-contained data fetching */}
           {activeView === "compare" && (
             <CompareView onBack={() => setActiveView("grid")} />
+          )}
+
+          {/* Activity: hotness tracking */}
+          {activeView === "activity" && (
+            <ActivityView />
           )}
 
           {/* Weekly report: self-contained data fetching */}

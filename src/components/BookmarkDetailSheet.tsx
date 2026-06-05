@@ -1,11 +1,12 @@
 "use client";
 
-import { ExternalLink, Trash2, Share2, Clock, BookOpen, CheckCircle2, Archive, MapPin, Calendar, X } from "lucide-react";
+import { ExternalLink, Trash2, Share2, TrendingUp, Clock, BookOpen, CheckCircle2, Archive, MapPin, Calendar, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { RelatedBookmarks } from "@/components/RelatedBookmarks";
+import { toast } from "sonner";
 import { cn } from "@/lib/utils";
 import type { BookmarkData } from "@/lib/types";
 
@@ -33,6 +34,7 @@ interface BookmarkDetailSheetProps {
   onDelete: (id: string) => void;
   onShare?: (id: string) => void;
   onSelectBookmark?: (id: string) => void;
+  onStartTracking?: (id: string) => void;
 }
 
 export function BookmarkDetailSheet({
@@ -44,6 +46,7 @@ export function BookmarkDetailSheet({
   onDelete,
   onShare,
   onSelectBookmark,
+  onStartTracking,
 }: BookmarkDetailSheetProps) {
   return (
     <AnimatePresence>
@@ -253,6 +256,26 @@ export function BookmarkDetailSheet({
                 className="rounded-xl text-[13px] border-[var(--border)] bg-[var(--card)] hover:bg-[var(--muted)] text-[var(--foreground)] font-sans h-10 px-3"
               >
                 <Share2 className="h-3.5 w-3.5" />
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => {
+                  fetch(`/api/tracking/configs`, {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ bookmarkId: bookmark.id }),
+                  })
+                    .then((r) => {
+                      if (!r.ok) throw new Error();
+                      toast.success("已开始追踪热度");
+                      onStartTracking?.(bookmark.id);
+                    })
+                    .catch(() => toast.error("追踪失败"));
+                }}
+                className="rounded-xl text-[13px] border-[var(--border)] bg-[var(--card)] hover:bg-[var(--muted)] text-[var(--foreground)] font-sans h-10 px-3"
+                title="追踪热度"
+              >
+                <TrendingUp className="h-3.5 w-3.5" />
               </Button>
               <Button
                 variant="ghost"

@@ -77,6 +77,7 @@ model Bookmark {
   tags        BookmarkTag[]
   collections CollectionBookmark[]
   pathItems   LearningPathItem[]
+  trackers    HotnessTracker[]
   createdAt   DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
   readAt      DateTime?
@@ -179,4 +180,33 @@ model PathNote {
   createdAt DateTime @default(now())
 
   item LearningPathItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+}
+
+model HotnessTracker {
+  id            String   @id @default(cuid())
+  bookmarkId    String   @unique
+  sourceType    String   @default("github")
+  enabled       Boolean  @default(true)
+  lastCheckedAt DateTime?
+  createdAt     DateTime @default(now())
+
+  bookmark  Bookmark          @relation(fields: [bookmarkId], references: [id], onDelete: Cascade)
+  snapshots HotnessSnapshot[]
+}
+
+model HotnessSnapshot {
+  id          String   @id @default(cuid())
+  trackerId   String
+  timestamp   DateTime @default(now())
+  stars       Int?
+  forks       Int?
+  openIssues  Int?
+  views       Int?
+  likes       Int?
+  httpStatus  Int?
+  snapshot    String?
+
+  tracker HotnessTracker @relation(fields: [trackerId], references: [id], onDelete: Cascade)
+
+  @@index([trackerId, timestamp])
 }

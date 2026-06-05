@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutGrid, Images, Compass, BookOpen, GitCompare, BarChart3, Clock, CalendarDays } from "lucide-react";
+import { LayoutGrid, Images, Compass, BookOpen, GitCompare, TrendingUp, BarChart3, Clock, CalendarDays } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ViewType } from "@/lib/types";
 
@@ -10,6 +10,7 @@ const TABS: { value: ViewType; label: string; icon: typeof LayoutGrid }[] = [
   { value: "discover", label: "发现", icon: Compass },
   { value: "compare", label: "对比", icon: GitCompare },
   { value: "learning-path", label: "学习路径", icon: BookOpen },
+  { value: "activity", label: "热度", icon: TrendingUp },
   { value: "dashboard", label: "仪表板", icon: BarChart3 },
   { value: "timeline", label: "时间线", icon: Clock },
   { value: "weekly", label: "周报", icon: CalendarDays },

@@ -82,3 +82,13 @@ export type LearningPathItem = Prisma.LearningPathItemModel
  * 
  */
 export type PathNote = Prisma.PathNoteModel
+/**
+ * Model HotnessTracker
+ * 
+ */
+export type HotnessTracker = Prisma.HotnessTrackerModel
+/**
+ * Model HotnessSnapshot
+ * 
+ */
+export type HotnessSnapshot = Prisma.HotnessSnapshotModel
