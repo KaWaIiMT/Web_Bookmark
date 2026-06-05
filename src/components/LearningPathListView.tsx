@@ -55,9 +55,9 @@ export function LearningPathListView({ onSelectPath, onCreateNew }: LearningPath
     } catch { toast.error("创建失败"); }
   };
 
-  const handleDelete = async (id: string) => {
+  const handleDelete = async (pathId: string) => {
     try {
-      await fetch(`/api/learning-paths/${id}`, { method: "DELETE" });
+      await fetch(`/api/learning-paths/${pathId}`, { method: "DELETE" });
       fetchPaths();
       toast.success("已删除");
     } catch { toast.error("删除失败"); }
@@ -120,7 +120,7 @@ export function LearningPathListView({ onSelectPath, onCreateNew }: LearningPath
       ) : (
         <div className="space-y-3">
           {paths.map((path, i) => (
-            <motion.button
+            <motion.div
               key={path.id}
               initial={{ opacity: 0, y: 16 }}
               animate={{ opacity: 1, y: 0 }}
@@ -150,15 +150,18 @@ export function LearningPathListView({ onSelectPath, onCreateNew }: LearningPath
                 </div>
                 <div className="flex items-center gap-1 ml-3 shrink-0">
                   <ArrowRight className="h-4 w-4 text-[var(--foreground)]/15 group-hover:text-[var(--accent)] transition-colors" />
-                  <button
+                  <span
+                    role="button"
+                    tabIndex={0}
                     onClick={(e) => { e.stopPropagation(); handleDelete(path.id); }}
-                    className="p-1 rounded-lg text-[var(--foreground)]/10 hover:text-red-400 transition-colors"
+                    onKeyDown={(e) => { if (e.key === "Enter") { e.stopPropagation(); handleDelete(path.id); } }}
+                    className="p-1 rounded-lg text-[var(--foreground)]/10 hover:text-red-400 transition-colors cursor-pointer"
                   >
                     <Trash2 className="h-3.5 w-3.5" />
-                  </button>
+                  </span>
                 </div>
               </div>
-            </motion.button>
+            </motion.div>
           ))}
         </div>
       )}

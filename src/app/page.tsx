@@ -86,7 +86,9 @@ export default function Home() {
     }
     const controller = new AbortController();
     fetchBookmarks(controller.signal);
-    return () => controller.abort();
+    return () => {
+      try { controller.abort(); } catch {}
+    };
   }, [fetchBookmarks, isReady, activeView]);
 
   const handleStatusChange = async (id: string, status: string) => {
