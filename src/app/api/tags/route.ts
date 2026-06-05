@@ -1,14 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { getUserIdFromRequest } from "@/lib/auth-helpers";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) return NextResponse.json({ data: [] });
+    const userId = await getUserIdFromRequest(req);
+    // Tags are scoped to user — unauthenticated returns empty
+    if (!userId) return NextResponse.json({ data: [] });
 
     const tags = await prisma.tag.findMany({
-      where: { userId: session.user.id },
+      where: { userId },
       include: { _count: { select: { bookmarks: true } } },
       orderBy: { name: "asc" },
     });

@@ -1,11 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { getUserIdFromRequest } from "@/lib/auth-helpers";
 
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -16,7 +16,6 @@ export async function POST(req: NextRequest) {
     }
 
     // Verify all bookmarks belong to this user
-    const userId = session.user.id;
     const owned = await prisma.bookmark.findMany({
       where: { id: { in: orderedIds }, userId },
       select: { id: true },

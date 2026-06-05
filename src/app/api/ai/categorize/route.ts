@@ -1,8 +1,14 @@
 import { NextRequest, NextResponse } from "next/server";
 import { categorizeBookmark } from "@/lib/deepseek";
+import { getUserIdFromRequest } from "@/lib/auth-helpers";
 
 export async function POST(req: NextRequest) {
   try {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const body = await req.json();
     const { title, description, siteName, contentType } = body;
 

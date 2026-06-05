@@ -60,7 +60,8 @@ export const ModelName = {
   BookmarkTag: 'BookmarkTag',
   Category: 'Category',
   Collection: 'Collection',
-  CollectionBookmark: 'CollectionBookmark'
+  CollectionBookmark: 'CollectionBookmark',
+  ApiKey: 'ApiKey'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -199,6 +200,18 @@ export const CollectionBookmarkScalarFieldEnum = {
 } as const
 
 export type CollectionBookmarkScalarFieldEnum = (typeof CollectionBookmarkScalarFieldEnum)[keyof typeof CollectionBookmarkScalarFieldEnum]
+
+
+export const ApiKeyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  key: 'key',
+  userId: 'userId',
+  lastUsedAt: 'lastUsedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ApiKeyScalarFieldEnum = (typeof ApiKeyScalarFieldEnum)[keyof typeof ApiKeyScalarFieldEnum]
 
 
 export const SortOrder = {

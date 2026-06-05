@@ -60,7 +60,36 @@ export interface PaginatedResponse<T> {
   };
 }
 
-export type ViewType = "grid" | "gallery" | "dashboard" | "timeline" | "weekly";
+export type ViewType = "grid" | "gallery" | "dashboard" | "timeline" | "weekly" | "graph";
+
+export interface GraphNode {
+  id: string;
+  type: "category" | "tag" | "bookmark";
+  label: string;
+  bookmarkCount: number;
+  color: string;
+  // Bookmark node fields (set when type === "bookmark")
+  bookmarkId?: string;
+  url?: string;
+  favicon?: string;
+  coverImage?: string;
+  contentType?: string;
+  status?: string;
+  createdAt?: string;
+  x?: number;
+  y?: number;
+  vx?: number;
+  vy?: number;
+  fx?: number;
+  fy?: number;
+}
+
+export interface GraphLink {
+  source: string;
+  target: string;
+  strength: number;
+  type: "tag-tag" | "tag-category" | "bookmark-tag";
+}
 
 export interface TimelineGroup {
   year: number;

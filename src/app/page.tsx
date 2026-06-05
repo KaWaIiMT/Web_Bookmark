@@ -24,6 +24,7 @@ import { MasonryGallery } from "@/components/MasonryGallery";
 import { TimelineView } from "@/components/TimelineView";
 import { DashboardView } from "@/components/DashboardView";
 import { WeeklyReport } from "@/components/WeeklyReport";
+import { KnowledgeGraphView } from "@/components/KnowledgeGraphView";
 import { VoiceSearch } from "@/components/VoiceSearch";
 import { useRouter } from "next/navigation";
 import type { BookmarkData, PaginatedResponse, ViewType } from "@/lib/types";
@@ -346,6 +347,11 @@ export default function Home() {
           {/* Weekly report: self-contained data fetching */}
           {activeView === "weekly" && (
             <WeeklyReport />
+          )}
+
+          {/* Knowledge graph: self-contained data fetching */}
+          {activeView === "graph" && (
+            <KnowledgeGraphView />
           )}
         </div>
       </main>

@@ -18,6 +18,7 @@ model User {
   bookmarks     Bookmark[]
   collections   Collection[]
   tags          Tag[]
+  apiKeys       ApiKey[]
   createdAt     DateTime     @default(now())
 }
 
@@ -134,4 +135,14 @@ model CollectionBookmark {
   addedAt      DateTime   @default(now())
 
   @@id([collectionId, bookmarkId])
+}
+
+model ApiKey {
+  id        String    @id @default(cuid())
+  name      String
+  key       String    @unique
+  userId    String
+  user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  lastUsedAt DateTime?
+  createdAt DateTime  @default(now())
 }

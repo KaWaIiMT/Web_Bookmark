@@ -5,3 +5,7 @@ dist/
 .cache/
 .next/
 dev.db
+tsconfig.tsbuildinfo
+markbox-extension/.output/
+markbox-extension/.wxt/
+markbox-extension/node_modules/

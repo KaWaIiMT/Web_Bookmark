@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { getUserIdFromRequest } from "@/lib/auth-helpers";
 
 // Delete or update collection
 export async function PATCH(
@@ -8,15 +8,15 @@ export async function PATCH(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const { id } = await params;
     const body = await req.json();
     const { name, isPublic } = body;
 
     const collection = await prisma.collection.findUnique({ where: { id } });
-    if (!collection || collection.userId !== session.user.id) {
+    if (!collection || collection.userId !== userId) {
       return NextResponse.json({ error: "Collection not found" }, { status: 404 });
     }
 
@@ -41,13 +41,13 @@ export async function DELETE(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const { id } = await params;
 
     const collection = await prisma.collection.findUnique({ where: { id } });
-    if (!collection || collection.userId !== session.user.id) {
+    if (!collection || collection.userId !== userId) {
       return NextResponse.json({ error: "Collection not found" }, { status: 404 });
     }
 

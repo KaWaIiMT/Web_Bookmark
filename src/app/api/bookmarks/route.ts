@@ -2,18 +2,22 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { extractMetadata } from "@/lib/metadata";
 import { categorizeBookmark } from "@/lib/deepseek";
-import { auth } from "@/lib/auth";
+import { getUserIdFromRequest } from "@/lib/auth-helpers";
 
 // Create bookmark (with metadata extraction + AI categorization)
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    const userId = session.user.id;
 
-    const { url, title: customTitle, description: customDescription } = await req.json();
+    const {
+      url,
+      title: customTitle,
+      description: customDescription,
+      categoryId: userCategoryId,
+    } = await req.json();
 
     if (!url) {
       return NextResponse.json({ error: "URL is required" }, { status: 400 });
@@ -78,9 +82,11 @@ export async function POST(req: NextRequest) {
       })
     );
 
-    // Step 4: Find or create category (only top level)
+    // Step 4: Find or create category — use user-provided id if given
     let categoryId: string | null = null;
-    if (aiCategory) {
+    if (userCategoryId) {
+      categoryId = userCategoryId;
+    } else if (aiCategory) {
       const topCategory = aiCategory.split(">")[0].trim();
       const catSlug = topCategory.toLowerCase().replace(/\s+/g, "-");
       const category = await prisma.category.upsert({
@@ -128,8 +134,8 @@ export async function POST(req: NextRequest) {
 // List bookmarks with pagination, filtering, and search
 export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -141,12 +147,14 @@ export async function GET(req: NextRequest) {
     const collectionId = searchParams.get("collectionId") || undefined;
     const contentType = searchParams.get("contentType") || undefined;
     const search = searchParams.get("q") || undefined;
+    const url = searchParams.get("url") || undefined;
 
-    const where: Record<string, unknown> = { userId: session.user.id };
+    const where: Record<string, unknown> = { userId };
 
     if (status) where.status = status;
     if (categoryId) where.categoryId = categoryId;
     if (contentType) where.contentType = contentType;
+    if (url) where.url = url;
     if (collectionId) {
       where.collections = { some: { collectionId } };
     }

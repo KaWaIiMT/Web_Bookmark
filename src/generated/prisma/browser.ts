@@ -67,3 +67,8 @@ export type Collection = Prisma.CollectionModel
  * 
  */
 export type CollectionBookmark = Prisma.CollectionBookmarkModel
+/**
+ * Model ApiKey
+ * 
+ */
+export type ApiKey = Prisma.ApiKeyModel
