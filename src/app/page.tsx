@@ -55,7 +55,7 @@ export default function Home() {
   const [activeView, setActiveView] = useState<ViewType>("grid");
   const [selectedPathId, setSelectedPathId] = useState<string | null>(null);
 
-  const fetchBookmarks = useCallback(async (signal?: AbortSignal) => {
+  const fetchBookmarks = useCallback(async (signal: AbortSignal) => {
     setLoading(true);
     try {
       const params = new URLSearchParams();
@@ -66,14 +66,15 @@ export default function Home() {
       params.set("limit", "100");
 
       const res = await fetch(`/api/bookmarks?${params.toString()}`, { signal });
-      if (signal?.aborted) return;
+      if (signal.aborted) return;
       const data = (await res.json()) as PaginatedResponse<BookmarkData>;
-      if (!signal?.aborted) setBookmarks(data.data || []);
+      if (!signal.aborted) setBookmarks(data.data || []);
     } catch (err) {
+      if (signal.aborted) return;
       if (err instanceof DOMException && err.name === "AbortError") return;
-      if (!signal?.aborted) setBookmarks([]);
+      setBookmarks([]);
     } finally {
-      if (!signal?.aborted) setLoading(false);
+      if (!signal.aborted) setLoading(false);
     }
   }, [activeStatus, activeCategory, activeCollection, searchQuery]);
 
@@ -84,11 +85,16 @@ export default function Home() {
       setLoading(false);
       return;
     }
-    let aborted = false;
     const controller = new AbortController();
     fetchBookmarks(controller.signal);
-    return () => { aborted = true; controller.abort(); };
+    return () => controller.abort();
+
   }, [fetchBookmarks, isReady, activeView]);
+
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const refreshBookmarks = useCallback(() => {
+    fetchBookmarks(new AbortController().signal);
+  }, [fetchBookmarks]);
 
   const handleStatusChange = async (id: string, status: string) => {
     try {
@@ -100,7 +106,7 @@ export default function Home() {
       if (!res.ok) throw new Error(await res.text());
       toast.success(`已改为「${status === "unread" ? "待读" : status === "reading" ? "在读" : status === "read" ? "已读" : "归档"}」`);
       setSelectedBookmark((prev) => prev?.id === id ? { ...prev, status: status as BookmarkData["status"] } : prev);
-      fetchBookmarks();
+      refreshBookmarks();
     } catch {
       toast.error("操作失败，请重试");
     }
@@ -112,7 +118,7 @@ export default function Home() {
       if (!res.ok) throw new Error(await res.text());
       toast.success("书签已删除");
       setDeleteTarget(null);
-      fetchBookmarks();
+      refreshBookmarks();
     } catch {
       toast.error("删除失败，请重试");
     }
@@ -155,7 +161,7 @@ export default function Home() {
       if (!res.ok) throw new Error(await res.text());
     } catch {
       toast.error("排序失败");
-      fetchBookmarks(); // rollback
+      refreshBookmarks(); // rollback
     }
   };
 
@@ -404,7 +410,7 @@ export default function Home() {
       <AddBookmarkDialog
         open={addDialogOpen}
         onOpenChange={setAddDialogOpen}
-        onCreated={fetchBookmarks}
+        onCreated={refreshBookmarks}
         editBookmark={editBookmark}
       />
 
