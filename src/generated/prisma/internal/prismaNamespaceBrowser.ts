@@ -61,11 +61,12 @@ export const ModelName = {
   Category: 'Category',
   Collection: 'Collection',
   CollectionBookmark: 'CollectionBookmark',
+  HotnessTracker: 'HotnessTracker',
+  HotnessSnapshot: 'HotnessSnapshot',
+  ApiKey: 'ApiKey',
   LearningPath: 'LearningPath',
   LearningPathItem: 'LearningPathItem',
-  PathNote: 'PathNote',
-  HotnessTracker: 'HotnessTracker',
-  HotnessSnapshot: 'HotnessSnapshot'
+  PathNote: 'PathNote'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -207,6 +208,46 @@ export const CollectionBookmarkScalarFieldEnum = {
 export type CollectionBookmarkScalarFieldEnum = (typeof CollectionBookmarkScalarFieldEnum)[keyof typeof CollectionBookmarkScalarFieldEnum]
 
 
+export const HotnessTrackerScalarFieldEnum = {
+  id: 'id',
+  bookmarkId: 'bookmarkId',
+  sourceType: 'sourceType',
+  enabled: 'enabled',
+  lastCheckedAt: 'lastCheckedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type HotnessTrackerScalarFieldEnum = (typeof HotnessTrackerScalarFieldEnum)[keyof typeof HotnessTrackerScalarFieldEnum]
+
+
+export const HotnessSnapshotScalarFieldEnum = {
+  id: 'id',
+  trackerId: 'trackerId',
+  timestamp: 'timestamp',
+  stars: 'stars',
+  forks: 'forks',
+  openIssues: 'openIssues',
+  views: 'views',
+  likes: 'likes',
+  httpStatus: 'httpStatus',
+  snapshot: 'snapshot'
+} as const
+
+export type HotnessSnapshotScalarFieldEnum = (typeof HotnessSnapshotScalarFieldEnum)[keyof typeof HotnessSnapshotScalarFieldEnum]
+
+
+export const ApiKeyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  key: 'key',
+  userId: 'userId',
+  lastUsedAt: 'lastUsedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ApiKeyScalarFieldEnum = (typeof ApiKeyScalarFieldEnum)[keyof typeof ApiKeyScalarFieldEnum]
+
+
 export const LearningPathScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -247,34 +288,6 @@ export const PathNoteScalarFieldEnum = {
 } as const
 
 export type PathNoteScalarFieldEnum = (typeof PathNoteScalarFieldEnum)[keyof typeof PathNoteScalarFieldEnum]
-
-
-export const HotnessTrackerScalarFieldEnum = {
-  id: 'id',
-  bookmarkId: 'bookmarkId',
-  sourceType: 'sourceType',
-  enabled: 'enabled',
-  lastCheckedAt: 'lastCheckedAt',
-  createdAt: 'createdAt'
-} as const
-
-export type HotnessTrackerScalarFieldEnum = (typeof HotnessTrackerScalarFieldEnum)[keyof typeof HotnessTrackerScalarFieldEnum]
-
-
-export const HotnessSnapshotScalarFieldEnum = {
-  id: 'id',
-  trackerId: 'trackerId',
-  timestamp: 'timestamp',
-  stars: 'stars',
-  forks: 'forks',
-  openIssues: 'openIssues',
-  views: 'views',
-  likes: 'likes',
-  httpStatus: 'httpStatus',
-  snapshot: 'snapshot'
-} as const
-
-export type HotnessSnapshotScalarFieldEnum = (typeof HotnessSnapshotScalarFieldEnum)[keyof typeof HotnessSnapshotScalarFieldEnum]
 
 
 export const SortOrder = {

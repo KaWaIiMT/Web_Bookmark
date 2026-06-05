@@ -1,16 +1,15 @@
-import { NextResponse } from "next/server";
+import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { getUserIdFromRequest } from "@/lib/auth-helpers";
 import { startOfWeek, endOfWeek, subWeeks, format } from "date-fns";
 import { zhCN } from "date-fns/locale";
 
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
-    const userId = session.user.id;
 
     const now = new Date();
     const thisWeekStart = startOfWeek(now, { weekStartsOn: 1 }); // Monday

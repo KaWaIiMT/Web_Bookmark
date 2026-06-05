@@ -29,6 +29,7 @@ import { LearningPathListView } from "@/components/LearningPathListView";
 import { LearningPathDetailView } from "@/components/LearningPathDetailView";
 import { CompareView } from "@/components/CompareView";
 import { ActivityView } from "@/components/ActivityView";
+import { KnowledgeGraphView } from "@/components/KnowledgeGraphView";
 import { VoiceSearch } from "@/components/VoiceSearch";
 import { useRouter } from "next/navigation";
 import type { BookmarkData, PaginatedResponse, ViewType } from "@/lib/types";
@@ -399,6 +400,11 @@ export default function Home() {
           {/* Weekly report: self-contained data fetching */}
           {activeView === "weekly" && (
             <WeeklyReport />
+          )}
+
+          {/* Knowledge graph: self-contained data fetching */}
+          {activeView === "graph" && (
+            <KnowledgeGraphView />
           )}
         </div>
       </main>

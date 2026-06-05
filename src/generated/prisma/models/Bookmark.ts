@@ -824,20 +824,6 @@ export type BookmarkUpdateOneRequiredWithoutCollectionsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BookmarkUpdateToOneWithWhereWithoutCollectionsInput, Prisma.BookmarkUpdateWithoutCollectionsInput>, Prisma.BookmarkUncheckedUpdateWithoutCollectionsInput>
 }
 
-export type BookmarkCreateNestedOneWithoutPathItemsInput = {
-  create?: Prisma.XOR<Prisma.BookmarkCreateWithoutPathItemsInput, Prisma.BookmarkUncheckedCreateWithoutPathItemsInput>
-  connectOrCreate?: Prisma.BookmarkCreateOrConnectWithoutPathItemsInput
-  connect?: Prisma.BookmarkWhereUniqueInput
-}
-
-export type BookmarkUpdateOneRequiredWithoutPathItemsNestedInput = {
-  create?: Prisma.XOR<Prisma.BookmarkCreateWithoutPathItemsInput, Prisma.BookmarkUncheckedCreateWithoutPathItemsInput>
-  connectOrCreate?: Prisma.BookmarkCreateOrConnectWithoutPathItemsInput
-  upsert?: Prisma.BookmarkUpsertWithoutPathItemsInput
-  connect?: Prisma.BookmarkWhereUniqueInput
-  update?: Prisma.XOR<Prisma.XOR<Prisma.BookmarkUpdateToOneWithWhereWithoutPathItemsInput, Prisma.BookmarkUpdateWithoutPathItemsInput>, Prisma.BookmarkUncheckedUpdateWithoutPathItemsInput>
-}
-
 export type BookmarkCreateNestedOneWithoutTrackersInput = {
   create?: Prisma.XOR<Prisma.BookmarkCreateWithoutTrackersInput, Prisma.BookmarkUncheckedCreateWithoutTrackersInput>
   connectOrCreate?: Prisma.BookmarkCreateOrConnectWithoutTrackersInput
@@ -850,6 +836,20 @@ export type BookmarkUpdateOneRequiredWithoutTrackersNestedInput = {
   upsert?: Prisma.BookmarkUpsertWithoutTrackersInput
   connect?: Prisma.BookmarkWhereUniqueInput
   update?: Prisma.XOR<Prisma.XOR<Prisma.BookmarkUpdateToOneWithWhereWithoutTrackersInput, Prisma.BookmarkUpdateWithoutTrackersInput>, Prisma.BookmarkUncheckedUpdateWithoutTrackersInput>
+}
+
+export type BookmarkCreateNestedOneWithoutPathItemsInput = {
+  create?: Prisma.XOR<Prisma.BookmarkCreateWithoutPathItemsInput, Prisma.BookmarkUncheckedCreateWithoutPathItemsInput>
+  connectOrCreate?: Prisma.BookmarkCreateOrConnectWithoutPathItemsInput
+  connect?: Prisma.BookmarkWhereUniqueInput
+}
+
+export type BookmarkUpdateOneRequiredWithoutPathItemsNestedInput = {
+  create?: Prisma.XOR<Prisma.BookmarkCreateWithoutPathItemsInput, Prisma.BookmarkUncheckedCreateWithoutPathItemsInput>
+  connectOrCreate?: Prisma.BookmarkCreateOrConnectWithoutPathItemsInput
+  upsert?: Prisma.BookmarkUpsertWithoutPathItemsInput
+  connect?: Prisma.BookmarkWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookmarkUpdateToOneWithWhereWithoutPathItemsInput, Prisma.BookmarkUpdateWithoutPathItemsInput>, Prisma.BookmarkUncheckedUpdateWithoutPathItemsInput>
 }
 
 export type BookmarkCreateWithoutUserInput = {
@@ -1259,122 +1259,6 @@ export type BookmarkUncheckedUpdateWithoutCollectionsInput = {
   trackers?: Prisma.HotnessTrackerUncheckedUpdateManyWithoutBookmarkNestedInput
 }
 
-export type BookmarkCreateWithoutPathItemsInput = {
-  id?: string
-  url: string
-  title: string
-  description?: string | null
-  coverImage?: string | null
-  favicon?: string | null
-  siteName?: string | null
-  contentType?: string
-  metadata?: string | null
-  aiSummary?: string | null
-  shareToken?: string | null
-  embedding?: string | null
-  status?: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  readAt?: Date | string | null
-  order?: number
-  category?: Prisma.CategoryCreateNestedOneWithoutBookmarksInput
-  user: Prisma.UserCreateNestedOneWithoutBookmarksInput
-  tags?: Prisma.BookmarkTagCreateNestedManyWithoutBookmarkInput
-  collections?: Prisma.CollectionBookmarkCreateNestedManyWithoutBookmarkInput
-  trackers?: Prisma.HotnessTrackerCreateNestedManyWithoutBookmarkInput
-}
-
-export type BookmarkUncheckedCreateWithoutPathItemsInput = {
-  id?: string
-  url: string
-  title: string
-  description?: string | null
-  coverImage?: string | null
-  favicon?: string | null
-  siteName?: string | null
-  contentType?: string
-  metadata?: string | null
-  aiSummary?: string | null
-  shareToken?: string | null
-  embedding?: string | null
-  status?: string
-  categoryId?: string | null
-  userId: string
-  createdAt?: Date | string
-  updatedAt?: Date | string
-  readAt?: Date | string | null
-  order?: number
-  tags?: Prisma.BookmarkTagUncheckedCreateNestedManyWithoutBookmarkInput
-  collections?: Prisma.CollectionBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
-  trackers?: Prisma.HotnessTrackerUncheckedCreateNestedManyWithoutBookmarkInput
-}
-
-export type BookmarkCreateOrConnectWithoutPathItemsInput = {
-  where: Prisma.BookmarkWhereUniqueInput
-  create: Prisma.XOR<Prisma.BookmarkCreateWithoutPathItemsInput, Prisma.BookmarkUncheckedCreateWithoutPathItemsInput>
-}
-
-export type BookmarkUpsertWithoutPathItemsInput = {
-  update: Prisma.XOR<Prisma.BookmarkUpdateWithoutPathItemsInput, Prisma.BookmarkUncheckedUpdateWithoutPathItemsInput>
-  create: Prisma.XOR<Prisma.BookmarkCreateWithoutPathItemsInput, Prisma.BookmarkUncheckedCreateWithoutPathItemsInput>
-  where?: Prisma.BookmarkWhereInput
-}
-
-export type BookmarkUpdateToOneWithWhereWithoutPathItemsInput = {
-  where?: Prisma.BookmarkWhereInput
-  data: Prisma.XOR<Prisma.BookmarkUpdateWithoutPathItemsInput, Prisma.BookmarkUncheckedUpdateWithoutPathItemsInput>
-}
-
-export type BookmarkUpdateWithoutPathItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  favicon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  siteName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contentType?: Prisma.StringFieldUpdateOperationsInput | string
-  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  embedding?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  order?: Prisma.IntFieldUpdateOperationsInput | number
-  category?: Prisma.CategoryUpdateOneWithoutBookmarksNestedInput
-  user?: Prisma.UserUpdateOneRequiredWithoutBookmarksNestedInput
-  tags?: Prisma.BookmarkTagUpdateManyWithoutBookmarkNestedInput
-  collections?: Prisma.CollectionBookmarkUpdateManyWithoutBookmarkNestedInput
-  trackers?: Prisma.HotnessTrackerUpdateManyWithoutBookmarkNestedInput
-}
-
-export type BookmarkUncheckedUpdateWithoutPathItemsInput = {
-  id?: Prisma.StringFieldUpdateOperationsInput | string
-  url?: Prisma.StringFieldUpdateOperationsInput | string
-  title?: Prisma.StringFieldUpdateOperationsInput | string
-  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  favicon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  siteName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  contentType?: Prisma.StringFieldUpdateOperationsInput | string
-  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  embedding?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  status?: Prisma.StringFieldUpdateOperationsInput | string
-  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
-  userId?: Prisma.StringFieldUpdateOperationsInput | string
-  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
-  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
-  order?: Prisma.IntFieldUpdateOperationsInput | number
-  tags?: Prisma.BookmarkTagUncheckedUpdateManyWithoutBookmarkNestedInput
-  collections?: Prisma.CollectionBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
-  trackers?: Prisma.HotnessTrackerUncheckedUpdateManyWithoutBookmarkNestedInput
-}
-
 export type BookmarkCreateWithoutTrackersInput = {
   id?: string
   url: string
@@ -1489,6 +1373,122 @@ export type BookmarkUncheckedUpdateWithoutTrackersInput = {
   tags?: Prisma.BookmarkTagUncheckedUpdateManyWithoutBookmarkNestedInput
   collections?: Prisma.CollectionBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
   pathItems?: Prisma.LearningPathItemUncheckedUpdateManyWithoutBookmarkNestedInput
+}
+
+export type BookmarkCreateWithoutPathItemsInput = {
+  id?: string
+  url: string
+  title: string
+  description?: string | null
+  coverImage?: string | null
+  favicon?: string | null
+  siteName?: string | null
+  contentType?: string
+  metadata?: string | null
+  aiSummary?: string | null
+  shareToken?: string | null
+  embedding?: string | null
+  status?: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  readAt?: Date | string | null
+  order?: number
+  category?: Prisma.CategoryCreateNestedOneWithoutBookmarksInput
+  user: Prisma.UserCreateNestedOneWithoutBookmarksInput
+  tags?: Prisma.BookmarkTagCreateNestedManyWithoutBookmarkInput
+  collections?: Prisma.CollectionBookmarkCreateNestedManyWithoutBookmarkInput
+  trackers?: Prisma.HotnessTrackerCreateNestedManyWithoutBookmarkInput
+}
+
+export type BookmarkUncheckedCreateWithoutPathItemsInput = {
+  id?: string
+  url: string
+  title: string
+  description?: string | null
+  coverImage?: string | null
+  favicon?: string | null
+  siteName?: string | null
+  contentType?: string
+  metadata?: string | null
+  aiSummary?: string | null
+  shareToken?: string | null
+  embedding?: string | null
+  status?: string
+  categoryId?: string | null
+  userId: string
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  readAt?: Date | string | null
+  order?: number
+  tags?: Prisma.BookmarkTagUncheckedCreateNestedManyWithoutBookmarkInput
+  collections?: Prisma.CollectionBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
+  trackers?: Prisma.HotnessTrackerUncheckedCreateNestedManyWithoutBookmarkInput
+}
+
+export type BookmarkCreateOrConnectWithoutPathItemsInput = {
+  where: Prisma.BookmarkWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookmarkCreateWithoutPathItemsInput, Prisma.BookmarkUncheckedCreateWithoutPathItemsInput>
+}
+
+export type BookmarkUpsertWithoutPathItemsInput = {
+  update: Prisma.XOR<Prisma.BookmarkUpdateWithoutPathItemsInput, Prisma.BookmarkUncheckedUpdateWithoutPathItemsInput>
+  create: Prisma.XOR<Prisma.BookmarkCreateWithoutPathItemsInput, Prisma.BookmarkUncheckedCreateWithoutPathItemsInput>
+  where?: Prisma.BookmarkWhereInput
+}
+
+export type BookmarkUpdateToOneWithWhereWithoutPathItemsInput = {
+  where?: Prisma.BookmarkWhereInput
+  data: Prisma.XOR<Prisma.BookmarkUpdateWithoutPathItemsInput, Prisma.BookmarkUncheckedUpdateWithoutPathItemsInput>
+}
+
+export type BookmarkUpdateWithoutPathItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favicon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentType?: Prisma.StringFieldUpdateOperationsInput | string
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  embedding?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  category?: Prisma.CategoryUpdateOneWithoutBookmarksNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBookmarksNestedInput
+  tags?: Prisma.BookmarkTagUpdateManyWithoutBookmarkNestedInput
+  collections?: Prisma.CollectionBookmarkUpdateManyWithoutBookmarkNestedInput
+  trackers?: Prisma.HotnessTrackerUpdateManyWithoutBookmarkNestedInput
+}
+
+export type BookmarkUncheckedUpdateWithoutPathItemsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favicon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentType?: Prisma.StringFieldUpdateOperationsInput | string
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  embedding?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  tags?: Prisma.BookmarkTagUncheckedUpdateManyWithoutBookmarkNestedInput
+  collections?: Prisma.CollectionBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
+  trackers?: Prisma.HotnessTrackerUncheckedUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkCreateManyUserInput = {

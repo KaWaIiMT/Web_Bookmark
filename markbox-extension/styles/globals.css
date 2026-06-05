@@ -1,0 +1,115 @@
+@import "tailwindcss";
+
+/* ===== Font Imports ===== */
+@import url('https://fonts.googleapis.com/css2?family=Noto+Sans+SC:wght@400;500;700&family=Playfair+Display:wght@700&display=swap');
+
+/* ===== Design Tokens (ported from main app) ===== */
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-border: var(--border);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-skeleton: var(--skeleton);
+  --font-sans: "Noto Sans SC", "PingFang SC", "Microsoft YaHei", ui-sans-serif, system-ui, sans-serif;
+  --font-display: "Playfair Display", "Noto Serif SC", Georgia, serif;
+  --radius-sm: 0.5rem;
+  --radius-md: 0.75rem;
+  --radius-lg: 1rem;
+  --radius-xl: 1.25rem;
+}
+
+:root {
+  --background: #f5f3f0;
+  --foreground: #2c2c2c;
+  --card: rgba(255, 255, 255, 0.6);
+  --card-foreground: #2c2c2c;
+  --muted: #e8e4df;
+  --muted-foreground: rgba(44, 44, 44, 0.45);
+  --border: rgba(44, 44, 44, 0.04);
+  --accent: #b76e4b;
+  --accent-foreground: #ffffff;
+  --ring: rgba(183, 110, 75, 0.2);
+  --input: rgba(255, 255, 255, 0.4);
+  --popover: rgba(255, 255, 255, 0.95);
+  --popover-foreground: #2c2c2c;
+  --skeleton: #e8e4df;
+  --noise-opacity: 0.035;
+}
+
+.dark {
+  --background: #121210;
+  --foreground: #e8e4df;
+  --card: rgba(36, 36, 34, 0.75);
+  --card-foreground: #e8e4df;
+  --muted: #1e1e1c;
+  --muted-foreground: rgba(232, 228, 223, 0.35);
+  --border: rgba(232, 228, 223, 0.06);
+  --accent: #c9866b;
+  --accent-foreground: #121210;
+  --ring: rgba(201, 134, 107, 0.3);
+  --input: rgba(36, 36, 34, 0.6);
+  --popover: rgba(30, 30, 28, 0.95);
+  --popover-foreground: #e8e4df;
+  --skeleton: #1e1e1c;
+  --noise-opacity: 0.05;
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+/* ===== Scrollbar ===== */
+::-webkit-scrollbar {
+  width: 4px;
+  height: 4px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(183, 110, 75, 0.15);
+  border-radius: 2px;
+}
+
+/* ===== Selection ===== */
+::selection {
+  background: rgba(183, 110, 75, 0.2);
+  color: inherit;
+}
+
+/* ===== Glass Card ===== */
+.glass-card {
+  background: var(--card);
+  backdrop-filter: blur(16px) saturate(140%);
+  -webkit-backdrop-filter: blur(16px) saturate(140%);
+  border: 1px solid var(--border);
+}
+
+/* ===== Shimmer Animation ===== */
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+.shimmer {
+  background: linear-gradient(
+    90deg,
+    var(--skeleton) 0%,
+    var(--muted) 50%,
+    var(--skeleton) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+}

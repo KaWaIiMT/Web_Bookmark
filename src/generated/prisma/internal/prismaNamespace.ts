@@ -394,11 +394,12 @@ export const ModelName = {
   Category: 'Category',
   Collection: 'Collection',
   CollectionBookmark: 'CollectionBookmark',
+  HotnessTracker: 'HotnessTracker',
+  HotnessSnapshot: 'HotnessSnapshot',
+  ApiKey: 'ApiKey',
   LearningPath: 'LearningPath',
   LearningPathItem: 'LearningPathItem',
-  PathNote: 'PathNote',
-  HotnessTracker: 'HotnessTracker',
-  HotnessSnapshot: 'HotnessSnapshot'
+  PathNote: 'PathNote'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -414,7 +415,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "bookmark" | "tag" | "bookmarkTag" | "category" | "collection" | "collectionBookmark" | "learningPath" | "learningPathItem" | "pathNote" | "hotnessTracker" | "hotnessSnapshot"
+    modelProps: "user" | "account" | "session" | "verificationToken" | "bookmark" | "tag" | "bookmarkTag" | "category" | "collection" | "collectionBookmark" | "hotnessTracker" | "hotnessSnapshot" | "apiKey" | "learningPath" | "learningPathItem" | "pathNote"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1158,6 +1159,228 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    HotnessTracker: {
+      payload: Prisma.$HotnessTrackerPayload<ExtArgs>
+      fields: Prisma.HotnessTrackerFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HotnessTrackerFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HotnessTrackerFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
+        }
+        findFirst: {
+          args: Prisma.HotnessTrackerFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HotnessTrackerFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
+        }
+        findMany: {
+          args: Prisma.HotnessTrackerFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>[]
+        }
+        create: {
+          args: Prisma.HotnessTrackerCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
+        }
+        createMany: {
+          args: Prisma.HotnessTrackerCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.HotnessTrackerCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>[]
+        }
+        delete: {
+          args: Prisma.HotnessTrackerDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
+        }
+        update: {
+          args: Prisma.HotnessTrackerUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
+        }
+        deleteMany: {
+          args: Prisma.HotnessTrackerDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HotnessTrackerUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.HotnessTrackerUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>[]
+        }
+        upsert: {
+          args: Prisma.HotnessTrackerUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
+        }
+        aggregate: {
+          args: Prisma.HotnessTrackerAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHotnessTracker>
+        }
+        groupBy: {
+          args: Prisma.HotnessTrackerGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HotnessTrackerGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HotnessTrackerCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HotnessTrackerCountAggregateOutputType> | number
+        }
+      }
+    }
+    HotnessSnapshot: {
+      payload: Prisma.$HotnessSnapshotPayload<ExtArgs>
+      fields: Prisma.HotnessSnapshotFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.HotnessSnapshotFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.HotnessSnapshotFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
+        }
+        findFirst: {
+          args: Prisma.HotnessSnapshotFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.HotnessSnapshotFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
+        }
+        findMany: {
+          args: Prisma.HotnessSnapshotFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>[]
+        }
+        create: {
+          args: Prisma.HotnessSnapshotCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
+        }
+        createMany: {
+          args: Prisma.HotnessSnapshotCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.HotnessSnapshotCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>[]
+        }
+        delete: {
+          args: Prisma.HotnessSnapshotDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
+        }
+        update: {
+          args: Prisma.HotnessSnapshotUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
+        }
+        deleteMany: {
+          args: Prisma.HotnessSnapshotDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.HotnessSnapshotUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.HotnessSnapshotUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>[]
+        }
+        upsert: {
+          args: Prisma.HotnessSnapshotUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
+        }
+        aggregate: {
+          args: Prisma.HotnessSnapshotAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateHotnessSnapshot>
+        }
+        groupBy: {
+          args: Prisma.HotnessSnapshotGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HotnessSnapshotGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.HotnessSnapshotCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.HotnessSnapshotCountAggregateOutputType> | number
+        }
+      }
+    }
+    ApiKey: {
+      payload: Prisma.$ApiKeyPayload<ExtArgs>
+      fields: Prisma.ApiKeyFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ApiKeyFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ApiKeyFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        findFirst: {
+          args: Prisma.ApiKeyFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ApiKeyFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        findMany: {
+          args: Prisma.ApiKeyFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>[]
+        }
+        create: {
+          args: Prisma.ApiKeyCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        createMany: {
+          args: Prisma.ApiKeyCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ApiKeyCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>[]
+        }
+        delete: {
+          args: Prisma.ApiKeyDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        update: {
+          args: Prisma.ApiKeyUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        deleteMany: {
+          args: Prisma.ApiKeyDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ApiKeyUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ApiKeyUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>[]
+        }
+        upsert: {
+          args: Prisma.ApiKeyUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ApiKeyPayload>
+        }
+        aggregate: {
+          args: Prisma.ApiKeyAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateApiKey>
+        }
+        groupBy: {
+          args: Prisma.ApiKeyGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApiKeyGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ApiKeyCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ApiKeyCountAggregateOutputType> | number
+        }
+      }
+    }
     LearningPath: {
       payload: Prisma.$LearningPathPayload<ExtArgs>
       fields: Prisma.LearningPathFieldRefs
@@ -1380,154 +1603,6 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
-    HotnessTracker: {
-      payload: Prisma.$HotnessTrackerPayload<ExtArgs>
-      fields: Prisma.HotnessTrackerFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.HotnessTrackerFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.HotnessTrackerFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
-        }
-        findFirst: {
-          args: Prisma.HotnessTrackerFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.HotnessTrackerFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
-        }
-        findMany: {
-          args: Prisma.HotnessTrackerFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>[]
-        }
-        create: {
-          args: Prisma.HotnessTrackerCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
-        }
-        createMany: {
-          args: Prisma.HotnessTrackerCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.HotnessTrackerCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>[]
-        }
-        delete: {
-          args: Prisma.HotnessTrackerDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
-        }
-        update: {
-          args: Prisma.HotnessTrackerUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
-        }
-        deleteMany: {
-          args: Prisma.HotnessTrackerDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.HotnessTrackerUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.HotnessTrackerUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>[]
-        }
-        upsert: {
-          args: Prisma.HotnessTrackerUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessTrackerPayload>
-        }
-        aggregate: {
-          args: Prisma.HotnessTrackerAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateHotnessTracker>
-        }
-        groupBy: {
-          args: Prisma.HotnessTrackerGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.HotnessTrackerGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.HotnessTrackerCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.HotnessTrackerCountAggregateOutputType> | number
-        }
-      }
-    }
-    HotnessSnapshot: {
-      payload: Prisma.$HotnessSnapshotPayload<ExtArgs>
-      fields: Prisma.HotnessSnapshotFieldRefs
-      operations: {
-        findUnique: {
-          args: Prisma.HotnessSnapshotFindUniqueArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload> | null
-        }
-        findUniqueOrThrow: {
-          args: Prisma.HotnessSnapshotFindUniqueOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
-        }
-        findFirst: {
-          args: Prisma.HotnessSnapshotFindFirstArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload> | null
-        }
-        findFirstOrThrow: {
-          args: Prisma.HotnessSnapshotFindFirstOrThrowArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
-        }
-        findMany: {
-          args: Prisma.HotnessSnapshotFindManyArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>[]
-        }
-        create: {
-          args: Prisma.HotnessSnapshotCreateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
-        }
-        createMany: {
-          args: Prisma.HotnessSnapshotCreateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        createManyAndReturn: {
-          args: Prisma.HotnessSnapshotCreateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>[]
-        }
-        delete: {
-          args: Prisma.HotnessSnapshotDeleteArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
-        }
-        update: {
-          args: Prisma.HotnessSnapshotUpdateArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
-        }
-        deleteMany: {
-          args: Prisma.HotnessSnapshotDeleteManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateMany: {
-          args: Prisma.HotnessSnapshotUpdateManyArgs<ExtArgs>
-          result: BatchPayload
-        }
-        updateManyAndReturn: {
-          args: Prisma.HotnessSnapshotUpdateManyAndReturnArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>[]
-        }
-        upsert: {
-          args: Prisma.HotnessSnapshotUpsertArgs<ExtArgs>
-          result: runtime.Types.Utils.PayloadToResult<Prisma.$HotnessSnapshotPayload>
-        }
-        aggregate: {
-          args: Prisma.HotnessSnapshotAggregateArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.AggregateHotnessSnapshot>
-        }
-        groupBy: {
-          args: Prisma.HotnessSnapshotGroupByArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.HotnessSnapshotGroupByOutputType>[]
-        }
-        count: {
-          args: Prisma.HotnessSnapshotCountArgs<ExtArgs>
-          result: runtime.Types.Utils.Optional<Prisma.HotnessSnapshotCountAggregateOutputType> | number
-        }
-      }
-    }
   }
 } & {
   other: {
@@ -1690,6 +1765,46 @@ export const CollectionBookmarkScalarFieldEnum = {
 export type CollectionBookmarkScalarFieldEnum = (typeof CollectionBookmarkScalarFieldEnum)[keyof typeof CollectionBookmarkScalarFieldEnum]
 
 
+export const HotnessTrackerScalarFieldEnum = {
+  id: 'id',
+  bookmarkId: 'bookmarkId',
+  sourceType: 'sourceType',
+  enabled: 'enabled',
+  lastCheckedAt: 'lastCheckedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type HotnessTrackerScalarFieldEnum = (typeof HotnessTrackerScalarFieldEnum)[keyof typeof HotnessTrackerScalarFieldEnum]
+
+
+export const HotnessSnapshotScalarFieldEnum = {
+  id: 'id',
+  trackerId: 'trackerId',
+  timestamp: 'timestamp',
+  stars: 'stars',
+  forks: 'forks',
+  openIssues: 'openIssues',
+  views: 'views',
+  likes: 'likes',
+  httpStatus: 'httpStatus',
+  snapshot: 'snapshot'
+} as const
+
+export type HotnessSnapshotScalarFieldEnum = (typeof HotnessSnapshotScalarFieldEnum)[keyof typeof HotnessSnapshotScalarFieldEnum]
+
+
+export const ApiKeyScalarFieldEnum = {
+  id: 'id',
+  name: 'name',
+  key: 'key',
+  userId: 'userId',
+  lastUsedAt: 'lastUsedAt',
+  createdAt: 'createdAt'
+} as const
+
+export type ApiKeyScalarFieldEnum = (typeof ApiKeyScalarFieldEnum)[keyof typeof ApiKeyScalarFieldEnum]
+
+
 export const LearningPathScalarFieldEnum = {
   id: 'id',
   userId: 'userId',
@@ -1730,34 +1845,6 @@ export const PathNoteScalarFieldEnum = {
 } as const
 
 export type PathNoteScalarFieldEnum = (typeof PathNoteScalarFieldEnum)[keyof typeof PathNoteScalarFieldEnum]
-
-
-export const HotnessTrackerScalarFieldEnum = {
-  id: 'id',
-  bookmarkId: 'bookmarkId',
-  sourceType: 'sourceType',
-  enabled: 'enabled',
-  lastCheckedAt: 'lastCheckedAt',
-  createdAt: 'createdAt'
-} as const
-
-export type HotnessTrackerScalarFieldEnum = (typeof HotnessTrackerScalarFieldEnum)[keyof typeof HotnessTrackerScalarFieldEnum]
-
-
-export const HotnessSnapshotScalarFieldEnum = {
-  id: 'id',
-  trackerId: 'trackerId',
-  timestamp: 'timestamp',
-  stars: 'stars',
-  forks: 'forks',
-  openIssues: 'openIssues',
-  views: 'views',
-  likes: 'likes',
-  httpStatus: 'httpStatus',
-  snapshot: 'snapshot'
-} as const
-
-export type HotnessSnapshotScalarFieldEnum = (typeof HotnessSnapshotScalarFieldEnum)[keyof typeof HotnessSnapshotScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -1936,11 +2023,12 @@ export type GlobalOmitConfig = {
   category?: Prisma.CategoryOmit
   collection?: Prisma.CollectionOmit
   collectionBookmark?: Prisma.CollectionBookmarkOmit
+  hotnessTracker?: Prisma.HotnessTrackerOmit
+  hotnessSnapshot?: Prisma.HotnessSnapshotOmit
+  apiKey?: Prisma.ApiKeyOmit
   learningPath?: Prisma.LearningPathOmit
   learningPathItem?: Prisma.LearningPathItemOmit
   pathNote?: Prisma.PathNoteOmit
-  hotnessTracker?: Prisma.HotnessTrackerOmit
-  hotnessSnapshot?: Prisma.HotnessSnapshotOmit
 }
 
 /* Types for Logging */

@@ -68,6 +68,21 @@ export type Collection = Prisma.CollectionModel
  */
 export type CollectionBookmark = Prisma.CollectionBookmarkModel
 /**
+ * Model HotnessTracker
+ * 
+ */
+export type HotnessTracker = Prisma.HotnessTrackerModel
+/**
+ * Model HotnessSnapshot
+ * 
+ */
+export type HotnessSnapshot = Prisma.HotnessSnapshotModel
+/**
+ * Model ApiKey
+ * 
+ */
+export type ApiKey = Prisma.ApiKeyModel
+/**
  * Model LearningPath
  * 
  */
@@ -82,13 +97,3 @@ export type LearningPathItem = Prisma.LearningPathItemModel
  * 
  */
 export type PathNote = Prisma.PathNoteModel
-/**
- * Model HotnessTracker
- * 
- */
-export type HotnessTracker = Prisma.HotnessTrackerModel
-/**
- * Model HotnessSnapshot
- * 
- */
-export type HotnessSnapshot = Prisma.HotnessSnapshotModel

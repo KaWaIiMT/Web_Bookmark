@@ -1,6 +1,6 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { getUserIdFromRequest } from "@/lib/auth-helpers";
 
 // Get bookmarks in a collection
 export async function GET(
@@ -8,13 +8,13 @@ export async function GET(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const { id } = await params;
 
     const bookmarks = await prisma.collectionBookmark.findMany({
-      where: { collectionId: id, collection: { userId: session.user.id } },
+      where: { collectionId: id, collection: { userId } },
       include: {
         bookmark: {
           include: {
@@ -41,8 +41,8 @@ export async function POST(
   { params }: { params: Promise<{ id: string }> }
 ) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
 
     const { id } = await params;
     const { bookmarkId } = await req.json();
@@ -51,13 +51,13 @@ export async function POST(
 
     // Verify collection ownership
     const collection = await prisma.collection.findUnique({ where: { id } });
-    if (!collection || collection.userId !== session.user.id) {
+    if (!collection || collection.userId !== userId) {
       return NextResponse.json({ error: "Collection not found" }, { status: 404 });
     }
 
     // Verify bookmark ownership
     const bookmark = await prisma.bookmark.findUnique({ where: { id: bookmarkId } });
-    if (!bookmark || bookmark.userId !== session.user.id) {
+    if (!bookmark || bookmark.userId !== userId) {
       return NextResponse.json({ error: "Bookmark not found" }, { status: 404 });
     }
 

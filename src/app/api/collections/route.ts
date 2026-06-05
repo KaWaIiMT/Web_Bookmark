@@ -1,17 +1,17 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
+import { getUserIdFromRequest } from "@/lib/auth-helpers";
 
 // List user's collections
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const collections = await prisma.collection.findMany({
-      where: { userId: session.user.id },
+      where: { userId },
       include: {
         _count: { select: { bookmarks: true } },
       },
@@ -28,8 +28,8 @@ export async function GET() {
 // Create collection
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -39,7 +39,6 @@ export async function POST(req: NextRequest) {
     }
 
     const slug = name.toLowerCase().replace(/\s+/g, "-");
-    const userId = session.user.id;
 
     const collection = await prisma.collection.create({
       data: { name, slug, userId },
