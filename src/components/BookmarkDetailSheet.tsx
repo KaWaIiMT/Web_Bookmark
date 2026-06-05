@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, Trash2, Clock, BookOpen, CheckCircle2, Archive, MapPin, Calendar, X } from "lucide-react";
+import { ExternalLink, Trash2, Share2, Clock, BookOpen, CheckCircle2, Archive, MapPin, Calendar, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
@@ -30,6 +30,7 @@ interface BookmarkDetailSheetProps {
   onClose: () => void;
   onStatusChange: (id: string, status: string) => void;
   onDelete: (id: string) => void;
+  onShare?: (id: string) => void;
 }
 
 export function BookmarkDetailSheet({
@@ -39,6 +40,7 @@ export function BookmarkDetailSheet({
   onClose,
   onStatusChange,
   onDelete,
+  onShare,
 }: BookmarkDetailSheetProps) {
   return (
     <AnimatePresence>
@@ -235,6 +237,13 @@ export function BookmarkDetailSheet({
               >
                 <ExternalLink className="h-3.5 w-3.5 mr-1.5 opacity-50" />
                 打开链接
+              </Button>
+              <Button
+                variant="outline"
+                onClick={() => { onShare?.(bookmark.id); }}
+                className="rounded-xl text-[13px] border-[var(--border)] bg-[var(--card)] hover:bg-[var(--muted)] text-[var(--foreground)] font-sans h-10 px-3"
+              >
+                <Share2 className="h-3.5 w-3.5" />
               </Button>
               <Button
                 variant="ghost"

@@ -45,6 +45,7 @@ export type BookmarkMinAggregateOutputType = {
   contentType: string | null
   metadata: string | null
   aiSummary: string | null
+  shareToken: string | null
   status: string | null
   categoryId: string | null
   userId: string | null
@@ -65,6 +66,7 @@ export type BookmarkMaxAggregateOutputType = {
   contentType: string | null
   metadata: string | null
   aiSummary: string | null
+  shareToken: string | null
   status: string | null
   categoryId: string | null
   userId: string | null
@@ -85,6 +87,7 @@ export type BookmarkCountAggregateOutputType = {
   contentType: number
   metadata: number
   aiSummary: number
+  shareToken: number
   status: number
   categoryId: number
   userId: number
@@ -115,6 +118,7 @@ export type BookmarkMinAggregateInputType = {
   contentType?: true
   metadata?: true
   aiSummary?: true
+  shareToken?: true
   status?: true
   categoryId?: true
   userId?: true
@@ -135,6 +139,7 @@ export type BookmarkMaxAggregateInputType = {
   contentType?: true
   metadata?: true
   aiSummary?: true
+  shareToken?: true
   status?: true
   categoryId?: true
   userId?: true
@@ -155,6 +160,7 @@ export type BookmarkCountAggregateInputType = {
   contentType?: true
   metadata?: true
   aiSummary?: true
+  shareToken?: true
   status?: true
   categoryId?: true
   userId?: true
@@ -262,6 +268,7 @@ export type BookmarkGroupByOutputType = {
   contentType: string
   metadata: string | null
   aiSummary: string | null
+  shareToken: string | null
   status: string
   categoryId: string | null
   userId: string
@@ -305,6 +312,7 @@ export type BookmarkWhereInput = {
   contentType?: Prisma.StringFilter<"Bookmark"> | string
   metadata?: Prisma.StringNullableFilter<"Bookmark"> | string | null
   aiSummary?: Prisma.StringNullableFilter<"Bookmark"> | string | null
+  shareToken?: Prisma.StringNullableFilter<"Bookmark"> | string | null
   status?: Prisma.StringFilter<"Bookmark"> | string
   categoryId?: Prisma.StringNullableFilter<"Bookmark"> | string | null
   userId?: Prisma.StringFilter<"Bookmark"> | string
@@ -329,6 +337,7 @@ export type BookmarkOrderByWithRelationInput = {
   contentType?: Prisma.SortOrder
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
   aiSummary?: Prisma.SortOrderInput | Prisma.SortOrder
+  shareToken?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -344,6 +353,7 @@ export type BookmarkOrderByWithRelationInput = {
 
 export type BookmarkWhereUniqueInput = Prisma.AtLeast<{
   id?: string
+  shareToken?: string
   AND?: Prisma.BookmarkWhereInput | Prisma.BookmarkWhereInput[]
   OR?: Prisma.BookmarkWhereInput[]
   NOT?: Prisma.BookmarkWhereInput | Prisma.BookmarkWhereInput[]
@@ -367,7 +377,7 @@ export type BookmarkWhereUniqueInput = Prisma.AtLeast<{
   user?: Prisma.XOR<Prisma.UserScalarRelationFilter, Prisma.UserWhereInput>
   tags?: Prisma.BookmarkTagListRelationFilter
   collections?: Prisma.CollectionBookmarkListRelationFilter
-}, "id">
+}, "id" | "shareToken">
 
 export type BookmarkOrderByWithAggregationInput = {
   id?: Prisma.SortOrder
@@ -380,6 +390,7 @@ export type BookmarkOrderByWithAggregationInput = {
   contentType?: Prisma.SortOrder
   metadata?: Prisma.SortOrderInput | Prisma.SortOrder
   aiSummary?: Prisma.SortOrderInput | Prisma.SortOrder
+  shareToken?: Prisma.SortOrderInput | Prisma.SortOrder
   status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -408,6 +419,7 @@ export type BookmarkScalarWhereWithAggregatesInput = {
   contentType?: Prisma.StringWithAggregatesFilter<"Bookmark"> | string
   metadata?: Prisma.StringNullableWithAggregatesFilter<"Bookmark"> | string | null
   aiSummary?: Prisma.StringNullableWithAggregatesFilter<"Bookmark"> | string | null
+  shareToken?: Prisma.StringNullableWithAggregatesFilter<"Bookmark"> | string | null
   status?: Prisma.StringWithAggregatesFilter<"Bookmark"> | string
   categoryId?: Prisma.StringNullableWithAggregatesFilter<"Bookmark"> | string | null
   userId?: Prisma.StringWithAggregatesFilter<"Bookmark"> | string
@@ -428,6 +440,7 @@ export type BookmarkCreateInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -450,6 +463,7 @@ export type BookmarkUncheckedCreateInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   categoryId?: string | null
   userId: string
@@ -472,6 +486,7 @@ export type BookmarkUpdateInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -494,6 +509,7 @@ export type BookmarkUncheckedUpdateInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -516,6 +532,7 @@ export type BookmarkCreateManyInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   categoryId?: string | null
   userId: string
@@ -536,6 +553,7 @@ export type BookmarkUpdateManyMutationInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -554,6 +572,7 @@ export type BookmarkUncheckedUpdateManyInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -584,6 +603,7 @@ export type BookmarkCountOrderByAggregateInput = {
   contentType?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   aiSummary?: Prisma.SortOrder
+  shareToken?: Prisma.SortOrder
   status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -608,6 +628,7 @@ export type BookmarkMaxOrderByAggregateInput = {
   contentType?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   aiSummary?: Prisma.SortOrder
+  shareToken?: Prisma.SortOrder
   status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -628,6 +649,7 @@ export type BookmarkMinOrderByAggregateInput = {
   contentType?: Prisma.SortOrder
   metadata?: Prisma.SortOrder
   aiSummary?: Prisma.SortOrder
+  shareToken?: Prisma.SortOrder
   status?: Prisma.SortOrder
   categoryId?: Prisma.SortOrder
   userId?: Prisma.SortOrder
@@ -777,6 +799,7 @@ export type BookmarkCreateWithoutUserInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -798,6 +821,7 @@ export type BookmarkUncheckedCreateWithoutUserInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   categoryId?: string | null
   createdAt?: Date | string
@@ -847,6 +871,7 @@ export type BookmarkScalarWhereInput = {
   contentType?: Prisma.StringFilter<"Bookmark"> | string
   metadata?: Prisma.StringNullableFilter<"Bookmark"> | string | null
   aiSummary?: Prisma.StringNullableFilter<"Bookmark"> | string | null
+  shareToken?: Prisma.StringNullableFilter<"Bookmark"> | string | null
   status?: Prisma.StringFilter<"Bookmark"> | string
   categoryId?: Prisma.StringNullableFilter<"Bookmark"> | string | null
   userId?: Prisma.StringFilter<"Bookmark"> | string
@@ -867,6 +892,7 @@ export type BookmarkCreateWithoutTagsInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -888,6 +914,7 @@ export type BookmarkUncheckedCreateWithoutTagsInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   categoryId?: string | null
   userId: string
@@ -925,6 +952,7 @@ export type BookmarkUpdateWithoutTagsInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -946,6 +974,7 @@ export type BookmarkUncheckedUpdateWithoutTagsInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -967,6 +996,7 @@ export type BookmarkCreateWithoutCategoryInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -988,6 +1018,7 @@ export type BookmarkUncheckedCreateWithoutCategoryInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   userId: string
   createdAt?: Date | string
@@ -1034,6 +1065,7 @@ export type BookmarkCreateWithoutCollectionsInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -1055,6 +1087,7 @@ export type BookmarkUncheckedCreateWithoutCollectionsInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   categoryId?: string | null
   userId: string
@@ -1092,6 +1125,7 @@ export type BookmarkUpdateWithoutCollectionsInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1113,6 +1147,7 @@ export type BookmarkUncheckedUpdateWithoutCollectionsInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
@@ -1134,6 +1169,7 @@ export type BookmarkCreateManyUserInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   categoryId?: string | null
   createdAt?: Date | string
@@ -1153,6 +1189,7 @@ export type BookmarkUpdateWithoutUserInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1174,6 +1211,7 @@ export type BookmarkUncheckedUpdateWithoutUserInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1195,6 +1233,7 @@ export type BookmarkUncheckedUpdateManyWithoutUserInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1214,6 +1253,7 @@ export type BookmarkCreateManyCategoryInput = {
   contentType?: string
   metadata?: string | null
   aiSummary?: string | null
+  shareToken?: string | null
   status?: string
   userId: string
   createdAt?: Date | string
@@ -1233,6 +1273,7 @@ export type BookmarkUpdateWithoutCategoryInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1254,6 +1295,7 @@ export type BookmarkUncheckedUpdateWithoutCategoryInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1275,6 +1317,7 @@ export type BookmarkUncheckedUpdateManyWithoutCategoryInput = {
   contentType?: Prisma.StringFieldUpdateOperationsInput | string
   metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
   status?: Prisma.StringFieldUpdateOperationsInput | string
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -1334,6 +1377,7 @@ export type BookmarkSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   contentType?: boolean
   metadata?: boolean
   aiSummary?: boolean
+  shareToken?: boolean
   status?: boolean
   categoryId?: boolean
   userId?: boolean
@@ -1359,6 +1403,7 @@ export type BookmarkSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Exte
   contentType?: boolean
   metadata?: boolean
   aiSummary?: boolean
+  shareToken?: boolean
   status?: boolean
   categoryId?: boolean
   userId?: boolean
@@ -1381,6 +1426,7 @@ export type BookmarkSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Exte
   contentType?: boolean
   metadata?: boolean
   aiSummary?: boolean
+  shareToken?: boolean
   status?: boolean
   categoryId?: boolean
   userId?: boolean
@@ -1403,6 +1449,7 @@ export type BookmarkSelectScalar = {
   contentType?: boolean
   metadata?: boolean
   aiSummary?: boolean
+  shareToken?: boolean
   status?: boolean
   categoryId?: boolean
   userId?: boolean
@@ -1412,7 +1459,7 @@ export type BookmarkSelectScalar = {
   order?: boolean
 }
 
-export type BookmarkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "url" | "title" | "description" | "coverImage" | "favicon" | "siteName" | "contentType" | "metadata" | "aiSummary" | "status" | "categoryId" | "userId" | "createdAt" | "updatedAt" | "readAt" | "order", ExtArgs["result"]["bookmark"]>
+export type BookmarkOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "url" | "title" | "description" | "coverImage" | "favicon" | "siteName" | "contentType" | "metadata" | "aiSummary" | "shareToken" | "status" | "categoryId" | "userId" | "createdAt" | "updatedAt" | "readAt" | "order", ExtArgs["result"]["bookmark"]>
 export type BookmarkInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   category?: boolean | Prisma.Bookmark$categoryArgs<ExtArgs>
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
@@ -1448,6 +1495,7 @@ export type $BookmarkPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     contentType: string
     metadata: string | null
     aiSummary: string | null
+    shareToken: string | null
     status: string
     categoryId: string | null
     userId: string
@@ -1892,6 +1940,7 @@ export interface BookmarkFieldRefs {
   readonly contentType: Prisma.FieldRef<"Bookmark", 'String'>
   readonly metadata: Prisma.FieldRef<"Bookmark", 'String'>
   readonly aiSummary: Prisma.FieldRef<"Bookmark", 'String'>
+  readonly shareToken: Prisma.FieldRef<"Bookmark", 'String'>
   readonly status: Prisma.FieldRef<"Bookmark", 'String'>
   readonly categoryId: Prisma.FieldRef<"Bookmark", 'String'>
   readonly userId: Prisma.FieldRef<"Bookmark", 'String'>

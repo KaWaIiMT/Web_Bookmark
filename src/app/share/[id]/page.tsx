@@ -69,7 +69,6 @@ export default async function SharePage({ params }: Props) {
                     alt=""
                     className="w-20 h-14 rounded-xl object-cover shrink-0"
                     referrerPolicy="no-referrer"
-                    onError={(e) => { (e.target as HTMLImageElement).style.display = "none"; }}
                   />
                 )}
                 <div className="flex-1 min-w-0">

@@ -9,6 +9,7 @@ export interface BookmarkData {
   contentType: "video" | "article" | "repository" | "image" | "social" | "webpage";
   metadata: string | null;
   aiSummary: string | null;
+  shareToken: string | null;
   status: "unread" | "reading" | "read" | "archived";
   categoryId: string | null;
   category: CategoryData | null;

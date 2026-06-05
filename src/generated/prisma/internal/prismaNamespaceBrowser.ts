@@ -136,6 +136,7 @@ export const BookmarkScalarFieldEnum = {
   contentType: 'contentType',
   metadata: 'metadata',
   aiSummary: 'aiSummary',
+  shareToken: 'shareToken',
   status: 'status',
   categoryId: 'categoryId',
   userId: 'userId',

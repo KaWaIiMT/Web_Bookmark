@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, Eye, Star, User, Trash2, Pencil, Clock, BookOpen, CheckCircle2, Archive } from "lucide-react";
+import { ExternalLink, Eye, Star, User, Trash2, Pencil, Clock, BookOpen, CheckCircle2, Archive, Share2 } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
@@ -59,9 +59,10 @@ interface BookmarkCardProps {
   onStatusChange: (id: string, status: string) => void;
   onDelete: (id: string) => void;
   onEdit: (bookmark: BookmarkData) => void;
+  onShare?: (id: string) => void;
 }
 
-export function BookmarkCard({ bookmark, onStatusChange, onDelete, onEdit }: BookmarkCardProps) {
+export function BookmarkCard({ bookmark, onStatusChange, onDelete, onEdit, onShare }: BookmarkCardProps) {
   const meta = parseMetadata(bookmark.metadata);
   const statusConf = STATUS_CONFIG[bookmark.status] || STATUS_CONFIG.unread;
 
@@ -219,6 +220,10 @@ export function BookmarkCard({ bookmark, onStatusChange, onDelete, onEdit }: Boo
         <ContextMenuItem onClick={() => onEdit(bookmark)} className="text-[13px] rounded-xl cursor-pointer font-sans">
           <Pencil className="h-3.5 w-3.5 mr-2.5 opacity-50" />
           编辑
+        </ContextMenuItem>
+        <ContextMenuItem onClick={() => onShare?.(bookmark.id)} className="text-[13px] rounded-xl cursor-pointer font-sans">
+          <Share2 className="h-3.5 w-3.5 mr-2.5 opacity-50" />
+          生成分享链接
         </ContextMenuItem>
         <ContextMenuSeparator className="bg-[var(--border)]" />
         <ContextMenuItem

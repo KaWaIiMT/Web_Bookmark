@@ -28,6 +28,7 @@ interface SortableBookmarkGridProps {
   onEdit: (bookmark: BookmarkData) => void;
   onReorder: (orderedIds: string[]) => void;
   onCardClick: (bookmark: BookmarkData, element: HTMLElement) => void;
+  onShare?: (id: string) => void;
 }
 
 function SortableCard({
@@ -37,6 +38,7 @@ function SortableCard({
   onEdit,
   isDragging,
   onCardClick,
+  onShare,
 }: {
   bookmark: BookmarkData;
   onStatusChange: (id: string, status: string) => void;
@@ -44,6 +46,7 @@ function SortableCard({
   onEdit: (bookmark: BookmarkData) => void;
   isDragging: boolean;
   onCardClick: (bookmark: BookmarkData, element: HTMLElement) => void;
+  onShare?: (id: string) => void;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -122,6 +125,7 @@ function SortableCard({
             onStatusChange={onStatusChange}
             onDelete={onDelete}
             onEdit={onEdit}
+            onShare={onShare}
           />
         </div>
       </motion.div>
@@ -136,6 +140,7 @@ export function SortableBookmarkGrid({
   onEdit,
   onReorder,
   onCardClick,
+  onShare,
 }: SortableBookmarkGridProps) {
   const [draggingId, setDraggingId] = useState<string | null>(null);
 
@@ -193,6 +198,7 @@ export function SortableBookmarkGrid({
               onEdit={onEdit}
               isDragging={draggingId === bookmark.id}
               onCardClick={onCardClick}
+              onShare={onShare}
             />
           ))}
         </div>

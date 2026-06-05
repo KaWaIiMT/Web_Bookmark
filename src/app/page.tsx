@@ -116,6 +116,22 @@ export default function Home() {
     setAddDialogOpen(true);
   };
 
+  const handleShare = async (id: string) => {
+    try {
+      const res = await fetch(`/api/bookmarks/${id}/share`, { method: "POST" });
+      if (!res.ok) {
+        const err = await res.text();
+        throw new Error(err);
+      }
+      const data = await res.json();
+      const shareUrl = `${window.location.origin}/share/bookmark/${data.shareToken}`;
+      await navigator.clipboard.writeText(shareUrl);
+      toast.success("分享链接已复制到剪贴板");
+    } catch {
+      toast.error("生成分享链接失败，请重试");
+    }
+  };
+
   const handleReorder = async (orderedIds: string[]) => {
     // Optimistic UI update
     const reordered = orderedIds
@@ -304,6 +320,7 @@ export default function Home() {
                   onEdit={handleEdit}
                   onReorder={handleReorder}
                   onCardClick={handleCardClick}
+                  onShare={handleShare}
                 />
               )}
             </>
@@ -368,6 +385,7 @@ export default function Home() {
           handleDetailClose();
           setDeleteTarget(bookmarks.find((b) => b.id === id) || null);
         }}
+        onShare={handleShare}
       />
     </div>
   );

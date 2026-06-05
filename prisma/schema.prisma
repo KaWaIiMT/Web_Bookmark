@@ -66,6 +66,7 @@ model Bookmark {
   contentType String              @default("webpage")
   metadata    String?
   aiSummary   String?
+  shareToken  String?             @unique
   status      String              @default("unread")
   categoryId  String?
   category    Category?           @relation(fields: [categoryId], references: [id])
