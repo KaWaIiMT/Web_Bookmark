@@ -165,8 +165,8 @@ export function computeBookmarkNodes(
   nodeType: "tag" | "category",
   maxNodes = 50,
 ): GraphDataResult {
-  // Strip prefix to get the raw DB id
-  const rawId = nodeId.startsWith("tag:") ? nodeId.slice(4) : nodeId.slice(4);
+  // Strip prefix to get the raw DB id ("tag:xxx" or "cat:xxx" → "xxx")
+  const rawId = nodeId.includes(":") ? nodeId.slice(nodeId.indexOf(":") + 1) : nodeId;
 
   // Filter bookmarks matching this tag/category
   const matching: BookmarkData[] = [];

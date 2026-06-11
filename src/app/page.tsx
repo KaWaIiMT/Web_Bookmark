@@ -89,7 +89,9 @@ export default function Home() {
     }
     const controller = new AbortController();
     fetchBookmarks(controller.signal);
-    return () => controller.abort();
+    return () => {
+      if (!controller.signal.aborted) controller.abort();
+    };
 
   }, [fetchBookmarks, isReady, activeView]);
 

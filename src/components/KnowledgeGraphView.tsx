@@ -97,7 +97,7 @@ function renderNode(
   const grad = ctx.createRadialGradient(node.x!, node.y!, r * 0.3, node.x!, node.y!, glowR);
   const baseAlpha = node.type === "category" ? 0.25 : 0.15;
   grad.addColorStop(0, isDark
-    ? color.replace(")", `, ${baseAlpha})`).replace("rgb", "rgba")
+    ? `rgba(${hexToRgb(color)}, ${baseAlpha})`
     : color + "40"
   );
   grad.addColorStop(0.5, isDark
@@ -150,14 +150,18 @@ function renderLink(
   const src = link.source;
   const tgt = link.target;
 
+  // Guard: skip links whose endpoints lack valid positions (simulation not yet started)
+  if (src.x == null || src.y == null || !isFinite(src.x) || !isFinite(src.y)) return;
+  if (tgt.x == null || tgt.y == null || !isFinite(tgt.x) || !isFinite(tgt.y)) return;
+
   const alpha = Math.min(0.2, 0.05 + link.strength * 0.02);
   const color = isDark
     ? `rgba(201,134,107,${alpha})`
     : `rgba(183,110,75,${alpha})`;
 
   ctx.beginPath();
-  ctx.moveTo(src.x!, src.y!);
-  ctx.lineTo(tgt.x!, tgt.y!);
+  ctx.moveTo(src.x, src.y);
+  ctx.lineTo(tgt.x, tgt.y);
   ctx.strokeStyle = color;
   ctx.lineWidth = Math.max(0.5, Math.min(3, link.strength * 0.6));
   ctx.stroke();
@@ -241,7 +245,10 @@ export function KnowledgeGraphView() {
         }
       }
       for (const l of extra.links) {
-        allBmLinks.push(l);
+        // Only include links whose source node was actually added to the graph
+        if (seenBms.has(l.source)) {
+          allBmLinks.push(l);
+        }
       }
     }
     return {
@@ -373,14 +380,18 @@ export function KnowledgeGraphView() {
     }, "image/png");
   }, []);
 
-  // Hover handler
+  // Hover handler — convert simulation coords to screen coords
   const handleNodeHover = useCallback(
     (node: GraphNode | null, _prevNode: GraphNode | null) => {
-      if (node) {
+      if (node && node.x != null && node.y != null) {
+        // Convert simulation coordinates to CSS-relative screen coordinates
+        const screenPos = graphRef.current?.graph2ScreenCoords
+          ? graphRef.current.graph2ScreenCoords(node.x, node.y)
+          : { x: node.x, y: node.y };
         setHoveredNode({
           node,
-          x: node.x!,
-          y: node.y!,
+          x: screenPos.x,
+          y: screenPos.y,
         });
       } else {
         setHoveredNode(null);

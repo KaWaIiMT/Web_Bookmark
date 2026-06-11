@@ -1,18 +1,18 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
-import { auth } from "@/lib/auth";
-import { generateApiKey, maskApiKey } from "@/lib/auth-helpers";
+import { getUserIdFromRequest } from "@/lib/auth-helpers";
+import { generateApiKey } from "@/lib/auth-helpers";
 
 // List all API keys for the authenticated user
-export async function GET() {
+export async function GET(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
     const keys = await prisma.apiKey.findMany({
-      where: { userId: session.user.id },
+      where: { userId },
       select: {
         id: true,
         name: true,
@@ -42,8 +42,8 @@ export async function GET() {
 // Generate a new API key
 export async function POST(req: NextRequest) {
   try {
-    const session = await auth();
-    if (!session?.user?.id) {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
@@ -58,7 +58,7 @@ export async function POST(req: NextRequest) {
       data: {
         name,
         key: hashedKey,
-        userId: session.user.id,
+        userId,
       },
     });
 

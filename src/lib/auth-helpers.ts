@@ -24,7 +24,7 @@ export async function getUserIdFromRequest(req: Request): Promise<string | null>
       // Update lastUsedAt asynchronously (don't block the request)
       prisma.apiKey
         .update({ where: { id: apiKey.id }, data: { lastUsedAt: new Date() } })
-        .catch(() => {}); // Fire-and-forget
+        .catch((e) => console.error("Failed to update apiKey lastUsedAt:", e));
       return apiKey.userId;
     }
   }

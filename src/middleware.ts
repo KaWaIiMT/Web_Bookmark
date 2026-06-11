@@ -29,6 +29,8 @@ function isAllowedOrigin(origin: string): boolean {
   if (origin.startsWith("http://localhost")) return true;
   // Allow chrome extension origins (dev + prod)
   if (origin.startsWith("chrome-extension://")) return true;
+  // Allow Firefox extension origins
+  if (origin.startsWith("moz-extension://")) return true;
   // Allow the app's own origin (same-origin doesn't send Origin header anyway)
   if (origin === process.env.NEXT_PUBLIC_APP_URL) return true;
   return false;

@@ -85,8 +85,16 @@ export async function POST(req: NextRequest) {
     // Step 4: Find or create category — use user-provided id if given
     let categoryId: string | null = null;
     if (userCategoryId) {
-      categoryId = userCategoryId;
-    } else if (aiCategory) {
+      // Verify the category exists before using it
+      const existingCategory = await prisma.category.findUnique({
+        where: { id: userCategoryId },
+      });
+      if (existingCategory) {
+        categoryId = userCategoryId;
+      }
+      // If category doesn't exist, fall through to AI categorization
+    }
+    if (!categoryId && aiCategory) {
       const topCategory = aiCategory.split(">")[0].trim();
       const catSlug = topCategory.toLowerCase().replace(/\s+/g, "-");
       const category = await prisma.category.upsert({
