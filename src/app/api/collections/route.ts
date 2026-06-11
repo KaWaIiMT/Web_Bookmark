@@ -33,7 +33,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const { name } = await req.json();
+    const { name, isSmart, rules, sortBy, sortOrder, maxItems } = await req.json();
     if (!name || typeof name !== "string") {
       return NextResponse.json({ error: "name is required" }, { status: 400 });
     }
@@ -41,7 +41,16 @@ export async function POST(req: NextRequest) {
     const slug = name.toLowerCase().replace(/\s+/g, "-");
 
     const collection = await prisma.collection.create({
-      data: { name, slug, userId },
+      data: {
+        name,
+        slug,
+        userId,
+        ...(isSmart !== undefined && { isSmart }),
+        ...(rules !== undefined && { rules: typeof rules === "string" ? rules : JSON.stringify(rules) }),
+        ...(sortBy !== undefined && { sortBy }),
+        ...(sortOrder !== undefined && { sortOrder }),
+        ...(maxItems !== undefined && { maxItems }),
+      },
       include: { _count: { select: { bookmarks: true } } },
     });
 

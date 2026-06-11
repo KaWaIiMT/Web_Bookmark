@@ -1,6 +1,6 @@
 "use client";
 
-import { LayoutGrid, Images, Compass, BookOpen, GitCompare, TrendingUp, BarChart3, Clock, CalendarDays, GitGraph } from "lucide-react";
+import { LayoutGrid, Images, Compass, BookOpen, GitCompare, TrendingUp, BarChart3, Clock, CalendarDays, GitGraph, MessageCircle } from "lucide-react";
 import { cn } from "@/lib/utils";
 import type { ViewType } from "@/lib/types";
 
@@ -15,6 +15,7 @@ const TABS: { value: ViewType; label: string; icon: typeof LayoutGrid }[] = [
   { value: "timeline", label: "时间线", icon: Clock },
   { value: "weekly", label: "周报", icon: CalendarDays },
   { value: "graph", label: "图谱", icon: GitGraph },
+  { value: "chat", label: "问答", icon: MessageCircle },
 ];
 
 interface ViewTabsProps {

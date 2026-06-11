@@ -20,8 +20,18 @@ export type CollectionModel = runtime.Types.Result.DefaultSelection<Prisma.$Coll
 
 export type AggregateCollection = {
   _count: CollectionCountAggregateOutputType | null
+  _avg: CollectionAvgAggregateOutputType | null
+  _sum: CollectionSumAggregateOutputType | null
   _min: CollectionMinAggregateOutputType | null
   _max: CollectionMaxAggregateOutputType | null
+}
+
+export type CollectionAvgAggregateOutputType = {
+  maxItems: number | null
+}
+
+export type CollectionSumAggregateOutputType = {
+  maxItems: number | null
 }
 
 export type CollectionMinAggregateOutputType = {
@@ -29,6 +39,11 @@ export type CollectionMinAggregateOutputType = {
   name: string | null
   slug: string | null
   isPublic: boolean | null
+  isSmart: boolean | null
+  rules: string | null
+  sortBy: string | null
+  sortOrder: string | null
+  maxItems: number | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -39,6 +54,11 @@ export type CollectionMaxAggregateOutputType = {
   name: string | null
   slug: string | null
   isPublic: boolean | null
+  isSmart: boolean | null
+  rules: string | null
+  sortBy: string | null
+  sortOrder: string | null
+  maxItems: number | null
   userId: string | null
   createdAt: Date | null
   updatedAt: Date | null
@@ -49,6 +69,11 @@ export type CollectionCountAggregateOutputType = {
   name: number
   slug: number
   isPublic: number
+  isSmart: number
+  rules: number
+  sortBy: number
+  sortOrder: number
+  maxItems: number
   userId: number
   createdAt: number
   updatedAt: number
@@ -56,11 +81,24 @@ export type CollectionCountAggregateOutputType = {
 }
 
 
+export type CollectionAvgAggregateInputType = {
+  maxItems?: true
+}
+
+export type CollectionSumAggregateInputType = {
+  maxItems?: true
+}
+
 export type CollectionMinAggregateInputType = {
   id?: true
   name?: true
   slug?: true
   isPublic?: true
+  isSmart?: true
+  rules?: true
+  sortBy?: true
+  sortOrder?: true
+  maxItems?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -71,6 +109,11 @@ export type CollectionMaxAggregateInputType = {
   name?: true
   slug?: true
   isPublic?: true
+  isSmart?: true
+  rules?: true
+  sortBy?: true
+  sortOrder?: true
+  maxItems?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -81,6 +124,11 @@ export type CollectionCountAggregateInputType = {
   name?: true
   slug?: true
   isPublic?: true
+  isSmart?: true
+  rules?: true
+  sortBy?: true
+  sortOrder?: true
+  maxItems?: true
   userId?: true
   createdAt?: true
   updatedAt?: true
@@ -125,6 +173,18 @@ export type CollectionAggregateArgs<ExtArgs extends runtime.Types.Extensions.Int
   /**
    * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
    * 
+   * Select which fields to average
+  **/
+  _avg?: CollectionAvgAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
+   * Select which fields to sum
+  **/
+  _sum?: CollectionSumAggregateInputType
+  /**
+   * {@link https://www.prisma.io/docs/concepts/components/prisma-client/aggregations Aggregation Docs}
+   * 
    * Select which fields to find the minimum value
   **/
   _min?: CollectionMinAggregateInputType
@@ -155,6 +215,8 @@ export type CollectionGroupByArgs<ExtArgs extends runtime.Types.Extensions.Inter
   take?: number
   skip?: number
   _count?: CollectionCountAggregateInputType | true
+  _avg?: CollectionAvgAggregateInputType
+  _sum?: CollectionSumAggregateInputType
   _min?: CollectionMinAggregateInputType
   _max?: CollectionMaxAggregateInputType
 }
@@ -164,10 +226,17 @@ export type CollectionGroupByOutputType = {
   name: string
   slug: string
   isPublic: boolean
+  isSmart: boolean
+  rules: string | null
+  sortBy: string | null
+  sortOrder: string | null
+  maxItems: number | null
   userId: string
   createdAt: Date
   updatedAt: Date
   _count: CollectionCountAggregateOutputType | null
+  _avg: CollectionAvgAggregateOutputType | null
+  _sum: CollectionSumAggregateOutputType | null
   _min: CollectionMinAggregateOutputType | null
   _max: CollectionMaxAggregateOutputType | null
 }
@@ -195,6 +264,11 @@ export type CollectionWhereInput = {
   name?: Prisma.StringFilter<"Collection"> | string
   slug?: Prisma.StringFilter<"Collection"> | string
   isPublic?: Prisma.BoolFilter<"Collection"> | boolean
+  isSmart?: Prisma.BoolFilter<"Collection"> | boolean
+  rules?: Prisma.StringNullableFilter<"Collection"> | string | null
+  sortBy?: Prisma.StringNullableFilter<"Collection"> | string | null
+  sortOrder?: Prisma.StringNullableFilter<"Collection"> | string | null
+  maxItems?: Prisma.IntNullableFilter<"Collection"> | number | null
   userId?: Prisma.StringFilter<"Collection"> | string
   createdAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
@@ -207,6 +281,11 @@ export type CollectionOrderByWithRelationInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   isPublic?: Prisma.SortOrder
+  isSmart?: Prisma.SortOrder
+  rules?: Prisma.SortOrderInput | Prisma.SortOrder
+  sortBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  sortOrder?: Prisma.SortOrderInput | Prisma.SortOrder
+  maxItems?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -223,6 +302,11 @@ export type CollectionWhereUniqueInput = Prisma.AtLeast<{
   name?: Prisma.StringFilter<"Collection"> | string
   slug?: Prisma.StringFilter<"Collection"> | string
   isPublic?: Prisma.BoolFilter<"Collection"> | boolean
+  isSmart?: Prisma.BoolFilter<"Collection"> | boolean
+  rules?: Prisma.StringNullableFilter<"Collection"> | string | null
+  sortBy?: Prisma.StringNullableFilter<"Collection"> | string | null
+  sortOrder?: Prisma.StringNullableFilter<"Collection"> | string | null
+  maxItems?: Prisma.IntNullableFilter<"Collection"> | number | null
   userId?: Prisma.StringFilter<"Collection"> | string
   createdAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
@@ -235,12 +319,19 @@ export type CollectionOrderByWithAggregationInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   isPublic?: Prisma.SortOrder
+  isSmart?: Prisma.SortOrder
+  rules?: Prisma.SortOrderInput | Prisma.SortOrder
+  sortBy?: Prisma.SortOrderInput | Prisma.SortOrder
+  sortOrder?: Prisma.SortOrderInput | Prisma.SortOrder
+  maxItems?: Prisma.SortOrderInput | Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
   _count?: Prisma.CollectionCountOrderByAggregateInput
+  _avg?: Prisma.CollectionAvgOrderByAggregateInput
   _max?: Prisma.CollectionMaxOrderByAggregateInput
   _min?: Prisma.CollectionMinOrderByAggregateInput
+  _sum?: Prisma.CollectionSumOrderByAggregateInput
 }
 
 export type CollectionScalarWhereWithAggregatesInput = {
@@ -251,6 +342,11 @@ export type CollectionScalarWhereWithAggregatesInput = {
   name?: Prisma.StringWithAggregatesFilter<"Collection"> | string
   slug?: Prisma.StringWithAggregatesFilter<"Collection"> | string
   isPublic?: Prisma.BoolWithAggregatesFilter<"Collection"> | boolean
+  isSmart?: Prisma.BoolWithAggregatesFilter<"Collection"> | boolean
+  rules?: Prisma.StringNullableWithAggregatesFilter<"Collection"> | string | null
+  sortBy?: Prisma.StringNullableWithAggregatesFilter<"Collection"> | string | null
+  sortOrder?: Prisma.StringNullableWithAggregatesFilter<"Collection"> | string | null
+  maxItems?: Prisma.IntNullableWithAggregatesFilter<"Collection"> | number | null
   userId?: Prisma.StringWithAggregatesFilter<"Collection"> | string
   createdAt?: Prisma.DateTimeWithAggregatesFilter<"Collection"> | Date | string
   updatedAt?: Prisma.DateTimeWithAggregatesFilter<"Collection"> | Date | string
@@ -261,6 +357,11 @@ export type CollectionCreateInput = {
   name: string
   slug: string
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: string | null
+  sortBy?: string | null
+  sortOrder?: string | null
+  maxItems?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCollectionsInput
@@ -272,6 +373,11 @@ export type CollectionUncheckedCreateInput = {
   name: string
   slug: string
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: string | null
+  sortBy?: string | null
+  sortOrder?: string | null
+  maxItems?: number | null
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -283,6 +389,11 @@ export type CollectionUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSmart?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortOrder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxItems?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCollectionsNestedInput
@@ -294,6 +405,11 @@ export type CollectionUncheckedUpdateInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSmart?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortOrder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxItems?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -305,6 +421,11 @@ export type CollectionCreateManyInput = {
   name: string
   slug: string
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: string | null
+  sortBy?: string | null
+  sortOrder?: string | null
+  maxItems?: number | null
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -315,6 +436,11 @@ export type CollectionUpdateManyMutationInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSmart?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortOrder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxItems?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -324,6 +450,11 @@ export type CollectionUncheckedUpdateManyInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSmart?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortOrder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxItems?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -349,9 +480,18 @@ export type CollectionCountOrderByAggregateInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   isPublic?: Prisma.SortOrder
+  isSmart?: Prisma.SortOrder
+  rules?: Prisma.SortOrder
+  sortBy?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
+  maxItems?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type CollectionAvgOrderByAggregateInput = {
+  maxItems?: Prisma.SortOrder
 }
 
 export type CollectionMaxOrderByAggregateInput = {
@@ -359,6 +499,11 @@ export type CollectionMaxOrderByAggregateInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   isPublic?: Prisma.SortOrder
+  isSmart?: Prisma.SortOrder
+  rules?: Prisma.SortOrder
+  sortBy?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
+  maxItems?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
@@ -369,9 +514,18 @@ export type CollectionMinOrderByAggregateInput = {
   name?: Prisma.SortOrder
   slug?: Prisma.SortOrder
   isPublic?: Prisma.SortOrder
+  isSmart?: Prisma.SortOrder
+  rules?: Prisma.SortOrder
+  sortBy?: Prisma.SortOrder
+  sortOrder?: Prisma.SortOrder
+  maxItems?: Prisma.SortOrder
   userId?: Prisma.SortOrder
   createdAt?: Prisma.SortOrder
   updatedAt?: Prisma.SortOrder
+}
+
+export type CollectionSumOrderByAggregateInput = {
+  maxItems?: Prisma.SortOrder
 }
 
 export type CollectionScalarRelationFilter = {
@@ -444,6 +598,11 @@ export type CollectionCreateWithoutUserInput = {
   name: string
   slug: string
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: string | null
+  sortBy?: string | null
+  sortOrder?: string | null
+  maxItems?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   bookmarks?: Prisma.CollectionBookmarkCreateNestedManyWithoutCollectionInput
@@ -454,6 +613,11 @@ export type CollectionUncheckedCreateWithoutUserInput = {
   name: string
   slug: string
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: string | null
+  sortBy?: string | null
+  sortOrder?: string | null
+  maxItems?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   bookmarks?: Prisma.CollectionBookmarkUncheckedCreateNestedManyWithoutCollectionInput
@@ -492,6 +656,11 @@ export type CollectionScalarWhereInput = {
   name?: Prisma.StringFilter<"Collection"> | string
   slug?: Prisma.StringFilter<"Collection"> | string
   isPublic?: Prisma.BoolFilter<"Collection"> | boolean
+  isSmart?: Prisma.BoolFilter<"Collection"> | boolean
+  rules?: Prisma.StringNullableFilter<"Collection"> | string | null
+  sortBy?: Prisma.StringNullableFilter<"Collection"> | string | null
+  sortOrder?: Prisma.StringNullableFilter<"Collection"> | string | null
+  maxItems?: Prisma.IntNullableFilter<"Collection"> | number | null
   userId?: Prisma.StringFilter<"Collection"> | string
   createdAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
   updatedAt?: Prisma.DateTimeFilter<"Collection"> | Date | string
@@ -502,6 +671,11 @@ export type CollectionCreateWithoutBookmarksInput = {
   name: string
   slug: string
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: string | null
+  sortBy?: string | null
+  sortOrder?: string | null
+  maxItems?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
   user: Prisma.UserCreateNestedOneWithoutCollectionsInput
@@ -512,6 +686,11 @@ export type CollectionUncheckedCreateWithoutBookmarksInput = {
   name: string
   slug: string
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: string | null
+  sortBy?: string | null
+  sortOrder?: string | null
+  maxItems?: number | null
   userId: string
   createdAt?: Date | string
   updatedAt?: Date | string
@@ -538,6 +717,11 @@ export type CollectionUpdateWithoutBookmarksInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSmart?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortOrder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxItems?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   user?: Prisma.UserUpdateOneRequiredWithoutCollectionsNestedInput
@@ -548,6 +732,11 @@ export type CollectionUncheckedUpdateWithoutBookmarksInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSmart?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortOrder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxItems?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   userId?: Prisma.StringFieldUpdateOperationsInput | string
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
@@ -558,6 +747,11 @@ export type CollectionCreateManyUserInput = {
   name: string
   slug: string
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: string | null
+  sortBy?: string | null
+  sortOrder?: string | null
+  maxItems?: number | null
   createdAt?: Date | string
   updatedAt?: Date | string
 }
@@ -567,6 +761,11 @@ export type CollectionUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSmart?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortOrder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxItems?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookmarks?: Prisma.CollectionBookmarkUpdateManyWithoutCollectionNestedInput
@@ -577,6 +776,11 @@ export type CollectionUncheckedUpdateWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSmart?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortOrder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxItems?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   bookmarks?: Prisma.CollectionBookmarkUncheckedUpdateManyWithoutCollectionNestedInput
@@ -587,6 +791,11 @@ export type CollectionUncheckedUpdateManyWithoutUserInput = {
   name?: Prisma.StringFieldUpdateOperationsInput | string
   slug?: Prisma.StringFieldUpdateOperationsInput | string
   isPublic?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  isSmart?: Prisma.BoolFieldUpdateOperationsInput | boolean
+  rules?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortBy?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  sortOrder?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  maxItems?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
   createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
   updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
 }
@@ -627,6 +836,11 @@ export type CollectionSelect<ExtArgs extends runtime.Types.Extensions.InternalAr
   name?: boolean
   slug?: boolean
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: boolean
+  sortBy?: boolean
+  sortOrder?: boolean
+  maxItems?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -640,6 +854,11 @@ export type CollectionSelectCreateManyAndReturn<ExtArgs extends runtime.Types.Ex
   name?: boolean
   slug?: boolean
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: boolean
+  sortBy?: boolean
+  sortOrder?: boolean
+  maxItems?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -651,6 +870,11 @@ export type CollectionSelectUpdateManyAndReturn<ExtArgs extends runtime.Types.Ex
   name?: boolean
   slug?: boolean
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: boolean
+  sortBy?: boolean
+  sortOrder?: boolean
+  maxItems?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
@@ -662,12 +886,17 @@ export type CollectionSelectScalar = {
   name?: boolean
   slug?: boolean
   isPublic?: boolean
+  isSmart?: boolean
+  rules?: boolean
+  sortBy?: boolean
+  sortOrder?: boolean
+  maxItems?: boolean
   userId?: boolean
   createdAt?: boolean
   updatedAt?: boolean
 }
 
-export type CollectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "isPublic" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["collection"]>
+export type CollectionOmit<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetOmit<"id" | "name" | "slug" | "isPublic" | "isSmart" | "rules" | "sortBy" | "sortOrder" | "maxItems" | "userId" | "createdAt" | "updatedAt", ExtArgs["result"]["collection"]>
 export type CollectionInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
   user?: boolean | Prisma.UserDefaultArgs<ExtArgs>
   bookmarks?: boolean | Prisma.Collection$bookmarksArgs<ExtArgs>
@@ -691,6 +920,11 @@ export type $CollectionPayload<ExtArgs extends runtime.Types.Extensions.Internal
     name: string
     slug: string
     isPublic: boolean
+    isSmart: boolean
+    rules: string | null
+    sortBy: string | null
+    sortOrder: string | null
+    maxItems: number | null
     userId: string
     createdAt: Date
     updatedAt: Date
@@ -1123,6 +1357,11 @@ export interface CollectionFieldRefs {
   readonly name: Prisma.FieldRef<"Collection", 'String'>
   readonly slug: Prisma.FieldRef<"Collection", 'String'>
   readonly isPublic: Prisma.FieldRef<"Collection", 'Boolean'>
+  readonly isSmart: Prisma.FieldRef<"Collection", 'Boolean'>
+  readonly rules: Prisma.FieldRef<"Collection", 'String'>
+  readonly sortBy: Prisma.FieldRef<"Collection", 'String'>
+  readonly sortOrder: Prisma.FieldRef<"Collection", 'String'>
+  readonly maxItems: Prisma.FieldRef<"Collection", 'Int'>
   readonly userId: Prisma.FieldRef<"Collection", 'String'>
   readonly createdAt: Prisma.FieldRef<"Collection", 'DateTime'>
   readonly updatedAt: Prisma.FieldRef<"Collection", 'DateTime'>

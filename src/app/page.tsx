@@ -31,6 +31,9 @@ import { CompareView } from "@/components/CompareView";
 import { ActivityView } from "@/components/ActivityView";
 import { KnowledgeGraphView } from "@/components/KnowledgeGraphView";
 import { ReaderView } from "@/components/ReaderView";
+import { ChatView } from "@/components/ChatView";
+import { QuickAskDialog } from "@/components/QuickAskDialog";
+import { SmartCollectionCreator } from "@/components/SmartCollectionCreator";
 import { VoiceSearch } from "@/components/VoiceSearch";
 import { useRouter } from "next/navigation";
 import type { BookmarkData, PaginatedResponse, ViewType } from "@/lib/types";
@@ -59,6 +62,8 @@ export default function Home() {
   const [selectedPathId, setSelectedPathId] = useState<string | null>(null);
   const [readerBookmark, setReaderBookmark] = useState<BookmarkData | null>(null);
   const [readerOpen, setReaderOpen] = useState(false);
+  const [quickAskOpen, setQuickAskOpen] = useState(false);
+  const [showSmartCreator, setShowSmartCreator] = useState(false);
 
   const fetchBookmarks = useCallback(async (signal: AbortSignal) => {
     setLoading(true);
@@ -97,6 +102,18 @@ export default function Home() {
     };
 
   }, [fetchBookmarks, isReady, activeView]);
+
+  // Ctrl+K global shortcut for QuickAsk
+  useEffect(() => {
+    const handler = (e: KeyboardEvent) => {
+      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
+        e.preventDefault();
+        setQuickAskOpen((prev) => !prev);
+      }
+    };
+    window.addEventListener("keydown", handler);
+    return () => window.removeEventListener("keydown", handler);
+  }, []);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const refreshBookmarks = useCallback(() => {
@@ -197,6 +214,7 @@ export default function Home() {
           onCategoryChange={setActiveCategory}
           onCollectionClick={setActiveCollection}
           onAddClick={() => { setEditBookmark(null); setAddDialogOpen(true); }}
+          onAddSmartClick={() => setShowSmartCreator(true)}
         />
       </div>
 
@@ -411,8 +429,32 @@ export default function Home() {
           {activeView === "graph" && (
             <KnowledgeGraphView />
           )}
+
+          {/* Chat: RAG knowledge Q&A */}
+          {activeView === "chat" && (
+            <ChatView />
+          )}
         </div>
       </main>
+
+      {/* QuickAsk Dialog (Ctrl+K) */}
+      <QuickAskDialog
+        open={quickAskOpen}
+        onClose={() => setQuickAskOpen(false)}
+        onAsk={(query: string) => {
+          setActiveView("chat");
+        }}
+      />
+
+      {/* Smart Collection Creator */}
+      <SmartCollectionCreator
+        open={showSmartCreator}
+        onClose={() => setShowSmartCreator(false)}
+        onCreated={() => {
+          // Refresh collections in sidebar — dispatch a custom event
+          window.dispatchEvent(new CustomEvent("bookmark-created"));
+        }}
+      />
 
       {/* Add Dialog */}
       <AddBookmarkDialog

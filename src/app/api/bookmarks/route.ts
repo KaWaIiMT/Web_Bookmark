@@ -162,6 +162,16 @@ export async function POST(req: NextRequest) {
   }
 }
 
+// After bookmark creation, trigger smart collection matching (fire-and-forget)
+async function afterBookmarkCreate(bookmarkId: string) {
+  try {
+    const { matchBookmarkToSmartCollections } = await import("@/lib/smart-collections");
+    await matchBookmarkToSmartCollections(bookmarkId);
+  } catch {
+    // Non-fatal
+  }
+}
+
 // List bookmarks with pagination, filtering, and search
 export async function GET(req: NextRequest) {
   try {

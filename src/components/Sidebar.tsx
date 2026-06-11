@@ -2,11 +2,13 @@
 
 import { useState, useEffect } from "react";
 import { Bookmark, Hash, Clock, BookOpen, CheckCircle2, Archive, Plus, Folder } from "lucide-react";
+import { Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import { Input } from "@/components/ui/input";
 import { cn } from "@/lib/utils";
 import { toast } from "sonner";
+import { SmartCollectionBlock } from "@/components/SmartCollectionBlock";
 import type { CategoryData } from "@/lib/types";
 
 interface CollectionData {
@@ -14,6 +16,11 @@ interface CollectionData {
   name: string;
   slug: string;
   isPublic: boolean;
+  isSmart: boolean;
+  rules: string | null;
+  sortBy: string | null;
+  sortOrder: string | null;
+  maxItems: number | null;
   _count: { bookmarks: number };
 }
 
@@ -25,6 +32,7 @@ interface SidebarProps {
   onAddClick: () => void;
   onCollectionClick?: (collectionId: string) => void;
   activeCollection?: string | null;
+  onAddSmartClick?: () => void;
 }
 
 const STATUS_OPTIONS = [
@@ -42,6 +50,7 @@ export function Sidebar({
   onAddClick,
   onCollectionClick,
   activeCollection,
+  onAddSmartClick,
 }: SidebarProps) {
   const [categories, setCategories] = useState<CategoryData[]>([]);
   const [collections, setCollections] = useState<CollectionData[]>([]);
@@ -150,7 +159,7 @@ export function Sidebar({
               </Button>
             </div>
           )}
-          {collections.map((col) => (
+          {collections.filter((c) => !c.isSmart).map((col) => (
             <button
               key={col.id}
               onClick={() => onCollectionClick?.(col.id)}
@@ -166,6 +175,18 @@ export function Sidebar({
               <span className="text-[10px] text-[var(--foreground)]/20 shrink-0">{col._count.bookmarks}</span>
             </button>
           ))}
+        </div>
+
+        <div className="mx-4 h-px bg-[var(--border)] mt-2" />
+
+        {/* Smart Collections */}
+        <div className="px-3 pt-4 pb-1">
+          <SmartCollectionBlock
+            collections={collections.filter((c) => c.isSmart)}
+            activeCollection={activeCollection || null}
+            onCollectionClick={(id) => onCollectionClick?.(id)}
+            onAddClick={() => onAddSmartClick?.()}
+          />
         </div>
 
         <div className="mx-4 h-px bg-[var(--border)] mt-2" />
