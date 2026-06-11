@@ -14,9 +14,25 @@ export interface BookmarkData {
   categoryId: string | null;
   category: CategoryData | null;
   tags: { tag: TagData }[];
+  archiveHtml: string | null;
+  archiveText: string | null;
+  archivedAt: string | null;
+  archiveStatus: string | null;
+  linkStatus: string | null;
+  linkStatusCode: number | null;
+  linkCheckedAt: string | null;
+  linkRedirectUrl: string | null;
+  linkTitleChanged: boolean | null;
   createdAt: string;
   updatedAt: string;
   readAt: string | null;
+}
+
+export interface ArchiveData {
+  html: string | null;
+  text: string | null;
+  archivedAt: string | null;
+  status: string | null;
 }
 
 export interface TagData {

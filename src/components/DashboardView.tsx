@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { PieChart, Pie, Cell, BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer } from "recharts";
 import { PieChart as PieChartIcon, BarChart3, Tags } from "lucide-react";
 import { WordCloud } from "@/components/WordCloud";
+import { HealthPanel } from "@/components/HealthPanel";
 import type { StatsResponse } from "@/app/api/stats/route";
 
 const STATUS_COLORS: Record<string, string> = {
@@ -168,6 +169,9 @@ export function DashboardView() {
           <WordCloud tags={data.topTags} maxFontSize={30} />
         </div>
       )}
+
+      {/* Link health panel */}
+      <HealthPanel />
     </div>
   );
 }

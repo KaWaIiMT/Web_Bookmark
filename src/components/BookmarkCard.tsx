@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, Eye, Star, User, Trash2, Pencil, Clock, BookOpen, CheckCircle2, Archive, Share2 } from "lucide-react";
+import { ExternalLink, Eye, Star, User, Trash2, Pencil, Clock, BookOpen, CheckCircle2, Archive, Share2, FileArchive, Wifi, WifiOff, AlertTriangle } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
@@ -111,20 +111,39 @@ export function BookmarkCard({ bookmark, onStatusChange, onDelete, onEdit, onSha
                 </span>
               </div>
 
-              {/* Status dot + label */}
-              <button
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onStatusChange(bookmark.id, NEXT_STATUS[bookmark.status]);
-                }}
-                className="shrink-0 flex items-center gap-1 text-[10px] text-[var(--foreground)]/35 hover:text-[var(--foreground)]/60 transition-colors cursor-pointer group/status"
-                data-no-drag
-              >
-                <span className={cn("h-1.5 w-1.5 rounded-full", statusConf.dotColor)} />
-                <span className="opacity-0 group-hover/status:opacity-100 transition-opacity">
-                  {statusConf.label}
-                </span>
-              </button>
+              {/* Health dot + status dot */}
+              <div className="shrink-0 flex items-center gap-1.5">
+                {/* Link health indicator */}
+                {bookmark.linkStatus === "broken" && (
+                  <span title={`链接失效 · ${bookmark.linkStatusCode || "未知"}`} className="cursor-help">
+                    <WifiOff className="h-3 w-3 text-red-400" />
+                  </span>
+                )}
+                {bookmark.linkStatus === "redirect" && (
+                  <span title={`重定向${bookmark.linkRedirectUrl ? ` → ${bookmark.linkRedirectUrl}` : ""} · ${bookmark.linkStatusCode || ""}`} className="cursor-help">
+                    <AlertTriangle className="h-3 w-3 text-amber-400" />
+                  </span>
+                )}
+                {bookmark.linkStatus === "healthy" && (
+                  <span title="链接正常" className="cursor-help">
+                    <Wifi className="h-3 w-3 text-emerald-400/60" />
+                  </span>
+                )}
+                {/* Status dot + label */}
+                <button
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    onStatusChange(bookmark.id, NEXT_STATUS[bookmark.status]);
+                  }}
+                  className="flex items-center gap-1 text-[10px] text-[var(--foreground)]/35 hover:text-[var(--foreground)]/60 transition-colors cursor-pointer group/status"
+                  data-no-drag
+                >
+                  <span className={cn("h-1.5 w-1.5 rounded-full", statusConf.dotColor)} />
+                  <span className="opacity-0 group-hover/status:opacity-100 transition-opacity">
+                    {statusConf.label}
+                  </span>
+                </button>
+              </div>
             </div>
 
             {/* Title */}
@@ -184,10 +203,27 @@ export function BookmarkCard({ bookmark, onStatusChange, onDelete, onEdit, onSha
               </div>
             )}
 
-            {/* Timestamp */}
-            <p className="text-[10px] text-[var(--foreground)]/20 mt-2.5 font-sans">
-              {formatDate(bookmark.createdAt)}
-            </p>
+            {/* Timestamp + archive indicator */}
+            <div className="flex items-center gap-2 mt-2.5">
+              <p className="text-[10px] text-[var(--foreground)]/20 font-sans">
+                {formatDate(bookmark.createdAt)}
+              </p>
+              {bookmark.archiveStatus === "success" && (
+                <span className="flex items-center gap-0.5 text-[10px] text-emerald-500/60 font-sans" title="已存档">
+                  <FileArchive className="h-2.5 w-2.5" />
+                </span>
+              )}
+              {bookmark.archiveStatus === "pending" && (
+                <span className="flex items-center gap-0.5 text-[10px] text-amber-400/60 font-sans" title="存档中">
+                  <FileArchive className="h-2.5 w-2.5 animate-pulse" />
+                </span>
+              )}
+              {bookmark.archiveStatus && bookmark.archiveStatus.startsWith("failed") && (
+                <span className="flex items-center gap-0.5 text-[10px] text-red-400/60 font-sans" title={bookmark.archiveStatus.replace(/^failed:\s*/, "")}>
+                  <FileArchive className="h-2.5 w-2.5" />
+                </span>
+              )}
+            </div>
           </div>
         </Card>
       </ContextMenuTrigger>

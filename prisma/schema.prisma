@@ -20,6 +20,7 @@ model User {
   tags          Tag[]
   learningPaths LearningPath[]
   apiKeys       ApiKey[]
+  annotations   Annotation[]
   createdAt     DateTime     @default(now())
 }
 
@@ -77,9 +78,20 @@ model Bookmark {
   user        User                @relation(fields: [userId], references: [id], onDelete: Cascade)
   tags        BookmarkTag[]
   collections CollectionBookmark[]
-  pathItems   LearningPathItem[]
-  trackers    HotnessTracker[]
-  createdAt   DateTime            @default(now())
+  pathItems     LearningPathItem[]
+  trackers      HotnessTracker[]
+  annotations   Annotation[]
+  archiveHtml   String?
+  archiveText   String?
+  archivedAt    DateTime?
+  archiveStatus String?
+  linkStatus        String?   // healthy | redirect | broken | unknown
+  linkStatusCode    Int?      // latest HTTP status code
+  linkCheckedAt     DateTime? // last check timestamp
+  linkCheckError    String?   // latest error message
+  linkRedirectUrl   String?   // redirect target URL
+  linkTitleChanged  Boolean?  // title changed since last check
+  createdAt     DateTime            @default(now())
   updatedAt   DateTime            @updatedAt
   readAt      DateTime?
   order       Int                 @default(0)
@@ -220,4 +232,22 @@ model PathNote {
   createdAt DateTime @default(now())
 
   item LearningPathItem @relation(fields: [itemId], references: [id], onDelete: Cascade)
+}
+
+model Annotation {
+  id         String   @id @default(cuid())
+  userId     String
+  bookmarkId String
+  type       String   // highlight | note
+  color      String?  // yellow | green | blue | red
+  text       String   // the selected original text
+  note       String?  // margin note content
+  anchor     String   // JSON: { xpath, startOffset, endOffset, textPrefix, textSuffix, selectedText }
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  bookmark Bookmark @relation(fields: [bookmarkId], references: [id], onDelete: Cascade)
+
+  @@index([userId, bookmarkId])
 }

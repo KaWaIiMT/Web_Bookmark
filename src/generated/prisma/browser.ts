@@ -97,3 +97,8 @@ export type LearningPathItem = Prisma.LearningPathItemModel
  * 
  */
 export type PathNote = Prisma.PathNoteModel
+/**
+ * Model Annotation
+ * 
+ */
+export type Annotation = Prisma.AnnotationModel

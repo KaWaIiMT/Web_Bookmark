@@ -24,6 +24,12 @@ import {
   Copy,
   Eye,
   EyeOff,
+  FileArchive,
+  RefreshCw,
+  Database,
+  AlertTriangle,
+  Loader2,
+  Wifi,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
@@ -60,6 +66,15 @@ export default function SettingsPage() {
   const [generating, setGenerating] = useState(false);
   const [revoking, setRevoking] = useState<string | null>(null);
   const [showKey, setShowKey] = useState<Record<string, boolean>>({});
+  const [archiveStats, setArchiveStats] = useState<{
+    totalBookmarks: number;
+    archived: number;
+    pending: number;
+    failed: number;
+    unarchived: number;
+    storageFormatted: string;
+  } | null>(null);
+  const [refreshing, setRefreshing] = useState(false);
 
   // Fetch API keys
   useEffect(() => {
@@ -137,7 +152,34 @@ export default function SettingsPage() {
       .then((r) => r.json())
       .then((d) => setTagCount(d.data?.length || 0))
       .catch(() => {});
+    // Fetch archive stats
+    fetch("/api/bookmarks/archive")
+      .then((r) => r.json())
+      .then((d) => setArchiveStats(d))
+      .catch(() => {});
   }, [session, status, router]);
+
+  const handleRefreshArchives = async () => {
+    setRefreshing(true);
+    try {
+      const res = await fetch("/api/bookmarks/archive", { method: "POST", headers: { "Content-Type": "application/json" }, body: JSON.stringify({ days: 30 }) });
+      const data = await res.json();
+      if (res.ok) {
+        toast.success(data.message || `已开始刷新 ${data.refreshed} 篇书签存档`);
+        // Refresh stats
+        fetch("/api/bookmarks/archive")
+          .then((r) => r.json())
+          .then((d) => setArchiveStats(d))
+          .catch(() => {});
+      } else {
+        toast.error(data.error || "刷新失败");
+      }
+    } catch {
+      toast.error("刷新失败，请重试");
+    } finally {
+      setRefreshing(false);
+    }
+  };
 
   const handleExport = async () => {
     setExporting(true);
@@ -357,6 +399,96 @@ export default function SettingsPage() {
           </div>
         </section>
 
+        {/* Archive Management */}
+        <section>
+          <h2 className="text-[12px] font-medium text-[var(--muted-foreground)] uppercase tracking-widest mb-4 font-sans">
+            存档管理
+          </h2>
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] backdrop-blur-sm overflow-hidden">
+            <div className="p-5">
+              <div className="flex items-center justify-between mb-4">
+                <div>
+                  <h3 className="text-[14px] font-medium text-[var(--foreground)] font-sans">
+                    页面存档
+                  </h3>
+                  <p className="text-[12px] text-[var(--muted-foreground)] mt-0.5 font-sans">
+                    防止链接失效导致内容丢失
+                  </p>
+                </div>
+                <Button
+                  onClick={handleRefreshArchives}
+                  disabled={refreshing}
+                  variant="outline"
+                  className="rounded-xl text-[13px] border-[var(--border)] bg-[var(--card)] hover:bg-[var(--muted)] text-[var(--foreground)] font-sans h-10"
+                >
+                  {refreshing ? (
+                    <Loader2 className="h-4 w-4 mr-2 animate-spin" />
+                  ) : (
+                    <RefreshCw className="h-4 w-4 mr-2 opacity-50" />
+                  )}
+                  刷新最近30天
+                </Button>
+              </div>
+
+              {archiveStats ? (
+                <div className="grid grid-cols-5 gap-3 mb-4">
+                  <StatCard icon={FileArchive} label="已存档" value={archiveStats.archived} className="text-emerald-500 bg-emerald-100/50 dark:bg-emerald-500/10" />
+                  <StatCard icon={Loader2} label="存档中" value={archiveStats.pending} className="text-amber-500 bg-amber-100/50 dark:bg-amber-500/10" />
+                  <StatCard icon={AlertTriangle} label="失败" value={archiveStats.failed} className="text-red-500 bg-red-100/50 dark:bg-red-500/10" />
+                  <StatCard icon={Archive} label="未存档" value={archiveStats.unarchived} className="text-zinc-400 bg-zinc-100/50 dark:bg-zinc-500/10" />
+                  <StatCard icon={Database} label="存储用量" value={0} className="text-[#b76e4b] bg-[#b76e4b]/10">
+                    <span className="text-[10px] font-sans">{archiveStats.storageFormatted}</span>
+                  </StatCard>
+                </div>
+              ) : (
+                <div className="grid grid-cols-5 gap-3 mb-4">
+                  {Array.from({ length: 5 }).map((_, i) => (
+                    <div key={i} className="rounded-xl bg-[var(--muted)] h-20 animate-pulse" />
+                  ))}
+                </div>
+              )}
+
+              <p className="text-[11px] text-[var(--muted-foreground)] font-sans">
+                收藏书签时自动存档 · 简化 HTML 格式 · iframe sandbox 安全渲染
+              </p>
+            </div>
+          </div>
+        </section>
+
+        {/* Link Health Check */}
+        <section>
+          <h2 className="text-[12px] font-medium text-[var(--muted-foreground)] uppercase tracking-widest mb-4 font-sans">
+            链接健康
+          </h2>
+          <div className="rounded-2xl border border-[var(--border)] bg-[var(--card)] backdrop-blur-sm overflow-hidden">
+            <div className="p-5 flex items-center justify-between">
+              <div>
+                <h3 className="text-[14px] font-medium text-[var(--foreground)] font-sans">
+                  链接检测
+                </h3>
+                <p className="text-[12px] text-[var(--muted-foreground)] mt-0.5 font-sans">
+                  检测活跃书签的链接状态，自动标记失效页面
+                </p>
+              </div>
+              <Button
+                onClick={async () => {
+                  try {
+                    const res = await fetch("/api/health/check", { method: "POST" });
+                    const data = await res.json();
+                    if (res.ok) toast.success(data.message || `已检查 ${data.checked} 条`);
+                    else toast.error(data.error || "检查失败");
+                  } catch { toast.error("检查请求失败"); }
+                }}
+                variant="outline"
+                className="rounded-xl text-[13px] border-[var(--border)] bg-[var(--card)] hover:bg-[var(--muted)] text-[var(--foreground)] font-sans h-10"
+              >
+                <Wifi className="h-4 w-4 mr-2 opacity-50" />
+                检查链接
+              </Button>
+            </div>
+          </div>
+        </section>
+
         {/* API Keys */}
         <section>
           <h2 className="text-[12px] font-medium text-[var(--muted-foreground)] uppercase tracking-widest mb-4 font-sans">
@@ -513,11 +645,13 @@ function StatCard({
   label,
   value,
   className,
+  children,
 }: {
   icon: typeof Bookmark;
   label: string;
   value: number;
   className?: string;
+  children?: React.ReactNode;
 }) {
   return (
     <div
@@ -528,7 +662,7 @@ function StatCard({
       )}
     >
       <Icon className="h-3.5 w-3.5 mx-auto opacity-60" />
-      <div className="text-[15px] font-semibold font-display">{value}</div>
+      <div className="text-[15px] font-semibold font-display">{children ?? value}</div>
       <div className="text-[10px] font-sans">{label}</div>
     </div>
   );

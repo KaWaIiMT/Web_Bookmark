@@ -30,6 +30,7 @@ import { LearningPathDetailView } from "@/components/LearningPathDetailView";
 import { CompareView } from "@/components/CompareView";
 import { ActivityView } from "@/components/ActivityView";
 import { KnowledgeGraphView } from "@/components/KnowledgeGraphView";
+import { ReaderView } from "@/components/ReaderView";
 import { VoiceSearch } from "@/components/VoiceSearch";
 import { useRouter } from "next/navigation";
 import type { BookmarkData, PaginatedResponse, ViewType } from "@/lib/types";
@@ -56,6 +57,8 @@ export default function Home() {
   const [activeCollection, setActiveCollection] = useState<string | null>(null);
   const [activeView, setActiveView] = useState<ViewType>("grid");
   const [selectedPathId, setSelectedPathId] = useState<string | null>(null);
+  const [readerBookmark, setReaderBookmark] = useState<BookmarkData | null>(null);
+  const [readerOpen, setReaderOpen] = useState(false);
 
   const fetchBookmarks = useCallback(async (signal: AbortSignal) => {
     setLoading(true);
@@ -463,6 +466,17 @@ export default function Home() {
             setCardRect(null);
           }
         }}
+        onRead={(bookmark) => {
+          setReaderBookmark(bookmark);
+          setReaderOpen(true);
+        }}
+      />
+
+      {/* Reader View — full-screen reading mode */}
+      <ReaderView
+        bookmark={readerBookmark!}
+        open={readerOpen}
+        onClose={() => setReaderOpen(false)}
       />
     </div>
   );

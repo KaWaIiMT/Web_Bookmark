@@ -66,7 +66,8 @@ export const ModelName = {
   ApiKey: 'ApiKey',
   LearningPath: 'LearningPath',
   LearningPathItem: 'LearningPathItem',
-  PathNote: 'PathNote'
+  PathNote: 'PathNote',
+  Annotation: 'Annotation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -147,6 +148,16 @@ export const BookmarkScalarFieldEnum = {
   status: 'status',
   categoryId: 'categoryId',
   userId: 'userId',
+  archiveHtml: 'archiveHtml',
+  archiveText: 'archiveText',
+  archivedAt: 'archivedAt',
+  archiveStatus: 'archiveStatus',
+  linkStatus: 'linkStatus',
+  linkStatusCode: 'linkStatusCode',
+  linkCheckedAt: 'linkCheckedAt',
+  linkCheckError: 'linkCheckError',
+  linkRedirectUrl: 'linkRedirectUrl',
+  linkTitleChanged: 'linkTitleChanged',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   readAt: 'readAt',
@@ -288,6 +299,22 @@ export const PathNoteScalarFieldEnum = {
 } as const
 
 export type PathNoteScalarFieldEnum = (typeof PathNoteScalarFieldEnum)[keyof typeof PathNoteScalarFieldEnum]
+
+
+export const AnnotationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  bookmarkId: 'bookmarkId',
+  type: 'type',
+  color: 'color',
+  text: 'text',
+  note: 'note',
+  anchor: 'anchor',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AnnotationScalarFieldEnum = (typeof AnnotationScalarFieldEnum)[keyof typeof AnnotationScalarFieldEnum]
 
 
 export const SortOrder = {

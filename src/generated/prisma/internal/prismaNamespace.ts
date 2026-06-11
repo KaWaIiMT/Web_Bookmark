@@ -399,7 +399,8 @@ export const ModelName = {
   ApiKey: 'ApiKey',
   LearningPath: 'LearningPath',
   LearningPathItem: 'LearningPathItem',
-  PathNote: 'PathNote'
+  PathNote: 'PathNote',
+  Annotation: 'Annotation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -415,7 +416,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "bookmark" | "tag" | "bookmarkTag" | "category" | "collection" | "collectionBookmark" | "hotnessTracker" | "hotnessSnapshot" | "apiKey" | "learningPath" | "learningPathItem" | "pathNote"
+    modelProps: "user" | "account" | "session" | "verificationToken" | "bookmark" | "tag" | "bookmarkTag" | "category" | "collection" | "collectionBookmark" | "hotnessTracker" | "hotnessSnapshot" | "apiKey" | "learningPath" | "learningPathItem" | "pathNote" | "annotation"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1603,6 +1604,80 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Annotation: {
+      payload: Prisma.$AnnotationPayload<ExtArgs>
+      fields: Prisma.AnnotationFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.AnnotationFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnotationPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.AnnotationFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnotationPayload>
+        }
+        findFirst: {
+          args: Prisma.AnnotationFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnotationPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.AnnotationFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnotationPayload>
+        }
+        findMany: {
+          args: Prisma.AnnotationFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnotationPayload>[]
+        }
+        create: {
+          args: Prisma.AnnotationCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnotationPayload>
+        }
+        createMany: {
+          args: Prisma.AnnotationCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.AnnotationCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnotationPayload>[]
+        }
+        delete: {
+          args: Prisma.AnnotationDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnotationPayload>
+        }
+        update: {
+          args: Prisma.AnnotationUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnotationPayload>
+        }
+        deleteMany: {
+          args: Prisma.AnnotationDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.AnnotationUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.AnnotationUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnotationPayload>[]
+        }
+        upsert: {
+          args: Prisma.AnnotationUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$AnnotationPayload>
+        }
+        aggregate: {
+          args: Prisma.AnnotationAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateAnnotation>
+        }
+        groupBy: {
+          args: Prisma.AnnotationGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AnnotationGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.AnnotationCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AnnotationCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1704,6 +1779,16 @@ export const BookmarkScalarFieldEnum = {
   status: 'status',
   categoryId: 'categoryId',
   userId: 'userId',
+  archiveHtml: 'archiveHtml',
+  archiveText: 'archiveText',
+  archivedAt: 'archivedAt',
+  archiveStatus: 'archiveStatus',
+  linkStatus: 'linkStatus',
+  linkStatusCode: 'linkStatusCode',
+  linkCheckedAt: 'linkCheckedAt',
+  linkCheckError: 'linkCheckError',
+  linkRedirectUrl: 'linkRedirectUrl',
+  linkTitleChanged: 'linkTitleChanged',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt',
   readAt: 'readAt',
@@ -1845,6 +1930,22 @@ export const PathNoteScalarFieldEnum = {
 } as const
 
 export type PathNoteScalarFieldEnum = (typeof PathNoteScalarFieldEnum)[keyof typeof PathNoteScalarFieldEnum]
+
+
+export const AnnotationScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  bookmarkId: 'bookmarkId',
+  type: 'type',
+  color: 'color',
+  text: 'text',
+  note: 'note',
+  anchor: 'anchor',
+  createdAt: 'createdAt',
+  updatedAt: 'updatedAt'
+} as const
+
+export type AnnotationScalarFieldEnum = (typeof AnnotationScalarFieldEnum)[keyof typeof AnnotationScalarFieldEnum]
 
 
 export const SortOrder = {
@@ -2029,6 +2130,7 @@ export type GlobalOmitConfig = {
   learningPath?: Prisma.LearningPathOmit
   learningPathItem?: Prisma.LearningPathItemOmit
   pathNote?: Prisma.PathNoteOmit
+  annotation?: Prisma.AnnotationOmit
 }
 
 /* Types for Logging */

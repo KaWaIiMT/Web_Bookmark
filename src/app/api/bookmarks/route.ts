@@ -2,6 +2,7 @@ import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { extractMetadata } from "@/lib/metadata";
 import { categorizeBookmark } from "@/lib/deepseek";
+import { archivePage } from "@/lib/archiver";
 import { getUserIdFromRequest } from "@/lib/auth-helpers";
 
 // Create bookmark (with metadata extraction + AI categorization)
@@ -131,6 +132,28 @@ export async function POST(req: NextRequest) {
       },
     });
 
+    // Step 6: Fire-and-forget archive (async, don't block the response)
+    const bookmarkId = bookmark.id;
+    const bookmarkUrl = url;
+    prisma.bookmark
+      .update({ where: { id: bookmarkId }, data: { archiveStatus: "pending" } })
+      .then(() => archivePage(bookmarkUrl))
+      .then(({ html, text }) =>
+        prisma.bookmark.update({
+          where: { id: bookmarkId },
+          data: { archiveHtml: html, archiveText: text, archivedAt: new Date(), archiveStatus: "success" },
+        })
+      )
+      .catch((e) => {
+        const msg = e instanceof Error ? e.message : "unknown";
+        prisma.bookmark
+          .update({
+            where: { id: bookmarkId },
+            data: { archiveStatus: `failed: ${msg.slice(0, 200)}` },
+          })
+          .catch(() => {}); // swallow — can't do much if this also fails
+      });
+
     return NextResponse.json(bookmark, { status: 201 });
   } catch (err) {
     const message = err instanceof Error ? err.message : "Failed to create bookmark";
@@ -178,7 +201,33 @@ export async function GET(req: NextRequest) {
     const [bookmarks, total] = await Promise.all([
       prisma.bookmark.findMany({
         where,
-        include: {
+        select: {
+          id: true,
+          url: true,
+          title: true,
+          description: true,
+          coverImage: true,
+          favicon: true,
+          siteName: true,
+          contentType: true,
+          metadata: true,
+          aiSummary: true,
+          shareToken: true,
+          embedding: true,
+          status: true,
+          categoryId: true,
+          userId: true,
+          order: true,
+          readAt: true,
+          archiveStatus: true,
+          archivedAt: true,
+          linkStatus: true,
+          linkStatusCode: true,
+          linkCheckedAt: true,
+          linkRedirectUrl: true,
+          linkTitleChanged: true,
+          createdAt: true,
+          updatedAt: true,
           tags: { include: { tag: true } },
           category: true,
         },
