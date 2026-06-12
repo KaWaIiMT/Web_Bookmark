@@ -90,6 +90,10 @@ export function Sidebar({
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ name: newColName.trim() }),
       });
+      if (res.status === 401) {
+        toast.error("请先登录 GitHub 账号");
+        return;
+      }
       if (!res.ok) throw new Error();
       setNewColName("");
       setAddingCol(false);

@@ -65,6 +65,24 @@ export default function Home() {
   const [quickAskOpen, setQuickAskOpen] = useState(false);
   const [showSmartCreator, setShowSmartCreator] = useState(false);
 
+  // Helper: guard unauthenticated writes (returns true = blocked)
+  const guardAuth = useCallback((): boolean => {
+    if (status !== "loading" && !session) {
+      toast.error("请先登录 GitHub 账号");
+      return true;
+    }
+    return false;
+  }, [status, session]);
+
+  const handleShowSidebarAdd = useCallback(() => {
+    if (status !== "loading" && !session) {
+      toast.error("请先登录 GitHub 账号");
+      return;
+    }
+    setEditBookmark(null);
+    setAddDialogOpen(true);
+  }, [status, session]);
+
   const fetchBookmarks = useCallback(async (signal: AbortSignal) => {
     setLoading(true);
     try {
@@ -121,6 +139,7 @@ export default function Home() {
   }, [fetchBookmarks]);
 
   const handleStatusChange = async (id: string, status: string) => {
+    if (guardAuth()) return;
     try {
       const res = await fetch(`/api/bookmarks/${id}`, {
         method: "PATCH",
@@ -137,6 +156,7 @@ export default function Home() {
   };
 
   const handleDelete = async (id: string) => {
+    if (guardAuth()) return;
     try {
       const res = await fetch(`/api/bookmarks/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(await res.text());
@@ -149,11 +169,13 @@ export default function Home() {
   };
 
   const handleEdit = (bookmark: BookmarkData) => {
+    if (guardAuth()) return;
     setEditBookmark(bookmark);
     setAddDialogOpen(true);
   };
 
   const handleShare = async (id: string) => {
+    if (guardAuth()) return;
     try {
       const res = await fetch(`/api/bookmarks/${id}/share`, { method: "POST" });
       if (!res.ok) {
@@ -213,8 +235,11 @@ export default function Home() {
           onStatusChange={setActiveStatus}
           onCategoryChange={setActiveCategory}
           onCollectionClick={setActiveCollection}
-          onAddClick={() => { setEditBookmark(null); setAddDialogOpen(true); }}
-          onAddSmartClick={() => setShowSmartCreator(true)}
+          onAddClick={handleShowSidebarAdd}
+          onAddSmartClick={() => {
+            if (guardAuth()) return;
+            setShowSmartCreator(true);
+          }}
         />
       </div>
 
@@ -230,7 +255,7 @@ export default function Home() {
               onStatusChange={(s) => { setActiveStatus(s); setSidebarOpen(false); }}
               onCategoryChange={(c) => { setActiveCategory(c); setSidebarOpen(false); }}
               onCollectionClick={(c) => { setActiveCollection(c); setSidebarOpen(false); }}
-              onAddClick={() => { setEditBookmark(null); setAddDialogOpen(true); setSidebarOpen(false); }}
+              onAddClick={handleShowSidebarAdd}
             />
           </div>
         </div>
