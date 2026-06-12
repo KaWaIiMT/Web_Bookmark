@@ -8,10 +8,11 @@ datasource db {
 }
 
 model User {
-  id            String        @id @default(cuid())
+  id            String       @id @default(cuid())
   name          String?
-  email         String?       @unique
+  email         String?      @unique
   emailVerified DateTime?
+  password      String?
   image         String?
   accounts      Account[]
   sessions      Session[]
@@ -19,10 +20,9 @@ model User {
   collections   Collection[]
   tags          Tag[]
   learningPaths LearningPath[]
-  chatSessions  ChatSession[]
   apiKeys       ApiKey[]
   annotations   Annotation[]
-  createdAt     DateTime      @default(now())
+  createdAt     DateTime     @default(now())
 }
 
 model Account {
@@ -135,11 +135,6 @@ model Collection {
   name      String
   slug      String
   isPublic  Boolean               @default(false)
-  isSmart   Boolean               @default(false)
-  rules     String?               // JSON: SmartCollectionRules
-  sortBy    String?               // createdAt | updatedAt | title
-  sortOrder String?               // asc | desc
-  maxItems  Int?                  // null = unlimited
   userId    String
   user      User                  @relation(fields: [userId], references: [id], onDelete: Cascade)
   bookmarks CollectionBookmark[]
@@ -256,25 +251,4 @@ model Annotation {
   bookmark Bookmark @relation(fields: [bookmarkId], references: [id], onDelete: Cascade)
 
   @@index([userId, bookmarkId])
-}
-
-model ChatSession {
-  id        String        @id @default(cuid())
-  userId    String
-  title     String        // Auto-generated from first question
-  messages  ChatMessage[]
-  createdAt DateTime      @default(now())
-  updatedAt DateTime      @updatedAt
-  user      User          @relation(fields: [userId], references: [id], onDelete: Cascade)
-}
-
-model ChatMessage {
-  id          String      @id @default(cuid())
-  sessionId   String
-  role        String      // user | assistant
-  content     String      // Markdown
-  citations   String?     // JSON: [{ bookmarkId, title, snippet, relevanceScore }]
-  feedback    String?     // positive | negative | null
-  createdAt   DateTime    @default(now())
-  session     ChatSession @relation(fields: [sessionId], references: [id], onDelete: Cascade)
 }

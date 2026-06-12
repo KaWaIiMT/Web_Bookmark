@@ -1,10 +1,80 @@
 "use client";
 
-import { signIn } from "next-auth/react";
-import { Brain } from "lucide-react";
+import { Suspense, useState, useEffect } from "react";
+import { useRouter, useSearchParams } from "next/navigation";
+import { signIn, useSession } from "next-auth/react";
+import { Brain, Loader2, Eye, EyeOff, CheckCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { toast } from "sonner";
 
-export default function LoginPage() {
+function LoginForm() {
+  const router = useRouter();
+  const searchParams = useSearchParams();
+  const { data: session, status } = useSession();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState("");
+  const [verified, setVerified] = useState(false);
+
+  // Handle URL query params
+  useEffect(() => {
+    if (searchParams.get("verified") === "true") {
+      setVerified(true);
+      toast.success("邮箱验证成功，请登录");
+    }
+    const err = searchParams.get("error");
+    if (err === "token-expired") {
+      setError("验证链接已过期，请重新注册");
+    } else if (err === "token-not-found" || err === "invalid-token") {
+      setError("验证链接无效");
+    } else if (err === "server-error") {
+      setError("服务器错误，请稍后重试");
+    }
+  }, [searchParams]);
+
+  // Redirect if already logged in
+  if (status === "authenticated" && session) {
+    router.replace("/");
+    return null;
+  }
+
+  async function handleCredentialsLogin(e: React.FormEvent) {
+    e.preventDefault();
+    setError("");
+
+    if (!email.trim()) {
+      setError("请输入邮箱地址");
+      return;
+    }
+    if (!password) {
+      setError("请输入密码");
+      return;
+    }
+
+    setLoading(true);
+    try {
+      const result = await signIn("credentials", {
+        email: email.trim(),
+        password,
+        redirect: false,
+      });
+
+      if (result?.error) {
+        setError("邮箱或密码错误");
+      } else if (result?.ok) {
+        router.push("/");
+      }
+    } catch {
+      setError("登录失败，请稍后重试");
+    } finally {
+      setLoading(false);
+    }
+  }
+
   return (
     <div className="min-h-screen bg-[var(--background)] flex items-center justify-center">
       <div className="text-center space-y-8">
@@ -24,10 +94,70 @@ export default function LoginPage() {
         </div>
 
         {/* Login card */}
-        <div className="bg-[var(--card)] backdrop-blur-sm rounded-2xl border border-[var(--border)] p-8 w-[340px] shadow-[0_12px_40px_rgba(0,0,0,0.04)]">
-          <p className="text-[13px] text-[var(--muted-foreground)] mb-6 font-sans">
-            使用 GitHub 账号登录，开始管理你的书签
-          </p>
+        <div className="bg-[var(--card)] backdrop-blur-sm rounded-2xl border border-[var(--border)] p-8 w-[360px] shadow-[0_12px_40px_rgba(0,0,0,0.04)]">
+          {/* Verified banner */}
+          {verified && (
+            <div className="flex items-center gap-2 mb-6 p-3 rounded-xl bg-green-500/10 border border-green-500/20 text-green-600 text-[13px] font-sans">
+              <CheckCircle className="h-4 w-4 shrink-0" />
+              邮箱验证成功，请登录
+            </div>
+          )}
+
+          {/* Email + Password form */}
+          <form onSubmit={handleCredentialsLogin} className="space-y-4">
+            <Input
+              type="email"
+              placeholder="邮箱地址"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              className="rounded-xl h-11 text-[14px] font-sans"
+              autoComplete="email"
+            />
+
+            <div className="relative">
+              <Input
+                type={showPassword ? "text" : "password"}
+                placeholder="密码"
+                value={password}
+                onChange={(e) => setPassword(e.target.value)}
+                className="rounded-xl h-11 text-[14px] pr-10 font-sans"
+                autoComplete="current-password"
+              />
+              <button
+                type="button"
+                onClick={() => setShowPassword(!showPassword)}
+                className="absolute right-3 top-1/2 -translate-y-1/2 text-[var(--muted-foreground)]/50 hover:text-[var(--muted-foreground)] transition-colors"
+                tabIndex={-1}
+              >
+                {showPassword ? <EyeOff className="h-4 w-4" /> : <Eye className="h-4 w-4" />}
+              </button>
+            </div>
+
+            {error && (
+              <p className="text-[13px] text-red-500 font-sans">{error}</p>
+            )}
+
+            <Button
+              type="submit"
+              disabled={loading}
+              className="w-full rounded-xl bg-[var(--foreground)] hover:bg-[var(--foreground)]/80 text-[var(--background)] h-11 text-[14px] font-medium shadow-none transition-all font-sans"
+            >
+              {loading ? (
+                <Loader2 className="h-4 w-4 animate-spin" />
+              ) : (
+                "登录"
+              )}
+            </Button>
+          </form>
+
+          {/* Divider */}
+          <div className="flex items-center gap-3 my-5">
+            <div className="flex-1 h-px bg-[var(--border)]" />
+            <span className="text-[12px] text-[var(--muted-foreground)]/60 font-sans">或</span>
+            <div className="flex-1 h-px bg-[var(--border)]" />
+          </div>
+
+          {/* GitHub login */}
           <Button
             onClick={() => signIn("github", { callbackUrl: "/" })}
             className="w-full rounded-xl bg-[var(--foreground)] hover:bg-[var(--foreground)]/80 text-[var(--background)] h-11 text-[14px] font-medium shadow-none transition-all font-sans"
@@ -38,7 +168,36 @@ export default function LoginPage() {
             使用 GitHub 登录
           </Button>
         </div>
+
+        {/* Footer links */}
+        <div className="text-center space-y-2">
+          <p className="text-[13px] text-[var(--muted-foreground)] font-sans">
+            还没有账号？{" "}
+            <button
+              onClick={() => router.push("/register")}
+              className="text-[var(--foreground)] hover:underline font-medium"
+            >
+              立即注册
+            </button>
+          </p>
+          <p>
+            <button
+              onClick={() => toast.info("该功能即将上线")}
+              className="text-[12px] text-[var(--muted-foreground)]/60 hover:text-[var(--muted-foreground)] font-sans transition-colors"
+            >
+              忘记密码？
+            </button>
+          </p>
+        </div>
       </div>
     </div>
+  );
+}
+
+export default function LoginPage() {
+  return (
+    <Suspense>
+      <LoginForm />
+    </Suspense>
   );
 }

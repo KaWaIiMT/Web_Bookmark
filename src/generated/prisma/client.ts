@@ -126,13 +126,3 @@ export type PathNote = Prisma.PathNoteModel
  * 
  */
 export type Annotation = Prisma.AnnotationModel
-/**
- * Model ChatSession
- * 
- */
-export type ChatSession = Prisma.ChatSessionModel
-/**
- * Model ChatMessage
- * 
- */
-export type ChatMessage = Prisma.ChatMessageModel

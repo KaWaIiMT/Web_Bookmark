@@ -13,7 +13,7 @@ export async function PATCH(
 
     const { id } = await params;
     const body = await req.json();
-    const { name, isPublic, isSmart, rules, sortBy, sortOrder, maxItems } = body;
+    const { name, isPublic } = body;
 
     const collection = await prisma.collection.findUnique({ where: { id } });
     if (!collection || collection.userId !== userId) {
@@ -25,11 +25,6 @@ export async function PATCH(
       data: {
         ...(name !== undefined && { name, slug: name.toLowerCase().replace(/\s+/g, "-") }),
         ...(isPublic !== undefined && { isPublic }),
-        ...(isSmart !== undefined && { isSmart }),
-        ...(rules !== undefined && { rules: typeof rules === "string" ? rules : JSON.stringify(rules) }),
-        ...(sortBy !== undefined && { sortBy }),
-        ...(sortOrder !== undefined && { sortOrder }),
-        ...(maxItems !== undefined && { maxItems }),
       },
       include: { _count: { select: { bookmarks: true } } },
     });

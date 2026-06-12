@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { useSession, signIn, signOut } from "next-auth/react";
+import { useSession, signOut } from "next-auth/react";
 import { Search, Inbox, Brain, Menu, LogOut, Settings, LogIn } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -31,9 +31,6 @@ import { CompareView } from "@/components/CompareView";
 import { ActivityView } from "@/components/ActivityView";
 import { KnowledgeGraphView } from "@/components/KnowledgeGraphView";
 import { ReaderView } from "@/components/ReaderView";
-import { ChatView } from "@/components/ChatView";
-import { QuickAskDialog } from "@/components/QuickAskDialog";
-import { SmartCollectionCreator } from "@/components/SmartCollectionCreator";
 import { VoiceSearch } from "@/components/VoiceSearch";
 import { useRouter } from "next/navigation";
 import type { BookmarkData, PaginatedResponse, ViewType } from "@/lib/types";
@@ -62,26 +59,6 @@ export default function Home() {
   const [selectedPathId, setSelectedPathId] = useState<string | null>(null);
   const [readerBookmark, setReaderBookmark] = useState<BookmarkData | null>(null);
   const [readerOpen, setReaderOpen] = useState(false);
-  const [quickAskOpen, setQuickAskOpen] = useState(false);
-  const [showSmartCreator, setShowSmartCreator] = useState(false);
-
-  // Helper: guard unauthenticated writes (returns true = blocked)
-  const guardAuth = useCallback((): boolean => {
-    if (status !== "loading" && !session) {
-      toast.error("请先登录 GitHub 账号");
-      return true;
-    }
-    return false;
-  }, [status, session]);
-
-  const handleShowSidebarAdd = useCallback(() => {
-    if (status !== "loading" && !session) {
-      toast.error("请先登录 GitHub 账号");
-      return;
-    }
-    setEditBookmark(null);
-    setAddDialogOpen(true);
-  }, [status, session]);
 
   const fetchBookmarks = useCallback(async (signal: AbortSignal) => {
     setLoading(true);
@@ -121,25 +98,12 @@ export default function Home() {
 
   }, [fetchBookmarks, isReady, activeView]);
 
-  // Ctrl+K global shortcut for QuickAsk
-  useEffect(() => {
-    const handler = (e: KeyboardEvent) => {
-      if ((e.ctrlKey || e.metaKey) && e.key === "k") {
-        e.preventDefault();
-        setQuickAskOpen((prev) => !prev);
-      }
-    };
-    window.addEventListener("keydown", handler);
-    return () => window.removeEventListener("keydown", handler);
-  }, []);
-
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const refreshBookmarks = useCallback(() => {
     fetchBookmarks(new AbortController().signal);
   }, [fetchBookmarks]);
 
   const handleStatusChange = async (id: string, status: string) => {
-    if (guardAuth()) return;
     try {
       const res = await fetch(`/api/bookmarks/${id}`, {
         method: "PATCH",
@@ -156,7 +120,6 @@ export default function Home() {
   };
 
   const handleDelete = async (id: string) => {
-    if (guardAuth()) return;
     try {
       const res = await fetch(`/api/bookmarks/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(await res.text());
@@ -169,13 +132,11 @@ export default function Home() {
   };
 
   const handleEdit = (bookmark: BookmarkData) => {
-    if (guardAuth()) return;
     setEditBookmark(bookmark);
     setAddDialogOpen(true);
   };
 
   const handleShare = async (id: string) => {
-    if (guardAuth()) return;
     try {
       const res = await fetch(`/api/bookmarks/${id}/share`, { method: "POST" });
       if (!res.ok) {
@@ -235,11 +196,7 @@ export default function Home() {
           onStatusChange={setActiveStatus}
           onCategoryChange={setActiveCategory}
           onCollectionClick={setActiveCollection}
-          onAddClick={handleShowSidebarAdd}
-          onAddSmartClick={() => {
-            if (guardAuth()) return;
-            setShowSmartCreator(true);
-          }}
+          onAddClick={() => { setEditBookmark(null); setAddDialogOpen(true); }}
         />
       </div>
 
@@ -255,7 +212,7 @@ export default function Home() {
               onStatusChange={(s) => { setActiveStatus(s); setSidebarOpen(false); }}
               onCategoryChange={(c) => { setActiveCategory(c); setSidebarOpen(false); }}
               onCollectionClick={(c) => { setActiveCollection(c); setSidebarOpen(false); }}
-              onAddClick={handleShowSidebarAdd}
+              onAddClick={() => { setEditBookmark(null); setAddDialogOpen(true); setSidebarOpen(false); }}
             />
           </div>
         </div>
@@ -328,7 +285,7 @@ export default function Home() {
             ) : (
               <div className="flex items-center gap-2">
                 <Button
-                  onClick={() => signIn("github")}
+                  onClick={() => router.push("/login")}
                   className="rounded-xl bg-[var(--foreground)] hover:bg-[var(--foreground)]/85 text-[var(--background)] h-8 px-3.5 text-[12px] font-medium shadow-none transition-all font-sans"
                 >
                   <svg className="h-3.5 w-3.5 mr-1.5" viewBox="0 0 24 24" fill="currentColor">
@@ -454,32 +411,8 @@ export default function Home() {
           {activeView === "graph" && (
             <KnowledgeGraphView />
           )}
-
-          {/* Chat: RAG knowledge Q&A */}
-          {activeView === "chat" && (
-            <ChatView />
-          )}
         </div>
       </main>
-
-      {/* QuickAsk Dialog (Ctrl+K) */}
-      <QuickAskDialog
-        open={quickAskOpen}
-        onClose={() => setQuickAskOpen(false)}
-        onAsk={(query: string) => {
-          setActiveView("chat");
-        }}
-      />
-
-      {/* Smart Collection Creator */}
-      <SmartCollectionCreator
-        open={showSmartCreator}
-        onClose={() => setShowSmartCreator(false)}
-        onCreated={() => {
-          // Refresh collections in sidebar — dispatch a custom event
-          window.dispatchEvent(new CustomEvent("bookmark-created"));
-        }}
-      />
 
       {/* Add Dialog */}
       <AddBookmarkDialog

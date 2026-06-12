@@ -67,9 +67,7 @@ export const ModelName = {
   LearningPath: 'LearningPath',
   LearningPathItem: 'LearningPathItem',
   PathNote: 'PathNote',
-  Annotation: 'Annotation',
-  ChatSession: 'ChatSession',
-  ChatMessage: 'ChatMessage'
+  Annotation: 'Annotation'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -90,6 +88,7 @@ export const UserScalarFieldEnum = {
   name: 'name',
   email: 'email',
   emailVerified: 'emailVerified',
+  password: 'password',
   image: 'image',
   createdAt: 'createdAt'
 } as const
@@ -204,11 +203,6 @@ export const CollectionScalarFieldEnum = {
   name: 'name',
   slug: 'slug',
   isPublic: 'isPublic',
-  isSmart: 'isSmart',
-  rules: 'rules',
-  sortBy: 'sortBy',
-  sortOrder: 'sortOrder',
-  maxItems: 'maxItems',
   userId: 'userId',
   createdAt: 'createdAt',
   updatedAt: 'updatedAt'
@@ -322,30 +316,6 @@ export const AnnotationScalarFieldEnum = {
 } as const
 
 export type AnnotationScalarFieldEnum = (typeof AnnotationScalarFieldEnum)[keyof typeof AnnotationScalarFieldEnum]
-
-
-export const ChatSessionScalarFieldEnum = {
-  id: 'id',
-  userId: 'userId',
-  title: 'title',
-  createdAt: 'createdAt',
-  updatedAt: 'updatedAt'
-} as const
-
-export type ChatSessionScalarFieldEnum = (typeof ChatSessionScalarFieldEnum)[keyof typeof ChatSessionScalarFieldEnum]
-
-
-export const ChatMessageScalarFieldEnum = {
-  id: 'id',
-  sessionId: 'sessionId',
-  role: 'role',
-  content: 'content',
-  citations: 'citations',
-  feedback: 'feedback',
-  createdAt: 'createdAt'
-} as const
-
-export type ChatMessageScalarFieldEnum = (typeof ChatMessageScalarFieldEnum)[keyof typeof ChatMessageScalarFieldEnum]
 
 
 export const SortOrder = {

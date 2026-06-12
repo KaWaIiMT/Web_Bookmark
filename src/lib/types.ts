@@ -76,7 +76,7 @@ export interface PaginatedResponse<T> {
   };
 }
 
-export type ViewType = "grid" | "gallery" | "discover" | "learning-path" | "compare" | "activity" | "dashboard" | "timeline" | "weekly" | "graph" | "chat";
+export type ViewType = "grid" | "gallery" | "discover" | "learning-path" | "compare" | "activity" | "dashboard" | "timeline" | "weekly" | "graph";
 
 export interface GraphNode {
   id: string;
