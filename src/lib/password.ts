@@ -1,3 +1,4 @@
+export const runtime = 'nodejs';
 import bcrypt from "bcryptjs";
 
 const SALT_ROUNDS = 12;
