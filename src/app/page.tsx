@@ -60,6 +60,25 @@ export default function Home() {
   const [readerBookmark, setReaderBookmark] = useState<BookmarkData | null>(null);
   const [readerOpen, setReaderOpen] = useState(false);
 
+  const [quickAskOpen, setQuickAskOpen] = useState(false);
+  const [showSmartCreator, setShowSmartCreator] = useState(false);
+
+  // Helper: guard unauthenticated writes (returns true = blocked)
+  const guardAuth = useCallback((): boolean => {
+    if (status !== "loading" && !session) {
+      toast.error("请先登录 GitHub 账号");
+      return true;
+    }
+    return false;
+  }, [status, session]);
+
+  const handleShowSidebarAdd = useCallback(() => {
+    if (guardAuth()) return;
+    setEditBookmark(null);
+    setAddDialogOpen(true);
+    setSidebarOpen(false);
+  }, [guardAuth]);
+
   const fetchBookmarks = useCallback(async (signal: AbortSignal) => {
     setLoading(true);
     try {
@@ -104,6 +123,7 @@ export default function Home() {
   }, [fetchBookmarks]);
 
   const handleStatusChange = async (id: string, status: string) => {
+    if (guardAuth()) return;
     try {
       const res = await fetch(`/api/bookmarks/${id}`, {
         method: "PATCH",
@@ -120,6 +140,7 @@ export default function Home() {
   };
 
   const handleDelete = async (id: string) => {
+    if (guardAuth()) return;
     try {
       const res = await fetch(`/api/bookmarks/${id}`, { method: "DELETE" });
       if (!res.ok) throw new Error(await res.text());
@@ -132,11 +153,13 @@ export default function Home() {
   };
 
   const handleEdit = (bookmark: BookmarkData) => {
+    if (guardAuth()) return;
     setEditBookmark(bookmark);
     setAddDialogOpen(true);
   };
 
   const handleShare = async (id: string) => {
+    if (guardAuth()) return;
     try {
       const res = await fetch(`/api/bookmarks/${id}/share`, { method: "POST" });
       if (!res.ok) {
@@ -153,6 +176,11 @@ export default function Home() {
   };
 
   const handleReorder = async (orderedIds: string[]) => {
+    if (guardAuth()) {
+      // Rollback optimistic UI if blocked
+      setBookmarks((prev) => prev);
+      return;
+    }
     // Optimistic UI update
     const reordered = orderedIds
       .map((id) => bookmarks.find((b) => b.id === id))
@@ -196,7 +224,11 @@ export default function Home() {
           onStatusChange={setActiveStatus}
           onCategoryChange={setActiveCategory}
           onCollectionClick={setActiveCollection}
-          onAddClick={() => { setEditBookmark(null); setAddDialogOpen(true); }}
+          onAddClick={handleShowSidebarAdd}
+          onAddSmartClick={() => {
+            if (guardAuth()) return;
+            setShowSmartCreator(true);
+          }}
         />
       </div>
 
@@ -212,7 +244,7 @@ export default function Home() {
               onStatusChange={(s) => { setActiveStatus(s); setSidebarOpen(false); }}
               onCategoryChange={(c) => { setActiveCategory(c); setSidebarOpen(false); }}
               onCollectionClick={(c) => { setActiveCollection(c); setSidebarOpen(false); }}
-              onAddClick={() => { setEditBookmark(null); setAddDialogOpen(true); setSidebarOpen(false); }}
+              onAddClick={handleShowSidebarAdd}
             />
           </div>
         </div>
@@ -334,7 +366,7 @@ export default function Home() {
                   <Button
                     variant="ghost"
                     className="mt-4 rounded-xl text-[13px] text-[var(--accent)] hover:bg-[var(--accent)]/5 font-sans"
-                    onClick={() => { setEditBookmark(null); setAddDialogOpen(true); }}
+                    onClick={handleShowSidebarAdd}
                   >
                     <PlusIcon className="mr-1.5" />
                     添加第一个书签
