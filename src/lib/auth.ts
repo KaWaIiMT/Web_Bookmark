@@ -34,9 +34,7 @@ export const authConfig: NextAuthConfig = {
   },
   callbacks: {
     session({ session, user }) {
-      if (session.user) {
-        session.user.id = user.id;
-      }
+      if (session.user) { session.user.id = user.id; }
       return session;
     },
   },
