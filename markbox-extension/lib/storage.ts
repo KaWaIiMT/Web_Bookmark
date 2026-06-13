@@ -18,7 +18,7 @@ export async function clearApiKey(): Promise<void> {
 
 export async function getApiUrl(): Promise<string> {
   const result = await chrome.storage.local.get(STORAGE_KEYS.API_URL);
-  return result[STORAGE_KEYS.API_URL] || "http://localhost:3000";
+  return result[STORAGE_KEYS.API_URL] || "https://ccjproject.top";
 }
 
 export async function setApiUrl(url: string): Promise<void> {

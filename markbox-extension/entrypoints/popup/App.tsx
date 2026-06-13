@@ -31,7 +31,7 @@ export default function App() {
     message: string;
     type: "success" | "error";
   } | null>(null);
-  const [baseUrl, setBaseUrl] = useState("http://localhost:3000");
+  const [baseUrl, setBaseUrl] = useState("https://ccjproject.top");
 
   // Initialize: get tab URL and check auth
   useEffect(() => {

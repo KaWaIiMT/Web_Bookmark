@@ -19,7 +19,7 @@ export default function App() {
     favicon: string;
   } | null>(null);
   const [pageBookmark, setPageBookmark] = useState<BookmarkData | null>(null);
-  const [baseUrl, setBaseUrl] = useState("http://localhost:3000");
+  const [baseUrl, setBaseUrl] = useState("https://ccjproject.top");
   const [toast, setToast] = useState<{
     message: string;
     type: "success" | "error";

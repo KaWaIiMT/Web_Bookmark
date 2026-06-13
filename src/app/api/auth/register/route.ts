@@ -71,6 +71,7 @@ export async function POST(request: Request) {
       });
 
       // Send verification email if email not yet verified
+      let emailResult: { method: string; verificationUrl: string } | null = null;
       if (!existingUser.emailVerified) {
         const token = crypto.randomUUID();
         await prisma.verificationToken.create({
@@ -80,11 +81,13 @@ export async function POST(request: Request) {
             expires: new Date(Date.now() + 24 * 60 * 60 * 1000),
           },
         });
-        await sendVerificationEmail(normalizedEmail, token);
+        emailResult = await sendVerificationEmail(normalizedEmail, token);
       }
 
       return NextResponse.json({
         message: "密码设置成功，现在可以使用邮箱登录",
+        emailSent: emailResult ? emailResult.method !== "none" : true,
+        verificationUrl: emailResult?.verificationUrl || "",
       });
     }
 
@@ -109,10 +112,15 @@ export async function POST(request: Request) {
       },
     });
 
-    await sendVerificationEmail(normalizedEmail, token);
+    const emailResult = await sendVerificationEmail(normalizedEmail, token);
 
     return NextResponse.json(
-      { message: "注册成功，请查收验证邮件" },
+      {
+        message: "注册成功，请查收验证邮件",
+        emailSent: emailResult.method !== "none",
+        verificationUrl:
+          emailResult.method === "none" ? emailResult.verificationUrl : "",
+      },
       { status: 201 }
     );
   } catch (error) {

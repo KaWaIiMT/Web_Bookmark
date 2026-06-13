@@ -9,7 +9,7 @@ export default defineConfig({
     permissions: ["activeTab", "storage", "scripting", "sidePanel", "contextMenus"],
     host_permissions: [
       "http://localhost:3000/*",
-      "https://markbox.app/*",
+      "https://ccjproject.top/*",
     ],
     side_panel: {
       default_path: "entrypoints/sidepanel/index.html",

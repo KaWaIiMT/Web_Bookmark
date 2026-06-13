@@ -1,6 +1,27 @@
 export const runtime = 'nodejs';
+import { Resend } from "resend";
 import nodemailer from "nodemailer";
 import type { Transporter } from "nodemailer";
+
+// ─── Resend client ───────────────────────────────────────────────
+
+let cachedResend: Resend | null | undefined;
+
+function getResendClient(): Resend | null {
+  if (cachedResend !== undefined) return cachedResend;
+
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) {
+    console.log("[email] Resend not configured (missing RESEND_API_KEY)");
+    cachedResend = null;
+    return null;
+  }
+
+  cachedResend = new Resend(apiKey);
+  return cachedResend;
+}
+
+// ─── SMTP (nodemailer) fallback ──────────────────────────────────
 
 let cachedTransporter: Transporter | null | undefined;
 
@@ -30,26 +51,19 @@ function getTransporter(): Transporter | null {
   return cachedTransporter;
 }
 
-export async function sendVerificationEmail(
-  to: string,
-  token: string
-): Promise<void> {
-  const appUrl =
-    process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
-  const verifyUrl = `${appUrl}/api/auth/verify-email?token=${token}`;
-  const from =
-    process.env.SMTP_FROM || process.env.SMTP_USER || "noreply@markbox.app";
+// ─── Types ───────────────────────────────────────────────────────
 
-  const transporter = getTransporter();
+export type EmailMethod = "resend" | "smtp" | "none";
 
-  if (!transporter) {
-    console.log(
-      `[email] Verification link for ${to}: ${verifyUrl}`
-    );
-    return;
-  }
+export interface SendResult {
+  method: EmailMethod;
+  verificationUrl: string;
+}
 
-  const html = `
+// ─── Helpers ─────────────────────────────────────────────────────
+
+function buildVerificationEmailHtml(verifyUrl: string): string {
+  return `
 <!DOCTYPE html>
 <html lang="zh-CN">
 <head><meta charset="utf-8"></head>
@@ -71,19 +85,57 @@ export async function sendVerificationEmail(
   </div>
 </body>
 </html>`;
+}
 
-  try {
-    await transporter.sendMail({
-      from,
-      to,
-      subject: "验证你的 MarkBox 邮箱地址",
-      html,
-    });
-    console.log(`[email] Verification email sent to ${to}`);
-  } catch (error) {
-    console.error(`[email] Failed to send verification email to ${to}:`, error);
-    console.log(
-      `[email] Fallback — verification link for ${to}: ${verifyUrl}`
-    );
+function getFromAddress(): string {
+  return (
+    process.env.RESEND_FROM ||
+    process.env.SMTP_FROM ||
+    process.env.SMTP_USER ||
+    "MarkBox <noreply@markbox.app>"
+  );
+}
+
+// ─── Main send function ──────────────────────────────────────────
+
+export async function sendVerificationEmail(
+  to: string,
+  token: string
+): Promise<SendResult> {
+  const appUrl =
+    process.env.NEXT_PUBLIC_APP_URL || "http://localhost:3000";
+  const verifyUrl = `${appUrl}/api/auth/verify-email?token=${token}`;
+  const from = getFromAddress();
+  const subject = "验证你的 MarkBox 邮箱地址";
+  const html = buildVerificationEmailHtml(verifyUrl);
+
+  // 1) Try Resend
+  const resend = getResendClient();
+  if (resend) {
+    try {
+      await resend.emails.send({ from, to, subject, html });
+      console.log(`[email] Verification email sent via Resend to ${to}`);
+      return { method: "resend", verificationUrl: verifyUrl };
+    } catch (error) {
+      console.error(`[email] Resend failed, falling back:`, error);
+    }
   }
+
+  // 2) Try SMTP (nodemailer)
+  const transporter = getTransporter();
+  if (transporter) {
+    try {
+      await transporter.sendMail({ from, to, subject, html });
+      console.log(`[email] Verification email sent via SMTP to ${to}`);
+      return { method: "smtp", verificationUrl: verifyUrl };
+    } catch (error) {
+      console.error(`[email] SMTP failed, falling back:`, error);
+    }
+  }
+
+  // 3) Neither available — log to console
+  console.log(
+    `[email] No email provider configured — verification link for ${to}: ${verifyUrl}`
+  );
+  return { method: "none", verificationUrl: verifyUrl };
 }
