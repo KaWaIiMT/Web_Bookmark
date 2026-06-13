@@ -44,6 +44,7 @@ export default function Home() {
 
   const [bookmarks, setBookmarks] = useState<BookmarkData[]>([]);
   const [loading, setLoading] = useState(true);
+  const [isFirstLoad, setIsFirstLoad] = useState(true);
   const [activeStatus, setActiveStatus] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -79,8 +80,8 @@ export default function Home() {
     setSidebarOpen(false);
   }, [guardAuth]);
 
-  const fetchBookmarks = useCallback(async (signal: AbortSignal) => {
-    setLoading(true);
+  const fetchBookmarks = useCallback(async (signal: AbortSignal, showLoading: boolean) => {
+    if (showLoading) setLoading(true);
     try {
       const params = new URLSearchParams();
       if (activeStatus) params.set("status", activeStatus);
@@ -98,7 +99,10 @@ export default function Home() {
       if (err instanceof DOMException && err.name === "AbortError") return;
       setBookmarks([]);
     } finally {
-      if (!signal.aborted) setLoading(false);
+      if (!signal.aborted) {
+        setLoading(false);
+        setIsFirstLoad(false);
+      }
     }
   }, [activeStatus, activeCategory, activeCollection, searchQuery]);
 
@@ -110,7 +114,7 @@ export default function Home() {
       return;
     }
     const controller = new AbortController();
-    fetchBookmarks(controller.signal);
+    fetchBookmarks(controller.signal, isFirstLoad);
     return () => {
       if (!controller.signal.aborted) controller.abort();
     };
@@ -119,7 +123,7 @@ export default function Home() {
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const refreshBookmarks = useCallback(() => {
-    fetchBookmarks(new AbortController().signal);
+    fetchBookmarks(new AbortController().signal, false);
   }, [fetchBookmarks]);
 
   const handleStatusChange = async (id: string, status: string) => {
