@@ -126,8 +126,26 @@ export function BookmarkDetailSheet({
     if (!bookmark) return;
     setArchiveLoading(true);
     try {
+      // Fetch the URL from the browser (more reliable, no Vercel timeout)
+      let html = "";
+      try {
+        const fetchRes = await fetch(bookmark.url, {
+          headers: {
+            "User-Agent": navigator.userAgent,
+            Accept: "text/html,application/xhtml+xml",
+          },
+        });
+        if (fetchRes.ok) {
+          html = await fetchRes.text();
+        }
+      } catch {
+        // Browser fetch failed — server will fall back to server-side fetch
+      }
+
       const res = await fetch(`/api/bookmarks/${bookmark.id}/archive`, {
         method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ html: html || undefined }),
       });
       const data = await res.json();
       if (res.ok) {

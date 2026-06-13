@@ -1,8 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
-import { Prisma } from "@/generated/prisma/client";
 import { prisma } from "@/lib/prisma";
 import { archivePage } from "@/lib/archiver";
 import { getUserIdFromRequest } from "@/lib/auth-helpers";
+import * as cheerio from "cheerio";
 
 // Trigger archive for a bookmark
 export async function POST(
@@ -27,7 +27,47 @@ export async function POST(
       data: { archiveStatus: "pending" },
     });
 
-    // Run archive (synchronous for now; Phase 3 will make this async)
+    // Accept client-provided HTML (browser-side fetch), otherwise fetch server-side
+    const { html: clientHtml } = (await req.json().catch(() => ({}))) as {
+      html?: string;
+    };
+
+    if (clientHtml && clientHtml.trim().length > 500) {
+      // Client provided HTML — process it directly (fast, no network wait)
+      try {
+        const $ = cheerio.load(clientHtml);
+        $("script, style, iframe, noscript, nav, footer, header").remove();
+        const bodyText = $("body").text()?.replace(/\s+/g, " ").trim().slice(0, 50000) || "";
+        const bodyHtml = $("body").html() || clientHtml;
+
+        await prisma.bookmark.update({
+          where: { id },
+          data: {
+            archiveHtml: bodyHtml,
+            archiveText: bodyText,
+            archivedAt: new Date(),
+            archiveStatus: "success",
+          },
+        });
+
+        return NextResponse.json({
+          status: "success",
+          archivedAt: new Date().toISOString(),
+        });
+      } catch (processErr) {
+        const msg = processErr instanceof Error ? processErr.message : "HTML processing failed";
+        await prisma.bookmark.update({
+          where: { id },
+          data: { archiveStatus: `failed: ${msg.slice(0, 200)}` },
+        });
+        return NextResponse.json(
+          { status: "failed", error: msg },
+          { status: 500 }
+        );
+      }
+    }
+
+    // No client HTML — try server-side fetch (fallback)
     try {
       const { html, text } = await archivePage(bookmark.url);
 
