@@ -1,5 +1,8 @@
 import * as cheerio from "cheerio";
 
+const BROWSER_UA =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
+
 export interface ArchiveResult {
   html: string;
   text: string;
@@ -7,6 +10,7 @@ export interface ArchiveResult {
 
 /**
  * Fetch and archive a web page as simplified HTML + extracted plain text.
+ * Uses a realistic browser User-Agent to avoid being blocked.
  * - Removes <script>, <style>, <iframe>, <noscript>, event handler attributes
  * - Extracts the main content region (article, main, .content, etc.)
  * - Falls back to <body> if no main content region found
@@ -14,31 +18,44 @@ export interface ArchiveResult {
  */
 export async function archivePage(url: string): Promise<ArchiveResult> {
   const controller = new AbortController();
-  const timeout = setTimeout(() => controller.abort(), 15000);
+  const timeout = setTimeout(() => controller.abort(), 20000);
 
   let rawHtml: string;
   try {
     const res = await fetch(url, {
       headers: {
-        "User-Agent": "MarkBox-Archiver/1.0",
-        Accept: "text/html,application/xhtml+xml",
+        "User-Agent": BROWSER_UA,
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
       },
       signal: controller.signal,
+      redirect: "follow",
     });
     if (!res.ok) {
-      throw new Error(`HTTP ${res.status}: ${res.statusText}`);
+      throw new Error(`HTTP ${res.status}`);
     }
     rawHtml = await res.text();
   } catch (err) {
+    clearTimeout(timeout);
     if (err instanceof Error && err.name === "AbortError") {
       throw new Error(`归档超时：${url}`);
     }
-    throw new Error(`归档抓取失败：${url} — ${err instanceof Error ? err.message : String(err)}`);
+    const msg = err instanceof Error ? err.message : String(err);
+    throw new Error(`归档抓取失败（${msg}）：${url}`);
   } finally {
     clearTimeout(timeout);
   }
 
-  const $ = cheerio.load(rawHtml);
+  if (!rawHtml || rawHtml.trim().length < 100) {
+    throw new Error("网页内容过短，无法归档");
+  }
+
+  let $: cheerio.CheerioAPI;
+  try {
+    $ = cheerio.load(rawHtml);
+  } catch {
+    throw new Error("网页格式异常，无法解析");
+  }
 
   // Remove dangerous / unwanted tags
   $("script, style, iframe, noscript, nav, footer, header").remove();
@@ -54,7 +71,6 @@ export async function archivePage(url: string): Promise<ArchiveResult> {
     // Remove style attributes that could be problematic in sandbox
     const style = $(el).attr("style");
     if (style) {
-      // Strip position:fixed/sticky which behave strangely in sandboxed iframes
       const cleaned = style
         .replace(/position\s*:\s*fixed\s*;?/gi, "")
         .replace(/position\s*:\s*sticky\s*;?/gi, "");
@@ -79,7 +95,6 @@ export async function archivePage(url: string): Promise<ArchiveResult> {
     ".entry-content",
   ];
   let $main = $(mainSelectors.join(", "));
-  // Require at least 200 chars of text from the main region, otherwise fall back to body
   const mainText = $main.text()?.replace(/\s+/g, " ").trim() || "";
   if (!mainText || mainText.length < 200) {
     $main = $("body");

@@ -1,5 +1,8 @@
 import { Readability } from "@mozilla/readability";
-import { JSDOM } from "jsdom";
+import { parseHTML } from "linkedom";
+
+const BROWSER_UA =
+  "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36";
 
 export interface ReadableResult {
   title: string;
@@ -14,7 +17,7 @@ export interface ReadableResult {
 
 /**
  * Extract readable content from a URL using Mozilla Readability.
- * Uses a realistic browser User-Agent to avoid being blocked.
+ * Uses linkedom (lightweight) instead of jsdom for Vercel compatibility.
  * Falls back to raw body text if Readability fails.
  */
 export async function extractReadable(url: string): Promise<ReadableResult> {
@@ -25,14 +28,9 @@ export async function extractReadable(url: string): Promise<ReadableResult> {
   try {
     const res = await fetch(url, {
       headers: {
-        "User-Agent":
-          "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
-        Accept:
-          "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
+        "User-Agent": BROWSER_UA,
+        Accept: "text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8",
         "Accept-Language": "zh-CN,zh;q=0.9,en;q=0.8",
-        "Accept-Encoding": "gzip, deflate, br",
-        "Cache-Control": "no-cache",
-        Pragma: "no-cache",
       },
       signal: controller.signal,
       redirect: "follow",
@@ -52,35 +50,45 @@ export async function extractReadable(url: string): Promise<ReadableResult> {
     clearTimeout(timeout);
   }
 
-  // Validate we got useful HTML
   if (!rawHtml || rawHtml.trim().length < 100) {
     throw new Error("网页内容过短，无法提取正文");
   }
 
-  let doc: JSDOM;
+  // Parse with linkedom (lightweight, works on Vercel)
+  let document: Document;
   try {
-    doc = new JSDOM(rawHtml, { url });
+    const dom = parseHTML(rawHtml);
+    document = dom.document as unknown as Document;
   } catch {
     throw new Error("网页格式异常，无法解析");
   }
 
-  const reader = new Readability(doc.window.document);
-  const article = reader.parse();
+  // Run Readability
+  let article: ReturnType<typeof Readability.prototype.parse> | null = null;
+  try {
+    const reader = new Readability(document as any);
+    article = reader.parse();
+  } catch {
+    // Readability crashed — fall through to body text extraction
+  }
 
   if (article && article.content) {
-    // Clean up the content further — strip nav, footer-like elements
-    const cleanDoc = new JSDOM(article.content);
-    cleanDoc.window.document
-      .querySelectorAll(
-        "nav, footer, .nav, .footer, .sidebar, .comments, script, style"
-      )
-      .forEach((el: Element) => el.remove());
+    // Clean up nav/footer-like elements
+    let cleanHtml = article.content;
+    try {
+      const cleanDom = parseHTML(`<html><body>${article.content}</body></html>`);
+      cleanDom.document
+        .querySelectorAll("nav, footer, .nav, .footer, .sidebar, .comments, script, style")
+        .forEach((el: Element) => el.remove());
+      cleanHtml = cleanDom.document.body?.innerHTML || article.content;
+    } catch {
+      // ignore cleanup errors, use original content
+    }
 
     return {
       title: article.title || "",
-      content: cleanDoc.serialize(),
-      textContent:
-        article.textContent?.replace(/\s+/g, " ").trim() || "",
+      content: cleanHtml,
+      textContent: article.textContent?.replace(/\s+/g, " ").trim() || "",
       excerpt:
         article.excerpt ||
         article.textContent?.slice(0, 200)?.replace(/\s+/g, " ").trim() ||
@@ -92,22 +100,24 @@ export async function extractReadable(url: string): Promise<ReadableResult> {
   }
 
   // Readability failed — extract body text as fallback
-  const bodyDoc = new JSDOM(rawHtml, { url });
-  bodyDoc.window.document
-    .querySelectorAll("script, style, nav, footer, iframe, noscript")
-    .forEach((el: Element) => el.remove());
+  try {
+    document
+      .querySelectorAll("script, style, nav, footer, iframe, noscript")
+      .forEach((el: Element) => el.remove());
+  } catch {
+    // ignore
+  }
+
   const bodyText =
-    bodyDoc.window.document.body?.textContent
-      ?.replace(/\s+/g, " ")
-      .trim() || "";
+    document.body?.textContent?.replace(/\s+/g, " ").trim() || "";
 
   if (!bodyText || bodyText.length < 50) {
     throw new Error("该网页正文内容极少，可能为纯图片或动态加载页面");
   }
 
   return {
-    title: bodyDoc.window.document.title || "",
-    content: bodyDoc.window.document.body?.innerHTML || "",
+    title: document.title || "",
+    content: document.body?.innerHTML || "",
     textContent: bodyText.slice(0, 50000),
     excerpt: bodyText.slice(0, 200),
     byline: null,
