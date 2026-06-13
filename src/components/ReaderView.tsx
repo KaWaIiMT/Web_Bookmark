@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useLayoutEffect, useCallback, useRef } from "react";
 import { ArrowLeft, FileArchive, Download, Loader2, AlertTriangle, MessageSquare, List, Highlighter } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { Button } from "@/components/ui/button";
@@ -200,154 +200,163 @@ export function ReaderView({ bookmark, open, onClose }: ReaderViewProps) {
     } catch {}
   };
 
-  // Apply highlights to rendered content using anchor data for precise positioning
-  useEffect(() => {
+  // Apply highlights synchronously (useLayoutEffect) to prevent flickering
+  const appliedIdsRef = useRef<Set<string>>(new Set());
+
+  useLayoutEffect(() => {
     if (!contentRef.current || annotations.length === 0) return;
 
-    // Remove old highlight spans first
-    contentRef.current.querySelectorAll(".annotation-highlight").forEach((el) => {
-      const parent = el.parentNode;
-      if (parent) {
-        while (el.firstChild) parent.insertBefore(el.firstChild, el);
-        parent.removeChild(el);
-      }
-    });
-    contentRef.current.normalize();
+    // Only apply if annotations actually changed
+    const currentIds = new Set(annotations.map((a) => a.id));
+    if (
+      currentIds.size === appliedIdsRef.current.size &&
+      [...currentIds].every((id) => appliedIdsRef.current.has(id))
+    ) {
+      return; // Same annotations, skip
+    }
+    appliedIdsRef.current = currentIds;
 
-    // Search root: prefer [data-reader-body] to skip header/excerpt area
-    const searchRoot =
-      contentRef.current.querySelector("[data-reader-body]") ||
-      contentRef.current;
+    // Use rAF to batch DOM operations
+    requestAnimationFrame(() => {
+      if (!contentRef.current) return;
 
-    // Apply each annotation as a highlight
-    for (const ann of annotations) {
-      if (ann.type !== "highlight" || !ann.color) continue;
-      const color = ann.color;
-      const text = ann.text;
-      if (!text || text.length < 2) continue;
+      // Remove old highlight spans
+      contentRef.current.querySelectorAll(".annotation-highlight").forEach((el) => {
+        const parent = el.parentNode;
+        if (parent) {
+          while (el.firstChild) parent.insertBefore(el.firstChild, el);
+          parent.removeChild(el);
+        }
+      });
+      contentRef.current.normalize();
 
-      let anchor: AnnotationAnchor | null = null;
-      try {
-        anchor = ann.anchor ? JSON.parse(ann.anchor) : null;
-      } catch {
-        anchor = null;
-      }
+      const searchRoot =
+        contentRef.current.querySelector("[data-reader-body]") ||
+        contentRef.current;
 
-      // Build a fingerprint: prefix + text (for precise location)
-      const prefix = anchor?.textPrefix || "";
-      const suffix = anchor?.textSuffix || "";
-      const fingerprint = prefix + text;
+      for (const ann of annotations) {
+        if (ann.type !== "highlight" || !ann.color) continue;
+        const color = ann.color;
+        const text = ann.text;
+        if (!text || text.length < 2) continue;
 
-      // Search text nodes within the body content only for the exact location
-      const walker = document.createTreeWalker(
-        searchRoot,
-        NodeFilter.SHOW_TEXT,
-        {
+        let anchor: AnnotationAnchor | null = null;
+        try { anchor = ann.anchor ? JSON.parse(ann.anchor) : null; } catch { anchor = null; }
+
+        const prefix = anchor?.textPrefix || "";
+        const suffix = anchor?.textSuffix || "";
+        const fingerprint = prefix ? prefix + text : "";
+
+        // Find the text node containing this annotation
+        const walker = document.createTreeWalker(searchRoot, NodeFilter.SHOW_TEXT, {
           acceptNode(node) {
             if ((node.parentElement as Element)?.closest?.(".annotation-highlight")) return NodeFilter.FILTER_REJECT;
-            if ((node.parentElement as Element)?.closest?.("script, style")) return NodeFilter.FILTER_REJECT;
             return (node.textContent || "").length > 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
           },
-        }
-      );
+        });
 
-      let bestNode: Text | null = null;
-      let bestIdx = -1;
-      let bestScore = Infinity;
+        let foundNode: Text | null = null;
+        let foundIdx = -1;
 
-      // Find the best match: prefer fingerprint match, fall back to text-only
-      let textNode: Text | null;
-      while ((textNode = walker.nextNode() as Text)) {
-        const nodeText = textNode.textContent || "";
-
-        // Try fingerprint match first (most precise)
-        const fpIdx = prefix ? nodeText.indexOf(fingerprint) : -1;
-        if (fpIdx !== -1) {
-          const idx = fpIdx + prefix.length;
-          // Perfect match found — use immediately
-          bestNode = textNode;
-          bestIdx = idx;
-          break;
-        }
-
-        // Fallback: text match, score by how close to prefix
-        const txtIdx = nodeText.indexOf(text);
-        if (txtIdx !== -1) {
-          // Prefer matches closer to the beginning (the first visible text)
-          // But if we have prefix info, prefer matches near where prefix would be
-          const score = prefix
-            ? Math.abs(nodeText.indexOf(prefix) - txtIdx)
-            : txtIdx;
-          if (score < bestScore) {
-            bestScore = score;
-            bestNode = textNode;
-            bestIdx = txtIdx;
+        // Strategy 1: fingerprint match
+        if (fingerprint) {
+          let tn: Text | null;
+          while ((tn = walker.nextNode() as Text)) {
+            const idx = (tn.textContent || "").indexOf(fingerprint);
+            if (idx !== -1) { foundNode = tn; foundIdx = idx + prefix.length; break; }
           }
         }
-      }
 
-      // If no match found, try searching again without prefix (still within body)
-      if (!bestNode) {
-        const walker2 = document.createTreeWalker(
-          searchRoot,
-          NodeFilter.SHOW_TEXT,
-          {
+        // Strategy 2: text-only match
+        if (!foundNode) {
+          const walker2 = document.createTreeWalker(searchRoot, NodeFilter.SHOW_TEXT, {
             acceptNode(node) {
               if ((node.parentElement as Element)?.closest?.(".annotation-highlight")) return NodeFilter.FILTER_REJECT;
-              if ((node.parentElement as Element)?.closest?.("script, style")) return NodeFilter.FILTER_REJECT;
               return (node.textContent || "").length > 0 ? NodeFilter.FILTER_ACCEPT : NodeFilter.FILTER_REJECT;
             },
+          });
+          let tn: Text | null;
+          while ((tn = walker2.nextNode() as Text)) {
+            const idx = (tn.textContent || "").indexOf(text);
+            if (idx !== -1) { foundNode = tn; foundIdx = idx; break; }
           }
-        );
-        let n: Text | null;
-        while ((n = walker2.nextNode() as Text)) {
-          const nodeText = n.textContent || "";
-          const idx = nodeText.indexOf(text);
-          if (idx !== -1) {
-            bestNode = n;
-            bestIdx = idx;
-            break;
+        }
+
+        if (!foundNode || foundIdx === -1) continue;
+
+        // Create highlight span
+        const span = document.createElement("span");
+        span.className = `annotation-highlight annotation-${ann.id}`;
+        const highlightColors: Record<string, { bg: string; border: string }> = {
+          yellow: { bg: "rgba(234,179,8,0.3)", border: "#eab308" },
+          green: { bg: "rgba(16,185,129,0.3)", border: "#10b981" },
+          blue: { bg: "rgba(59,130,246,0.3)", border: "#3b82f6" },
+          red: { bg: "rgba(239,68,68,0.3)", border: "#ef4444" },
+        };
+        const hc = highlightColors[color];
+        span.style.backgroundColor = hc.bg;
+        span.style.borderBottom = `2px solid ${hc.border}`;
+        span.style.cursor = "pointer";
+        span.style.borderRadius = "2px";
+        span.style.padding = "0 1px";
+        span.dataset.annotationId = ann.id;
+        span.dataset.color = color;
+        span.title = ann.note ? `💡 ${ann.note}` : "";
+
+        // Try to wrap the range; handle multi-node selections
+        const range = document.createRange();
+        range.setStart(foundNode, foundIdx);
+        range.setEnd(foundNode, foundIdx + text.length);
+
+        try {
+          range.surroundContents(span);
+        } catch {
+          // Cross-element selection — wrap each text segment individually
+          range.detach();
+          try {
+            const fullRange = document.createRange();
+            const startOffset = anchor?.startOffset ?? foundIdx;
+            const endOffset = anchor?.endOffset ?? foundIdx + text.length;
+            fullRange.setStart(foundNode, startOffset);
+
+            // Find the end node
+            const endWalker = document.createTreeWalker(searchRoot, NodeFilter.SHOW_TEXT);
+            let endNode: Text | null = null;
+            let remaining = text.length;
+            let n: Text | null;
+            let started = false;
+            while ((n = endWalker.nextNode() as Text)) {
+              if (n === foundNode) started = true;
+              if (!started) continue;
+              const nodeLen = (n.textContent || "").length;
+              if (remaining <= nodeLen) { endNode = n; break; }
+              remaining -= nodeLen;
+            }
+
+            if (endNode) {
+              fullRange.setEnd(endNode, Math.min(endOffset, (endNode.textContent || "").length));
+
+              // Wrap each text node in the range
+              const frag = fullRange.extractContents();
+              const wrapper = document.createElement("span");
+              wrapper.className = span.className;
+              wrapper.style.backgroundColor = hc.bg;
+              wrapper.style.borderBottom = `2px solid ${hc.border}`;
+              wrapper.style.cursor = "pointer";
+              wrapper.style.borderRadius = "2px";
+              wrapper.style.padding = "0 1px";
+              wrapper.dataset.annotationId = ann.id;
+              wrapper.dataset.color = color;
+              wrapper.title = span.title;
+              wrapper.appendChild(frag);
+              fullRange.insertNode(wrapper);
+            }
+          } catch {
+            // All attempts failed — skip this annotation
           }
         }
       }
-
-      if (!bestNode || bestIdx === -1) continue;
-
-      // Verify suffix matches (extra validation)
-      if (suffix && bestNode.textContent) {
-        const afterText = bestNode.textContent.slice(bestIdx + text.length, bestIdx + text.length + suffix.length);
-        if (afterText !== suffix) {
-          // Suffix doesn't match — might be wrong location, but proceed anyway
-          // (suffix mismatch can happen if the DOM changed slightly)
-        }
-      }
-
-      // Create and apply the highlight
-      const range = document.createRange();
-      range.setStart(bestNode, bestIdx);
-      range.setEnd(bestNode, bestIdx + text.length);
-
-      const span = document.createElement("span");
-      span.className = `annotation-highlight annotation-${ann.id}`;
-      const config = COLOR_CONFIG[color];
-      span.style.backgroundColor = color === "yellow" ? "rgba(234,179,8,0.3)" :
-        color === "green" ? "rgba(16,185,129,0.3)" :
-        color === "blue" ? "rgba(59,130,246,0.3)" :
-        "rgba(239,68,68,0.3)";
-      span.style.borderBottom = `2px solid ${color === "yellow" ? "#eab308" : color === "green" ? "#10b981" : color === "blue" ? "#3b82f6" : "#ef4444"}`;
-      span.style.cursor = "pointer";
-      span.style.borderRadius = "2px";
-      span.style.padding = "0 1px";
-      span.title = ann.note ? `💡 ${ann.note}` : config?.label || "";
-      span.dataset.annotationId = ann.id;
-      span.dataset.color = color;
-
-      try {
-        range.surroundContents(span);
-      } catch {
-        range.detach();
-      }
-    }
+    });
   }, [annotations, readable]);
 
   // Render highlight spans in content
