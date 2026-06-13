@@ -27,6 +27,7 @@ export const authConfig: NextAuthConfig = {
       authorization: {
         params: { prompt: "consent" },
       },
+      allowDangerousEmailAccountLinking: true,
     }),
   ],
   pages: {

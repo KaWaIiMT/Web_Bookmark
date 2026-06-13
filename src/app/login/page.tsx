@@ -33,6 +33,16 @@ function LoginForm() {
       setError("验证链接无效");
     } else if (err === "server-error") {
       setError("服务器错误，请稍后重试");
+    } else if (err === "OAuthAccountNotLinked") {
+      setError("此邮箱已注册过账号，请先用密码登录，然后在设置中关联 GitHub");
+    } else if (err === "OAuthCallback") {
+      setError("GitHub 授权失败，请重试");
+    } else if (err === "OAuthSignin") {
+      setError("GitHub 登录流程异常，请重试");
+    } else if (err === "Callback") {
+      setError("登录回调异常，请重试");
+    } else if (err) {
+      setError("登录失败，请重试");
     }
   }, [searchParams]);
 
