@@ -214,6 +214,11 @@ export function ReaderView({ bookmark, open, onClose }: ReaderViewProps) {
     });
     contentRef.current.normalize();
 
+    // Search root: prefer [data-reader-body] to skip header/excerpt area
+    const searchRoot =
+      contentRef.current.querySelector("[data-reader-body]") ||
+      contentRef.current;
+
     // Apply each annotation as a highlight
     for (const ann of annotations) {
       if (ann.type !== "highlight" || !ann.color) continue;
@@ -233,9 +238,9 @@ export function ReaderView({ bookmark, open, onClose }: ReaderViewProps) {
       const suffix = anchor?.textSuffix || "";
       const fingerprint = prefix + text;
 
-      // Search all text nodes for the exact location
+      // Search text nodes within the body content only for the exact location
       const walker = document.createTreeWalker(
-        contentRef.current,
+        searchRoot,
         NodeFilter.SHOW_TEXT,
         {
           acceptNode(node) {
@@ -281,10 +286,10 @@ export function ReaderView({ bookmark, open, onClose }: ReaderViewProps) {
         }
       }
 
-      // If no match found, try searching again without prefix
+      // If no match found, try searching again without prefix (still within body)
       if (!bestNode) {
         const walker2 = document.createTreeWalker(
-          contentRef.current,
+          searchRoot,
           NodeFilter.SHOW_TEXT,
           {
             acceptNode(node) {
@@ -484,7 +489,7 @@ export function ReaderView({ bookmark, open, onClose }: ReaderViewProps) {
                       </p>
                     )}
                   </div>
-                  {renderContent()}
+                  <div data-reader-body>{renderContent()}</div>
                 </div>
               )}
             </div>
