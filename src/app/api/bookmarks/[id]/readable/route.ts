@@ -23,11 +23,13 @@ export async function GET(
     }
 
     // Try Readability extraction first
+    let readableErr: string | null = null;
     try {
       const readable = await extractReadable(bookmark.url);
       return NextResponse.json(readable);
-    } catch (readableErr) {
-      console.warn("Readability extraction failed, falling back:", readableErr);
+    } catch (err) {
+      readableErr = err instanceof Error ? err.message : String(err);
+      console.warn("Readability extraction failed:", readableErr);
     }
 
     // Fallback: use archive HTML if available
@@ -45,7 +47,7 @@ export async function GET(
     }
 
     return NextResponse.json(
-      { error: "Unable to extract readable content. Try archiving this page first." },
+      { error: readableErr || "无法提取正文内容，建议先归档该网页" },
       { status: 503 }
     );
   } catch (err) {

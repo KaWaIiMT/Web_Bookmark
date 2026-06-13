@@ -74,8 +74,11 @@ export function ReaderView({ bookmark, open, onClose }: ReaderViewProps) {
     setLoading(true);
     setError(null);
     fetch(`/api/bookmarks/${bookmark.id}/readable`)
-      .then((r) => {
-        if (!r.ok) throw new Error("Failed to load");
+      .then(async (r) => {
+        if (!r.ok) {
+          const body = await r.json().catch(() => ({}));
+          throw new Error(body.error || `服务器错误 (${r.status})`);
+        }
         return r.json();
       })
       .then((data) => setReadable(data))
