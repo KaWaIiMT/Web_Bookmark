@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Pencil, Plus } from "lucide-react";
 import { TagBadge } from "./TagBadge";
 import { CategorySelector } from "./CategorySelector";
+import { resolveImageUrl } from "@/lib/utils";
 import type { ExtractedMetadata, AICategorizeOutput } from "@/lib/types";
 
 interface BookmarkPreviewCardProps {
@@ -52,7 +53,7 @@ export function BookmarkPreviewCard({
       {metadata.coverImage && (
         <div className="relative aspect-[2.2/1] bg-[var(--muted)] overflow-hidden">
           <img
-            src={metadata.coverImage.startsWith("//") ? `https:${metadata.coverImage}` : metadata.coverImage}
+            src={resolveImageUrl(metadata.coverImage, url) ?? undefined}
             alt=""
             className="w-full h-full object-cover"
             referrerPolicy="no-referrer"

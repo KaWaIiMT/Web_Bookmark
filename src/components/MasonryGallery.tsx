@@ -3,6 +3,7 @@
 import { ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
 import type { BookmarkData } from "@/lib/types";
+import { resolveImageUrl } from "@/lib/utils";
 
 interface MasonryGalleryProps {
   bookmarks: BookmarkData[];
@@ -41,7 +42,7 @@ export function MasonryGallery({ bookmarks, onCardClick }: MasonryGalleryProps) 
           {bookmark.coverImage && (
             <div className="relative">
               <img
-                src={bookmark.coverImage.startsWith("//") ? `https:${bookmark.coverImage}` : bookmark.coverImage}
+                src={resolveImageUrl(bookmark.coverImage, bookmark.url) ?? undefined}
                 alt={bookmark.title}
                 className="w-full object-cover"
                 loading="lazy"

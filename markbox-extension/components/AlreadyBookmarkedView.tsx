@@ -1,5 +1,6 @@
 import { ExternalLink } from "lucide-react";
 import { StatusBadge } from "./StatusBadge";
+import { resolveImageUrl } from "@/lib/utils";
 import type { BookmarkData } from "@/lib/types";
 
 interface AlreadyBookmarkedViewProps {
@@ -43,9 +44,7 @@ export function AlreadyBookmarkedView({
         <div className="aspect-[2.2/1] rounded-xl bg-[var(--muted)] overflow-hidden">
           <img
             src={
-              bookmark.coverImage.startsWith("//")
-                ? `https:${bookmark.coverImage}`
-                : bookmark.coverImage
+              resolveImageUrl(bookmark.coverImage, bookmark.url) ?? undefined
             }
             alt=""
             className="w-full h-full object-cover"

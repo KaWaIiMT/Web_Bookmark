@@ -15,6 +15,7 @@ import { Badge } from "@/components/ui/badge";
 import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import type { ExtractedMetadata, AICategorizeOutput, BookmarkData } from "@/lib/types";
+import { resolveImageUrl } from "@/lib/utils";
 
 interface AddBookmarkDialogProps {
   open: boolean;
@@ -259,7 +260,7 @@ export function AddBookmarkDialog({
                 {metadata.coverImage && (
                   <div className="aspect-video rounded-xl overflow-hidden bg-[var(--muted)]">
                     <img
-                      src={metadata.coverImage.startsWith("//") ? `https:${metadata.coverImage}` : metadata.coverImage}
+                      src={resolveImageUrl(metadata.coverImage, url) ?? undefined}
                       alt="封面"
                       className="w-full h-full object-cover"
                       referrerPolicy="no-referrer"

@@ -227,11 +227,20 @@ export async function extractMetadata(url: string): Promise<ExtractedMetadata> {
     $('meta[name="description"]').attr("content") ||
     "";
 
-  const coverImage =
+  let coverImage =
     $('meta[property="og:image"]').attr("content") ||
     $('meta[name="twitter:image"]').attr("content") ||
     $('meta[itemprop="image"]').attr("content") ||
     "";
+
+  // Resolve relative/protocol-relative URLs against the page URL
+  if (coverImage) {
+    try {
+      coverImage = new URL(coverImage, validatedUrl).href;
+    } catch {
+      // leave as-is if URL is malformed
+    }
+  }
 
   const siteName =
     $('meta[property="og:site_name"]').attr("content") ||

@@ -13,7 +13,7 @@ import {
   ContextMenuSubContent,
   ContextMenuSubTrigger,
 } from "@/components/ui/context-menu";
-import { cn } from "@/lib/utils";
+import { cn, resolveImageUrl } from "@/lib/utils";
 import type { BookmarkData } from "@/lib/types";
 
 function formatDate(dateStr: string) {
@@ -80,7 +80,7 @@ export function BookmarkCard({ bookmark, onStatusChange, onDelete, onEdit, onSha
               onClick={(e) => e.stopPropagation()}
             >
               <img
-                src={bookmark.coverImage.startsWith("//") ? `https:${bookmark.coverImage}` : bookmark.coverImage}
+                src={resolveImageUrl(bookmark.coverImage, bookmark.url) ?? undefined}
                 alt={bookmark.title}
                 className="w-full h-full object-cover transition-transform duration-500 group-hover/card:scale-[1.04]"
                 loading="lazy"

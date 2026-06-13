@@ -3,7 +3,7 @@
 import { useState, useEffect } from "react";
 import { Sparkles, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
+import { cn, resolveImageUrl } from "@/lib/utils";
 
 interface RelatedItem {
   id: string;
@@ -72,7 +72,7 @@ export function RelatedBookmarks({ bookmarkId, onSelect }: RelatedBookmarksProps
             {item.coverImage && (
               <div className="aspect-[2.2/1] rounded-lg overflow-hidden bg-[var(--muted)] mb-2">
                 <img
-                  src={item.coverImage.startsWith("//") ? `https:${item.coverImage}` : item.coverImage}
+                  src={resolveImageUrl(item.coverImage, item.url) ?? undefined}
                   alt=""
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   referrerPolicy="no-referrer"

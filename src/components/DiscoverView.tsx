@@ -4,6 +4,7 @@ import { useState, useEffect } from "react";
 import { Compass, TrendingUp, Target, Sparkles, ExternalLink } from "lucide-react";
 import { motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
+import { resolveImageUrl } from "@/lib/utils";
 import type { BookmarkData } from "@/lib/types";
 
 interface DiscoverViewProps {
@@ -90,7 +91,7 @@ export function DiscoverView({ onCardClick }: DiscoverViewProps) {
               {bm.coverImage && (
                 <div className="aspect-[2.2/1] bg-[var(--muted)] overflow-hidden">
                   <img
-                    src={bm.coverImage.startsWith("//") ? `https:${bm.coverImage}` : bm.coverImage}
+                    src={resolveImageUrl(bm.coverImage, bm.url) ?? undefined}
                     alt={bm.title}
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
                     referrerPolicy="no-referrer"

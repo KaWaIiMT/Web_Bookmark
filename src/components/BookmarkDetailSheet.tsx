@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
 import { RelatedBookmarks } from "@/components/RelatedBookmarks";
 import { toast } from "sonner";
-import { cn } from "@/lib/utils";
+import { cn, resolveImageUrl } from "@/lib/utils";
 import type { BookmarkData, ArchiveData } from "@/lib/types";
 
 const STATUS_CONFIG: Record<string, { label: string; icon: typeof Clock; className: string; dotColor: string }> = {
@@ -228,7 +228,7 @@ export function BookmarkDetailSheet({
             {bookmark.coverImage && (
               <div className="aspect-video bg-[var(--muted)] shrink-0">
                 <img
-                  src={bookmark.coverImage.startsWith("//") ? `https:${bookmark.coverImage}` : bookmark.coverImage}
+                  src={resolveImageUrl(bookmark.coverImage, bookmark.url) ?? undefined}
                   alt={bookmark.title}
                   className="w-full h-full object-cover"
                   referrerPolicy="no-referrer"

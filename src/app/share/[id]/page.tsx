@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { resolveImageUrl } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -65,7 +66,7 @@ export default async function SharePage({ params }: Props) {
               <div className="flex items-start gap-4">
                 {bookmark.coverImage && (
                   <img
-                    src={bookmark.coverImage.startsWith("//") ? `https:${bookmark.coverImage}` : bookmark.coverImage}
+                    src={resolveImageUrl(bookmark.coverImage, bookmark.url) ?? undefined}
                     alt=""
                     className="w-20 h-14 rounded-xl object-cover shrink-0"
                     referrerPolicy="no-referrer"

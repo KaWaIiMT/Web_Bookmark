@@ -4,6 +4,7 @@ import { notFound } from "next/navigation";
 import Link from "next/link";
 import { ExternalLink } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
+import { resolveImageUrl } from "@/lib/utils";
 
 type Props = {
   params: Promise<{ token: string }>;
@@ -72,9 +73,7 @@ export default async function ShareBookmarkPage({ params }: Props) {
           <div className="mb-8">
             <img
               src={
-                bookmark.coverImage.startsWith("//")
-                  ? `https:${bookmark.coverImage}`
-                  : bookmark.coverImage
+                resolveImageUrl(bookmark.coverImage, bookmark.url) ?? undefined
               }
               alt={bookmark.title}
               className="w-full rounded-2xl object-cover max-h-96"
