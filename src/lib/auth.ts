@@ -34,8 +34,42 @@ export const authConfig: NextAuthConfig = {
     signIn: "/login",
   },
   callbacks: {
+    async signIn({ user, account, profile }) {
+      // When signing in with GitHub, sync profile data (name, avatar)
+      // This handles the case where allowDangerousEmailAccountLinking
+      // links a GitHub account to an existing user with empty profile
+      if (account?.provider === "github" && profile) {
+        const ghProfile = profile as {
+          name?: string;
+          avatar_url?: string;
+          login?: string;
+        };
+        // Only update if the user record is missing data
+        const needsName = !user.name || user.name === "";
+        const needsImage = !user.image || user.image === "";
+        if (needsName || needsImage) {
+          await prisma.user.update({
+            where: { id: user.id! },
+            data: {
+              ...(needsName && {
+                name: ghProfile.name || ghProfile.login || user.name,
+              }),
+              ...(needsImage && {
+                image: ghProfile.avatar_url || user.image,
+              }),
+            },
+          });
+        }
+      }
+      return true;
+    },
     session({ session, user }) {
-      if (session.user) { session.user.id = user.id; }
+      if (session.user) {
+        session.user.id = user.id;
+        session.user.name = user.name;
+        session.user.image = user.image;
+        session.user.email = user.email || "";
+      }
       return session;
     },
   },
