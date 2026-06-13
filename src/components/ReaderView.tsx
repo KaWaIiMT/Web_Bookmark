@@ -67,6 +67,7 @@ export function ReaderView({ bookmark, open, onClose }: ReaderViewProps) {
   const [activeColor, setActiveColor] = useState<string | null>(null);
   const [readingProgress, setReadingProgress] = useState(0);
   const contentRef = useRef<HTMLDivElement>(null);
+  const bodyRef = useRef<HTMLDivElement>(null);
 
   // Fetch readable content
   useEffect(() => {
@@ -205,16 +206,6 @@ export function ReaderView({ bookmark, open, onClose }: ReaderViewProps) {
 
   useLayoutEffect(() => {
     if (!contentRef.current || annotations.length === 0) return;
-
-    // Only apply if annotations actually changed
-    const currentIds = new Set(annotations.map((a) => a.id));
-    if (
-      currentIds.size === appliedIdsRef.current.size &&
-      [...currentIds].every((id) => appliedIdsRef.current.has(id))
-    ) {
-      return; // Same annotations, skip
-    }
-    appliedIdsRef.current = currentIds;
 
     // Use rAF to batch DOM operations
     requestAnimationFrame(() => {
@@ -360,15 +351,13 @@ export function ReaderView({ bookmark, open, onClose }: ReaderViewProps) {
   }, [annotations, readable]);
 
   // Render highlight spans in content
-  const renderContent = () => {
-    if (!readable?.content) return null;
-    return (
-      <div
-        className="reader-content prose prose-base dark:prose-invert max-w-none font-sans text-[15px] leading-relaxed"
-        dangerouslySetInnerHTML={{ __html: readable.content }}
-      />
-    );
-  };
+  // Render content into a raw ref — React re-renders won't destroy highlights
+  useEffect(() => {
+    if (!bodyRef.current || !readable?.content) return;
+    bodyRef.current.innerHTML = readable.content;
+    // Reset applied IDs when content changes
+    appliedIdsRef.current = new Set();
+  }, [readable?.content]);
 
   if (!bookmark) return null;
 
@@ -498,7 +487,11 @@ export function ReaderView({ bookmark, open, onClose }: ReaderViewProps) {
                       </p>
                     )}
                   </div>
-                  <div data-reader-body>{renderContent()}</div>
+                  <div
+                    data-reader-body
+                    ref={bodyRef}
+                    className="reader-content prose prose-base dark:prose-invert max-w-none font-sans text-[15px] leading-relaxed"
+                  />
                 </div>
               )}
             </div>
