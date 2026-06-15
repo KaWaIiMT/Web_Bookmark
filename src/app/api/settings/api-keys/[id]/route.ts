@@ -15,10 +15,20 @@ export async function GET(
 
     const { id } = await params;
 
-    const apiKey = await prisma.apiKey.findUnique({
-      where: { id },
-      select: { id: true, userId: true, encryptedKey: true },
-    });
+    // Fallback: if encryptedKey column doesn't exist, try without it
+    let apiKey;
+    try {
+      apiKey = await prisma.apiKey.findUnique({
+        where: { id },
+        select: { id: true, userId: true, encryptedKey: true },
+      });
+    } catch {
+      apiKey = await prisma.apiKey.findUnique({
+        where: { id },
+        select: { id: true, userId: true },
+      });
+    }
+
     if (!apiKey) {
       return NextResponse.json({ error: "Not found" }, { status: 404 });
     }
@@ -26,11 +36,12 @@ export async function GET(
       return NextResponse.json({ error: "Unauthorized" }, { status: 403 });
     }
 
-    if (!apiKey.encryptedKey) {
+    const encrypted = (apiKey as any).encryptedKey;
+    if (!encrypted) {
       return NextResponse.json({ error: "This key was created before the encryption feature. Please generate a new key." }, { status: 400 });
     }
 
-    return NextResponse.json({ key: decryptApiKey(apiKey.encryptedKey) });
+    return NextResponse.json({ key: decryptApiKey(encrypted) });
   } catch (err) {
     console.error("GET /api/settings/api-keys/[id] error:", err);
     return NextResponse.json({ error: "Failed to reveal API key" }, { status: 500 });
