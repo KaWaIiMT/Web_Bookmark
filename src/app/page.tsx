@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback } from "react";
 import { useSession, signOut } from "next-auth/react";
-import { Search, Inbox, Brain, Menu, LogOut, Settings, LogIn } from "lucide-react";
+import { Search, Inbox, Brain, Menu, LogOut, Settings, LogIn, Shield } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -291,6 +291,16 @@ export default function Home() {
 
           {/* Auth area */}
           <div className="flex items-center gap-2 shrink-0">
+            {/* Admin — only visible to admins */}
+            {session?.user?.isAdmin && (
+              <button
+                onClick={() => router.push("/admin")}
+                className="p-1.5 rounded-xl hover:bg-[var(--accent)]/10 text-[var(--accent)]/60 hover:text-[var(--accent)] transition-colors"
+                title="管理面板"
+              >
+                <Shield className="h-4 w-4" />
+              </button>
+            )}
             {/* Settings */}
             <button
               onClick={() => router.push("/settings")}

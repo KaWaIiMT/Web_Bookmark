@@ -2,6 +2,7 @@ import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
+import { isAdmin } from "@/lib/admin";
 import type { NextAuthConfig } from "next-auth";
 
 const proxyUrl = process.env.HTTP_PROXY || process.env.HTTPS_PROXY;
@@ -63,12 +64,13 @@ export const authConfig: NextAuthConfig = {
       }
       return true;
     },
-    session({ session, user }) {
+    async session({ session, user }) {
       if (session.user) {
         session.user.id = user.id;
         session.user.name = user.name;
         session.user.image = user.image;
         session.user.email = user.email || "";
+        session.user.isAdmin = await isAdmin(user.id);
       }
       return session;
     },

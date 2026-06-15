@@ -132,3 +132,20 @@ export interface WeeklyReportData {
   };
   weekLabel: string;
 }
+
+export interface AdminUserData {
+  id: string;
+  name: string | null;
+  email: string | null;
+  image: string | null;
+  createdAt: string;
+  bookmarkCount: number;
+  githubAccount: {
+    provider: string;
+    providerAccountId: string;
+  } | null;
+}
+
+export interface AdminUsersResponse {
+  data: AdminUserData[];
+}
