@@ -1,4 +1,4 @@
-import { getApiKey, getApiUrl } from "@/lib/storage";
+import { getApiKey } from "@/lib/storage";
 
 /**
  * Background Service Worker
@@ -6,6 +6,8 @@ import { getApiKey, getApiUrl } from "@/lib/storage";
  * - Silent bookmark keyboard shortcut (Ctrl+Shift+S)
  * - Tab info relay for popup/sidepanel
  */
+
+const BASE_URL = "https://ccjproject.top";
 
 export default defineBackground(() => {
   // --- Context Menu ---
@@ -33,7 +35,6 @@ export default defineBackground(() => {
     if (!url) return;
 
     try {
-      // Only pass title if it's a real page title, not a URL
       const pageTitle =
         info.menuItemId === "bookmark-page" && tab?.title && !tab.title.startsWith("http")
           ? tab.title
@@ -71,7 +72,6 @@ export default defineBackground(() => {
     ) return;
 
     try {
-      // Only pass title if it's a real page title
       const pageTitle = tab.title && !tab.title.startsWith("http") ? tab.title : undefined;
       await doSilentBookmark(tab.url, pageTitle);
       browser.action.setBadgeText({ text: "✓", tabId: tab.id! });
@@ -116,7 +116,6 @@ export default defineBackground(() => {
 
 /** Call the MarkBox API to create a bookmark silently */
 async function doSilentBookmark(url: string, title?: string) {
-  const baseUrl = await getApiUrl();
   const apiKey = await getApiKey();
 
   const headers: Record<string, string> = {
@@ -129,7 +128,7 @@ async function doSilentBookmark(url: string, title?: string) {
   const body: Record<string, string> = { url };
   if (title) body.title = title;
 
-  const res = await fetch(`${baseUrl}/api/bookmarks`, {
+  const res = await fetch(`${BASE_URL}/api/bookmarks`, {
     method: "POST",
     headers,
     body: JSON.stringify(body),
