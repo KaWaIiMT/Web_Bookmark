@@ -43,3 +43,43 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
+
+// PATCH: Rename a category
+export async function PATCH(req: NextRequest) {
+  try {
+    const { id, name } = await req.json();
+    if (!id || !name || typeof name !== "string") {
+      return NextResponse.json({ error: "id and name are required" }, { status: 400 });
+    }
+    const slug = name.toLowerCase().replace(/\s+/g, "-");
+    const category = await prisma.category.update({
+      where: { id },
+      data: { name, slug },
+    });
+    return NextResponse.json(category);
+  } catch (err) {
+    console.error("PATCH /api/categories error:", err);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}
+
+// DELETE: Remove a category (bookmarks become uncategorized)
+export async function DELETE(req: NextRequest) {
+  try {
+    const { searchParams } = new URL(req.url);
+    const id = searchParams.get("id");
+    if (!id) return NextResponse.json({ error: "id is required" }, { status: 400 });
+
+    // Unlink bookmarks first (set categoryId to null)
+    await prisma.bookmark.updateMany({
+      where: { categoryId: id },
+      data: { categoryId: null },
+    });
+
+    await prisma.category.delete({ where: { id } });
+    return NextResponse.json({ success: true });
+  } catch (err) {
+    console.error("DELETE /api/categories error:", err);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}

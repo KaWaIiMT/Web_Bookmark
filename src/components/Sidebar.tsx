@@ -17,7 +17,7 @@ import {
 } from "@dnd-kit/sortable";
 import { CSS } from "@dnd-kit/utilities";
 import { motion } from "motion/react";
-import { Bookmark, Hash, Clock, BookOpen, CheckCircle2, Archive, Plus, Folder, GripVertical, Pin, PinOff } from "lucide-react";
+import { Bookmark, Hash, Clock, BookOpen, CheckCircle2, Archive, Plus, Folder, GripVertical, Pin, PinOff, Pencil, Trash2 } from "lucide-react";
 import { Zap } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { ScrollArea } from "@/components/ui/scroll-area";
@@ -26,6 +26,20 @@ import { cn } from "@/lib/utils";
 import { toast } from "sonner";
 import { SmartCollectionBlock } from "@/components/SmartCollectionBlock";
 import { playPickup, playDrop } from "@/lib/sounds";
+import {
+  ContextMenu,
+  ContextMenuContent,
+  ContextMenuItem,
+  ContextMenuTrigger,
+} from "@/components/ui/context-menu";
+import {
+  Dialog,
+  DialogContent,
+  DialogDescription,
+  DialogHeader,
+  DialogTitle,
+  DialogFooter,
+} from "@/components/ui/dialog";
 import type { CategoryData } from "@/lib/types";
 
 interface CollectionData {
@@ -66,6 +80,8 @@ function SortableCategoryItem({
   isDragging,
   onClick,
   onTogglePin,
+  onRename,
+  onDelete,
 }: {
   cat: CategoryData;
   isActive: boolean;
@@ -73,9 +89,11 @@ function SortableCategoryItem({
   isDragging: boolean;
   onClick: () => void;
   onTogglePin: () => void;
+  onRename: (id: string, name: string) => void;
+  onDelete: (id: string) => void;
 }) {
   const { attributes, listeners, setNodeRef, transform, transition } =
-    useSortable({ id: cat.id });
+    useSortable({ id: cat.id, disabled: isPinned });
 
   const style = {
     transform: CSS.Transform.toString(transform),
@@ -109,47 +127,78 @@ function SortableCategoryItem({
         }}
         whileTap={{ scale: 0.97, transition: { duration: 0.1 } }}
       >
-        <div className="flex items-center gap-1 group/item relative">
-          {/* Drag handle */}
-          <button
-            {...listeners}
-            className="shrink-0 p-0.5 rounded-md text-[var(--foreground)]/0 group-hover/item:text-[var(--foreground)]/15 hover:text-[var(--foreground)]/30 transition-all cursor-grab active:cursor-grabbing"
-            onClick={(e) => e.stopPropagation()}
-            title="拖拽排序"
-          >
-            <GripVertical className="h-3.5 w-3.5" />
-          </button>
+        <ContextMenu>
+          <ContextMenuTrigger className="block w-full">
+            <div className="flex items-center gap-1 group/item relative">
+              {/* Drag handle — hidden for pinned items */}
+              {!isPinned && (
+                <button
+                  {...listeners}
+                  className="shrink-0 p-0.5 rounded-md text-[var(--foreground)]/0 group-hover/item:text-[var(--foreground)]/15 hover:text-[var(--foreground)]/30 transition-all cursor-grab active:cursor-grabbing"
+                  onClick={(e) => e.stopPropagation()}
+                  title="拖拽排序"
+                >
+                  <GripVertical className="h-3.5 w-3.5" />
+                </button>
+              )}
 
-          {/* Main button */}
-          <button
-            onClick={onClick}
-            className={cn(
-              "flex-1 flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] transition-all duration-200 justify-between",
-              isActive
-                ? "bg-[var(--sidebar-item)] text-[var(--foreground)] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
-                : "text-[var(--foreground)]/45 hover:bg-[var(--sidebar-item-hover)] hover:text-[var(--foreground)]/65"
-            )}
-          >
-            <span className="flex items-center gap-2.5">
-              <Hash className="h-3.5 w-3.5 opacity-50" />
-              {cat.name}
-            </span>
-          </button>
+              {/* Main button */}
+              <button
+                onClick={onClick}
+                className={cn(
+                  "flex-1 flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] transition-all duration-200 justify-between",
+                  isActive
+                    ? "bg-[var(--sidebar-item)] text-[var(--foreground)] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
+                    : "text-[var(--foreground)]/45 hover:bg-[var(--sidebar-item-hover)] hover:text-[var(--foreground)]/65"
+                )}
+              >
+                <span className="flex items-center gap-2.5">
+                  <Hash className="h-3.5 w-3.5 opacity-50" />
+                  {cat.name}
+                </span>
+              </button>
 
-          {/* Pin toggle */}
-          <button
-            onClick={(e) => { e.stopPropagation(); onTogglePin(); }}
-            className={cn(
-              "shrink-0 p-0.5 rounded-md transition-all",
-              isPinned
-                ? "text-[var(--accent)] opacity-100"
-                : "text-[var(--foreground)]/0 group-hover/item:text-[var(--foreground)]/15 hover:text-[var(--accent)]/60 opacity-0 group-hover/item:opacity-100"
-            )}
-            title={isPinned ? "取消置顶" : "置顶"}
-          >
-            {isPinned ? <Pin className="h-3 w-3" /> : <PinOff className="h-3 w-3" />}
-          </button>
-        </div>
+              {/* Pin toggle */}
+              <button
+                onClick={(e) => { e.stopPropagation(); onTogglePin(); }}
+                className={cn(
+                  "shrink-0 p-0.5 rounded-md transition-all",
+                  isPinned
+                    ? "text-[var(--accent)] opacity-100"
+                    : "text-[var(--foreground)]/0 group-hover/item:text-[var(--foreground)]/15 hover:text-[var(--accent)]/60 opacity-0 group-hover/item:opacity-100"
+                )}
+                title={isPinned ? "取消置顶" : "置顶"}
+              >
+                {isPinned ? <Pin className="h-3 w-3" /> : <PinOff className="h-3 w-3" />}
+              </button>
+            </div>
+          </ContextMenuTrigger>
+          <ContextMenuContent className="w-44 rounded-2xl border border-[var(--border)] shadow-[0_12px_40px_rgba(0,0,0,0.08)] bg-[var(--popover)] backdrop-blur-xl p-1.5">
+            <ContextMenuItem
+              onClick={() => {
+                const name = prompt("编辑分类名称", cat.name);
+                if (name && name.trim() && name.trim() !== cat.name) {
+                  onRename(cat.id, name.trim());
+                }
+              }}
+              className="text-[13px] rounded-xl cursor-pointer font-sans"
+            >
+              <Pencil className="h-3.5 w-3.5 mr-2.5 opacity-50" />
+              重命名
+            </ContextMenuItem>
+            <ContextMenuItem
+              onClick={() => {
+                if (confirm(`确定删除「${cat.name}」分类？书签不会被删除，只是取消关联。`)) {
+                  onDelete(cat.id);
+                }
+              }}
+              className="text-[13px] rounded-xl text-red-400 hover:text-red-500 cursor-pointer font-sans"
+            >
+              <Trash2 className="h-3.5 w-3.5 mr-2.5" />
+              删除分类
+            </ContextMenuItem>
+          </ContextMenuContent>
+        </ContextMenu>
       </motion.div>
     </div>
   );
@@ -281,6 +330,33 @@ export function Sidebar({
     } catch {
       toast.error("排序失败");
       fetchCategories(); // rollback
+    }
+  };
+
+  const handleRenameCategory = async (id: string, name: string) => {
+    try {
+      const res = await fetch("/api/categories", {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ id, name }),
+      });
+      if (!res.ok) throw new Error();
+      toast.success("分类已重命名");
+      fetchCategories();
+    } catch {
+      toast.error("重命名失败");
+    }
+  };
+
+  const handleDeleteCategory = async (id: string) => {
+    try {
+      const res = await fetch(`/api/categories?id=${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error();
+      toast.success("分类已删除");
+      if (activeCategory === id) onCategoryChange(null);
+      fetchCategories();
+    } catch {
+      toast.error("删除失败");
     }
   };
 
@@ -442,6 +518,8 @@ export function Sidebar({
                       isDragging={draggingId === cat.id}
                       onClick={() => onCategoryChange(cat.id)}
                       onTogglePin={() => togglePin(cat.id)}
+                      onRename={handleRenameCategory}
+                      onDelete={handleDeleteCategory}
                     />
                   ))}
                 </div>
