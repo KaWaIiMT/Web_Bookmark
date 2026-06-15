@@ -16,6 +16,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { ScrollArea } from "@/components/ui/scroll-area";
 import type { ExtractedMetadata, AICategorizeOutput, BookmarkData } from "@/lib/types";
 import { resolveImageUrl } from "@/lib/utils";
+import { toast } from "sonner";
 
 interface AddBookmarkDialogProps {
   open: boolean;
@@ -67,6 +68,20 @@ export function AddBookmarkDialog({
   const handleSubmit = async () => {
     if (!url.trim()) return;
     setError("");
+
+    // Step 0: Quick duplicate check before proceeding
+    try {
+      const dupRes = await fetch(`/api/bookmarks?url=${encodeURIComponent(url.trim())}&limit=1`);
+      if (dupRes.ok) {
+        const dupData = await dupRes.json();
+        if (dupData.data?.length > 0) {
+          setError("你已经收藏过这个网页了");
+          toast.error("你已经收藏过这个网页了");
+          return;
+        }
+      }
+    } catch { /* proceed anyway if check fails */ }
+
     setStep("extracting");
 
     try {
@@ -118,7 +133,6 @@ export function AddBookmarkDialog({
     setStep("saving");
     try {
       if (editBookmark) {
-        // Edit mode — PATCH existing bookmark
         const res = await fetch(`/api/bookmarks/${editBookmark.id}`, {
           method: "PATCH",
           headers: { "Content-Type": "application/json" },
@@ -133,7 +147,6 @@ export function AddBookmarkDialog({
           throw new Error(err.error || "更新失败");
         }
       } else {
-        // Create mode — POST new bookmark
         const res = await fetch("/api/bookmarks", {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -149,16 +162,60 @@ export function AddBookmarkDialog({
           throw new Error(err.error || "保存失败");
         }
 
-        // Dispatch event to refresh category list
         window.dispatchEvent(new CustomEvent("bookmark-created"));
       }
 
       onCreated();
       reset();
       onOpenChange(false);
+      toast.success(editBookmark ? "书签已更新" : "书签已收藏，AI 正在后台整理");
     } catch (err) {
       setError(err instanceof Error ? err.message : "保存失败");
       setStep("preview");
+    }
+  };
+
+  // Direct background save: skip preview, close dialog immediately
+  const handleQuickSave = async () => {
+    if (!url.trim()) return;
+    setError("");
+
+    // Quick duplicate check
+    try {
+      const dupRes = await fetch(`/api/bookmarks?url=${encodeURIComponent(url.trim())}&limit=1`);
+      if (dupRes.ok) {
+        const dupData = await dupRes.json();
+        if (dupData.data?.length > 0) {
+          setError("你已经收藏过这个网页了");
+          toast.error("你已经收藏过这个网页了");
+          return;
+        }
+      }
+    } catch { /* proceed */ }
+
+    // Close dialog immediately
+    reset();
+    onOpenChange(false);
+    toast.loading("正在收藏...", { duration: 2000 });
+
+    try {
+      const res = await fetch("/api/bookmarks", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ url: url.trim() }),
+      });
+
+      if (!res.ok) {
+        const err = await res.json();
+        toast.error(err.error || "收藏失败");
+        return;
+      }
+
+      window.dispatchEvent(new CustomEvent("bookmark-created"));
+      onCreated();
+      toast.success("书签已收藏，AI 正在后台整理");
+    } catch {
+      toast.error("收藏失败，请重试");
     }
   };
 
@@ -216,19 +273,34 @@ export function AddBookmarkDialog({
                     placeholder="粘贴 URL..."
                     value={url}
                     onChange={(e) => setUrl(e.target.value)}
-                    onKeyDown={(e) => e.key === "Enter" && handleSubmit()}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" && e.ctrlKey) handleSubmit(); // Ctrl+Enter = preview
+                      else if (e.key === "Enter") handleQuickSave();      // Enter = quick save
+                    }}
                     className="pl-10 h-11 rounded-xl bg-[var(--muted)] border-0 focus:bg-[var(--card)] focus:ring-2 focus:ring-[var(--accent)]/15 text-[14px] font-sans"
                     autoFocus
                   />
                 </div>
                 <Button
-                  onClick={handleSubmit}
+                  onClick={handleQuickSave}
                   disabled={!url.trim()}
                   className="rounded-xl bg-[var(--accent)] hover:bg-[var(--accent)]/85 text-white h-11 px-5 text-[13px] font-medium shadow-none transition-all duration-200 hover:shadow-[0_4px_16px_rgba(183,110,75,0.2)] font-sans"
                 >
                   收藏
                 </Button>
+                <Button
+                  onClick={handleSubmit}
+                  disabled={!url.trim()}
+                  variant="ghost"
+                  className="rounded-xl text-[13px] text-[var(--foreground)]/30 hover:text-[var(--foreground)]/50 hover:bg-[var(--muted)] font-sans h-11 px-4"
+                  title="预览并编辑后再保存"
+                >
+                  预览
+                </Button>
               </div>
+              <p className="text-[10px] text-[var(--foreground)]/15 font-sans text-center">
+                直接点"收藏"后台保存 · 点"预览"编辑后再保存 · Ctrl+Enter 也可预览
+              </p>
               {error && (
                 <p className="text-[13px] text-red-400 bg-red-50 dark:bg-red-500/5 rounded-xl px-3 py-2 font-sans">{error}</p>
               )}

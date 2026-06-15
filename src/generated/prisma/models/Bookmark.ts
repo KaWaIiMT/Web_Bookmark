@@ -419,6 +419,7 @@ export type BookmarkWhereInput = {
   pathItems?: Prisma.LearningPathItemListRelationFilter
   trackers?: Prisma.HotnessTrackerListRelationFilter
   annotations?: Prisma.AnnotationListRelationFilter
+  comparisons?: Prisma.ComparisonBookmarkListRelationFilter
 }
 
 export type BookmarkOrderByWithRelationInput = {
@@ -458,6 +459,7 @@ export type BookmarkOrderByWithRelationInput = {
   pathItems?: Prisma.LearningPathItemOrderByRelationAggregateInput
   trackers?: Prisma.HotnessTrackerOrderByRelationAggregateInput
   annotations?: Prisma.AnnotationOrderByRelationAggregateInput
+  comparisons?: Prisma.ComparisonBookmarkOrderByRelationAggregateInput
 }
 
 export type BookmarkWhereUniqueInput = Prisma.AtLeast<{
@@ -500,6 +502,7 @@ export type BookmarkWhereUniqueInput = Prisma.AtLeast<{
   pathItems?: Prisma.LearningPathItemListRelationFilter
   trackers?: Prisma.HotnessTrackerListRelationFilter
   annotations?: Prisma.AnnotationListRelationFilter
+  comparisons?: Prisma.ComparisonBookmarkListRelationFilter
 }, "id" | "shareToken">
 
 export type BookmarkOrderByWithAggregationInput = {
@@ -609,6 +612,7 @@ export type BookmarkCreateInput = {
   pathItems?: Prisma.LearningPathItemCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkUncheckedCreateInput = {
@@ -646,6 +650,7 @@ export type BookmarkUncheckedCreateInput = {
   pathItems?: Prisma.LearningPathItemUncheckedCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerUncheckedCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkUpdateInput = {
@@ -683,6 +688,7 @@ export type BookmarkUpdateInput = {
   pathItems?: Prisma.LearningPathItemUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkUncheckedUpdateInput = {
@@ -720,6 +726,7 @@ export type BookmarkUncheckedUpdateInput = {
   pathItems?: Prisma.LearningPathItemUncheckedUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUncheckedUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkCreateManyInput = {
@@ -1103,6 +1110,20 @@ export type BookmarkUpdateOneRequiredWithoutAnnotationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.BookmarkUpdateToOneWithWhereWithoutAnnotationsInput, Prisma.BookmarkUpdateWithoutAnnotationsInput>, Prisma.BookmarkUncheckedUpdateWithoutAnnotationsInput>
 }
 
+export type BookmarkCreateNestedOneWithoutComparisonsInput = {
+  create?: Prisma.XOR<Prisma.BookmarkCreateWithoutComparisonsInput, Prisma.BookmarkUncheckedCreateWithoutComparisonsInput>
+  connectOrCreate?: Prisma.BookmarkCreateOrConnectWithoutComparisonsInput
+  connect?: Prisma.BookmarkWhereUniqueInput
+}
+
+export type BookmarkUpdateOneRequiredWithoutComparisonsNestedInput = {
+  create?: Prisma.XOR<Prisma.BookmarkCreateWithoutComparisonsInput, Prisma.BookmarkUncheckedCreateWithoutComparisonsInput>
+  connectOrCreate?: Prisma.BookmarkCreateOrConnectWithoutComparisonsInput
+  upsert?: Prisma.BookmarkUpsertWithoutComparisonsInput
+  connect?: Prisma.BookmarkWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.BookmarkUpdateToOneWithWhereWithoutComparisonsInput, Prisma.BookmarkUpdateWithoutComparisonsInput>, Prisma.BookmarkUncheckedUpdateWithoutComparisonsInput>
+}
+
 export type BookmarkCreateWithoutUserInput = {
   id?: string
   url: string
@@ -1137,6 +1158,7 @@ export type BookmarkCreateWithoutUserInput = {
   pathItems?: Prisma.LearningPathItemCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkUncheckedCreateWithoutUserInput = {
@@ -1173,6 +1195,7 @@ export type BookmarkUncheckedCreateWithoutUserInput = {
   pathItems?: Prisma.LearningPathItemUncheckedCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerUncheckedCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkCreateOrConnectWithoutUserInput = {
@@ -1269,6 +1292,7 @@ export type BookmarkCreateWithoutTagsInput = {
   pathItems?: Prisma.LearningPathItemCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkUncheckedCreateWithoutTagsInput = {
@@ -1305,6 +1329,7 @@ export type BookmarkUncheckedCreateWithoutTagsInput = {
   pathItems?: Prisma.LearningPathItemUncheckedCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerUncheckedCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkCreateOrConnectWithoutTagsInput = {
@@ -1357,6 +1382,7 @@ export type BookmarkUpdateWithoutTagsInput = {
   pathItems?: Prisma.LearningPathItemUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkUncheckedUpdateWithoutTagsInput = {
@@ -1393,6 +1419,7 @@ export type BookmarkUncheckedUpdateWithoutTagsInput = {
   pathItems?: Prisma.LearningPathItemUncheckedUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUncheckedUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkCreateWithoutCategoryInput = {
@@ -1429,6 +1456,7 @@ export type BookmarkCreateWithoutCategoryInput = {
   pathItems?: Prisma.LearningPathItemCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkUncheckedCreateWithoutCategoryInput = {
@@ -1465,6 +1493,7 @@ export type BookmarkUncheckedCreateWithoutCategoryInput = {
   pathItems?: Prisma.LearningPathItemUncheckedCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerUncheckedCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkCreateOrConnectWithoutCategoryInput = {
@@ -1526,6 +1555,7 @@ export type BookmarkCreateWithoutCollectionsInput = {
   pathItems?: Prisma.LearningPathItemCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkUncheckedCreateWithoutCollectionsInput = {
@@ -1562,6 +1592,7 @@ export type BookmarkUncheckedCreateWithoutCollectionsInput = {
   pathItems?: Prisma.LearningPathItemUncheckedCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerUncheckedCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkCreateOrConnectWithoutCollectionsInput = {
@@ -1614,6 +1645,7 @@ export type BookmarkUpdateWithoutCollectionsInput = {
   pathItems?: Prisma.LearningPathItemUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkUncheckedUpdateWithoutCollectionsInput = {
@@ -1650,6 +1682,7 @@ export type BookmarkUncheckedUpdateWithoutCollectionsInput = {
   pathItems?: Prisma.LearningPathItemUncheckedUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUncheckedUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkCreateWithoutTrackersInput = {
@@ -1686,6 +1719,7 @@ export type BookmarkCreateWithoutTrackersInput = {
   collections?: Prisma.CollectionBookmarkCreateNestedManyWithoutBookmarkInput
   pathItems?: Prisma.LearningPathItemCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkUncheckedCreateWithoutTrackersInput = {
@@ -1722,6 +1756,7 @@ export type BookmarkUncheckedCreateWithoutTrackersInput = {
   collections?: Prisma.CollectionBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
   pathItems?: Prisma.LearningPathItemUncheckedCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkCreateOrConnectWithoutTrackersInput = {
@@ -1774,6 +1809,7 @@ export type BookmarkUpdateWithoutTrackersInput = {
   collections?: Prisma.CollectionBookmarkUpdateManyWithoutBookmarkNestedInput
   pathItems?: Prisma.LearningPathItemUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkUncheckedUpdateWithoutTrackersInput = {
@@ -1810,6 +1846,7 @@ export type BookmarkUncheckedUpdateWithoutTrackersInput = {
   collections?: Prisma.CollectionBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
   pathItems?: Prisma.LearningPathItemUncheckedUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkCreateWithoutPathItemsInput = {
@@ -1846,6 +1883,7 @@ export type BookmarkCreateWithoutPathItemsInput = {
   collections?: Prisma.CollectionBookmarkCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkUncheckedCreateWithoutPathItemsInput = {
@@ -1882,6 +1920,7 @@ export type BookmarkUncheckedCreateWithoutPathItemsInput = {
   collections?: Prisma.CollectionBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerUncheckedCreateNestedManyWithoutBookmarkInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkCreateOrConnectWithoutPathItemsInput = {
@@ -1934,6 +1973,7 @@ export type BookmarkUpdateWithoutPathItemsInput = {
   collections?: Prisma.CollectionBookmarkUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkUncheckedUpdateWithoutPathItemsInput = {
@@ -1970,6 +2010,7 @@ export type BookmarkUncheckedUpdateWithoutPathItemsInput = {
   collections?: Prisma.CollectionBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUncheckedUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkCreateWithoutAnnotationsInput = {
@@ -2006,6 +2047,7 @@ export type BookmarkCreateWithoutAnnotationsInput = {
   collections?: Prisma.CollectionBookmarkCreateNestedManyWithoutBookmarkInput
   pathItems?: Prisma.LearningPathItemCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkUncheckedCreateWithoutAnnotationsInput = {
@@ -2042,6 +2084,7 @@ export type BookmarkUncheckedCreateWithoutAnnotationsInput = {
   collections?: Prisma.CollectionBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
   pathItems?: Prisma.LearningPathItemUncheckedCreateNestedManyWithoutBookmarkInput
   trackers?: Prisma.HotnessTrackerUncheckedCreateNestedManyWithoutBookmarkInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
 }
 
 export type BookmarkCreateOrConnectWithoutAnnotationsInput = {
@@ -2094,6 +2137,7 @@ export type BookmarkUpdateWithoutAnnotationsInput = {
   collections?: Prisma.CollectionBookmarkUpdateManyWithoutBookmarkNestedInput
   pathItems?: Prisma.LearningPathItemUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkUncheckedUpdateWithoutAnnotationsInput = {
@@ -2130,6 +2174,171 @@ export type BookmarkUncheckedUpdateWithoutAnnotationsInput = {
   collections?: Prisma.CollectionBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
   pathItems?: Prisma.LearningPathItemUncheckedUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUncheckedUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
+}
+
+export type BookmarkCreateWithoutComparisonsInput = {
+  id?: string
+  url: string
+  title: string
+  description?: string | null
+  coverImage?: string | null
+  favicon?: string | null
+  siteName?: string | null
+  contentType?: string
+  metadata?: string | null
+  aiSummary?: string | null
+  shareToken?: string | null
+  embedding?: string | null
+  status?: string
+  archiveHtml?: string | null
+  archiveText?: string | null
+  archivedAt?: Date | string | null
+  archiveStatus?: string | null
+  linkStatus?: string | null
+  linkStatusCode?: number | null
+  linkCheckedAt?: Date | string | null
+  linkCheckError?: string | null
+  linkRedirectUrl?: string | null
+  linkTitleChanged?: boolean | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  readAt?: Date | string | null
+  order?: number
+  category?: Prisma.CategoryCreateNestedOneWithoutBookmarksInput
+  user: Prisma.UserCreateNestedOneWithoutBookmarksInput
+  tags?: Prisma.BookmarkTagCreateNestedManyWithoutBookmarkInput
+  collections?: Prisma.CollectionBookmarkCreateNestedManyWithoutBookmarkInput
+  pathItems?: Prisma.LearningPathItemCreateNestedManyWithoutBookmarkInput
+  trackers?: Prisma.HotnessTrackerCreateNestedManyWithoutBookmarkInput
+  annotations?: Prisma.AnnotationCreateNestedManyWithoutBookmarkInput
+}
+
+export type BookmarkUncheckedCreateWithoutComparisonsInput = {
+  id?: string
+  url: string
+  title: string
+  description?: string | null
+  coverImage?: string | null
+  favicon?: string | null
+  siteName?: string | null
+  contentType?: string
+  metadata?: string | null
+  aiSummary?: string | null
+  shareToken?: string | null
+  embedding?: string | null
+  status?: string
+  categoryId?: string | null
+  userId: string
+  archiveHtml?: string | null
+  archiveText?: string | null
+  archivedAt?: Date | string | null
+  archiveStatus?: string | null
+  linkStatus?: string | null
+  linkStatusCode?: number | null
+  linkCheckedAt?: Date | string | null
+  linkCheckError?: string | null
+  linkRedirectUrl?: string | null
+  linkTitleChanged?: boolean | null
+  createdAt?: Date | string
+  updatedAt?: Date | string
+  readAt?: Date | string | null
+  order?: number
+  tags?: Prisma.BookmarkTagUncheckedCreateNestedManyWithoutBookmarkInput
+  collections?: Prisma.CollectionBookmarkUncheckedCreateNestedManyWithoutBookmarkInput
+  pathItems?: Prisma.LearningPathItemUncheckedCreateNestedManyWithoutBookmarkInput
+  trackers?: Prisma.HotnessTrackerUncheckedCreateNestedManyWithoutBookmarkInput
+  annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutBookmarkInput
+}
+
+export type BookmarkCreateOrConnectWithoutComparisonsInput = {
+  where: Prisma.BookmarkWhereUniqueInput
+  create: Prisma.XOR<Prisma.BookmarkCreateWithoutComparisonsInput, Prisma.BookmarkUncheckedCreateWithoutComparisonsInput>
+}
+
+export type BookmarkUpsertWithoutComparisonsInput = {
+  update: Prisma.XOR<Prisma.BookmarkUpdateWithoutComparisonsInput, Prisma.BookmarkUncheckedUpdateWithoutComparisonsInput>
+  create: Prisma.XOR<Prisma.BookmarkCreateWithoutComparisonsInput, Prisma.BookmarkUncheckedCreateWithoutComparisonsInput>
+  where?: Prisma.BookmarkWhereInput
+}
+
+export type BookmarkUpdateToOneWithWhereWithoutComparisonsInput = {
+  where?: Prisma.BookmarkWhereInput
+  data: Prisma.XOR<Prisma.BookmarkUpdateWithoutComparisonsInput, Prisma.BookmarkUncheckedUpdateWithoutComparisonsInput>
+}
+
+export type BookmarkUpdateWithoutComparisonsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favicon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentType?: Prisma.StringFieldUpdateOperationsInput | string
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  embedding?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  archiveHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archiveText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archiveStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkStatusCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  linkCheckedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  linkCheckError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkRedirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkTitleChanged?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  category?: Prisma.CategoryUpdateOneWithoutBookmarksNestedInput
+  user?: Prisma.UserUpdateOneRequiredWithoutBookmarksNestedInput
+  tags?: Prisma.BookmarkTagUpdateManyWithoutBookmarkNestedInput
+  collections?: Prisma.CollectionBookmarkUpdateManyWithoutBookmarkNestedInput
+  pathItems?: Prisma.LearningPathItemUpdateManyWithoutBookmarkNestedInput
+  trackers?: Prisma.HotnessTrackerUpdateManyWithoutBookmarkNestedInput
+  annotations?: Prisma.AnnotationUpdateManyWithoutBookmarkNestedInput
+}
+
+export type BookmarkUncheckedUpdateWithoutComparisonsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  url?: Prisma.StringFieldUpdateOperationsInput | string
+  title?: Prisma.StringFieldUpdateOperationsInput | string
+  description?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  coverImage?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  favicon?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  siteName?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  contentType?: Prisma.StringFieldUpdateOperationsInput | string
+  metadata?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  aiSummary?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  shareToken?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  embedding?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  status?: Prisma.StringFieldUpdateOperationsInput | string
+  categoryId?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  userId?: Prisma.StringFieldUpdateOperationsInput | string
+  archiveHtml?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archiveText?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  archivedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  archiveStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkStatus?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkStatusCode?: Prisma.NullableIntFieldUpdateOperationsInput | number | null
+  linkCheckedAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  linkCheckError?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkRedirectUrl?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  linkTitleChanged?: Prisma.NullableBoolFieldUpdateOperationsInput | boolean | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  updatedAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  readAt?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  order?: Prisma.IntFieldUpdateOperationsInput | number
+  tags?: Prisma.BookmarkTagUncheckedUpdateManyWithoutBookmarkNestedInput
+  collections?: Prisma.CollectionBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
+  pathItems?: Prisma.LearningPathItemUncheckedUpdateManyWithoutBookmarkNestedInput
+  trackers?: Prisma.HotnessTrackerUncheckedUpdateManyWithoutBookmarkNestedInput
+  annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkCreateManyUserInput = {
@@ -2197,6 +2406,7 @@ export type BookmarkUpdateWithoutUserInput = {
   pathItems?: Prisma.LearningPathItemUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkUncheckedUpdateWithoutUserInput = {
@@ -2233,6 +2443,7 @@ export type BookmarkUncheckedUpdateWithoutUserInput = {
   pathItems?: Prisma.LearningPathItemUncheckedUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUncheckedUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkUncheckedUpdateManyWithoutUserInput = {
@@ -2331,6 +2542,7 @@ export type BookmarkUpdateWithoutCategoryInput = {
   pathItems?: Prisma.LearningPathItemUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkUncheckedUpdateWithoutCategoryInput = {
@@ -2367,6 +2579,7 @@ export type BookmarkUncheckedUpdateWithoutCategoryInput = {
   pathItems?: Prisma.LearningPathItemUncheckedUpdateManyWithoutBookmarkNestedInput
   trackers?: Prisma.HotnessTrackerUncheckedUpdateManyWithoutBookmarkNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutBookmarkNestedInput
+  comparisons?: Prisma.ComparisonBookmarkUncheckedUpdateManyWithoutBookmarkNestedInput
 }
 
 export type BookmarkUncheckedUpdateManyWithoutCategoryInput = {
@@ -2411,6 +2624,7 @@ export type BookmarkCountOutputType = {
   pathItems: number
   trackers: number
   annotations: number
+  comparisons: number
 }
 
 export type BookmarkCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2419,6 +2633,7 @@ export type BookmarkCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensio
   pathItems?: boolean | BookmarkCountOutputTypeCountPathItemsArgs
   trackers?: boolean | BookmarkCountOutputTypeCountTrackersArgs
   annotations?: boolean | BookmarkCountOutputTypeCountAnnotationsArgs
+  comparisons?: boolean | BookmarkCountOutputTypeCountComparisonsArgs
 }
 
 /**
@@ -2466,6 +2681,13 @@ export type BookmarkCountOutputTypeCountAnnotationsArgs<ExtArgs extends runtime.
   where?: Prisma.AnnotationWhereInput
 }
 
+/**
+ * BookmarkCountOutputType without action
+ */
+export type BookmarkCountOutputTypeCountComparisonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ComparisonBookmarkWhereInput
+}
+
 
 export type BookmarkSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -2504,6 +2726,7 @@ export type BookmarkSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs
   pathItems?: boolean | Prisma.Bookmark$pathItemsArgs<ExtArgs>
   trackers?: boolean | Prisma.Bookmark$trackersArgs<ExtArgs>
   annotations?: boolean | Prisma.Bookmark$annotationsArgs<ExtArgs>
+  comparisons?: boolean | Prisma.Bookmark$comparisonsArgs<ExtArgs>
   _count?: boolean | Prisma.BookmarkCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["bookmark"]>
 
@@ -2616,6 +2839,7 @@ export type BookmarkInclude<ExtArgs extends runtime.Types.Extensions.InternalArg
   pathItems?: boolean | Prisma.Bookmark$pathItemsArgs<ExtArgs>
   trackers?: boolean | Prisma.Bookmark$trackersArgs<ExtArgs>
   annotations?: boolean | Prisma.Bookmark$annotationsArgs<ExtArgs>
+  comparisons?: boolean | Prisma.Bookmark$comparisonsArgs<ExtArgs>
   _count?: boolean | Prisma.BookmarkCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type BookmarkIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -2637,6 +2861,7 @@ export type $BookmarkPayload<ExtArgs extends runtime.Types.Extensions.InternalAr
     pathItems: Prisma.$LearningPathItemPayload<ExtArgs>[]
     trackers: Prisma.$HotnessTrackerPayload<ExtArgs>[]
     annotations: Prisma.$AnnotationPayload<ExtArgs>[]
+    comparisons: Prisma.$ComparisonBookmarkPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -3069,6 +3294,7 @@ export interface Prisma__BookmarkClient<T, Null = never, ExtArgs extends runtime
   pathItems<T extends Prisma.Bookmark$pathItemsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Bookmark$pathItemsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LearningPathItemPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   trackers<T extends Prisma.Bookmark$trackersArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Bookmark$trackersArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$HotnessTrackerPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   annotations<T extends Prisma.Bookmark$annotationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Bookmark$annotationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnotationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  comparisons<T extends Prisma.Bookmark$comparisonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.Bookmark$comparisonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ComparisonBookmarkPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -3662,6 +3888,30 @@ export type Bookmark$annotationsArgs<ExtArgs extends runtime.Types.Extensions.In
   take?: number
   skip?: number
   distinct?: Prisma.AnnotationScalarFieldEnum | Prisma.AnnotationScalarFieldEnum[]
+}
+
+/**
+ * Bookmark.comparisons
+ */
+export type Bookmark$comparisonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the ComparisonBookmark
+   */
+  select?: Prisma.ComparisonBookmarkSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the ComparisonBookmark
+   */
+  omit?: Prisma.ComparisonBookmarkOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ComparisonBookmarkInclude<ExtArgs> | null
+  where?: Prisma.ComparisonBookmarkWhereInput
+  orderBy?: Prisma.ComparisonBookmarkOrderByWithRelationInput | Prisma.ComparisonBookmarkOrderByWithRelationInput[]
+  cursor?: Prisma.ComparisonBookmarkWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ComparisonBookmarkScalarFieldEnum | Prisma.ComparisonBookmarkScalarFieldEnum[]
 }
 
 /**

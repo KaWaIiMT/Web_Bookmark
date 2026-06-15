@@ -206,6 +206,7 @@ export type UserWhereInput = {
   learningPaths?: Prisma.LearningPathListRelationFilter
   apiKeys?: Prisma.ApiKeyListRelationFilter
   annotations?: Prisma.AnnotationListRelationFilter
+  comparisons?: Prisma.ComparisonListRelationFilter
 }
 
 export type UserOrderByWithRelationInput = {
@@ -224,6 +225,7 @@ export type UserOrderByWithRelationInput = {
   learningPaths?: Prisma.LearningPathOrderByRelationAggregateInput
   apiKeys?: Prisma.ApiKeyOrderByRelationAggregateInput
   annotations?: Prisma.AnnotationOrderByRelationAggregateInput
+  comparisons?: Prisma.ComparisonOrderByRelationAggregateInput
 }
 
 export type UserWhereUniqueInput = Prisma.AtLeast<{
@@ -245,6 +247,7 @@ export type UserWhereUniqueInput = Prisma.AtLeast<{
   learningPaths?: Prisma.LearningPathListRelationFilter
   apiKeys?: Prisma.ApiKeyListRelationFilter
   annotations?: Prisma.AnnotationListRelationFilter
+  comparisons?: Prisma.ComparisonListRelationFilter
 }, "id" | "email">
 
 export type UserOrderByWithAggregationInput = {
@@ -289,6 +292,7 @@ export type UserCreateInput = {
   learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateInput = {
@@ -307,6 +311,7 @@ export type UserUncheckedCreateInput = {
   learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserUpdateInput = {
@@ -325,6 +330,7 @@ export type UserUpdateInput = {
   learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateInput = {
@@ -343,6 +349,7 @@ export type UserUncheckedUpdateInput = {
   learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateManyInput = {
@@ -538,6 +545,20 @@ export type UserUpdateOneRequiredWithoutAnnotationsNestedInput = {
   update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutAnnotationsInput, Prisma.UserUpdateWithoutAnnotationsInput>, Prisma.UserUncheckedUpdateWithoutAnnotationsInput>
 }
 
+export type UserCreateNestedOneWithoutComparisonsInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutComparisonsInput, Prisma.UserUncheckedCreateWithoutComparisonsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutComparisonsInput
+  connect?: Prisma.UserWhereUniqueInput
+}
+
+export type UserUpdateOneRequiredWithoutComparisonsNestedInput = {
+  create?: Prisma.XOR<Prisma.UserCreateWithoutComparisonsInput, Prisma.UserUncheckedCreateWithoutComparisonsInput>
+  connectOrCreate?: Prisma.UserCreateOrConnectWithoutComparisonsInput
+  upsert?: Prisma.UserUpsertWithoutComparisonsInput
+  connect?: Prisma.UserWhereUniqueInput
+  update?: Prisma.XOR<Prisma.XOR<Prisma.UserUpdateToOneWithWhereWithoutComparisonsInput, Prisma.UserUpdateWithoutComparisonsInput>, Prisma.UserUncheckedUpdateWithoutComparisonsInput>
+}
+
 export type UserCreateWithoutAccountsInput = {
   id?: string
   name?: string | null
@@ -553,6 +574,7 @@ export type UserCreateWithoutAccountsInput = {
   learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAccountsInput = {
@@ -570,6 +592,7 @@ export type UserUncheckedCreateWithoutAccountsInput = {
   learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAccountsInput = {
@@ -603,6 +626,7 @@ export type UserUpdateWithoutAccountsInput = {
   learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAccountsInput = {
@@ -620,6 +644,7 @@ export type UserUncheckedUpdateWithoutAccountsInput = {
   learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutSessionsInput = {
@@ -637,6 +662,7 @@ export type UserCreateWithoutSessionsInput = {
   learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutSessionsInput = {
@@ -654,6 +680,7 @@ export type UserUncheckedCreateWithoutSessionsInput = {
   learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutSessionsInput = {
@@ -687,6 +714,7 @@ export type UserUpdateWithoutSessionsInput = {
   learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutSessionsInput = {
@@ -704,6 +732,7 @@ export type UserUncheckedUpdateWithoutSessionsInput = {
   learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutBookmarksInput = {
@@ -721,6 +750,7 @@ export type UserCreateWithoutBookmarksInput = {
   learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutBookmarksInput = {
@@ -738,6 +768,7 @@ export type UserUncheckedCreateWithoutBookmarksInput = {
   learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutBookmarksInput = {
@@ -771,6 +802,7 @@ export type UserUpdateWithoutBookmarksInput = {
   learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutBookmarksInput = {
@@ -788,6 +820,7 @@ export type UserUncheckedUpdateWithoutBookmarksInput = {
   learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutTagsInput = {
@@ -805,6 +838,7 @@ export type UserCreateWithoutTagsInput = {
   learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutTagsInput = {
@@ -822,6 +856,7 @@ export type UserUncheckedCreateWithoutTagsInput = {
   learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutTagsInput = {
@@ -855,6 +890,7 @@ export type UserUpdateWithoutTagsInput = {
   learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutTagsInput = {
@@ -872,6 +908,7 @@ export type UserUncheckedUpdateWithoutTagsInput = {
   learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutCollectionsInput = {
@@ -889,6 +926,7 @@ export type UserCreateWithoutCollectionsInput = {
   learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutCollectionsInput = {
@@ -906,6 +944,7 @@ export type UserUncheckedCreateWithoutCollectionsInput = {
   learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutCollectionsInput = {
@@ -939,6 +978,7 @@ export type UserUpdateWithoutCollectionsInput = {
   learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutCollectionsInput = {
@@ -956,6 +996,7 @@ export type UserUncheckedUpdateWithoutCollectionsInput = {
   learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutApiKeysInput = {
@@ -973,6 +1014,7 @@ export type UserCreateWithoutApiKeysInput = {
   tags?: Prisma.TagCreateNestedManyWithoutUserInput
   learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutApiKeysInput = {
@@ -990,6 +1032,7 @@ export type UserUncheckedCreateWithoutApiKeysInput = {
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
   learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutApiKeysInput = {
@@ -1023,6 +1066,7 @@ export type UserUpdateWithoutApiKeysInput = {
   tags?: Prisma.TagUpdateManyWithoutUserNestedInput
   learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutApiKeysInput = {
@@ -1040,6 +1084,7 @@ export type UserUncheckedUpdateWithoutApiKeysInput = {
   tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
   learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutLearningPathsInput = {
@@ -1057,6 +1102,7 @@ export type UserCreateWithoutLearningPathsInput = {
   tags?: Prisma.TagCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutLearningPathsInput = {
@@ -1074,6 +1120,7 @@ export type UserUncheckedCreateWithoutLearningPathsInput = {
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
   annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutLearningPathsInput = {
@@ -1107,6 +1154,7 @@ export type UserUpdateWithoutLearningPathsInput = {
   tags?: Prisma.TagUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutLearningPathsInput = {
@@ -1124,6 +1172,7 @@ export type UserUncheckedUpdateWithoutLearningPathsInput = {
   tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
   annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUncheckedUpdateManyWithoutUserNestedInput
 }
 
 export type UserCreateWithoutAnnotationsInput = {
@@ -1141,6 +1190,7 @@ export type UserCreateWithoutAnnotationsInput = {
   tags?: Prisma.TagCreateNestedManyWithoutUserInput
   learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonCreateNestedManyWithoutUserInput
 }
 
 export type UserUncheckedCreateWithoutAnnotationsInput = {
@@ -1158,6 +1208,7 @@ export type UserUncheckedCreateWithoutAnnotationsInput = {
   tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
   learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
   apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  comparisons?: Prisma.ComparisonUncheckedCreateNestedManyWithoutUserInput
 }
 
 export type UserCreateOrConnectWithoutAnnotationsInput = {
@@ -1191,6 +1242,7 @@ export type UserUpdateWithoutAnnotationsInput = {
   tags?: Prisma.TagUpdateManyWithoutUserNestedInput
   learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUpdateManyWithoutUserNestedInput
 }
 
 export type UserUncheckedUpdateWithoutAnnotationsInput = {
@@ -1208,6 +1260,95 @@ export type UserUncheckedUpdateWithoutAnnotationsInput = {
   tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
   learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
   apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  comparisons?: Prisma.ComparisonUncheckedUpdateManyWithoutUserNestedInput
+}
+
+export type UserCreateWithoutComparisonsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  password?: string | null
+  image?: string | null
+  createdAt?: Date | string
+  accounts?: Prisma.AccountCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyCreateNestedManyWithoutUserInput
+  annotations?: Prisma.AnnotationCreateNestedManyWithoutUserInput
+}
+
+export type UserUncheckedCreateWithoutComparisonsInput = {
+  id?: string
+  name?: string | null
+  email?: string | null
+  emailVerified?: Date | string | null
+  password?: string | null
+  image?: string | null
+  createdAt?: Date | string
+  accounts?: Prisma.AccountUncheckedCreateNestedManyWithoutUserInput
+  sessions?: Prisma.SessionUncheckedCreateNestedManyWithoutUserInput
+  bookmarks?: Prisma.BookmarkUncheckedCreateNestedManyWithoutUserInput
+  collections?: Prisma.CollectionUncheckedCreateNestedManyWithoutUserInput
+  tags?: Prisma.TagUncheckedCreateNestedManyWithoutUserInput
+  learningPaths?: Prisma.LearningPathUncheckedCreateNestedManyWithoutUserInput
+  apiKeys?: Prisma.ApiKeyUncheckedCreateNestedManyWithoutUserInput
+  annotations?: Prisma.AnnotationUncheckedCreateNestedManyWithoutUserInput
+}
+
+export type UserCreateOrConnectWithoutComparisonsInput = {
+  where: Prisma.UserWhereUniqueInput
+  create: Prisma.XOR<Prisma.UserCreateWithoutComparisonsInput, Prisma.UserUncheckedCreateWithoutComparisonsInput>
+}
+
+export type UserUpsertWithoutComparisonsInput = {
+  update: Prisma.XOR<Prisma.UserUpdateWithoutComparisonsInput, Prisma.UserUncheckedUpdateWithoutComparisonsInput>
+  create: Prisma.XOR<Prisma.UserCreateWithoutComparisonsInput, Prisma.UserUncheckedCreateWithoutComparisonsInput>
+  where?: Prisma.UserWhereInput
+}
+
+export type UserUpdateToOneWithWhereWithoutComparisonsInput = {
+  where?: Prisma.UserWhereInput
+  data: Prisma.XOR<Prisma.UserUpdateWithoutComparisonsInput, Prisma.UserUncheckedUpdateWithoutComparisonsInput>
+}
+
+export type UserUpdateWithoutComparisonsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUpdateManyWithoutUserNestedInput
+  annotations?: Prisma.AnnotationUpdateManyWithoutUserNestedInput
+}
+
+export type UserUncheckedUpdateWithoutComparisonsInput = {
+  id?: Prisma.StringFieldUpdateOperationsInput | string
+  name?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  email?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  emailVerified?: Prisma.NullableDateTimeFieldUpdateOperationsInput | Date | string | null
+  password?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  image?: Prisma.NullableStringFieldUpdateOperationsInput | string | null
+  createdAt?: Prisma.DateTimeFieldUpdateOperationsInput | Date | string
+  accounts?: Prisma.AccountUncheckedUpdateManyWithoutUserNestedInput
+  sessions?: Prisma.SessionUncheckedUpdateManyWithoutUserNestedInput
+  bookmarks?: Prisma.BookmarkUncheckedUpdateManyWithoutUserNestedInput
+  collections?: Prisma.CollectionUncheckedUpdateManyWithoutUserNestedInput
+  tags?: Prisma.TagUncheckedUpdateManyWithoutUserNestedInput
+  learningPaths?: Prisma.LearningPathUncheckedUpdateManyWithoutUserNestedInput
+  apiKeys?: Prisma.ApiKeyUncheckedUpdateManyWithoutUserNestedInput
+  annotations?: Prisma.AnnotationUncheckedUpdateManyWithoutUserNestedInput
 }
 
 
@@ -1224,6 +1365,7 @@ export type UserCountOutputType = {
   learningPaths: number
   apiKeys: number
   annotations: number
+  comparisons: number
 }
 
 export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
@@ -1235,6 +1377,7 @@ export type UserCountOutputTypeSelect<ExtArgs extends runtime.Types.Extensions.I
   learningPaths?: boolean | UserCountOutputTypeCountLearningPathsArgs
   apiKeys?: boolean | UserCountOutputTypeCountApiKeysArgs
   annotations?: boolean | UserCountOutputTypeCountAnnotationsArgs
+  comparisons?: boolean | UserCountOutputTypeCountComparisonsArgs
 }
 
 /**
@@ -1303,6 +1446,13 @@ export type UserCountOutputTypeCountAnnotationsArgs<ExtArgs extends runtime.Type
   where?: Prisma.AnnotationWhereInput
 }
 
+/**
+ * UserCountOutputType without action
+ */
+export type UserCountOutputTypeCountComparisonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  where?: Prisma.ComparisonWhereInput
+}
+
 
 export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = runtime.Types.Extensions.GetSelect<{
   id?: boolean
@@ -1320,6 +1470,7 @@ export type UserSelect<ExtArgs extends runtime.Types.Extensions.InternalArgs = r
   learningPaths?: boolean | Prisma.User$learningPathsArgs<ExtArgs>
   apiKeys?: boolean | Prisma.User$apiKeysArgs<ExtArgs>
   annotations?: boolean | Prisma.User$annotationsArgs<ExtArgs>
+  comparisons?: boolean | Prisma.User$comparisonsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }, ExtArgs["result"]["user"]>
 
@@ -1363,6 +1514,7 @@ export type UserInclude<ExtArgs extends runtime.Types.Extensions.InternalArgs = 
   learningPaths?: boolean | Prisma.User$learningPathsArgs<ExtArgs>
   apiKeys?: boolean | Prisma.User$apiKeysArgs<ExtArgs>
   annotations?: boolean | Prisma.User$annotationsArgs<ExtArgs>
+  comparisons?: boolean | Prisma.User$comparisonsArgs<ExtArgs>
   _count?: boolean | Prisma.UserCountOutputTypeDefaultArgs<ExtArgs>
 }
 export type UserIncludeCreateManyAndReturn<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {}
@@ -1379,6 +1531,7 @@ export type $UserPayload<ExtArgs extends runtime.Types.Extensions.InternalArgs =
     learningPaths: Prisma.$LearningPathPayload<ExtArgs>[]
     apiKeys: Prisma.$ApiKeyPayload<ExtArgs>[]
     annotations: Prisma.$AnnotationPayload<ExtArgs>[]
+    comparisons: Prisma.$ComparisonPayload<ExtArgs>[]
   }
   scalars: runtime.Types.Extensions.GetPayloadResult<{
     id: string
@@ -1790,6 +1943,7 @@ export interface Prisma__UserClient<T, Null = never, ExtArgs extends runtime.Typ
   learningPaths<T extends Prisma.User$learningPathsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$learningPathsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$LearningPathPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   apiKeys<T extends Prisma.User$apiKeysArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$apiKeysArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ApiKeyPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   annotations<T extends Prisma.User$annotationsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$annotationsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$AnnotationPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
+  comparisons<T extends Prisma.User$comparisonsArgs<ExtArgs> = {}>(args?: Prisma.Subset<T, Prisma.User$comparisonsArgs<ExtArgs>>): Prisma.PrismaPromise<runtime.Types.Result.GetResult<Prisma.$ComparisonPayload<ExtArgs>, T, "findMany", GlobalOmitOptions> | Null>
   /**
    * Attaches callbacks for the resolution and/or rejection of the Promise.
    * @param onfulfilled The callback to execute when the Promise is resolved.
@@ -2406,6 +2560,30 @@ export type User$annotationsArgs<ExtArgs extends runtime.Types.Extensions.Intern
   take?: number
   skip?: number
   distinct?: Prisma.AnnotationScalarFieldEnum | Prisma.AnnotationScalarFieldEnum[]
+}
+
+/**
+ * User.comparisons
+ */
+export type User$comparisonsArgs<ExtArgs extends runtime.Types.Extensions.InternalArgs = runtime.Types.Extensions.DefaultArgs> = {
+  /**
+   * Select specific fields to fetch from the Comparison
+   */
+  select?: Prisma.ComparisonSelect<ExtArgs> | null
+  /**
+   * Omit specific fields from the Comparison
+   */
+  omit?: Prisma.ComparisonOmit<ExtArgs> | null
+  /**
+   * Choose, which related nodes to fetch as well
+   */
+  include?: Prisma.ComparisonInclude<ExtArgs> | null
+  where?: Prisma.ComparisonWhereInput
+  orderBy?: Prisma.ComparisonOrderByWithRelationInput | Prisma.ComparisonOrderByWithRelationInput[]
+  cursor?: Prisma.ComparisonWhereUniqueInput
+  take?: number
+  skip?: number
+  distinct?: Prisma.ComparisonScalarFieldEnum | Prisma.ComparisonScalarFieldEnum[]
 }
 
 /**

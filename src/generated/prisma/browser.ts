@@ -102,3 +102,13 @@ export type PathNote = Prisma.PathNoteModel
  * 
  */
 export type Annotation = Prisma.AnnotationModel
+/**
+ * Model Comparison
+ * 
+ */
+export type Comparison = Prisma.ComparisonModel
+/**
+ * Model ComparisonBookmark
+ * 
+ */
+export type ComparisonBookmark = Prisma.ComparisonBookmarkModel

@@ -3,6 +3,35 @@ import { prisma } from "@/lib/prisma";
 import { auth } from "@/lib/auth";
 import { analyzeComparison } from "@/lib/comparisons";
 
+// GET: List comparison history
+export async function GET(req: NextRequest) {
+  try {
+    const session = await auth();
+    if (!session?.user?.id) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    const userId = session.user.id;
+
+    const comparisons = await prisma.comparison.findMany({
+      where: { userId },
+      include: {
+        bookmarks: {
+          include: {
+            bookmark: {
+              select: { id: true, title: true, url: true, favicon: true, siteName: true, coverImage: true },
+            },
+          },
+        },
+      },
+      orderBy: { createdAt: "desc" },
+      take: 20,
+    });
+
+    return NextResponse.json({ data: comparisons });
+  } catch (err) {
+    console.error("Fetch comparisons error:", err);
+    return NextResponse.json({ error: "Failed to fetch comparisons" }, { status: 500 });
+  }
+}
+
 // POST: Analyze comparison of 2-5 bookmarks
 export async function POST(req: NextRequest) {
   try {
@@ -38,15 +67,30 @@ export async function POST(req: NextRequest) {
     }));
 
     const result = await analyzeComparison(formatted);
+
+    // Save to comparison history
+    const comparison = await prisma.comparison.create({
+      data: {
+        userId,
+        result: JSON.stringify(result),
+        bookmarks: {
+          create: bookmarkIds.map((id) => ({ bookmarkId: id })),
+        },
+      },
+      include: {
+        bookmarks: {
+          include: {
+            bookmark: {
+              select: { id: true, title: true, url: true, favicon: true, siteName: true, coverImage: true },
+            },
+          },
+        },
+      },
+    });
+
     return NextResponse.json({
-      bookmarks: bookmarks.map((b) => ({
-        id: b.id,
-        title: b.title,
-        url: b.url,
-        favicon: b.favicon,
-        siteName: b.siteName,
-        coverImage: b.coverImage,
-      })),
+      id: comparison.id,
+      bookmarks: comparison.bookmarks.map((cb) => cb.bookmark),
       ...result,
     });
   } catch (err) {

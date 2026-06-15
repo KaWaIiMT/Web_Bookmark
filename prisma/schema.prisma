@@ -22,6 +22,7 @@ model User {
   learningPaths LearningPath[]
   apiKeys       ApiKey[]
   annotations   Annotation[]
+  comparisons   Comparison[]
   createdAt     DateTime     @default(now())
 }
 
@@ -82,6 +83,7 @@ model Bookmark {
   pathItems     LearningPathItem[]
   trackers      HotnessTracker[]
   annotations   Annotation[]
+  comparisons   ComparisonBookmark[]
   archiveHtml   String?
   archiveText   String?
   archivedAt    DateTime?
@@ -251,4 +253,22 @@ model Annotation {
   bookmark Bookmark @relation(fields: [bookmarkId], references: [id], onDelete: Cascade)
 
   @@index([userId, bookmarkId])
+}
+
+model Comparison {
+  id        String       @id @default(cuid())
+  userId    String
+  user      User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  result    String       // JSON blob of ComparisonResult
+  createdAt DateTime     @default(now())
+  bookmarks ComparisonBookmark[]
+}
+
+model ComparisonBookmark {
+  comparisonId String
+  bookmarkId   String
+  comparison   Comparison @relation(fields: [comparisonId], references: [id], onDelete: Cascade)
+  bookmark     Bookmark   @relation(fields: [bookmarkId], references: [id], onDelete: Cascade)
+
+  @@id([comparisonId, bookmarkId])
 }

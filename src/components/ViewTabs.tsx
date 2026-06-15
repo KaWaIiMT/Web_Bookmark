@@ -7,7 +7,6 @@ import {
   DropdownMenuContent,
   DropdownMenuItem,
   DropdownMenuTrigger,
-  DropdownMenuSeparator,
 } from "@/components/ui/dropdown-menu";
 import type { ViewType } from "@/lib/types";
 
@@ -33,9 +32,6 @@ interface ViewTabsProps {
 }
 
 export function ViewTabs({ activeView, onViewChange }: ViewTabsProps) {
-  const isPrimary = PRIMARY_TABS.some((t) => t.value === activeView);
-  const activeMore = MORE_TABS.find((t) => t.value === activeView);
-
   return (
     <div className="flex items-center gap-0.5 p-1 rounded-xl bg-[var(--muted)] shrink-0">
       {PRIMARY_TABS.map(({ value, label, icon: Icon }) => (
@@ -54,24 +50,17 @@ export function ViewTabs({ activeView, onViewChange }: ViewTabsProps) {
         </button>
       ))}
 
-      {/* More dropdown */}
+      {/* More dropdown — always shows ellipsis */}
       <DropdownMenu>
         <DropdownMenuTrigger
           className={cn(
             "flex items-center gap-1.5 px-3 py-1.5 rounded-[10px] text-[12px] font-medium transition-all font-sans whitespace-nowrap outline-none",
-            !isPrimary
+            MORE_TABS.some((t) => t.value === activeView)
               ? "bg-[var(--card)] text-[var(--foreground)] shadow-[0_1px_3px_rgba(0,0,0,0.06)]"
               : "text-[var(--muted-foreground)] hover:text-[var(--foreground)]"
           )}
         >
-          {!isPrimary && activeMore ? (
-            <>
-              <activeMore.icon className="h-3.5 w-3.5" />
-              <span className="hidden sm:inline">{activeMore.label}</span>
-            </>
-          ) : (
-            <MoreHorizontal className="h-4 w-4" />
-          )}
+          <MoreHorizontal className="h-4 w-4" />
         </DropdownMenuTrigger>
         <DropdownMenuContent
           align="end"

@@ -67,7 +67,9 @@ export const ModelName = {
   LearningPath: 'LearningPath',
   LearningPathItem: 'LearningPathItem',
   PathNote: 'PathNote',
-  Annotation: 'Annotation'
+  Annotation: 'Annotation',
+  Comparison: 'Comparison',
+  ComparisonBookmark: 'ComparisonBookmark'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -316,6 +318,24 @@ export const AnnotationScalarFieldEnum = {
 } as const
 
 export type AnnotationScalarFieldEnum = (typeof AnnotationScalarFieldEnum)[keyof typeof AnnotationScalarFieldEnum]
+
+
+export const ComparisonScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  result: 'result',
+  createdAt: 'createdAt'
+} as const
+
+export type ComparisonScalarFieldEnum = (typeof ComparisonScalarFieldEnum)[keyof typeof ComparisonScalarFieldEnum]
+
+
+export const ComparisonBookmarkScalarFieldEnum = {
+  comparisonId: 'comparisonId',
+  bookmarkId: 'bookmarkId'
+} as const
+
+export type ComparisonBookmarkScalarFieldEnum = (typeof ComparisonBookmarkScalarFieldEnum)[keyof typeof ComparisonBookmarkScalarFieldEnum]
 
 
 export const SortOrder = {

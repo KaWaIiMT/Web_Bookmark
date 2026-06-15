@@ -400,7 +400,9 @@ export const ModelName = {
   LearningPath: 'LearningPath',
   LearningPathItem: 'LearningPathItem',
   PathNote: 'PathNote',
-  Annotation: 'Annotation'
+  Annotation: 'Annotation',
+  Comparison: 'Comparison',
+  ComparisonBookmark: 'ComparisonBookmark'
 } as const
 
 export type ModelName = (typeof ModelName)[keyof typeof ModelName]
@@ -416,7 +418,7 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
     omit: GlobalOmitOptions
   }
   meta: {
-    modelProps: "user" | "account" | "session" | "verificationToken" | "bookmark" | "tag" | "bookmarkTag" | "category" | "collection" | "collectionBookmark" | "hotnessTracker" | "hotnessSnapshot" | "apiKey" | "learningPath" | "learningPathItem" | "pathNote" | "annotation"
+    modelProps: "user" | "account" | "session" | "verificationToken" | "bookmark" | "tag" | "bookmarkTag" | "category" | "collection" | "collectionBookmark" | "hotnessTracker" | "hotnessSnapshot" | "apiKey" | "learningPath" | "learningPathItem" | "pathNote" | "annotation" | "comparison" | "comparisonBookmark"
     txIsolationLevel: TransactionIsolationLevel
   }
   model: {
@@ -1678,6 +1680,154 @@ export type TypeMap<ExtArgs extends runtime.Types.Extensions.InternalArgs = runt
         }
       }
     }
+    Comparison: {
+      payload: Prisma.$ComparisonPayload<ExtArgs>
+      fields: Prisma.ComparisonFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ComparisonFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ComparisonFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonPayload>
+        }
+        findFirst: {
+          args: Prisma.ComparisonFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ComparisonFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonPayload>
+        }
+        findMany: {
+          args: Prisma.ComparisonFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonPayload>[]
+        }
+        create: {
+          args: Prisma.ComparisonCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonPayload>
+        }
+        createMany: {
+          args: Prisma.ComparisonCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ComparisonCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonPayload>[]
+        }
+        delete: {
+          args: Prisma.ComparisonDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonPayload>
+        }
+        update: {
+          args: Prisma.ComparisonUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonPayload>
+        }
+        deleteMany: {
+          args: Prisma.ComparisonDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ComparisonUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ComparisonUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonPayload>[]
+        }
+        upsert: {
+          args: Prisma.ComparisonUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonPayload>
+        }
+        aggregate: {
+          args: Prisma.ComparisonAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateComparison>
+        }
+        groupBy: {
+          args: Prisma.ComparisonGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ComparisonGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ComparisonCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ComparisonCountAggregateOutputType> | number
+        }
+      }
+    }
+    ComparisonBookmark: {
+      payload: Prisma.$ComparisonBookmarkPayload<ExtArgs>
+      fields: Prisma.ComparisonBookmarkFieldRefs
+      operations: {
+        findUnique: {
+          args: Prisma.ComparisonBookmarkFindUniqueArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonBookmarkPayload> | null
+        }
+        findUniqueOrThrow: {
+          args: Prisma.ComparisonBookmarkFindUniqueOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonBookmarkPayload>
+        }
+        findFirst: {
+          args: Prisma.ComparisonBookmarkFindFirstArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonBookmarkPayload> | null
+        }
+        findFirstOrThrow: {
+          args: Prisma.ComparisonBookmarkFindFirstOrThrowArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonBookmarkPayload>
+        }
+        findMany: {
+          args: Prisma.ComparisonBookmarkFindManyArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonBookmarkPayload>[]
+        }
+        create: {
+          args: Prisma.ComparisonBookmarkCreateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonBookmarkPayload>
+        }
+        createMany: {
+          args: Prisma.ComparisonBookmarkCreateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        createManyAndReturn: {
+          args: Prisma.ComparisonBookmarkCreateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonBookmarkPayload>[]
+        }
+        delete: {
+          args: Prisma.ComparisonBookmarkDeleteArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonBookmarkPayload>
+        }
+        update: {
+          args: Prisma.ComparisonBookmarkUpdateArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonBookmarkPayload>
+        }
+        deleteMany: {
+          args: Prisma.ComparisonBookmarkDeleteManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateMany: {
+          args: Prisma.ComparisonBookmarkUpdateManyArgs<ExtArgs>
+          result: BatchPayload
+        }
+        updateManyAndReturn: {
+          args: Prisma.ComparisonBookmarkUpdateManyAndReturnArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonBookmarkPayload>[]
+        }
+        upsert: {
+          args: Prisma.ComparisonBookmarkUpsertArgs<ExtArgs>
+          result: runtime.Types.Utils.PayloadToResult<Prisma.$ComparisonBookmarkPayload>
+        }
+        aggregate: {
+          args: Prisma.ComparisonBookmarkAggregateArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.AggregateComparisonBookmark>
+        }
+        groupBy: {
+          args: Prisma.ComparisonBookmarkGroupByArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ComparisonBookmarkGroupByOutputType>[]
+        }
+        count: {
+          args: Prisma.ComparisonBookmarkCountArgs<ExtArgs>
+          result: runtime.Types.Utils.Optional<Prisma.ComparisonBookmarkCountAggregateOutputType> | number
+        }
+      }
+    }
   }
 } & {
   other: {
@@ -1949,6 +2099,24 @@ export const AnnotationScalarFieldEnum = {
 export type AnnotationScalarFieldEnum = (typeof AnnotationScalarFieldEnum)[keyof typeof AnnotationScalarFieldEnum]
 
 
+export const ComparisonScalarFieldEnum = {
+  id: 'id',
+  userId: 'userId',
+  result: 'result',
+  createdAt: 'createdAt'
+} as const
+
+export type ComparisonScalarFieldEnum = (typeof ComparisonScalarFieldEnum)[keyof typeof ComparisonScalarFieldEnum]
+
+
+export const ComparisonBookmarkScalarFieldEnum = {
+  comparisonId: 'comparisonId',
+  bookmarkId: 'bookmarkId'
+} as const
+
+export type ComparisonBookmarkScalarFieldEnum = (typeof ComparisonBookmarkScalarFieldEnum)[keyof typeof ComparisonBookmarkScalarFieldEnum]
+
+
 export const SortOrder = {
   asc: 'asc',
   desc: 'desc'
@@ -2132,6 +2300,8 @@ export type GlobalOmitConfig = {
   learningPathItem?: Prisma.LearningPathItemOmit
   pathNote?: Prisma.PathNoteOmit
   annotation?: Prisma.AnnotationOmit
+  comparison?: Prisma.ComparisonOmit
+  comparisonBookmark?: Prisma.ComparisonBookmarkOmit
 }
 
 /* Types for Logging */
