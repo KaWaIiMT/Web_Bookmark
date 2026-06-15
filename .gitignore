@@ -5,6 +5,10 @@ dist/
 .cache/
 .next/
 dev.db
+db
+db-wal
+db-shm
+.env.vercel
 tsconfig.tsbuildinfo
 markbox-extension/.output/
 markbox-extension/.wxt/
