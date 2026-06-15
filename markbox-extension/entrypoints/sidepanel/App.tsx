@@ -4,7 +4,6 @@ import { BookmarkListItem } from "@/components/BookmarkListItem";
 import { StatusBadge } from "@/components/StatusBadge";
 import { Toast } from "@/components/Toast";
 import { api } from "@/lib/api";
-import { getApiUrl } from "@/lib/storage";
 import type { BookmarkData } from "@/lib/types";
 import { Search, ExternalLink, Globe } from "lucide-react";
 
@@ -19,7 +18,6 @@ export default function App() {
     favicon: string;
   } | null>(null);
   const [pageBookmark, setPageBookmark] = useState<BookmarkData | null>(null);
-  const [baseUrl, setBaseUrl] = useState("https://ccjproject.top");
   const [toast, setToast] = useState<{
     message: string;
     type: "success" | "error";
@@ -33,9 +31,6 @@ export default function App() {
 
   const init = useCallback(async () => {
     try {
-      const url = await getApiUrl();
-      setBaseUrl(url);
-
       // Get current tab info
       browser.runtime.sendMessage({ type: "GET_CURRENT_TAB" }, (response) => {
         if (response?.success) {
@@ -189,7 +184,6 @@ export default function App() {
                   key={bm.id}
                   bookmark={bm}
                   onStatusChange={handleStatusChange}
-                  baseUrl={baseUrl}
                 />
               ))}
             </div>
@@ -199,7 +193,7 @@ export default function App() {
         {/* Footer */}
         <footer className="px-4 py-3 border-t border-[var(--border)] shrink-0">
           <a
-            href={baseUrl}
+            href="https://ccjproject.top"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center justify-center gap-1.5 py-2 rounded-xl text-[12px] text-[var(--muted-foreground)] font-sans hover:text-[var(--foreground)] hover:bg-[var(--muted)] transition-all no-underline"

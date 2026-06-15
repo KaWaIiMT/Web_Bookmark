@@ -22,13 +22,11 @@ function formatDate(dateStr: string): string {
 interface BookmarkListItemProps {
   bookmark: BookmarkData;
   onStatusChange: (id: string, status: string) => void;
-  baseUrl: string;
 }
 
 export function BookmarkListItem({
   bookmark,
   onStatusChange,
-  baseUrl,
 }: BookmarkListItemProps) {
   return (
     <a

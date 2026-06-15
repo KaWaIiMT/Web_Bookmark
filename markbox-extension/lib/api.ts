@@ -1,35 +1,22 @@
-import { getApiKey } from "./storage";
 import type { BookmarkData, AICategorizeOutput, ExtractedMetadata } from "./types";
 
 /**
  * API client for MarkBox backend.
  * Uses the production URL by default (ccjproject.top).
- * All requests include Authorization: Bearer <apiKey> header.
+ * Auth is handled via session cookie — no API key needed.
  */
 const BASE_URL = "https://ccjproject.top";
 
 class ApiClient {
-  private async getHeaders(): Promise<Record<string, string>> {
-    const apiKey = await getApiKey();
-    const headers: Record<string, string> = {
-      "Content-Type": "application/json",
-    };
-    if (apiKey) {
-      headers["Authorization"] = `Bearer ${apiKey}`;
-    }
-    return headers;
-  }
-
   private async request<T>(
     path: string,
     options: RequestInit = {}
   ): Promise<T> {
-    const headers = await this.getHeaders();
     const url = `${BASE_URL}${path}`;
 
     const res = await fetch(url, {
       ...options,
-      headers: { ...headers, ...options.headers },
+      headers: { "Content-Type": "application/json", ...options.headers },
       credentials: "include",
     });
 
@@ -94,28 +81,6 @@ class ApiClient {
       method: "PATCH",
       body: JSON.stringify(data),
     });
-  }
-
-  /** Try cookie-based auth (session cookie from main site) */
-  async tryCookieAuth(): Promise<boolean> {
-    try {
-      const res = await fetch(`${BASE_URL}/api/bookmarks?limit=1`, {
-        credentials: "include",
-      });
-      return res.ok;
-    } catch {
-      return false;
-    }
-  }
-
-  /** Validate API key by making a lightweight request */
-  async validateKey(): Promise<boolean> {
-    try {
-      await this.request<{ data: unknown[] }>("/api/bookmarks?limit=1");
-      return true;
-    } catch {
-      return false;
-    }
   }
 }
 
