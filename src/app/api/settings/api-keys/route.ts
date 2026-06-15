@@ -11,26 +11,41 @@ export async function GET(req: NextRequest) {
       return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
     }
 
-    const keys = await prisma.apiKey.findMany({
-      where: { userId },
-      select: {
-        id: true,
-        name: true,
-        encryptedKey: true,
-        lastUsedAt: true,
-        createdAt: true,
-      },
-      orderBy: { createdAt: "desc" },
-    });
+    // Fallback: if encryptedKey column doesn't exist yet on Turso, select without it
+    let keys;
+    try {
+      keys = await prisma.apiKey.findMany({
+        where: { userId },
+        select: {
+          id: true,
+          name: true,
+          encryptedKey: true,
+          lastUsedAt: true,
+          createdAt: true,
+        },
+        orderBy: { createdAt: "desc" },
+      });
+    } catch {
+      // Column doesn't exist yet — fall back to basic fields
+      keys = await prisma.apiKey.findMany({
+        where: { userId },
+        select: {
+          id: true,
+          name: true,
+          lastUsedAt: true,
+          createdAt: true,
+        },
+        orderBy: { createdAt: "desc" },
+      });
+    }
 
     return NextResponse.json({
-      data: keys.map((k) => ({
+      data: keys.map((k: any) => ({
         id: k.id,
         name: k.name,
         lastUsedAt: k.lastUsedAt,
         createdAt: k.createdAt,
         keyPreview: k.encryptedKey ? maskApiKey(decryptApiKey(k.encryptedKey)) : "****",
-        // User can request the full key by calling the reveal endpoint
       })),
     });
   } catch (err) {
@@ -57,14 +72,31 @@ export async function POST(req: NextRequest) {
 
     const { rawKey, hashedKey, encryptedKey } = generateApiKey();
 
-    const apiKey = await prisma.apiKey.create({
-      data: {
-        name,
-        key: hashedKey,
-        encryptedKey,
-        userId,
-      },
-    });
+    // Fallback: if encryptedKey column doesn't exist on Turso, create without it
+    let apiKey;
+    try {
+      apiKey = await prisma.apiKey.create({
+        data: {
+          name,
+          key: hashedKey,
+          encryptedKey,
+          userId,
+        },
+      });
+    } catch (e: any) {
+      if (e?.code === "P2022" || (e?.message && e.message.includes("encryptedKey"))) {
+        // Column doesn't exist — create without encrypted key
+        apiKey = await prisma.apiKey.create({
+          data: {
+            name,
+            key: hashedKey,
+            userId,
+          },
+        });
+      } else {
+        throw e;
+      }
+    }
 
     return NextResponse.json(
       {
