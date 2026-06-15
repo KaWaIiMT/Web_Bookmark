@@ -1,6 +1,6 @@
 import { auth } from "@/lib/auth";
 import { prisma } from "@/lib/prisma";
-import { createHash, randomBytes } from "crypto";
+import { createHash, randomBytes, createCipheriv, createDecipheriv } from "crypto";
 
 /**
  * Get the authenticated user ID from a request.
@@ -32,19 +32,40 @@ export async function getUserIdFromRequest(req: Request): Promise<string | null>
   return null;
 }
 
-/**
- * Generate a new API key. Returns the raw key (only shown once) and stores
- * the SHA-256 hash in the database.
- */
-export function generateApiKey(): { rawKey: string; hashedKey: string } {
-  const raw = randomBytes(48).toString("hex");
-  const rawKey = `mb_${raw}`;
-  const hashedKey = createHash("sha256").update(rawKey).digest("hex");
-  return { rawKey, hashedKey };
+const ENCRYPTION_KEY = (process.env.API_KEY_ENCRYPTION_KEY || process.env.AUTH_SECRET || "fallback-encryption-key-32chrs").slice(0, 32).padEnd(32, "0");
+const ENCRYPTION_IV = Buffer.from(createHash("sha256").update("markbox-iv").digest()).subarray(0, 16);
+
+function encrypt(text: string): string {
+  const cipher = createCipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY, "utf-8"), ENCRYPTION_IV);
+  return cipher.update(text, "utf-8", "hex") + cipher.final("hex");
+}
+
+function decrypt(encrypted: string): string {
+  const decipher = createDecipheriv("aes-256-cbc", Buffer.from(ENCRYPTION_KEY, "utf-8"), ENCRYPTION_IV);
+  return decipher.update(encrypted, "hex", "utf-8") + decipher.final("utf-8");
 }
 
 /**
- * Mask an API key for display: mb_a1b2...c3d4 (first 2 + last 4 chars)
+ * Generate a new API key. Stores the raw key encrypted (reversible) so users
+ * can view it later from the settings page.
+ */
+export function generateApiKey(): { rawKey: string; hashedKey: string; encryptedKey: string } {
+  const raw = randomBytes(48).toString("hex");
+  const rawKey = `mb_${raw}`;
+  const hashedKey = createHash("sha256").update(rawKey).digest("hex");
+  const encryptedKey = encrypt(rawKey);
+  return { rawKey, hashedKey, encryptedKey };
+}
+
+/**
+ * Decrypt an API key stored in the database so it can be shown to the user.
+ */
+export function decryptApiKey(encryptedKey: string): string {
+  return decrypt(encryptedKey);
+}
+
+/**
+ * Mask an API key for display: mb_a1b2...c3d4 (first 5 + last 4 chars)
  */
 export function maskApiKey(rawKey: string): string {
   if (rawKey.length <= 8) return rawKey;

@@ -6,7 +6,6 @@ import { AlreadyBookmarkedView } from "@/components/AlreadyBookmarkedView";
 import { ErrorFallbackView } from "@/components/ErrorFallbackView";
 import { Toast } from "@/components/Toast";
 import { api } from "@/lib/api";
-import { getApiUrl } from "@/lib/storage";
 import { extractMetadataFromDocument } from "@/lib/metadata";
 import type {
   BookmarkData,
@@ -31,7 +30,6 @@ export default function App() {
     message: string;
     type: "success" | "error";
   } | null>(null);
-  const [baseUrl, setBaseUrl] = useState("https://ccjproject.top");
 
   // Initialize: get tab URL and check auth
   useEffect(() => {
@@ -40,9 +38,6 @@ export default function App() {
 
   const init = useCallback(async () => {
     try {
-      const url = await getApiUrl();
-      setBaseUrl(url);
-
       // Get current tab info
       browser.runtime.sendMessage({ type: "GET_CURRENT_TAB" }, (response) => {
         if (!response?.success) {
@@ -239,7 +234,6 @@ export default function App() {
           {step === "already_bookmarked" && existingBookmark && (
             <AlreadyBookmarkedView
               bookmark={existingBookmark}
-              baseUrl={baseUrl}
             />
           )}
 

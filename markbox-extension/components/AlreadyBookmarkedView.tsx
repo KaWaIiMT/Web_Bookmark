@@ -5,7 +5,6 @@ import type { BookmarkData } from "@/lib/types";
 
 interface AlreadyBookmarkedViewProps {
   bookmark: BookmarkData;
-  baseUrl: string;
 }
 
 function formatDate(dateStr: string): string {
@@ -21,7 +20,6 @@ function formatDate(dateStr: string): string {
 
 export function AlreadyBookmarkedView({
   bookmark,
-  baseUrl,
 }: AlreadyBookmarkedViewProps) {
   return (
     <div className="p-4 space-y-4">
@@ -61,7 +59,7 @@ export function AlreadyBookmarkedView({
       {/* Actions */}
       <div className="flex gap-2">
         <a
-          href={`${baseUrl}/share/bookmark/${bookmark.shareToken || bookmark.id}`}
+          href={`https://ccjproject.top/share/bookmark/${bookmark.shareToken || bookmark.id}`}
           target="_blank"
           rel="noopener noreferrer"
           className="flex-1 flex items-center justify-center gap-1.5 py-2.5 rounded-xl border border-[var(--border)] text-[13px] text-[var(--foreground)]/60 font-sans hover:bg-[var(--muted)] transition-colors cursor-pointer no-underline"

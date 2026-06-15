@@ -1,7 +1,7 @@
 import { useState, useEffect, type ReactNode } from "react";
-import { getApiKey, setApiKey, getApiUrl, setApiUrl } from "@/lib/storage";
+import { getApiKey, setApiKey } from "@/lib/storage";
 import { api } from "@/lib/api";
-import { Key, Settings, AlertCircle } from "lucide-react";
+import { Key, AlertCircle } from "lucide-react";
 
 interface AuthGuardProps {
   children: ReactNode;
@@ -10,7 +10,6 @@ interface AuthGuardProps {
 export function AuthGuard({ children }: AuthGuardProps) {
   const [state, setState] = useState<"checking" | "authenticated" | "no_key">("checking");
   const [apiKeyInput, setApiKeyInput] = useState("");
-  const [apiUrlInput, setApiUrlInput] = useState("");
   const [error, setError] = useState("");
   const [saving, setSaving] = useState(false);
 
@@ -19,9 +18,6 @@ export function AuthGuard({ children }: AuthGuardProps) {
   }, []);
 
   async function checkAuth() {
-    const url = await getApiUrl();
-    setApiUrlInput(url);
-
     // 1. Try session cookie (zero-config for logged-in users)
     const cookieOk = await api.tryCookieAuth();
     if (cookieOk) {
@@ -59,9 +55,6 @@ export function AuthGuard({ children }: AuthGuardProps) {
 
     setSaving(true);
     await setApiKey(trimmed);
-    if (apiUrlInput.trim()) {
-      await setApiUrl(apiUrlInput.trim().replace(/\/$/, ""));
-    }
 
     const valid = await api.validateKey();
     setSaving(false);
@@ -69,7 +62,7 @@ export function AuthGuard({ children }: AuthGuardProps) {
     if (valid) {
       setState("authenticated");
     } else {
-      setError("无法连接到 MarkBox，请检查 API URL 和 Key 是否正确");
+      setError("无法连接到 MarkBox，请检查 Key 是否正确");
     }
   }
 
@@ -105,32 +98,18 @@ export function AuthGuard({ children }: AuthGuardProps) {
           </div>
         )}
 
-        <div className="w-full space-y-3">
-          <div>
-            <label className="text-[11px] font-medium text-[var(--muted-foreground)] font-sans">
-              API URL
-            </label>
-            <input
-              type="text"
-              value={apiUrlInput}
-              onChange={(e) => setApiUrlInput(e.target.value)}
-              placeholder="http://localhost:3000"
-              className="w-full mt-1 px-3 py-2 text-[13px] rounded-xl border border-[var(--border)] bg-[var(--input)] text-[var(--foreground)] font-sans outline-none focus:ring-2 focus:ring-[var(--ring)] transition-all"
-            />
-          </div>
-          <div>
-            <label className="text-[11px] font-medium text-[var(--muted-foreground)] font-sans">
-              API Key
-            </label>
-            <input
-              type="password"
-              value={apiKeyInput}
-              onChange={(e) => setApiKeyInput(e.target.value)}
-              placeholder="mb_..."
-              className="w-full mt-1 px-3 py-2 text-[13px] rounded-xl border border-[var(--border)] bg-[var(--input)] text-[var(--foreground)] font-sans outline-none focus:ring-2 focus:ring-[var(--ring)] transition-all"
-              onKeyDown={(e) => e.key === "Enter" && handleSaveKey()}
-            />
-          </div>
+        <div className="w-full">
+          <label className="text-[11px] font-medium text-[var(--muted-foreground)] font-sans">
+            API Key
+          </label>
+          <input
+            type="password"
+            value={apiKeyInput}
+            onChange={(e) => setApiKeyInput(e.target.value)}
+            placeholder="mb_..."
+            className="w-full mt-1 px-3 py-2 text-[13px] rounded-xl border border-[var(--border)] bg-[var(--input)] text-[var(--foreground)] font-sans outline-none focus:ring-2 focus:ring-[var(--ring)] transition-all"
+            onKeyDown={(e) => e.key === "Enter" && handleSaveKey()}
+          />
         </div>
 
         <button

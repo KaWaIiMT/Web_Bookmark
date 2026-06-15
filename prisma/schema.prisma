@@ -189,6 +189,7 @@ model ApiKey {
   id        String    @id @default(cuid())
   name      String
   key       String    @unique
+  encryptedKey String? // Encrypted raw key for re-display
   userId    String
   user      User      @relation(fields: [userId], references: [id], onDelete: Cascade)
   lastUsedAt DateTime?

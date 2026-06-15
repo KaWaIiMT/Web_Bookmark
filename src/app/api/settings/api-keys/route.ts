@@ -1,7 +1,7 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
 import { getUserIdFromRequest } from "@/lib/auth-helpers";
-import { generateApiKey } from "@/lib/auth-helpers";
+import { generateApiKey, decryptApiKey, maskApiKey } from "@/lib/auth-helpers";
 
 // List all API keys for the authenticated user
 export async function GET(req: NextRequest) {
@@ -16,18 +16,21 @@ export async function GET(req: NextRequest) {
       select: {
         id: true,
         name: true,
+        encryptedKey: true,
         lastUsedAt: true,
         createdAt: true,
       },
       orderBy: { createdAt: "desc" },
     });
 
-    // We don't return the raw key — only masked versions for display
     return NextResponse.json({
       data: keys.map((k) => ({
-        ...k,
-        // Key is hashed in DB, so we can't show it. Display a placeholder.
-        keyPreview: "****",
+        id: k.id,
+        name: k.name,
+        lastUsedAt: k.lastUsedAt,
+        createdAt: k.createdAt,
+        keyPreview: k.encryptedKey ? maskApiKey(decryptApiKey(k.encryptedKey)) : "****",
+        // User can request the full key by calling the reveal endpoint
       })),
     });
   } catch (err) {
@@ -52,12 +55,13 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "name is required" }, { status: 400 });
     }
 
-    const { rawKey, hashedKey } = generateApiKey();
+    const { rawKey, hashedKey, encryptedKey } = generateApiKey();
 
     const apiKey = await prisma.apiKey.create({
       data: {
         name,
         key: hashedKey,
+        encryptedKey,
         userId,
       },
     });
@@ -66,7 +70,7 @@ export async function POST(req: NextRequest) {
       {
         id: apiKey.id,
         name: apiKey.name,
-        key: rawKey, // Only returned once — user must copy now
+        key: rawKey,
         createdAt: apiKey.createdAt,
       },
       { status: 201 }

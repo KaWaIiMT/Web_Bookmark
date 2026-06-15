@@ -54,6 +54,7 @@ export default function SettingsPage() {
   const [apiKeys, setApiKeys] = useState<{
     id: string;
     name: string;
+    keyPreview?: string;
     lastUsedAt: string | null;
     createdAt: string;
   }[]>([]);
@@ -66,6 +67,8 @@ export default function SettingsPage() {
   const [generating, setGenerating] = useState(false);
   const [revoking, setRevoking] = useState<string | null>(null);
   const [showKey, setShowKey] = useState<Record<string, boolean>>({});
+  const [fullKeys, setFullKeys] = useState<Record<string, string>>({});
+  const [revealingKey, setRevealingKey] = useState<string | null>(null);
   const [archiveStats, setArchiveStats] = useState<{
     totalBookmarks: number;
     archived: number;
@@ -110,6 +113,25 @@ export default function SettingsPage() {
       toast.error("生成失败，请重试");
     } finally {
       setGenerating(false);
+    }
+  };
+
+  const handleRevealKey = async (id: string) => {
+    setRevealingKey(id);
+    try {
+      const res = await fetch(`/api/settings/api-keys/${id}`);
+      if (!res.ok) {
+        const err = await res.json();
+        toast.error(err.error || "查看失败");
+        return;
+      }
+      const data = await res.json();
+      setFullKeys((prev) => ({ ...prev, [id]: data.key }));
+      setShowKey((prev) => ({ ...prev, [id]: true }));
+    } catch {
+      toast.error("查看失败");
+    } finally {
+      setRevealingKey(null);
     }
   };
 
@@ -501,7 +523,7 @@ export default function SettingsPage() {
                 生成新 Key
               </h3>
               <p className="text-[12px] text-[var(--muted-foreground)] mb-3 font-sans">
-                用于浏览器扩展、第三方工具等场景的 API 认证。Key 仅生成时显示一次，请妥善保存。
+                用于浏览器扩展、第三方工具等场景的 API 认证。生成的 Key 可随时查看和复制。
               </p>
               <div className="flex items-center gap-2">
                 <input
@@ -558,7 +580,7 @@ export default function SettingsPage() {
                     </button>
                   </div>
                   <p className="text-[11px] text-emerald-600/60 dark:text-emerald-400/60 font-sans mt-1.5">
-                    ⚠️ 此 Key 仅在生成时展示一次，请立即复制保存
+                    Key 已生成 — 可随时在下方「已有 Keys」中查看和复制
                   </p>
                 </div>
               )}
@@ -573,35 +595,83 @@ export default function SettingsPage() {
                     已有 Keys
                   </h3>
                   <div className="space-y-2">
-                    {apiKeys.map((k) => (
+                    {apiKeys.map((k) => {
+                      const fullKey = fullKeys[k.id];
+                      const isVisible = showKey[k.id];
+                      return (
                       <div
                         key={k.id}
-                        className="flex items-center gap-3 px-3 py-2 rounded-xl bg-[var(--muted)]/50"
+                        className="flex flex-col gap-2 px-3 py-2 rounded-xl bg-[var(--muted)]/50"
                       >
-                        <Key className="h-3.5 w-3.5 text-[var(--muted-foreground)] shrink-0" />
-                        <div className="flex-1 min-w-0">
-                          <p className="text-[13px] font-medium text-[var(--foreground)] font-sans">
-                            {k.name}
-                          </p>
-                          <p className="text-[11px] text-[var(--muted-foreground)] font-sans">
-                            创建于{" "}
-                            {new Date(k.createdAt).toLocaleDateString("zh-CN")}
-                            {k.lastUsedAt
-                              ? ` · 上次使用 ${new Date(k.lastUsedAt).toLocaleDateString("zh-CN")}`
-                              : " · 从未使用"}
-                          </p>
+                        <div className="flex items-center gap-3">
+                          <Key className="h-3.5 w-3.5 text-[var(--muted-foreground)] shrink-0" />
+                          <div className="flex-1 min-w-0">
+                            <p className="text-[13px] font-medium text-[var(--foreground)] font-sans">
+                              {k.name}
+                            </p>
+                            <p className="text-[11px] text-[var(--muted-foreground)] font-sans">
+                              创建于{" "}
+                              {new Date(k.createdAt).toLocaleDateString("zh-CN")}
+                              {k.lastUsedAt
+                                ? ` · 上次使用 ${new Date(k.lastUsedAt).toLocaleDateString("zh-CN")}`
+                                : " · 从未使用"}
+                            </p>
+                          </div>
+                          <div className="flex items-center gap-1 shrink-0">
+                            {fullKey && (
+                              <button
+                                onClick={() => {
+                                  navigator.clipboard.writeText(fullKey).then(() => toast.success("已复制到剪贴板"));
+                                }}
+                                className="p-1.5 rounded-lg hover:bg-white/50 dark:hover:bg-black/20 text-[var(--muted-foreground)] cursor-pointer"
+                                title="复制"
+                              >
+                                <Copy className="h-3.5 w-3.5" />
+                              </button>
+                            )}
+                            <button
+                              onClick={() => {
+                                if (isVisible) {
+                                  setShowKey((prev) => ({ ...prev, [k.id]: false }));
+                                } else if (fullKey) {
+                                  setShowKey((prev) => ({ ...prev, [k.id]: true }));
+                                } else {
+                                  handleRevealKey(k.id);
+                                }
+                              }}
+                              disabled={revealingKey === k.id}
+                              className="p-1.5 rounded-lg hover:bg-white/50 dark:hover:bg-black/20 text-[var(--muted-foreground)] cursor-pointer shrink-0"
+                              title={isVisible ? "隐藏" : "查看完整 Key"}
+                            >
+                              {revealingKey === k.id ? (
+                                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+                              ) : isVisible ? (
+                                <EyeOff className="h-3.5 w-3.5" />
+                              ) : (
+                                <Eye className="h-3.5 w-3.5" />
+                              )}
+                            </button>
+                            <Button
+                              onClick={() => handleRevokeKey(k.id)}
+                              disabled={revoking === k.id}
+                              variant="ghost"
+                              className="rounded-lg text-[12px] text-red-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 font-sans h-8 px-3"
+                            >
+                              <Trash2 className="h-3.5 w-3.5" />
+                            </Button>
+                          </div>
                         </div>
-                        <Button
-                          onClick={() => handleRevokeKey(k.id)}
-                          disabled={revoking === k.id}
-                          variant="ghost"
-                          className="rounded-lg text-[12px] text-red-400 hover:text-red-500 hover:bg-red-50 dark:hover:bg-red-500/10 font-sans h-8 px-3 shrink-0"
-                        >
-                          <Trash2 className="h-3.5 w-3.5 mr-1" />
-                          {revoking === k.id ? "吊销中…" : "吊销"}
-                        </Button>
+                        {/* Key display row */}
+                        {isVisible && fullKey && (
+                          <div className="flex items-center gap-2 pl-7">
+                            <code className="flex-1 text-[11px] font-mono bg-white/50 dark:bg-black/20 px-2 py-1 rounded break-all select-all">
+                              {fullKey}
+                            </code>
+                          </div>
+                        )}
                       </div>
-                    ))}
+                      );
+                    })}
                   </div>
                 </div>
               </>

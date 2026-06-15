@@ -1,15 +1,14 @@
-import { getApiKey, getApiUrl } from "./storage";
+import { getApiKey } from "./storage";
 import type { BookmarkData, AICategorizeOutput, ExtractedMetadata } from "./types";
 
 /**
  * API client for MarkBox backend.
+ * Uses the production URL by default (ccjproject.top).
  * All requests include Authorization: Bearer <apiKey> header.
  */
-class ApiClient {
-  private async getBaseUrl(): Promise<string> {
-    return getApiUrl();
-  }
+const BASE_URL = "https://ccjproject.top";
 
+class ApiClient {
   private async getHeaders(): Promise<Record<string, string>> {
     const apiKey = await getApiKey();
     const headers: Record<string, string> = {
@@ -25,9 +24,8 @@ class ApiClient {
     path: string,
     options: RequestInit = {}
   ): Promise<T> {
-    const baseUrl = await this.getBaseUrl();
     const headers = await this.getHeaders();
-    const url = `${baseUrl}${path}`;
+    const url = `${BASE_URL}${path}`;
 
     const res = await fetch(url, {
       ...options,
@@ -101,8 +99,7 @@ class ApiClient {
   /** Try cookie-based auth (session cookie from main site) */
   async tryCookieAuth(): Promise<boolean> {
     try {
-      const baseUrl = await this.getBaseUrl();
-      const res = await fetch(`${baseUrl}/api/bookmarks?limit=1`, {
+      const res = await fetch(`${BASE_URL}/api/bookmarks?limit=1`, {
         credentials: "include",
       });
       return res.ok;

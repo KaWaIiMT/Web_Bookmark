@@ -2033,6 +2033,7 @@ export const ApiKeyScalarFieldEnum = {
   id: 'id',
   name: 'name',
   key: 'key',
+  encryptedKey: 'encryptedKey',
   userId: 'userId',
   lastUsedAt: 'lastUsedAt',
   createdAt: 'createdAt'
