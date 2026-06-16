@@ -20,11 +20,6 @@ export default function RegisterPage() {
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [loading, setLoading] = useState(false);
   const [registered, setRegistered] = useState(false);
-  const [emailSent, setEmailSent] = useState(true);
-  const [verificationUrl, setVerificationUrl] = useState("");
-  const [resending, setResending] = useState(false);
-  const [resendMessage, setResendMessage] = useState("");
-  const [showFallbackLink, setShowFallbackLink] = useState(false);
 
   // Redirect if already logged in
   if (status === "authenticated" && session) {
@@ -87,52 +82,11 @@ export default function RegisterPage() {
       }
 
       setRegistered(true);
-      setEmailSent(data.emailSent !== false);
-      setVerificationUrl(data.verificationUrl || "");
       toast.success(data.message || "注册成功");
     } catch {
       setErrors({ form: "网络错误，请检查连接后重试" });
     } finally {
       setLoading(false);
-    }
-  }
-
-  async function handleResendVerification() {
-    setResending(true);
-    setResendMessage("");
-    try {
-      const res = await fetch("/api/auth/resend-verification", {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ email: email.trim() }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        setResendMessage(data.error || "发送失败，请稍后重试");
-        return;
-      }
-      if (data.emailSent) {
-        setResendMessage("验证邮件已重新发送，请查收");
-        setVerificationUrl("");
-        setShowFallbackLink(false);
-      } else {
-        setResendMessage("邮件发送失败，请使用下方链接手动验证");
-        setVerificationUrl(data.verificationUrl || verificationUrl);
-        if (data.verificationUrl) setShowFallbackLink(true);
-      }
-    } catch {
-      setResendMessage("网络错误，请重试");
-    } finally {
-      setResending(false);
-    }
-  }
-
-  async function handleCopyLink() {
-    try {
-      await navigator.clipboard.writeText(verificationUrl);
-      toast.success("验证链接已复制");
-    } catch {
-      toast.error("复制失败，请手动复制");
     }
   }
 
@@ -160,88 +114,7 @@ export default function RegisterPage() {
               注册成功！
             </h2>
             <p className="text-[13px] text-[var(--muted-foreground)] leading-relaxed font-sans">
-              {emailSent
-                ? <>请查收发送至 <strong>{email}</strong> 的验证邮件，点击邮件中的链接完成邮箱验证。</>
-                : <>邮件服务暂未配置，请使用下方链接完成验证。</>
-              }
-            </p>
-
-            {/* Warning: email not sent — show direct link */}
-            {!emailSent && verificationUrl && (
-              <div className="p-4 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-left space-y-3">
-                <p className="text-[12px] text-amber-700 dark:text-amber-400 font-medium font-sans">
-                  手动验证链接（24小时内有效）
-                </p>
-                <p className="text-[11px] text-amber-600 dark:text-amber-500 break-all font-mono leading-relaxed select-all">
-                  {verificationUrl}
-                </p>
-                <button
-                  onClick={handleCopyLink}
-                  className="text-[12px] text-amber-700 dark:text-amber-400 hover:text-amber-900 dark:hover:text-amber-300 underline font-sans transition-colors cursor-pointer"
-                >
-                  复制链接
-                </button>
-              </div>
-            )}
-
-            {/* Resend button */}
-            <button
-              onClick={handleResendVerification}
-              disabled={resending}
-              className="w-full py-2.5 rounded-xl border border-[var(--border)] text-[13px] text-[var(--muted-foreground)] font-sans hover:bg-[var(--muted)] hover:text-[var(--foreground)] transition-all disabled:opacity-50 cursor-pointer"
-            >
-              {resending ? (
-                <span className="inline-flex items-center gap-2">
-                  <Loader2 className="h-3.5 w-3.5 animate-spin" />
-                  发送中...
-                </span>
-              ) : (
-                "重新发送验证邮件"
-              )}
-            </button>
-
-            {/* Resend feedback */}
-            {resendMessage && (
-              <p className={`text-[12px] font-sans ${
-                resendMessage.includes("失败") || resendMessage.includes("错误")
-                  ? "text-red-500"
-                  : "text-green-500"
-              }`}>
-                {resendMessage}
-              </p>
-            )}
-
-            {/* Toggle: show fallback link */}
-            {emailSent && (
-              <div className="text-center">
-                <button
-                  onClick={() => setShowFallbackLink(!showFallbackLink)}
-                  className="text-[11px] text-[var(--muted-foreground)]/50 hover:text-[var(--muted-foreground)] font-sans transition-colors cursor-pointer"
-                >
-                  {showFallbackLink ? "收起" : "仍然收不到邮件？"}
-                </button>
-                {showFallbackLink && verificationUrl && (
-                  <div className="mt-3 p-4 rounded-xl bg-amber-50 dark:bg-amber-500/10 border border-amber-200 dark:border-amber-500/20 text-left space-y-3">
-                    <p className="text-[12px] text-amber-700 dark:text-amber-400 font-medium font-sans">
-                      手动验证链接（24小时内有效）
-                    </p>
-                    <p className="text-[11px] text-amber-600 dark:text-amber-500 break-all font-mono leading-relaxed select-all">
-                      {verificationUrl}
-                    </p>
-                    <button
-                      onClick={handleCopyLink}
-                      className="text-[12px] text-amber-700 dark:text-amber-400 hover:text-amber-900 dark:hover:text-amber-300 underline font-sans transition-colors cursor-pointer"
-                    >
-                      复制链接
-                    </button>
-                  </div>
-                )}
-              </div>
-            )}
-
-            {/* Info */}
-            <p className="text-[12px] text-[var(--muted-foreground)]/60 font-sans">
-              未收到邮件？请检查垃圾箱，或点击上方按钮重新发送。
+              账号 <strong>{email}</strong> 已创建，现在可以登录了。
             </p>
 
             <Button

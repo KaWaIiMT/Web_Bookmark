@@ -1,8 +1,10 @@
 import NextAuth from "next-auth";
 import GitHub from "next-auth/providers/github";
+import Credentials from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@auth/prisma-adapter";
 import { prisma } from "@/lib/prisma";
 import { isAdmin } from "@/lib/admin";
+import { verifyPassword } from "@/lib/password";
 import type { NextAuthConfig } from "next-auth";
 
 const proxyUrl = process.env.HTTP_PROXY || process.env.HTTPS_PROXY;
@@ -29,6 +31,35 @@ export const authConfig: NextAuthConfig = {
         params: { prompt: "consent" },
       },
       allowDangerousEmailAccountLinking: true,
+    }),
+    Credentials({
+      name: "credentials",
+      credentials: {
+        email: { label: "邮箱", type: "email" },
+        password: { label: "密码", type: "password" },
+      },
+      async authorize(credentials) {
+        const email = (credentials.email as string)?.trim().toLowerCase();
+        const password = credentials.password as string;
+
+        if (!email || !password) return null;
+
+        const user = await prisma.user.findUnique({
+          where: { email },
+        });
+
+        if (!user || !user.password) return null;
+
+        const valid = await verifyPassword(password, user.password);
+        if (!valid) return null;
+
+        return {
+          id: user.id,
+          name: user.name,
+          email: user.email,
+          image: user.image,
+        };
+      },
     }),
   ],
   pages: {

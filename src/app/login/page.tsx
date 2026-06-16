@@ -192,14 +192,6 @@ function LoginForm() {
           </p>
           <p>
             <button
-              onClick={() => router.push("/register")}
-              className="text-[12px] text-[var(--muted-foreground)]/60 hover:text-[var(--muted-foreground)] font-sans transition-colors"
-            >
-              重新发送验证邮件
-            </button>
-          </p>
-          <p>
-            <button
               onClick={() => toast.info("该功能即将上线")}
               className="text-[12px] text-[var(--muted-foreground)]/60 hover:text-[var(--muted-foreground)] font-sans transition-colors"
             >
