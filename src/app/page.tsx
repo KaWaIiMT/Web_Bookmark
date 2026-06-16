@@ -67,7 +67,7 @@ export default function Home() {
   // Helper: guard unauthenticated writes (returns true = blocked)
   const guardAuth = useCallback((): boolean => {
     if (status !== "loading" && !session) {
-      toast.error("请先登录 GitHub 账号");
+      toast.error("请先登录账号");
       return true;
     }
     return false;
@@ -317,11 +317,15 @@ export default function Home() {
               <div className="h-8 w-8 rounded-full bg-[var(--muted)] animate-pulse" />
             ) : session?.user ? (
               <div className="flex items-center gap-1 sm:gap-2">
-                {session.user.image && (
+                {session.user.image ? (
                   <img src={session.user.image} alt="" className="h-7 w-7 rounded-full ring-2 ring-white/60" />
+                ) : (
+                  <div className="h-7 w-7 rounded-full bg-[var(--muted)] flex items-center justify-center">
+                    <LogIn className="h-3.5 w-3.5 text-[var(--muted-foreground)]" />
+                  </div>
                 )}
                 <span className="text-[12px] text-[var(--foreground)]/40 font-sans hidden sm:inline">
-                  {session.user.name}
+                  {session.user.name || session.user.email?.split("@")[0]}
                 </span>
                 <button
                   onClick={() => signOut()}
