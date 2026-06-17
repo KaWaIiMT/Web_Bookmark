@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="30%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8" />
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)" />
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">安全</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5" />
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">管理面板</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.40">多用户管理 · 书签审查 · 数据导出 — 为团队和实例管理员提供完整控制</text>
+  </g>
+  <g id="placeholder-admin">
+    <path fill="#c9866b" fill-opacity="0.03" d="M92,190 H1188 A12,12 0 0 1 1200,202 V518 A12,12 0 0 1 1188,530 H92 A12,12 0 0 1 80,518 V202 A12,12 0 0 1 92,190 Z" />
+    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M92,190 H1188 A12,12 0 0 1 1200,202 V518 A12,12 0 0 1 1188,530 H92 A12,12 0 0 1 80,518 V202 A12,12 0 0 1 92,190 Z" />
+    
+  <g transform="translate(600.0, 325.0) scale(1.6666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+  </g>
+    <text x="640" y="390" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.33">full_admin.png</text>
+    <text x="640" y="413" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">管理面板全貌截图</text>
+  </g>
+  <g id="admin-features">
+    <g id="admin-1">
+      <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M88,560 H427 A8,8 0 0 1 435,568 V622 A8,8 0 0 1 427,630 H88 A8,8 0 0 1 80,622 V568 A8,8 0 0 1 88,560 Z" />
+      
+  <g transform="translate(110.0, 585.0) scale(0.8333333333333334)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M5 7a4 4 0 1 0 8 0a4 4 0 1 0 -8 0" />
+    <path d="M3 21v-2a4 4 0 0 1 4 -4h4a4 4 0 0 1 4 4v2" />
+    <path d="M16 3.13a4 4 0 0 1 0 7.75" />
+    <path d="M21 21v-2a4 4 0 0 0 -3 -3.85" />
+  </g>
+      <text x="145" y="585" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600" fill="#2D2A26">用户列表 · 角色分配</text>
+      <text x="110" y="610" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.28">多用户管理 · 管理员/普通用户角色</text>
+    </g>
+    <g id="admin-2">
+      <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M463,560 H802 A8,8 0 0 1 810,568 V622 A8,8 0 0 1 802,630 H463 A8,8 0 0 1 455,622 V568 A8,8 0 0 1 463,560 Z" />
+      
+  <g transform="translate(485.0, 585.0) scale(0.8333333333333334)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+    <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+  </g>
+      <text x="520" y="585" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600" fill="#2D2A26">查看任意用户书签</text>
+      <text x="485" y="610" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.28">管理员视角浏览/审查书签数据</text>
+    </g>
+    <g id="admin-3">
+      <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M838,560 H1192 A8,8 0 0 1 1200,568 V622 A8,8 0 0 1 1192,630 H838 A8,8 0 0 1 830,622 V568 A8,8 0 0 1 838,560 Z" />
+      
+  <g transform="translate(860.0, 585.0) scale(0.8333333333333334)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M4 17v2a2 2 0 0 0 2 2h12a2 2 0 0 0 2 -2v-2" />
+    <path d="M7 11l5 5l5 -5" />
+    <path d="M12 4l0 12" />
+  </g>
+      <text x="895" y="585" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600" fill="#2D2A26">统计卡片 · 数据导出 JSON</text>
+      <text x="860" y="610" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.28">数据库统计总览 · 导出备份</text>
+    </g>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">24 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 管理面板</text>
+  </g>
+</svg>

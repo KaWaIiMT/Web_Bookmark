@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="70%" cy="40%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#25221f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#25221f"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.3">基座</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.3" stroke-width="1.5"/>
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#e8e4df">书签管理</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.50">拖拽排序 · 状态流转 · 分类管理 · 收藏夹</text>
+  </g>
+  <!-- Card 1: Drag & Drop -->
+  <g id="card-dragdrop">
+    <rect x="80" y="200" width="360" height="420" rx="12" fill="#33302d"/>
+    <rect x="80" y="200" width="360" height="420" rx="12" fill="none" stroke="#e8e4df" stroke-opacity="0.12" stroke-width="1"/>
+    <rect x="105" y="225" width="310" height="200" rx="8" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="105" y="225" width="310" height="200" rx="8" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/git-compare" x="240" y="300" width="36" height="36" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="260" y="320" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.33">detail_dragdrop.png</text>
+    <text x="115" y="455" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">拖拽排序</text>
+    <text x="115" y="485" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">dnd-kit 驱动即时拖拽反馈 · 乐观 UI 更新 · 侧边栏分类拖拽重排 · Balatro 风格动画+音效</text>
+  </g>
+  <!-- Card 2: Status Flow -->
+  <g id="card-status">
+    <rect x="460" y="200" width="360" height="420" rx="12" fill="#33302d"/>
+    <rect x="460" y="200" width="360" height="420" rx="12" fill="none" stroke="#e8e4df" stroke-opacity="0.12" stroke-width="1"/>
+    <rect x="485" y="225" width="310" height="200" rx="8" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="485" y="225" width="310" height="200" rx="8" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/arrow-right" x="620" y="300" width="36" height="36" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="640" y="320" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.33">detail_status_badges.png</text>
+    <text x="495" y="455" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">状态流转</text>
+    <text x="495" y="485" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">
+      <tspan x="495" dy="0">待读 → 在读 → 已读 → 归档</tspan>
+      <tspan x="495" dy="24">四态生命周期管理 · 一键切换</tspan>
+      <tspan x="495" dy="24">随机回顾提醒 · 不丢不遗忘</tspan>
+    </text>
+  </g>
+  <!-- Card 3: Context Menu -->
+  <g id="card-context">
+    <rect x="840" y="200" width="360" height="420" rx="12" fill="#33302d"/>
+    <rect x="840" y="200" width="360" height="420" rx="12" fill="none" stroke="#e8e4df" stroke-opacity="0.12" stroke-width="1"/>
+    <rect x="865" y="225" width="310" height="200" rx="8" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="865" y="225" width="310" height="200" rx="8" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/folder" x="1000" y="300" width="36" height="36" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="1020" y="320" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.33">detail_context_menu.png</text>
+    <text x="875" y="455" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">分类 &amp; 收藏夹</text>
+    <text x="875" y="485" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">
+      <tspan x="875" dy="0">右键菜单重命名/删除分类</tspan>
+      <tspan x="875" dy="24">收藏夹 CRUD · 层级分类树</tspan>
+      <tspan x="875" dy="24">按分类/收藏夹筛选过滤</tspan>
+    </text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.33">07 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">MarkBox · 书签管理</text>
+  </g>
+</svg>

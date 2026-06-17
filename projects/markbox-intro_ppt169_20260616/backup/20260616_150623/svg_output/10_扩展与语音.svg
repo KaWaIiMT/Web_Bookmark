@@ -1,0 +1,57 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="720" fill="#0F172A"/>
+
+  <!-- Header -->
+  <text x="640" y="70" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" fill="#64748B" letter-spacing="4">入 口 扩 展</text>
+  <text x="640" y="112" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="36" font-weight="bold" fill="#F1F5F9">无处不在的入口</text>
+  <rect x="560" y="126" width="160" height="3" rx="1.5" fill="url(#titleGrad)"/>
+  <text x="640" y="160" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#94A3B8">不离开浏览器就能完成一切 — 右键收藏、快捷键、语音搜索</text>
+
+  <!-- Divider -->
+  <line x1="640" y1="185" x2="640" y2="650" stroke="#334155" stroke-width="1"/>
+
+  <!-- Left: Browser Extension -->
+  <text x="290" y="225" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="22" font-weight="bold" fill="#3B82F6">🧩 浏览器扩展</text>
+
+  <rect x="60" y="255" width="560" height="80" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="60" y="255" width="4" height="80" rx="2" fill="#3B82F6"/>
+  <text x="100" y="288" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" font-weight="bold" fill="#F1F5F9">后台服务 (Service Worker)</text>
+  <text x="100" y="315" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">右键菜单收藏 · Ctrl+Shift+S 静默收藏 · Badge 状态提示</text>
+
+  <rect x="60" y="355" width="560" height="80" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="60" y="355" width="4" height="80" rx="2" fill="#06B6D4"/>
+  <text x="100" y="388" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" font-weight="bold" fill="#F1F5F9">弹窗 (Popup)</text>
+  <text x="100" y="415" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">完整收藏流程 · 去重检测 · AI 分类 · 已收藏检测</text>
+
+  <rect x="60" y="455" width="560" height="80" rx="8" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="60" y="455" width="4" height="80" rx="2" fill="#8B5CF6"/>
+  <text x="100" y="488" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" font-weight="bold" fill="#F1F5F9">侧边栏 (Side Panel)</text>
+  <text x="100" y="515" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">收藏状态 · 最近列表 · 快速搜索 (300ms 防抖) · 切换状态</text>
+
+  <!-- Right: Voice Search -->
+  <text x="980" y="225" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="22" font-weight="bold" fill="#06B6D4">🎤 语音搜索</text>
+
+  <rect x="660" y="280" width="560" height="260" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+
+  <!-- Voice UI mock -->
+  <circle cx="940" cy="360" r="40" fill="#0F172A" stroke="#06B6D4" stroke-width="2"/>
+  <circle cx="940" cy="360" r="28" fill="#06B6D4" fill-opacity="0.1"/>
+  <text x="940" y="367" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="22">🎙️</text>
+
+  <text x="940" y="425" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="17" fill="#F1F5F9">Web Speech API · 中文识别 (zh-CN)</text>
+  <text x="940" y="455" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">实时识别展示 · 脉冲录音指示器</text>
+  <text x="940" y="482" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">错误处理: not-allowed / no-speech / aborted</text>
+  <text x="940" y="510" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">完成后自动填入搜索框并执行搜索</text>
+
+  <!-- Bottom note -->
+  <text x="640" y="650" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#64748B">基于 WXT Framework 构建 · 支持 Chrome / Firefox / Edge</text>
+
+  <text x="1220" y="690" text-anchor="end" font-family="Consolas, monospace" font-size="12" fill="#64748B">10 / 14</text>
+</svg>

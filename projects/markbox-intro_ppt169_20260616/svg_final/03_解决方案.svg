@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="40%" r="50%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8" />
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)" />
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">方案</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5" />
+  </g>
+  <g id="hero-statement">
+    <text x="640" y="170" text-anchor="middle" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="40" font-weight="700" fill="#2D2A26">MarkBox 的答案</text>
+    <text x="640" y="240" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" fill="#2D2A26" fill-opacity="0.40">一个链接进来，AI 自动提取、理解、分类、关联</text>
+    <text x="640" y="270" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#c9866b" fill-opacity="0.70">你只管收藏，剩下的交给 AI</text>
+  </g>
+  <g id="step-1">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M156,340 H404 A16,16 0 0 1 420,356 V584 A16,16 0 0 1 404,600 H156 A16,16 0 0 1 140,584 V356 A16,16 0 0 1 156,340 Z" />
+    <circle cx="280" cy="400" r="32" fill="#c9866b" fill-opacity="0.08" />
+    
+  <g transform="translate(259.0, 379.0) scale(1.75)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M9 15l6 -6" />
+    <path d="M11 6l.463 -.536a5 5 0 0 1 7.071 7.072l-.534 .464" />
+    <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
+  </g>
+    <text x="280" y="465" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="600" fill="#2D2A26">粘贴链接</text>
+    <text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="280" y="500">复制 URL 一键丢入</text><text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="280" y="524">自动提取标题/封面/元数据</text></g>
+  <g id="arrow-1">
+    <line x1="430" y1="470" x2="480" y2="470" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" />
+    <polygon points="476,464 488,470 476,476" fill="#c9866b" fill-opacity="0.30" />
+  </g>
+  <g id="step-2">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M516,340 H764 A16,16 0 0 1 780,356 V584 A16,16 0 0 1 764,600 H516 A16,16 0 0 1 500,584 V356 A16,16 0 0 1 516,340 Z" />
+    <circle cx="640" cy="400" r="32" fill="#c9866b" fill-opacity="0.08" />
+    
+  <g transform="translate(619.0, 379.0) scale(1.75)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M15.5 13a3.5 3.5 0 0 0 -3.5 3.5v1a3.5 3.5 0 0 0 7 0v-1.8" />
+    <path d="M8.5 13a3.5 3.5 0 0 1 3.5 3.5v1a3.5 3.5 0 0 1 -7 0v-1.8" />
+    <path d="M17.5 16a3.5 3.5 0 0 0 0 -7h-.5" />
+    <path d="M19 9.3v-2.8a3.5 3.5 0 0 0 -7 0" />
+    <path d="M6.5 16a3.5 3.5 0 0 1 0 -7h.5" />
+    <path d="M5 9.3v-2.8a3.5 3.5 0 0 1 7 0v10" />
+  </g>
+    <text x="640" y="465" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="600" fill="#2D2A26">AI 自动理解</text>
+    <text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="640" y="500">DeepSeek V4 Flash 驱动</text><text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="640" y="524">智能标签 + 分类 + 摘要</text></g>
+  <g id="arrow-2">
+    <line x1="790" y1="470" x2="840" y2="470" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" />
+    <polygon points="836,464 848,470 836,476" fill="#c9866b" fill-opacity="0.30" />
+  </g>
+  <g id="step-3">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M876,340 H1124 A16,16 0 0 1 1140,356 V584 A16,16 0 0 1 1124,600 H876 A16,16 0 0 1 860,584 V356 A16,16 0 0 1 876,340 Z" />
+    <circle cx="1000" cy="400" r="32" fill="#c9866b" fill-opacity="0.08" />
+    
+  <g transform="translate(979.0, 379.0) scale(1.75)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2" />
+    <path d="M7 14l3 -3l2 2l3 -3l2 2" />
+  </g>
+    <text x="1000" y="465" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="600" fill="#2D2A26">知识网络生长</text>
+    <text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="1000" y="500">十个视图多维度呈现</text><text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="1000" y="524">发现关联 · 对比分析 · 知识图谱</text></g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">03 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 解决方案</text>
+  </g>
+</svg>

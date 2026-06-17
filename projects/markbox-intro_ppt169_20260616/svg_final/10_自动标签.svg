@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8" />
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)" />
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">AI</text>
+    <line x1="80" y1="68" x2="120" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5" />
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">自动标签</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.40">AI 生成 2-5 个精准中文标签，彩色徽章展示</text>
+  </g>
+  <g id="left-content">
+    <g id="feature-1">
+      
+  <g transform="translate(80.0, 210.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6" />
+  </g>
+      <text x="120" y="228" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">智能标签生成</text>
+      <text x="120" y="255" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">DeepSeek V4 Flash 分析书签内容，自动生成 2-5 个精准中文标签</text>
+    </g>
+    <g id="feature-2">
+      
+  <g transform="translate(80.0, 310.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M4 7h3a1 1 0 0 0 1 -1v-1a2 2 0 0 1 4 0v1a1 1 0 0 0 1 1h3a1 1 0 0 1 1 1v3a1 1 0 0 0 1 1h1a2 2 0 0 1 0 4h-1a1 1 0 0 0 -1 1v3a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-1a2 2 0 0 0 -4 0v1a1 1 0 0 1 -1 1h-3a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1h1a2 2 0 0 0 0 -4h-1a1 1 0 0 1 -1 -1v-3a1 1 0 0 1 1 -1" />
+  </g>
+      <text x="120" y="328" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">用户可编辑</text>
+      <text x="120" y="355" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">标签非锁定，用户可手动增删改，标签属于用户私有</text>
+    </g>
+    <g id="feature-3">
+      
+  <g transform="translate(80.0, 410.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M10 3.2a9 9 0 1 0 10.8 10.8a1 1 0 0 0 -1 -1h-6.8a2 2 0 0 1 -2 -2v-7a.9 .9 0 0 0 -1 -.8" />
+    <path d="M15 3.5a9 9 0 0 1 5.5 5.5h-4.5a1 1 0 0 1 -1 -1v-4.5" />
+  </g>
+      <text x="120" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">标签词云可视化</text>
+      <text x="120" y="455" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">纯 CSS flex-wrap + 动态字号实现，Dashboard 标签分布一目了然</text>
+    </g>
+    <g id="feature-4">
+      
+  <g transform="translate(80.0, 510.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M4 6a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M16 18a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
+    <path d="M11 6h5a2 2 0 0 1 2 2v8" />
+    <path d="M14 9l-3 -3l3 -3" />
+    <path d="M13 18h-5a2 2 0 0 1 -2 -2v-8" />
+    <path d="M10 15l3 3l-3 3" />
+  </g>
+      <text x="120" y="528" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">标签共现推荐</text>
+      <text x="120" y="555" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">Jaccard 标签相似度算法，免 AI 毫秒级关联推荐</text>
+    </g>
+  </g>
+  <g id="placeholder-tags">
+    <path fill="#c9866b" fill-opacity="0.03" d="M652,190 H1188 A12,12 0 0 1 1200,202 V618 A12,12 0 0 1 1188,630 H652 A12,12 0 0 1 640,618 V202 A12,12 0 0 1 652,190 Z" />
+    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M652,190 H1188 A12,12 0 0 1 1200,202 V618 A12,12 0 0 1 1188,630 H652 A12,12 0 0 1 640,618 V202 A12,12 0 0 1 652,190 Z" />
+    
+  <g transform="translate(880.0, 375.0) scale(1.6666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M6.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+    <path d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3" />
+  </g>
+    <text x="920" y="400" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.33">detail_tags.png</text>
+    <text x="920" y="423" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">AI 标签徽章特写</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">10 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 自动标签</text>
+  </g>
+</svg>

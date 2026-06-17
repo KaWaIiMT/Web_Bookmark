@@ -1,0 +1,43 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="40%" r="55%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="decor-top">
+    <circle cx="640" cy="360" r="280" fill="none" stroke="#c9866b" stroke-opacity="0.06" stroke-width="0.5"/>
+    <circle cx="640" cy="360" r="350" fill="none" stroke="#d4a574" stroke-opacity="0.03" stroke-width="0.5"/>
+  </g>
+  <g id="headline">
+    <text x="640" y="200" text-anchor="middle" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="44" font-weight="700" fill="#c9866b">开始使用 MarkBox</text>
+    <text x="640" y="250" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" fill="#2D2A26" fill-opacity="0.35">开源免费 · 一行命令 · 让书签成为你的第二大脑</text>
+  </g>
+  <g id="code-block">
+    <rect x="200" y="300" width="880" height="180" rx="12" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.10" stroke-width="1"/>
+    <text x="240" y="340" font-family="'SF Mono', 'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="16" fill="#2D2A26" fill-opacity="0.45">git clone https://github.com/KaWaIiMT/Web_Bookmark.git</text>
+    <text x="240" y="375" font-family="'SF Mono', 'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="16" fill="#2D2A26" fill-opacity="0.45">cd Web_Bookmark</text>
+    <text x="240" y="410" font-family="'SF Mono', 'JetBrains Mono', Consolas, 'Courier New', monospace" font-size="16" fill="#2D2A26" fill-opacity="0.45">npm install &amp;&amp; npx prisma db push &amp;&amp; npm run dev</text>
+    <text x="240" y="452" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">打开 http://localhost:3000 即可使用</text>
+  </g>
+  <g id="cta">
+    <rect x="440" y="540" width="180" height="48" rx="24" fill="#c9866b" fill-opacity="0.08"/>
+    <use data-icon="tabler-outline/star" x="470" y="553" width="22" height="22" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="505" y="569" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="600" fill="#c9866b">Star on GitHub</text>
+    <rect x="640" y="540" width="200" height="48" rx="24" fill="#c9866b" fill-opacity="0.06"/>
+    <use data-icon="tabler-outline/git-fork" x="670" y="553" width="22" height="22" fill="#c9866b" fill-opacity="0.45" stroke-width="2"/>
+    <text x="705" y="569" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.40">Fork &amp; Contribute</text>
+  </g>
+  <g id="summary">
+    <line x1="300" y1="625" x2="980" y2="625" stroke="#2D2A26" stroke-opacity="0.10" stroke-width="0.5"/>
+    <text x="640" y="655" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">Next.js 16 · Prisma 7 · DeepSeek V4 Flash · TypeScript · 36 API · 28 组件 · 10 视图 · 开源 MIT</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">25 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 开始使用</text>
+  </g>
+</svg>

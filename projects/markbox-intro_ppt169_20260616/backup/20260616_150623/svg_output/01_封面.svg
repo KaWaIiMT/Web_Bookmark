@@ -1,0 +1,75 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="accentBar" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="50%" stop-color="#06B6D4"/>
+      <stop offset="100%" stop-color="#8B5CF6"/>
+    </linearGradient>
+    <radialGradient id="bgGlow" cx="70%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.10"/>
+      <stop offset="50%" stop-color="#3B82F6" stop-opacity="0.03"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="bottomGlow" cx="30%" cy="80%" r="50%">
+      <stop offset="0%" stop-color="#8B5CF6" stop-opacity="0.06"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+    <marker id="arrowHead" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#3B82F6"/>
+    </marker>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1280" height="720" fill="#0F172A"/>
+  <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  <rect x="0" y="0" width="1280" height="720" fill="url(#bottomGlow)"/>
+
+  <!-- Subtle grid lines -->
+  <line x1="60" y1="360" x2="1220" y2="360" stroke="#1E293B" stroke-width="1"/>
+
+  <!-- Decorative hexagon nodes -->
+  <polygon points="1120,120 1130,110 1140,120 1140,130 1130,140 1120,130" fill="none" stroke="#3B82F6" stroke-width="1" stroke-opacity="0.3"/>
+  <circle cx="1130" cy="125" r="3" fill="#06B6D4" fill-opacity="0.4"/>
+  <polygon points="180,560 188,552 196,560 196,568 188,576 180,568" fill="none" stroke="#8B5CF6" stroke-width="1" stroke-opacity="0.2"/>
+  <circle cx="188" cy="564" r="2" fill="#8B5CF6" fill-opacity="0.3"/>
+
+  <!-- Corner accents -->
+  <line x1="60" y1="80" x2="180" y2="80" stroke="#3B82F6" stroke-width="2" stroke-opacity="0.4"/>
+  <line x1="60" y1="80" x2="60" y2="110" stroke="#3B82F6" stroke-width="2" stroke-opacity="0.4"/>
+  <line x1="1220" y1="640" x2="1100" y2="640" stroke="#06B6D4" stroke-width="2" stroke-opacity="0.3"/>
+  <line x1="1220" y1="640" x2="1220" y2="610" stroke="#06B6D4" stroke-width="2" stroke-opacity="0.3"/>
+
+  <!-- Main content area — centered -->
+  <!-- Icon: bookmark -->
+  <g transform="translate(640, 200)">
+    <path d="M-24,-30 L24,-30 L24,30 L0,18 L-24,30 Z" fill="none" stroke="url(#titleGrad)" stroke-width="2.5" stroke-linejoin="round"/>
+    <path d="M-24,-30 L-24,-14" stroke="url(#titleGrad)" stroke-width="2.5"/>
+  </g>
+
+  <!-- Title -->
+  <text x="640" y="290" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="72" font-weight="bold" fill="#F1F5F9" letter-spacing="4">MarkBox</text>
+
+  <!-- Accent underline -->
+  <rect x="520" y="310" width="240" height="4" rx="2" fill="url(#accentBar)"/>
+
+  <!-- Subtitle -->
+  <text x="640" y="365" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="28" font-weight="bold" fill="url(#titleGrad)" letter-spacing="8">AI 智能书签管理器</text>
+
+  <!-- Tagline -->
+  <text x="640" y="425" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" fill="#94A3B8">
+    <tspan x="640" dy="0">粘贴链接 · AI 理解 · 知识沉淀</tspan>
+  </text>
+
+  <!-- Bottom info -->
+  <text x="640" y="640" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="14" fill="#64748B">
+    <tspan x="640" dy="0">github.com/KaWaIiMT/Web_Bookmark</tspan>
+    <tspan x="640" dy="22">Next.js 16 · React 19 · Prisma 7 · DeepSeek V4</tspan>
+  </text>
+
+  <!-- Page number -->
+  <text x="1220" y="690" text-anchor="end" font-family="Consolas, 'Courier New', monospace" font-size="12" fill="#64748B">01 / 14</text>
+</svg>

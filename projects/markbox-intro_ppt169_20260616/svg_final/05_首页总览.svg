@@ -1,0 +1,35 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="30%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8" />
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)" />
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">基座</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5" />
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">首页总览</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.40">侧边栏导航 + 统计卡片 + 书签概览 + 视图切换</text>
+  </g>
+  <g id="placeholder-dashboard">
+    <path fill="#c9866b" fill-opacity="0.03" d="M92,190 H1188 A12,12 0 0 1 1200,202 V598 A12,12 0 0 1 1188,610 H92 A12,12 0 0 1 80,598 V202 A12,12 0 0 1 92,190 Z" />
+    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M92,190 H1188 A12,12 0 0 1 1200,202 V598 A12,12 0 0 1 1188,610 H92 A12,12 0 0 1 80,598 V202 A12,12 0 0 1 92,190 Z" />
+    
+  <g transform="translate(596.0, 355.0) scale(1.6666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+    <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+  </g>
+    <text x="640" y="415" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.33">full_dashboard.png</text>
+    <text x="640" y="438" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">仪表板主页全貌截图</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">05 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 首页总览</text>
+  </g>
+</svg>

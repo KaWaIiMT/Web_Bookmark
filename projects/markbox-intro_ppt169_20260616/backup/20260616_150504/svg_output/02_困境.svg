@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="accentBarH" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <linearGradient id="cardBorder1" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3B82F6" stop-opacity="0.3"/>
+      <stop offset="100%" stop-color="#06B6D4" stop-opacity="0.1"/>
+    </linearGradient>
+  </defs>
+
+  <!-- Background -->
+  <rect x="0" y="0" width="1280" height="720" fill="#0F172A"/>
+
+  <!-- Left section — big statement -->
+  <text x="100" y="180" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" fill="#64748B" letter-spacing="4">问 题</text>
+
+  <text x="100" y="250" font-family="'Noto Sans SC', Arial, sans-serif" font-size="48" font-weight="bold" fill="#F1F5F9">
+    <tspan x="100" dy="0">收藏从未停止</tspan>
+    <tspan x="100" dy="58">整理从未开始</tspan>
+  </text>
+
+  <rect x="100" y="320" width="80" height="4" rx="2" fill="url(#accentBarH)"/>
+
+  <text x="100" y="380" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" fill="#94A3B8">
+    <tspan x="100" dy="0">信息过载时代</tspan>
+    <tspan x="100" dy="28">传统书签管理已经失效</tspan>
+  </text>
+
+  <!-- Divider -->
+  <line x1="540" y1="100" x2="540" y2="620" stroke="#334155" stroke-width="1"/>
+
+  <!-- Right section — 3 pain-point cards -->
+  <!-- Card 1 -->
+  <rect x="600" y="100" width="600" height="150" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="600" y="100" width="4" height="150" rx="2" fill="#3B82F6"/>
+  <text x="640" y="150" font-family="'Noto Sans SC', Arial, sans-serif" font-size="24" font-weight="bold" fill="#F1F5F9">500+ 链接，想找的永远找不到</text>
+  <text x="640" y="185" font-family="'Noto Sans SC', Arial, sans-serif" font-size="17" fill="#94A3B8">
+    <tspan x="640" dy="0">浏览器收藏夹混乱、文件夹嵌套越来越深</tspan>
+    <tspan x="640" dy="26">缺乏智能分类和全文搜索能力</tspan>
+  </text>
+
+  <!-- Card 2 -->
+  <rect x="600" y="280" width="600" height="150" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="600" y="280" width="4" height="150" rx="2" fill="#06B6D4"/>
+  <text x="640" y="330" font-family="'Noto Sans SC', Arial, sans-serif" font-size="24" font-weight="bold" fill="#F1F5F9">看到好文章就存，存完再也不看</text>
+  <text x="640" y="365" font-family="'Noto Sans SC', Arial, sans-serif" font-size="17" fill="#94A3B8">
+    <tspan x="640" dy="0">沦为「数字仓鼠」— 收藏=完成</tspan>
+    <tspan x="640" dy="26">缺乏阅读状态追踪和定期回顾机制</tspan>
+  </text>
+
+  <!-- Card 3 -->
+  <rect x="600" y="460" width="600" height="150" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="600" y="460" width="4" height="150" rx="2" fill="#8B5CF6"/>
+  <text x="640" y="510" font-family="'Noto Sans SC', Arial, sans-serif" font-size="24" font-weight="bold" fill="#F1F5F9">知识散落各处，无法形成体系</text>
+  <text x="640" y="545" font-family="'Noto Sans SC', Arial, sans-serif" font-size="17" fill="#94A3B8">
+    <tspan x="640" dy="0">孤立的链接之间缺乏关联</tspan>
+    <tspan x="640" dy="26">无法从收藏中形成结构化知识</tspan>
+  </text>
+
+  <text x="1220" y="690" text-anchor="end" font-family="Consolas, monospace" font-size="12" fill="#64748B">02 / 14</text>
+</svg>

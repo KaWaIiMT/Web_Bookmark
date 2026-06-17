@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">生态</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5"/>
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">浏览器扩展</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.40">不离开浏览器就能完成一切 — 右键收藏 · 快捷键 · 弹窗 · 侧边栏</text>
+  </g>
+  <g id="left-content">
+    <g id="ext-context">
+      <use data-icon="tabler-outline/mouse" x="80" y="210" width="24" height="24" fill="#c9866b" fill-opacity="0.50" stroke-width="2"/>
+      <text x="120" y="228" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">右键菜单收藏</text>
+      <text x="120" y="255" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">在任意网页上右键，一键将当前页面保存到 MarkBox</text>
+    </g>
+    <g id="ext-shortcut">
+      <use data-icon="tabler-outline/terminal" x="80" y="315" width="24" height="24" fill="#c9866b" fill-opacity="0.50" stroke-width="2"/>
+      <text x="120" y="333" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">快捷键静默收藏</text>
+      <text x="120" y="360" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">Ctrl+Shift+S，不中断浏览，后台静默保存，通知栏轻提示</text>
+    </g>
+    <g id="ext-popup">
+      <use data-icon="tabler-outline/layout-dashboard" x="80" y="420" width="24" height="24" fill="#c9866b" fill-opacity="0.50" stroke-width="2"/>
+      <text x="120" y="438" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">弹窗完整流程</text>
+      <text x="120" y="465" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">去重检测 · AI 分类建议 · 状态选择 · 标签预览 · 确认入库</text>
+    </g>
+    <g id="ext-sidepanel">
+      <use data-icon="tabler-outline/search" x="80" y="525" width="24" height="24" fill="#c9866b" fill-opacity="0.50" stroke-width="2"/>
+      <text x="120" y="543" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">侧边栏浏览</text>
+      <text x="120" y="570" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">在浏览器侧边栏浏览、搜索最近书签，不离开当前页面</text>
+    </g>
+  </g>
+  <g id="placeholder-extension">
+    <rect x="640" y="190" width="560" height="450" rx="12" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="640" y="190" width="560" height="450" rx="12" fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/puzzle" x="880" y="380" width="40" height="40" fill="#c9866b" fill-opacity="0.45" stroke-width="2"/>
+    <text x="920" y="405" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.33">detail_extension_popup.png</text>
+    <text x="920" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">浏览器扩展弹窗界面</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">20 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 浏览器扩展</text>
+  </g>
+</svg>

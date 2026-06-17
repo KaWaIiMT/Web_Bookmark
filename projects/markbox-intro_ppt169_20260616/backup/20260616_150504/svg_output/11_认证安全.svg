@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="720" fill="#0F172A"/>
+
+  <!-- Header -->
+  <text x="640" y="70" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" fill="#64748B" letter-spacing="4">安 全 与 开 放</text>
+  <text x="640" y="112" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="36" font-weight="bold" fill="#F1F5F9">安全与开放</text>
+  <rect x="560" y="126" width="160" height="3" rx="1.5" fill="url(#titleGrad)"/>
+  <text x="640" y="160" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#94A3B8">双重认证保障安全，API Key 开放集成 — 兼顾安全与可扩展</text>
+
+  <!-- Divider -->
+  <line x1="640" y1="185" x2="640" y2="650" stroke="#334155" stroke-width="1"/>
+
+  <!-- Left: Auth -->
+  <text x="290" y="225" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="22" font-weight="bold" fill="#3B82F6">🔐 认证体系</text>
+
+  <!-- GitHub OAuth -->
+  <rect x="60" y="260" width="560" height="100" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="60" y="260" width="4" height="100" rx="2" fill="#3B82F6"/>
+  <text x="100" y="295" font-family="'Noto Sans SC', Arial, sans-serif" font-size="20" font-weight="bold" fill="#F1F5F9">GitHub OAuth 登录</text>
+  <text x="100" y="325" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">
+    <tspan x="100" dy="0">NextAuth v5 · prompt: "consent" 强制授权 → 支持账号切换</tspan>
+    <tspan x="100" dy="24">Callback: /api/auth/callback/github</tspan>
+  </text>
+
+  <!-- Dual Middleware -->
+  <rect x="60" y="380" width="560" height="110" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="60" y="380" width="4" height="110" rx="2" fill="#06B6D4"/>
+  <text x="100" y="415" font-family="'Noto Sans SC', Arial, sans-serif" font-size="20" font-weight="bold" fill="#F1F5F9">双重认证中间件</text>
+  <text x="100" y="445" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">
+    <tspan x="100" dy="0">优先 Session 认证 (同源 Web 应用)</tspan>
+    <tspan x="100" dy="24">回退 API Key 认证 (SHA-256 哈希比对)</tspan>
+    <tspan x="100" dy="24">自动更新 lastUsedAt (异步，不阻塞请求)</tspan>
+  </text>
+
+  <!-- CORS -->
+  <rect x="60" y="510" width="560" height="80" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="60" y="510" width="4" height="80" rx="2" fill="#8B5CF6"/>
+  <text x="100" y="543" font-family="'Noto Sans SC', Arial, sans-serif" font-size="20" font-weight="bold" fill="#F1F5F9">CORS 中间件</text>
+  <text x="100" y="570" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">localhost · chrome-extension:// · moz-extension:// · NEXT_PUBLIC_APP_URL</text>
+
+  <!-- Right: API Keys -->
+  <text x="980" y="225" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="22" font-weight="bold" fill="#06B6D4">🔑 API Key 管理</text>
+
+  <rect x="660" y="260" width="560" height="330" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+
+  <!-- Key format -->
+  <text x="700" y="305" font-family="Consolas, monospace" font-size="18" font-weight="bold" fill="#06B6D4">mb_xxxxxxxx...xxxxxxxx</text>
+  <text x="700" y="335" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">mb_ 前缀 · 96 字符随机密钥</text>
+
+  <line x1="700" y1="355" x2="1180" y2="355" stroke="#334155" stroke-width="1"/>
+
+  <!-- Features -->
+  <text x="700" y="390" font-family="'Noto Sans SC', Arial, sans-serif" font-size="17" fill="#F1F5F9">
+    <tspan x="700" dy="0">✓ 仅生成时完整显示一次</tspan>
+    <tspan x="700" dy="28">✓ 显示/隐藏切换 + 一键复制</tspan>
+    <tspan x="700" dy="28">✓ 吊销 (删除) Key</tspan>
+    <tspan x="700" dy="28">✓ 已有 Key 列表 (名称/创建时间/上次使用)</tspan>
+  </text>
+
+  <line x1="700" y1="510" x2="1180" y2="510" stroke="#334155" stroke-width="1"/>
+
+  <text x="700" y="540" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#64748B">
+    <tspan x="700" dy="0">API: GET/POST /api/settings/api-keys</tspan>
+    <tspan x="700" dy="24">DELETE /api/settings/api-keys/[id]</tspan>
+  </text>
+
+  <!-- Bottom note -->
+  <text x="640" y="650" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#64748B">所有 API Key 经 SHA-256 哈希存储，原文不可逆</text>
+
+  <text x="1220" y="690" text-anchor="end" font-family="Consolas, monospace" font-size="12" fill="#64748B">11 / 14</text>
+</svg>

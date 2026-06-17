@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#25221f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#25221f"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.3">生态</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.3" stroke-width="1.5"/>
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#e8e4df">语音搜索</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.50">Web Speech API 中文识别 — 说话就能搜到书签</text>
+  </g>
+  <g id="left-content">
+    <g id="voice-speech">
+      <use data-icon="tabler-outline/microphone" x="80" y="210" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="228" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">浏览器原生语音识别</text>
+      <text x="120" y="255" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">Web Speech API 无需额外权限，Chrome 原生支持中文识别</text>
+    </g>
+    <g id="voice-realtime">
+      <use data-icon="tabler-outline/wand" x="80" y="315" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="333" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">实时识别展示</text>
+      <text x="120" y="360" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">边说边显示识别文字 · 语音结束后自动填入搜索框触发搜索</text>
+    </g>
+    <g id="voice-pulse">
+      <use data-icon="tabler-outline/chart-pie" x="80" y="420" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="438" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">脉冲指示器动画</text>
+      <text x="120" y="465" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">CSS 动画驱动的脉冲波纹，语音识别进行中时可见麦克风状态</text>
+    </g>
+    <g id="voice-ux">
+      <use data-icon="tabler-outline/search" x="80" y="525" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="543" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">自然语言搜索结合</text>
+      <text x="120" y="570" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">"上次那个讲 React hooks 的视频" → 语义搜索召回相关书签</text>
+    </g>
+  </g>
+  <g id="placeholder-voice">
+    <rect x="640" y="190" width="560" height="450" rx="12" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="640" y="190" width="560" height="450" rx="12" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/microphone" x="880" y="380" width="40" height="40" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="920" y="405" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#e8e4df" fill-opacity="0.33">detail_voice.png</text>
+    <text x="920" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">语音搜索脉冲动画 + 识别文字</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.33">21 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">MarkBox · 语音搜索</text>
+  </g>
+</svg>

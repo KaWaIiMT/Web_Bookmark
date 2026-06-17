@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8" />
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)" />
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">生态</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5" />
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">分享与协作</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.40">公开分享收藏夹 · 单条书签分享卡片 · CORS 跨域支持</text>
+  </g>
+  <g id="left-content">
+    <g id="share-collection">
+      
+  <g transform="translate(80.0, 210.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+  </g>
+      <text x="120" y="228" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">共享收藏夹</text>
+      <text x="120" y="255" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">收藏夹设为公开 → 生成分享链接 `/share/[id]` → 可管理可撤销</text>
+    </g>
+    <g id="share-single">
+      
+  <g transform="translate(80.0, 315.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M3 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+    <path d="M15 6a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+    <path d="M15 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+    <path d="M8.7 10.7l6.6 -3.4" />
+    <path d="M8.7 13.3l6.6 3.4" />
+  </g>
+      <text x="120" y="333" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">单条书签分享</text>
+      <text x="120" y="360" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">生成分享 Token → 分享卡片页面 → 一键复制链接发送</text>
+    </g>
+    <g id="cors">
+      
+  <g transform="translate(80.0, 420.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M7 9a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+    <path d="M5.75 15a8.015 8.015 0 1 0 9.25 -13" />
+    <path d="M11 17v4" />
+    <path d="M7 21h8" />
+  </g>
+      <text x="120" y="438" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">CORS 跨域中间件</text>
+      <text x="120" y="465" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">浏览器扩展 / localhost / 自定义域名统一支持 · 安全白名单策略</text>
+    </g>
+    <g id="mobile">
+      
+  <g transform="translate(80.0, 525.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+    <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+  </g>
+      <text x="120" y="543" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">响应式设计</text>
+      <text x="120" y="570" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">桌面固定侧边栏 · 移动端抽屉式 · 响应式卡片布局</text>
+    </g>
+  </g>
+  <g id="placeholder-share">
+    <path fill="#c9866b" fill-opacity="0.03" d="M652,190 H1188 A12,12 0 0 1 1200,202 V628 A12,12 0 0 1 1188,640 H652 A12,12 0 0 1 640,628 V202 A12,12 0 0 1 652,190 Z" />
+    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M652,190 H1188 A12,12 0 0 1 1200,202 V628 A12,12 0 0 1 1188,640 H652 A12,12 0 0 1 640,628 V202 A12,12 0 0 1 652,190 Z" />
+    
+  <g transform="translate(880.0, 380.0) scale(1.6666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M3 12a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+    <path d="M15 6a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+    <path d="M15 18a3 3 0 1 0 6 0a3 3 0 1 0 -6 0" />
+    <path d="M8.7 10.7l6.6 -3.4" />
+    <path d="M8.7 13.3l6.6 3.4" />
+  </g>
+    <text x="920" y="405" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.33">detail_share.png</text>
+    <text x="920" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">分享收藏夹/分享卡片</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">22 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 分享与协作</text>
+  </g>
+</svg>

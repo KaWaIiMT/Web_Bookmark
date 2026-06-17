@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#25221f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#25221f"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.3">生态</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.3" stroke-width="1.5"/>
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#e8e4df">分享与协作</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.50">公开分享收藏夹 · 单条书签分享卡片 · CORS 跨域支持</text>
+  </g>
+  <g id="left-content">
+    <g id="share-collection">
+      <use data-icon="tabler-outline/folder" x="80" y="210" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="228" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">共享收藏夹</text>
+      <text x="120" y="255" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">收藏夹设为公开 → 生成分享链接 `/share/[id]` → 可管理可撤销</text>
+    </g>
+    <g id="share-single">
+      <use data-icon="tabler-outline/share" x="80" y="315" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="333" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">单条书签分享</text>
+      <text x="120" y="360" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">生成分享 Token → 分享卡片页面 → 一键复制链接发送</text>
+    </g>
+    <g id="cors">
+      <use data-icon="tabler-outline/globe" x="80" y="420" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="438" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">CORS 跨域中间件</text>
+      <text x="120" y="465" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">浏览器扩展 / localhost / 自定义域名统一支持 · 安全白名单策略</text>
+    </g>
+    <g id="mobile">
+      <use data-icon="tabler-outline/layout-dashboard" x="80" y="525" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="543" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">响应式设计</text>
+      <text x="120" y="570" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">桌面固定侧边栏 · 移动端抽屉式 · 响应式卡片布局</text>
+    </g>
+  </g>
+  <g id="placeholder-share">
+    <rect x="640" y="190" width="560" height="450" rx="12" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="640" y="190" width="560" height="450" rx="12" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/share" x="880" y="380" width="40" height="40" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="920" y="405" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#e8e4df" fill-opacity="0.33">detail_share.png</text>
+    <text x="920" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">分享收藏夹/分享卡片</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.33">22 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">MarkBox · 分享与协作</text>
+  </g>
+</svg>

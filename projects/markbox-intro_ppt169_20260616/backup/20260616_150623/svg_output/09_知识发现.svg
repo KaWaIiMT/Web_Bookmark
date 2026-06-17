@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="720" fill="#0F172A"/>
+
+  <!-- Header -->
+  <text x="640" y="70" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" fill="#64748B" letter-spacing="4">知 识 发 现</text>
+  <text x="640" y="112" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="36" font-weight="bold" fill="#F1F5F9">深度知识发现</text>
+  <rect x="560" y="126" width="160" height="3" rx="1.5" fill="url(#titleGrad)"/>
+  <text x="640" y="160" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#94A3B8">让书签之间产生联系 — 图谱关联、多维度对比、结构化学习路径</text>
+
+  <!-- Card 1: Knowledge Graph -->
+  <rect x="60" y="210" width="370" height="380" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="60" y="210" width="370" height="4" rx="2" fill="#3B82F6"/>
+  <text x="245" y="260" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="26" font-weight="bold" fill="#3B82F6">🧬 知识图谱</text>
+  <text x="245" y="300" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#F1F5F9">
+    <tspan x="245" dy="0">react-force-graph-2d</tspan>
+    <tspan x="245" dy="24">力导向图展示关联网络</tspan>
+    <tspan x="245" dy="24">节点搜索与高亮筛选</tspan>
+    <tspan x="245" dy="24">Canvas 截图导出 PNG</tspan>
+    <tspan x="245" dy="24">时间轴滑块动画播放</tspan>
+    <tspan x="245" dy="24">暗色/亮色主题 Canvas 适配</tspan>
+  </text>
+  <!-- Graph mini mock -->
+  <circle cx="200" cy="490" r="18" fill="#3B82F6" fill-opacity="0.3" stroke="#3B82F6" stroke-width="1"/>
+  <circle cx="260" cy="470" r="14" fill="#06B6D4" fill-opacity="0.3" stroke="#06B6D4" stroke-width="1"/>
+  <circle cx="230" cy="520" r="16" fill="#8B5CF6" fill-opacity="0.3" stroke="#8B5CF6" stroke-width="1"/>
+  <circle cx="290" cy="510" r="12" fill="#10B981" fill-opacity="0.3" stroke="#10B981" stroke-width="1"/>
+  <line x1="200" y1="490" x2="260" y2="470" stroke="#334155" stroke-width="1"/>
+  <line x1="200" y1="490" x2="230" y2="520" stroke="#334155" stroke-width="1"/>
+  <line x1="260" y1="470" x2="290" y2="510" stroke="#334155" stroke-width="1"/>
+  <line x1="230" y1="520" x2="290" y2="510" stroke="#334155" stroke-width="1"/>
+
+  <!-- Card 2: Compare -->
+  <rect x="455" y="210" width="370" height="380" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="455" y="210" width="370" height="4" rx="2" fill="#06B6D4"/>
+  <text x="640" y="260" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="26" font-weight="bold" fill="#06B6D4">⚖️ 横向对比</text>
+  <text x="640" y="300" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#F1F5F9">
+    <tspan x="640" dy="0">选择 2-5 篇书签</tspan>
+    <tspan x="640" dy="24">AI 多维对比分析</tspan>
+    <tspan x="640" dy="24">雷达图 5 维度评分</tspan>
+    <tspan x="640" dy="30">深度 · 可读性 · 权威性 · 时效性 · 实用性</tspan>
+    <tspan x="640" dy="30">矩阵表格 + AI 综合评论</tspan>
+  </text>
+  <!-- Radar mini mock -->
+  <polygon points="640,430 670,460 660,500 620,500 610,460" fill="#06B6D4" fill-opacity="0.1" stroke="#06B6D4" stroke-width="1.5"/>
+  <polygon points="640,440 660,462 653,490 627,490 620,462" fill="#06B6D4" fill-opacity="0.2" stroke="#06B6D4" stroke-width="1"/>
+  <text x="640" y="550" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#64748B">POST /api/comparisons</text>
+
+  <!-- Card 3: Learning Path -->
+  <rect x="850" y="210" width="370" height="380" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="850" y="210" width="370" height="4" rx="2" fill="#8B5CF6"/>
+  <text x="1035" y="260" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="26" font-weight="bold" fill="#8B5CF6">📚 学习路径</text>
+  <text x="1035" y="300" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#F1F5F9">
+    <tspan x="1035" dy="0">创建结构化学习计划</tspan>
+    <tspan x="1035" dy="24">书签组织成渐进路线</tspan>
+    <tspan x="1035" dy="24">阶段 + 难度 + 预估时间</tspan>
+    <tspan x="1035" dy="24">完成状态追踪</tspan>
+    <tspan x="1035" dy="24">学习笔记 (takeaway/note)</tspan>
+    <tspan x="1035" dy="24">AI 分析路径合理性</tspan>
+  </text>
+  <!-- Path mock -->
+  <rect x="930" y="480" width="180" height="28" rx="6" fill="#8B5CF6" fill-opacity="0.15"/>
+  <text x="1020" y="499" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="13" fill="#8B5CF6">入门 · 基础概念</text>
+  <line x1="1020" y1="508" x2="1020" y2="520" stroke="#334155" stroke-width="1"/>
+  <rect x="930" y="520" width="180" height="28" rx="6" fill="#8B5CF6" fill-opacity="0.15"/>
+  <text x="1020" y="539" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="13" fill="#8B5CF6">进阶 · 核心原理</text>
+  <line x1="1020" y1="548" x2="1020" y2="560" stroke="#334155" stroke-width="1"/>
+  <rect x="930" y="560" width="180" height="28" rx="6" fill="#10B981" fill-opacity="0.15"/>
+  <text x="1020" y="579" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="13" fill="#10B981">✓ 实战 · 项目应用</text>
+
+  <text x="1220" y="690" text-anchor="end" font-family="Consolas, monospace" font-size="12" fill="#64748B">09 / 14</text>
+</svg>

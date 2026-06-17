@@ -1,0 +1,55 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="85%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8" />
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)" />
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">问题</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5" />
+  </g>
+  <g id="left-headline">
+    <text x="80" y="200" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="48" font-weight="700" fill="#2D2A26">书签的困境</text>
+    <text font-size="22" fill-opacity="0.45" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="80" y="320">收藏从未停止</text><text font-size="22" fill-opacity="0.45" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="80" y="356">整理从未开始</text><text x="80" y="430" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.32">信息过载时代，传统书签管理已经失效</text>
+    <line x1="80" y1="470" x2="480" y2="470" stroke="#c9866b" stroke-opacity="0.18" stroke-width="0.5" />
+  </g>
+  <g id="card-pain-1">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M632,140 H1188 A12,12 0 0 1 1200,152 V268 A12,12 0 0 1 1188,280 H632 A12,12 0 0 1 620,268 V152 A12,12 0 0 1 632,140 Z" />
+    
+  <g transform="translate(650.0, 178.0) scale(1.1666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+    <path d="M21 21l-6 -6" />
+  </g>
+    <text x="695" y="196" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#2D2A26">收藏 500+ 链接，想找的永远找不到</text>
+    <text x="695" y="229" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.45">缺乏智能分类和高效搜索，浏览器默认书签栏杂乱无章</text>
+  </g>
+  <g id="card-pain-2">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M632,300 H1188 A12,12 0 0 1 1200,312 V428 A12,12 0 0 1 1188,440 H632 A12,12 0 0 1 620,428 V312 A12,12 0 0 1 632,300 Z" />
+    
+  <g transform="translate(650.0, 338.0) scale(1.1666666666666667)" fill="none" stroke="#b76e4b" stroke-width="2">
+    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+    <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+  </g>
+    <text x="695" y="356" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#2D2A26">看到好文章就存，存完再也不看</text>
+    <text x="695" y="389" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.45">缺乏阅读追踪和回顾机制，书签沦为一串沉默的链接</text>
+  </g>
+  <g id="card-pain-3">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M632,460 H1188 A12,12 0 0 1 1200,472 V588 A12,12 0 0 1 1188,600 H632 A12,12 0 0 1 620,588 V472 A12,12 0 0 1 632,460 Z" />
+    
+  <g transform="translate(650.0, 498.0) scale(1.1666666666666667)" fill="none" stroke="#d4a574" stroke-width="2">
+    <path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2" />
+    <path d="M7 14l3 -3l2 2l3 -3l2 2" />
+  </g>
+    <text x="695" y="516" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#2D2A26">知识散落各处，无法形成体系</text>
+    <text x="695" y="549" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.45">孤立的链接之间没有关联，无法进行深度阅读和知识结构化</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">02 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 书签的困境</text>
+  </g>
+</svg>

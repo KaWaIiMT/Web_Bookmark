@@ -1,0 +1,78 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8" />
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)" />
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">视图</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5" />
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">发现页 &amp; 关联推荐</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.40">三模式发现 + 三层推荐体系 — 让好书签自己找到你</text>
+  </g>
+  <g id="left-content">
+    <g id="mode-discover">
+      
+  <g transform="translate(80.0, 200.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M7 9a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+    <path d="M5.75 15a8.015 8.015 0 1 0 9.25 -13" />
+    <path d="M11 17v4" />
+    <path d="M7 21h8" />
+  </g>
+      <text x="120" y="218" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">三模式发现页</text>
+      <text x="120" y="245" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">跨领域探索 · 最新收录 · 每日精选 — 三种维度切换</text>
+    </g>
+    <g id="layer-tag">
+      
+  <g transform="translate(80.0, 305.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M6.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+    <path d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3" />
+  </g>
+      <text x="120" y="323" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">第一层：标签共现</text>
+      <text x="120" y="350" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">Jaccard 相似度算法 · 免 AI · 毫秒级延迟 · 同分类降级</text>
+    </g>
+    <g id="layer-embed">
+      
+  <g transform="translate(80.0, 410.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M4 6a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" />
+    <path d="M4 6v6a8 3 0 0 0 16 0v-6" />
+    <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+  </g>
+      <text x="120" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">第二层：语义向量精排</text>
+      <text x="120" y="455" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">DeepSeek Embedding API · 余弦相似度 · 标签40%+语义60%混合评分</text>
+    </g>
+    <g id="layer-dashboard">
+      
+  <g transform="translate(80.0, 515.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+    <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+  </g>
+      <text x="120" y="533" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">第三层：Dashboard 个性化</text>
+      <text x="120" y="560" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">继续深入 · 拓展边界 · 重温旧藏 — 三维度智能推荐卡片</text>
+    </g>
+  </g>
+  <g id="placeholder-discover">
+    <path fill="#c9866b" fill-opacity="0.03" d="M652,190 H1188 A12,12 0 0 1 1200,202 V628 A12,12 0 0 1 1188,640 H652 A12,12 0 0 1 640,628 V202 A12,12 0 0 1 652,190 Z" />
+    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M652,190 H1188 A12,12 0 0 1 1200,202 V628 A12,12 0 0 1 1188,640 H652 A12,12 0 0 1 640,628 V202 A12,12 0 0 1 652,190 Z" />
+    
+  <g transform="translate(880.0, 380.0) scale(1.6666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M7 9a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
+    <path d="M5.75 15a8.015 8.015 0 1 0 9.25 -13" />
+    <path d="M11 17v4" />
+    <path d="M7 21h8" />
+  </g>
+    <text x="920" y="405" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.33">detail_discover.png</text>
+    <text x="920" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">发现页 · 推荐卡片视图</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">19 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 发现页 &amp; 推荐</text>
+  </g>
+</svg>

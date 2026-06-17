@@ -1,0 +1,70 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="60%" cy="30%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#25221f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#25221f"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.3">基座</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.3" stroke-width="1.5"/>
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#e8e4df">富媒体卡片</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.50">四种内容类型，四种差异化卡片展示</text>
+  </g>
+  <!-- Content type matrix -->
+  <g id="type-video">
+    <rect x="80" y="200" width="260" height="180" rx="10" fill="#33302d"/>
+    <rect x="80" y="200" width="260" height="180" rx="10" fill="none" stroke="#e8e4df" stroke-opacity="0.12" stroke-width="1"/>
+    <use data-icon="tabler-outline/headphones" x="195" y="250" width="30" height="30" fill="#c9866b" stroke-width="2"/>
+    <text x="210" y="295" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">视频</text>
+    <text x="210" y="325" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.50">横向大卡片 · 封面左侧</text>
+    <text x="210" y="348" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.38">UP主 · 播放量 · 时长</text>
+  </g>
+  <g id="type-article">
+    <rect x="360" y="200" width="260" height="180" rx="10" fill="#33302d"/>
+    <rect x="360" y="200" width="260" height="180" rx="10" fill="none" stroke="#e8e4df" stroke-opacity="0.12" stroke-width="1"/>
+    <use data-icon="tabler-outline/file" x="475" y="250" width="30" height="30" fill="#c9866b" stroke-width="2"/>
+    <text x="490" y="295" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">文章</text>
+    <text x="490" y="325" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.50">纵向卡片 · 头图顶部</text>
+    <text x="490" y="348" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.38">作者 · 日期 · 阅读时长</text>
+  </g>
+  <g id="type-repo">
+    <rect x="640" y="200" width="260" height="180" rx="10" fill="#33302d"/>
+    <rect x="640" y="200" width="260" height="180" rx="10" fill="none" stroke="#e8e4df" stroke-opacity="0.12" stroke-width="1"/>
+    <use data-icon="tabler-outline/git-fork" x="755" y="250" width="30" height="30" fill="#c9866b" stroke-width="2"/>
+    <text x="770" y="295" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">代码仓库</text>
+    <text x="770" y="325" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.50">紧凑卡片 · 语言色条</text>
+    <text x="770" y="348" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.38">Star · Fork · License</text>
+  </g>
+  <g id="type-webpage">
+    <rect x="920" y="200" width="280" height="180" rx="10" fill="#33302d"/>
+    <rect x="920" y="200" width="280" height="180" rx="10" fill="none" stroke="#e8e4df" stroke-opacity="0.12" stroke-width="1"/>
+    <use data-icon="tabler-outline/globe" x="1045" y="250" width="30" height="30" fill="#c9866b" stroke-width="2"/>
+    <text x="1060" y="295" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">网页</text>
+    <text x="1060" y="325" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.50">简约卡片 · Favicon</text>
+    <text x="1060" y="348" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.38">标题 · 域名 · 描述片段</text>
+  </g>
+  <!-- Placeholders row -->
+  <g id="placeholder-grid">
+    <rect x="80" y="415" width="545" height="220" rx="10" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="80" y="415" width="545" height="220" rx="10" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/bookmarks" x="320" y="495" width="36" height="36" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="352" y="520" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.33">full_grid.png</text>
+    <text x="352" y="542" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">书签网格视图全貌</text>
+  </g>
+  <g id="placeholder-cards">
+    <rect x="655" y="415" width="545" height="220" rx="10" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="655" y="415" width="545" height="220" rx="10" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/eye" x="895" y="495" width="36" height="36" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="927" y="520" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.33">detail_media_cards.png</text>
+    <text x="927" y="542" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">四种富媒体卡片同框特写</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.33">08 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">MarkBox · 富媒体卡片</text>
+  </g>
+</svg>

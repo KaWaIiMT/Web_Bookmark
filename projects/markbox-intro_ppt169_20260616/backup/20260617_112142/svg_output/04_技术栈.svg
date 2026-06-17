@@ -1,0 +1,71 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="30%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.09"/>
+      <stop offset="100%" stop-color="#25221f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#25221f"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="65" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.3">基座</text>
+    <line x1="80" y1="78" x2="130" y2="78" stroke="#c9866b" stroke-opacity="0.3" stroke-width="1.5"/>
+    <text x="80" y="130" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#e8e4df">技术栈</text>
+    <text x="80" y="165" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#e8e4df" fill-opacity="0.50">全栈 TypeScript · 现代 Web 架构</text>
+  </g>
+  <!-- Card: 全栈框架 -->
+  <g id="card-framework">
+    <rect x="80" y="210" width="520" height="135" rx="12" fill="#33302d"/>
+    <rect x="80" y="210" width="520" height="135" rx="12" fill="none" stroke="#e8e4df" stroke-opacity="0.12" stroke-width="1"/>
+    <use data-icon="tabler-outline/terminal" x="115" y="247" width="32" height="32" fill="#c9866b" stroke-width="2"/>
+    <text x="165" y="270" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#e8e4df">全栈框架</text>
+    <text x="115" y="310" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">Next.js 16 (Turbopack) + React 19.2 · TypeScript 严格模式 · 36 个 API 端点</text>
+  </g>
+  <!-- Card: 数据层 -->
+  <g id="card-data">
+    <rect x="630" y="210" width="570" height="135" rx="12" fill="#33302d"/>
+    <rect x="630" y="210" width="570" height="135" rx="12" fill="none" stroke="#e8e4df" stroke-opacity="0.12" stroke-width="1"/>
+    <use data-icon="tabler-outline/database" x="665" y="247" width="32" height="32" fill="#c9866b" stroke-width="2"/>
+    <text x="715" y="270" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#e8e4df">数据层</text>
+    <text x="665" y="310" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">Prisma 7.8 + SQLite (libsql) · 标签共现推荐 · Embedding 向量语义精排</text>
+  </g>
+  <!-- Card: AI 引擎 -->
+  <g id="card-ai">
+    <rect x="80" y="365" width="520" height="135" rx="12" fill="#33302d"/>
+    <rect x="80" y="365" width="520" height="135" rx="12" fill="none" stroke="#e8e4df" stroke-opacity="0.12" stroke-width="1"/>
+    <use data-icon="tabler-outline/sparkles" x="115" y="402" width="32" height="32" fill="#c9866b" stroke-width="2"/>
+    <text x="165" y="425" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#e8e4df">AI 引擎</text>
+    <text x="115" y="465" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">DeepSeek V4 Flash · 自动标签/分类/摘要 · Embedding 语义搜索 · AI 路径分析</text>
+  </g>
+  <!-- Card: UI & 动画 -->
+  <g id="card-ui">
+    <rect x="630" y="365" width="570" height="135" rx="12" fill="#33302d"/>
+    <rect x="630" y="365" width="570" height="135" rx="12" fill="none" stroke="#e8e4df" stroke-opacity="0.12" stroke-width="1"/>
+    <use data-icon="tabler-outline/layout-dashboard" x="665" y="402" width="32" height="32" fill="#c9866b" stroke-width="2"/>
+    <text x="715" y="425" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#e8e4df">UI &amp; 动画</text>
+    <text x="665" y="465" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">Tailwind CSS 4 + shadcn/ui · motion (Framer Motion) · Recharts · dnd-kit · 28 个组件</text>
+  </g>
+  <!-- Tech badges row -->
+  <g id="badges">
+    <rect x="80" y="540" width="140" height="36" rx="18" fill="#c9866b" fill-opacity="0.08"/>
+    <text x="150" y="563" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.6">TypeScript</text>
+    <rect x="235" y="540" width="120" height="36" rx="18" fill="#c9866b" fill-opacity="0.08"/>
+    <text x="295" y="563" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.6">next-auth v5</text>
+    <rect x="370" y="540" width="100" height="36" rx="18" fill="#c9866b" fill-opacity="0.08"/>
+    <text x="420" y="563" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.6">dnd-kit</text>
+    <rect x="485" y="540" width="100" height="36" rx="18" fill="#c9866b" fill-opacity="0.08"/>
+    <text x="535" y="563" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.6">Recharts</text>
+    <rect x="600" y="540" width="100" height="36" rx="18" fill="#c9866b" fill-opacity="0.08"/>
+    <text x="650" y="563" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.6">cheerio</text>
+    <rect x="715" y="540" width="60" height="36" rx="18" fill="#c9866b" fill-opacity="0.08"/>
+    <text x="745" y="563" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.6">motion</text>
+    <rect x="790" y="540" width="110" height="36" rx="18" fill="#c9866b" fill-opacity="0.08"/>
+    <text x="845" y="563" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.6">lucide-react</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.33">04 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">MarkBox · 技术栈</text>
+  </g>
+</svg>

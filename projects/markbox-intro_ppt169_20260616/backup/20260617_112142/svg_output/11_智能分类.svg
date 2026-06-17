@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#25221f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#25221f"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.3">AI</text>
+    <line x1="80" y1="68" x2="120" y2="68" stroke="#c9866b" stroke-opacity="0.3" stroke-width="1.5"/>
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#e8e4df">智能分类</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.50">AI 自动建议层级路径，用户可确认或修改</text>
+  </g>
+  <g id="left-content">
+    <g id="feature-1">
+      <use data-icon="tabler-outline/brain" x="80" y="210" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="228" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">AI 路径建议</text>
+      <text x="120" y="255" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">基于内容语义自动推断分类，如：技术学习 &gt; 前端 &gt; React</text>
+    </g>
+    <g id="feature-2">
+      <use data-icon="tabler-outline/folder" x="80" y="320" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="338" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">层级分类树</text>
+      <text x="120" y="365" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">自引用父子关系，支持无限嵌套的子分类结构</text>
+    </g>
+    <g id="feature-3">
+      <use data-icon="tabler-outline/settings" x="80" y="430" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="448" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">分类管理</text>
+      <text x="120" y="475" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">右键菜单重命名/删除分类，dnd-kit 可拖拽重排分类顺序</text>
+    </g>
+    <g id="feature-4">
+      <use data-icon="tabler-outline/search" x="80" y="540" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="558" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">筛选过滤</text>
+      <text x="120" y="585" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">侧边栏点击分类即可过滤，快速找到目标书签</text>
+    </g>
+  </g>
+  <g id="placeholder-category">
+    <rect x="640" y="190" width="560" height="440" rx="12" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="640" y="190" width="560" height="440" rx="12" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/folder" x="880" y="375" width="40" height="40" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="920" y="400" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#e8e4df" fill-opacity="0.33">detail_category_suggest.png</text>
+    <text x="920" y="423" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">AI 分类路径建议下拉</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.33">11 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">MarkBox · 智能分类</text>
+  </g>
+</svg>

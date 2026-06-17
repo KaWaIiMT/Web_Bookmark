@@ -1,0 +1,92 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="40%" r="45%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8" />
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)" />
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">视图</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5" />
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">知识图谱</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.40">力导向图 · 标签共现网络 · 三层交互 · 时间轴播放</text>
+  </g>
+  <g id="placeholder-graph">
+    <path fill="#c9866b" fill-opacity="0.03" d="M92,185 H793 A12,12 0 0 1 805,197 V503 A12,12 0 0 1 793,515 H92 A12,12 0 0 1 80,503 V197 A12,12 0 0 1 92,185 Z" />
+    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M92,185 H793 A12,12 0 0 1 805,197 V503 A12,12 0 0 1 793,515 H92 A12,12 0 0 1 80,503 V197 A12,12 0 0 1 92,185 Z" />
+    
+  <g transform="translate(405.0, 315.0) scale(1.8333333333333333)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M4 18v-12a2 2 0 0 1 2 -2h12a2 2 0 0 1 2 2v12a2 2 0 0 1 -2 2h-12a2 2 0 0 1 -2 -2" />
+    <path d="M7 14l3 -3l2 2l3 -3l2 2" />
+  </g>
+    <text x="442" y="350" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.33">full_knowledge_graph.png</text>
+    <text x="442" y="373" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">力导向图全貌</text>
+  </g>
+  <g id="callouts">
+    <g id="callout-1">
+      <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M845,185 H1190 A10,10 0 0 1 1200,195 V275 A10,10 0 0 1 1190,285 H845 A10,10 0 0 1 835,275 V195 A10,10 0 0 1 845,185 Z" />
+      
+  <g transform="translate(860.0, 210.0) scale(0.8333333333333334)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+    <path d="M21 21l-6 -6" />
+  </g>
+      <text x="895" y="225" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="600" fill="#2D2A26">搜索高亮 + 节点筛选</text>
+      <text x="860" y="252" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.28">搜索节点高亮标记 · 下拉筛选仅显示邻居</text>
+    </g>
+    <g id="callout-2">
+      <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M845,300 H1190 A10,10 0 0 1 1200,310 V390 A10,10 0 0 1 1190,400 H845 A10,10 0 0 1 835,390 V310 A10,10 0 0 1 845,300 Z" />
+      
+  <g transform="translate(860.0, 325.0) scale(0.8333333333333334)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M5 12l14 0" />
+    <path d="M13 18l6 -6" />
+    <path d="M13 6l6 6" />
+  </g>
+      <text x="895" y="340" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="600" fill="#2D2A26">三层交互</text>
+      <text x="860" y="367" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.28">L1 标签/分类总览 → L2 点击展开书签 → L3 详情抽屉</text>
+    </g>
+    <g id="callout-3">
+      <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M845,415 H1190 A10,10 0 0 1 1200,425 V505 A10,10 0 0 1 1190,515 H845 A10,10 0 0 1 835,505 V425 A10,10 0 0 1 845,415 Z" />
+      
+  <g transform="translate(860.0, 440.0) scale(0.8333333333333334)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M12 17.75l-6.172 3.245l1.179 -6.873l-5 -4.867l6.9 -1l3.086 -6.253l3.086 6.253l6.9 1l-5 4.867l1.179 6.873l-6.158 -3.245" />
+  </g>
+      <text x="895" y="455" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" font-weight="600" fill="#2D2A26">视觉打磨</text>
+      <text x="860" y="482" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.28">径向渐变光晕 · 暗色星空背景 · 节点大小按连接数</text>
+    </g>
+  </g>
+  <g id="placeholder-node">
+    <path fill="#c9866b" fill-opacity="0.03" d="M90,540 H420 A10,10 0 0 1 430,550 V630 A10,10 0 0 1 420,640 H90 A10,10 0 0 1 80,630 V550 A10,10 0 0 1 90,540 Z" />
+    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M90,540 H420 A10,10 0 0 1 430,550 V630 A10,10 0 0 1 420,640 H90 A10,10 0 0 1 80,630 V550 A10,10 0 0 1 90,540 Z" />
+    
+  <g transform="translate(220.0, 565.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+    <path d="M21 12c-2.4 4 -5.4 6 -9 6c-3.6 0 -6.6 -2 -9 -6c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6" />
+  </g>
+    <text x="255" y="585" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.33">detail_graph_node.png</text>
+    <text x="255" y="608" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.18">节点展开 · 书签子节点</text>
+  </g>
+  <g id="placeholder-timeline">
+    <path fill="#c9866b" fill-opacity="0.03" d="M465,540 H795 A10,10 0 0 1 805,550 V630 A10,10 0 0 1 795,640 H465 A10,10 0 0 1 455,630 V550 A10,10 0 0 1 465,540 Z" />
+    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M465,540 H795 A10,10 0 0 1 805,550 V630 A10,10 0 0 1 795,640 H465 A10,10 0 0 1 455,630 V550 A10,10 0 0 1 465,540 Z" />
+    
+  <g transform="translate(595.0, 565.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M7 4v16l13 -8l-13 -8" />
+  </g>
+    <text x="630" y="585" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.33">detail_graph_timeline.png</text>
+    <text x="630" y="608" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.18">时间轴播放控件</text>
+  </g>
+  <g id="note">
+    <path fill="#c9866b" fill-opacity="0.04" d="M838,540 H1192 A8,8 0 0 1 1200,548 V632 A8,8 0 0 1 1192,640 H838 A8,8 0 0 1 830,632 V548 A8,8 0 0 1 838,540 Z" />
+    <text x="855" y="568" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.45">技术亮点</text>
+    <text x="855" y="595" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.28">防闪烁架构：全量节点预加载+visibility 控制</text>
+    <text x="855" y="618" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.28">时间轴滑块+1x/2x/5x 播放速度+截图导出 PNG</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">16 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 知识图谱</text>
+  </g>
+</svg>

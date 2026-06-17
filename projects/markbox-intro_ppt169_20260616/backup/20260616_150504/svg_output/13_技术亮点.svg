@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="720" fill="#0F172A"/>
+
+  <!-- Header -->
+  <text x="640" y="70" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" fill="#64748B" letter-spacing="4">架 构 亮 点</text>
+  <text x="640" y="112" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="36" font-weight="bold" fill="#F1F5F9">技术亮点</text>
+  <rect x="560" y="126" width="160" height="3" rx="1.5" fill="url(#titleGrad)"/>
+  <text x="640" y="160" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#94A3B8">不止是功能多，架构设计同样讲究</text>
+
+  <!-- 4 Feature Cards -->
+  <!-- Card 1: Optimistic UI -->
+  <rect x="80" y="210" width="540" height="200" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="80" y="210" width="4" height="200" rx="2" fill="#3B82F6"/>
+  <text x="125" y="255" font-family="'Noto Sans SC', Arial, sans-serif" font-size="22" font-weight="bold" fill="#3B82F6">⚡ 乐观 UI</text>
+  <text x="125" y="290" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#F1F5F9">
+    <tspan x="125" dy="0">@dnd-kit 拖拽即时反馈，乐观更新</tspan>
+    <tspan x="125" dy="26">分类重排 / 书签排序 / 学习步骤拖拽</tspan>
+    <tspan x="125" dy="26">请求失败自动回滚，不影响用户体验</tspan>
+  </text>
+  <text x="125" y="380" font-family="Consolas, monospace" font-size="13" fill="#64748B">POST /api/**/reorder</text>
+
+  <!-- Card 2: Animation -->
+  <rect x="660" y="210" width="540" height="200" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="660" y="210" width="4" height="200" rx="2" fill="#06B6D4"/>
+  <text x="705" y="255" font-family="'Noto Sans SC', Arial, sans-serif" font-size="22" font-weight="bold" fill="#06B6D4">🎨 动画系统</text>
+  <text x="705" y="290" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#F1F5F9">
+    <tspan x="705" dy="0">motion (Framer Motion 12.x) 全驱</tspan>
+    <tspan x="705" dy="26">卡片展开动画：getBoundingClientRect 精确定位</tspan>
+    <tspan x="705" dy="26">时间线交错入场、侧边栏 Balatro 风格动量滚动</tspan>
+  </text>
+  <text x="705" y="380" font-family="Consolas, monospace" font-size="13" fill="#64748B">useMotionValue + useSpring</text>
+
+  <!-- Card 3: CORS + Extension -->
+  <rect x="80" y="440" width="540" height="200" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="80" y="440" width="4" height="200" rx="2" fill="#8B5CF6"/>
+  <text x="125" y="485" font-family="'Noto Sans SC', Arial, sans-serif" font-size="22" font-weight="bold" fill="#8B5CF6">🌐 CORS 中间件</text>
+  <text x="125" y="520" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#F1F5F9">
+    <tspan x="125" dy="0">浏览器扩展跨域请求统一支持</tspan>
+    <tspan x="125" dy="26">OPTIONS 预检 · Access-Control-Max-Age 缓存</tspan>
+    <tspan x="125" dy="26">多源：localhost / chrome-extension / moz-extension</tspan>
+  </text>
+  <text x="125" y="610" font-family="Consolas, monospace" font-size="13" fill="#64748B">middleware.ts · CORS headers</text>
+
+  <!-- Card 4: Sound + Responsive -->
+  <rect x="660" y="440" width="540" height="200" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="660" y="440" width="4" height="200" rx="2" fill="#10B981"/>
+  <text x="705" y="485" font-family="'Noto Sans SC', Arial, sans-serif" font-size="22" font-weight="bold" fill="#10B981">🔊 细节打磨</text>
+  <text x="705" y="520" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#F1F5F9">
+    <tspan x="705" dy="0">Web Audio API 拖拽音效反馈</tspan>
+    <tspan x="705" dy="26">桌面固定侧边栏 / 移动端抽屉式（backdrop 模糊）</tspan>
+    <tspan x="705" dy="26">深色/浅色/跟随系统 三种主题模式</tspan>
+  </text>
+  <text x="705" y="610" font-family="Consolas, monospace" font-size="13" fill="#64748B">next-themes · Web Audio API</text>
+
+  <text x="1220" y="690" text-anchor="end" font-family="Consolas, monospace" font-size="12" fill="#64748B">13 / 14</text>
+</svg>

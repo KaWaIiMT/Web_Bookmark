@@ -1,0 +1,63 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#25221f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#25221f"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.3">视图</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.3" stroke-width="1.5"/>
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#e8e4df">横向对比</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.50">选 2-5 篇书签 → AI 五维度深度对比 → 雷达图 + 矩阵表格分析</text>
+  </g>
+  <!-- Left: Compare full view -->
+  <g id="col-compare">
+    <text x="80" y="205" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">对比结果视图</text>
+    <rect x="80" y="225" width="545" height="340" rx="12" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="80" y="225" width="545" height="340" rx="12" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/git-compare" x="320" y="360" width="40" height="40" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="352" y="390" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.33">full_compare.png</text>
+    <text x="352" y="412" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">全页对比视图</text>
+  </g>
+  <!-- Right: Radar detail -->
+  <g id="col-radar">
+    <text x="655" y="205" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">雷达图特写</text>
+    <rect x="655" y="225" width="545" height="340" rx="12" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="655" y="225" width="545" height="340" rx="12" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/chart-pie" x="895" y="360" width="40" height="40" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="927" y="390" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.33">detail_radar.png</text>
+    <text x="927" y="412" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">五维度雷达图特写</text>
+  </g>
+  <!-- Bottom features -->
+  <g id="features">
+    <g id="feat-1">
+      <rect x="80" y="590" width="270" height="60" rx="8" fill="#c9866b" fill-opacity="0.04"/>
+      <text x="100" y="613" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.50">选择 2-5 篇书签同时对比</text>
+      <text x="100" y="635" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#e8e4df" fill-opacity="0.33">同主题/跨领域自由选择</text>
+    </g>
+    <g id="feat-2">
+      <rect x="370" y="590" width="270" height="60" rx="8" fill="#c9866b" fill-opacity="0.04"/>
+      <text x="390" y="613" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.50">AI 五维度深度评分</text>
+      <text x="390" y="635" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#e8e4df" fill-opacity="0.33">DeepSeek V4 Flash 多维度分析</text>
+    </g>
+    <g id="feat-3">
+      <rect x="660" y="590" width="270" height="60" rx="8" fill="#c9866b" fill-opacity="0.04"/>
+      <text x="680" y="613" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.50">矩阵表差异高亮 + Markdown 导出</text>
+      <text x="680" y="635" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#e8e4df" fill-opacity="0.33">红/黄差异标记 · 评语总结</text>
+    </g>
+    <g id="feat-4">
+      <rect x="950" y="590" width="250" height="60" rx="8" fill="#c9866b" fill-opacity="0.04"/>
+      <text x="970" y="615" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.3">Recharts RadarChart</text>
+      <text x="970" y="638" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#e8e4df" fill-opacity="0.33">内置依赖，无额外安装</text>
+    </g>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.33">17 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">MarkBox · 横向对比</text>
+  </g>
+</svg>

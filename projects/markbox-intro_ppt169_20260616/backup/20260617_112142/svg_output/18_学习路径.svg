@@ -1,0 +1,52 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#25221f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#25221f"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.3">视图</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.3" stroke-width="1.5"/>
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#e8e4df">学习路径</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.50">结构化学习计划 · 书签编排 · 进度追踪 · AI 分析</text>
+  </g>
+  <g id="left-content">
+    <g id="cap-create">
+      <use data-icon="tabler-outline/plus" x="80" y="210" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="228" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">创建 &amp; 编排</text>
+      <text x="120" y="255" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">Quick-create 学习路径 · Reorder 拖拽编排书签顺序 · 难度/阶段标注</text>
+    </g>
+    <g id="cap-track">
+      <use data-icon="tabler-outline/chart-bar" x="80" y="310" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="328" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">进度追踪</text>
+      <text x="120" y="355" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">完成勾选 · 进度条 · 总览仪表板 · 学习状态可视化</text>
+    </g>
+    <g id="cap-notes">
+      <use data-icon="tabler-outline/file" x="80" y="410" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">微型笔记链</text>
+      <text x="120" y="455" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">PathNote — 每个路径节点可添加收获/疑问/行动计划笔记</text>
+    </g>
+    <g id="cap-ai">
+      <use data-icon="tabler-outline/brain" x="80" y="510" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="528" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">AI 路径分析</text>
+      <text x="120" y="555" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">骨架生成 + 知识缺口检测 + Markdown 导出 · 10 个 API 端点</text>
+    </g>
+  </g>
+  <!-- Placeholder -->
+  <g id="placeholder-path">
+    <rect x="640" y="190" width="560" height="450" rx="12" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="640" y="190" width="560" height="450" rx="12" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/puzzle" x="880" y="380" width="40" height="40" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="920" y="405" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#e8e4df" fill-opacity="0.33">detail_learning_path.png</text>
+    <text x="920" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">学习路径路线图 + 进度条</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.33">18 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">MarkBox · 学习路径</text>
+  </g>
+</svg>

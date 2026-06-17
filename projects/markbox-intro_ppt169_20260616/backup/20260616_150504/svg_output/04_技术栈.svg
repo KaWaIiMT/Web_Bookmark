@@ -1,0 +1,73 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="720" fill="#0F172A"/>
+
+  <!-- Header -->
+  <text x="640" y="80" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" fill="#64748B" letter-spacing="4">技 术 栈</text>
+  <text x="640" y="130" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="36" font-weight="bold" fill="#F1F5F9">现代全栈架构</text>
+  <rect x="560" y="148" width="160" height="3" rx="1.5" fill="url(#titleGrad)"/>
+
+  <!-- Main 4 tech cards — 2x2 grid -->
+  <!-- Card 1: Next.js -->
+  <rect x="100" y="190" width="520" height="140" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="100" y="190" width="4" height="140" rx="2" fill="#3B82F6"/>
+  <text x="140" y="235" font-family="Consolas, monospace" font-size="18" font-weight="bold" fill="#3B82F6">Next.js 16</text>
+  <text x="140" y="265" font-family="'Noto Sans SC', Arial, sans-serif" font-size="17" fill="#F1F5F9">全栈框架 · App Router · Turbopack</text>
+  <text x="140" y="295" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">
+    <tspan x="140" dy="0">React 19.2 + TypeScript 5.x</tspan>
+  </text>
+
+  <!-- Card 2: Prisma -->
+  <rect x="660" y="190" width="520" height="140" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="660" y="190" width="4" height="140" rx="2" fill="#06B6D4"/>
+  <text x="700" y="235" font-family="Consolas, monospace" font-size="18" font-weight="bold" fill="#06B6D4">Prisma 7.8</text>
+  <text x="700" y="265" font-family="'Noto Sans SC', Arial, sans-serif" font-size="17" fill="#F1F5F9">类型安全 ORM · SQLite (libsql)</text>
+  <text x="700" y="295" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">
+    <tspan x="700" dy="0">零配置 · 自动迁移 · Prisma Studio</tspan>
+  </text>
+
+  <!-- Card 3: DeepSeek -->
+  <rect x="100" y="360" width="520" height="140" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="100" y="360" width="4" height="140" rx="2" fill="#8B5CF6"/>
+  <text x="140" y="405" font-family="Consolas, monospace" font-size="18" font-weight="bold" fill="#8B5CF6">DeepSeek V4 Flash</text>
+  <text x="140" y="435" font-family="'Noto Sans SC', Arial, sans-serif" font-size="17" fill="#F1F5F9">AI 引擎 · 标签/分类/摘要/对比</text>
+  <text x="140" y="465" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">
+    <tspan x="140" dy="0">批量处理 · 低成本 · 中文优化</tspan>
+  </text>
+
+  <!-- Card 4: UI Stack -->
+  <rect x="660" y="360" width="520" height="140" rx="10" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="660" y="360" width="4" height="140" rx="2" fill="#10B981"/>
+  <text x="700" y="405" font-family="Consolas, monospace" font-size="18" font-weight="bold" fill="#10B981">UI &amp; UX</text>
+  <text x="700" y="435" font-family="'Noto Sans SC', Arial, sans-serif" font-size="17" fill="#F1F5F9">Tailwind CSS 4 + shadcn/ui + motion</text>
+  <text x="700" y="465" font-family="'Noto Sans SC', Arial, sans-serif" font-size="15" fill="#94A3B8">
+    <tspan x="700" dy="0">dnd-kit 拖拽 · Recharts 图表 · sonner</tspan>
+  </text>
+
+  <!-- Bottom badges row -->
+  <text x="640" y="560" text-anchor="middle" font-family="Consolas, monospace" font-size="14" fill="#64748B">
+    <tspan x="640" dy="0">+ next-auth · lucide-react · date-fns · next-themes · Web Speech API · Web Audio API</tspan>
+  </text>
+
+  <!-- Badge pills -->
+  <rect x="280" y="585" width="100" height="28" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="330" y="604" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="12" fill="#94A3B8">TypeScript</text>
+  <rect x="400" y="585" width="110" height="28" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="455" y="604" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="12" fill="#94A3B8">next-auth v5</text>
+  <rect x="530" y="585" width="70" height="28" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="565" y="604" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="12" fill="#94A3B8">dnd-kit</text>
+  <rect x="620" y="585" width="90" height="28" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="665" y="604" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="12" fill="#94A3B8">Recharts</text>
+  <rect x="730" y="585" width="110" height="28" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="785" y="604" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="12" fill="#94A3B8">lucide-react</text>
+  <rect x="860" y="585" width="80" height="28" rx="14" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <text x="900" y="604" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="12" fill="#94A3B8">sonner</text>
+
+  <text x="1220" y="690" text-anchor="end" font-family="Consolas, monospace" font-size="12" fill="#64748B">04 / 14</text>
+</svg>

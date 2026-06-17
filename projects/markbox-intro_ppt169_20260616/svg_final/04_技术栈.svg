@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="30%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.05" />
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8" />
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)" />
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">基座</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5" />
+    <text x="80" y="125" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">技术栈</text>
+    <text x="80" y="158" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.40">全栈 TypeScript · 现代 Web 架构</text>
+  </g>
+  <g id="card-framework">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M92,205 H588 A12,12 0 0 1 600,217 V328 A12,12 0 0 1 588,340 H92 A12,12 0 0 1 80,328 V217 A12,12 0 0 1 92,205 Z" />
+    
+  <g transform="translate(115.0, 242.0) scale(1.3333333333333333)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M5 7l5 5l-5 5" />
+    <path d="M12 19l7 0" />
+  </g>
+    <text x="165" y="265" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#2D2A26">全栈框架</text>
+    <text x="115" y="305" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.45">Next.js 16 (Turbopack) + React 19.2 · TypeScript 严格模式 · 36 个 API 端点</text>
+  </g>
+  <g id="card-data">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M642,205 H1188 A12,12 0 0 1 1200,217 V328 A12,12 0 0 1 1188,340 H642 A12,12 0 0 1 630,328 V217 A12,12 0 0 1 642,205 Z" />
+    
+  <g transform="translate(665.0, 242.0) scale(1.3333333333333333)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M4 6a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" />
+    <path d="M4 6v6a8 3 0 0 0 16 0v-6" />
+    <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+  </g>
+    <text x="715" y="265" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#2D2A26">数据层</text>
+    <text x="665" y="305" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.45">Prisma 7.8 + SQLite (libsql) · 标签共现推荐 · Embedding 向量语义精排</text>
+  </g>
+  <g id="card-ai">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M92,360 H588 A12,12 0 0 1 600,372 V483 A12,12 0 0 1 588,495 H92 A12,12 0 0 1 80,483 V372 A12,12 0 0 1 92,360 Z" />
+    
+  <g transform="translate(115.0, 397.0) scale(1.3333333333333333)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6" />
+  </g>
+    <text x="165" y="420" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#2D2A26">AI 引擎</text>
+    <text x="115" y="460" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.45">DeepSeek V4 Flash · 自动标签/分类/摘要 · Embedding 语义搜索 · AI 路径分析</text>
+  </g>
+  <g id="card-ui">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M642,360 H1188 A12,12 0 0 1 1200,372 V483 A12,12 0 0 1 1188,495 H642 A12,12 0 0 1 630,483 V372 A12,12 0 0 1 642,360 Z" />
+    
+  <g transform="translate(665.0, 397.0) scale(1.3333333333333333)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+    <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+  </g>
+    <text x="715" y="420" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#2D2A26">UI &amp; 动画</text>
+    <text x="665" y="460" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.45">Tailwind CSS 4 + shadcn/ui · motion (Framer Motion) · Recharts · dnd-kit · 28 个组件</text>
+  </g>
+  <g id="badges">
+    <path fill="#c9866b" fill-opacity="0.06" d="M98,535 H202 A18,18 0 0 1 220,553 V553 A18,18 0 0 1 202,571 H98 A18,18 0 0 1 80,553 V553 A18,18 0 0 1 98,535 Z" />
+    <text x="150" y="558" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.55">TypeScript</text>
+    <path fill="#c9866b" fill-opacity="0.06" d="M253,535 H337 A18,18 0 0 1 355,553 V553 A18,18 0 0 1 337,571 H253 A18,18 0 0 1 235,553 V553 A18,18 0 0 1 253,535 Z" />
+    <text x="295" y="558" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.55">next-auth v5</text>
+    <path fill="#c9866b" fill-opacity="0.06" d="M388,535 H452 A18,18 0 0 1 470,553 V553 A18,18 0 0 1 452,571 H388 A18,18 0 0 1 370,553 V553 A18,18 0 0 1 388,535 Z" />
+    <text x="420" y="558" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.55">dnd-kit</text>
+    <path fill="#c9866b" fill-opacity="0.06" d="M503,535 H567 A18,18 0 0 1 585,553 V553 A18,18 0 0 1 567,571 H503 A18,18 0 0 1 485,553 V553 A18,18 0 0 1 503,535 Z" />
+    <text x="535" y="558" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.55">Recharts</text>
+    <path fill="#c9866b" fill-opacity="0.06" d="M618,535 H682 A18,18 0 0 1 700,553 V553 A18,18 0 0 1 682,571 H618 A18,18 0 0 1 600,553 V553 A18,18 0 0 1 618,535 Z" />
+    <text x="650" y="558" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.55">cheerio</text>
+    <path fill="#c9866b" fill-opacity="0.06" d="M733,535 H777 A18,18 0 0 1 795,553 V553 A18,18 0 0 1 777,571 H733 A18,18 0 0 1 715,553 V553 A18,18 0 0 1 733,535 Z" />
+    <text x="755" y="558" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.55">motion</text>
+    <path fill="#c9866b" fill-opacity="0.06" d="M828,535 H902 A18,18 0 0 1 920,553 V553 A18,18 0 0 1 902,571 H828 A18,18 0 0 1 810,553 V553 A18,18 0 0 1 828,535 Z" />
+    <text x="865" y="558" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.55">lucide-react</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">04 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 技术栈</text>
+  </g>
+</svg>

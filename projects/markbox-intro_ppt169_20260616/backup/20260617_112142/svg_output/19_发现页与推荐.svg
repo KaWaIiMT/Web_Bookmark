@@ -1,0 +1,51 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#25221f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#25221f"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.3">视图</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.3" stroke-width="1.5"/>
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#e8e4df">发现页 &amp; 关联推荐</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.50">三模式发现 + 三层推荐体系 — 让好书签自己找到你</text>
+  </g>
+  <g id="left-content">
+    <g id="mode-discover">
+      <use data-icon="tabler-outline/globe" x="80" y="200" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="218" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">三模式发现页</text>
+      <text x="120" y="245" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">跨领域探索 · 最新收录 · 每日精选 — 三种维度切换</text>
+    </g>
+    <g id="layer-tag">
+      <use data-icon="tabler-outline/tag" x="80" y="305" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="323" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">第一层：标签共现</text>
+      <text x="120" y="350" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">Jaccard 相似度算法 · 免 AI · 毫秒级延迟 · 同分类降级</text>
+    </g>
+    <g id="layer-embed">
+      <use data-icon="tabler-outline/database" x="80" y="410" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">第二层：语义向量精排</text>
+      <text x="120" y="455" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">DeepSeek Embedding API · 余弦相似度 · 标签40%+语义60%混合评分</text>
+    </g>
+    <g id="layer-dashboard">
+      <use data-icon="tabler-outline/layout-dashboard" x="80" y="515" width="24" height="24" fill="#c9866b" stroke-width="2"/>
+      <text x="120" y="533" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">第三层：Dashboard 个性化</text>
+      <text x="120" y="560" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.50">继续深入 · 拓展边界 · 重温旧藏 — 三维度智能推荐卡片</text>
+    </g>
+  </g>
+  <g id="placeholder-discover">
+    <rect x="640" y="190" width="560" height="450" rx="12" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="640" y="190" width="560" height="450" rx="12" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/globe" x="880" y="380" width="40" height="40" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="920" y="405" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#e8e4df" fill-opacity="0.33">detail_discover.png</text>
+    <text x="920" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">发现页 · 推荐卡片视图</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.33">19 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">MarkBox · 发现页 &amp; 推荐</text>
+  </g>
+</svg>

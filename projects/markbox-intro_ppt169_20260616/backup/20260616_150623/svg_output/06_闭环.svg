@@ -1,0 +1,80 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#3B82F6"/>
+      <stop offset="100%" stop-color="#06B6D4"/>
+    </linearGradient>
+    <marker id="arrow" markerWidth="10" markerHeight="10" refX="9" refY="5" orient="auto" markerUnits="strokeWidth">
+      <path d="M0,0 L10,5 L0,10 Z" fill="#3B82F6"/>
+    </marker>
+  </defs>
+
+  <rect x="0" y="0" width="1280" height="720" fill="#0F172A"/>
+
+  <!-- Header -->
+  <text x="640" y="75" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="18" fill="#64748B" letter-spacing="4">功 能 闭 环</text>
+  <text x="640" y="120" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="36" font-weight="bold" fill="#F1F5F9">从收藏到洞察</text>
+  <rect x="560" y="136" width="160" height="3" rx="1.5" fill="url(#titleGrad)"/>
+
+  <!-- 4-step Z-flow layout -->
+  <!-- Step 1: 添加 — top left -->
+  <rect x="80" y="180" width="260" height="200" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="80" y="180" width="260" height="4" rx="2" fill="#3B82F6"/>
+  <text x="210" y="225" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="26" font-weight="bold" fill="#3B82F6">➕ 添加</text>
+  <text x="210" y="262" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#F1F5F9">
+    <tspan x="210" dy="0">URL 自动提取元数据</tspan>
+    <tspan x="210" dy="24">浏览器扩展一键收藏</tspan>
+    <tspan x="210" dy="24">Ctrl+Shift+S 静默收藏</tspan>
+  </text>
+  <text x="210" y="350" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#64748B">POST /api/metadata</text>
+
+  <!-- Arrow 1->2 -->
+  <line x1="348" y1="280" x2="398" y2="280" stroke="#3B82F6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 2: 管理 — top right -->
+  <rect x="410" y="180" width="260" height="200" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="410" y="180" width="260" height="4" rx="2" fill="#06B6D4"/>
+  <text x="540" y="225" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="26" font-weight="bold" fill="#06B6D4">📋 管理</text>
+  <text x="540" y="262" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#F1F5F9">
+    <tspan x="540" dy="0">@dnd-kit 拖拽排序</tspan>
+    <tspan x="540" dy="24">待读→在读→已读→归档</tspan>
+    <tspan x="540" dy="24">收藏夹组织管理</tspan>
+  </text>
+  <text x="540" y="350" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#64748B">POST /api/bookmarks/reorder</text>
+
+  <!-- Arrow 2->3 (down-right zigzag) -->
+  <line x1="670" y1="380" x2="670" y2="410" stroke="#06B6D4" stroke-width="2"/>
+  <line x1="670" y1="410" x2="610" y2="410" stroke="#06B6D4" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 3: 发现 — bottom right -->
+  <rect x="740" y="360" width="260" height="200" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="740" y="360" width="260" height="4" rx="2" fill="#8B5CF6"/>
+  <text x="870" y="405" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="26" font-weight="bold" fill="#8B5CF6">🔍 发现</text>
+  <text x="870" y="442" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#F1F5F9">
+    <tspan x="870" dy="0">全文搜索 + 防抖</tspan>
+    <tspan x="870" dy="24">跨领域随机发现</tspan>
+    <tspan x="870" dy="24">Jaccard 相关推荐</tspan>
+  </text>
+  <text x="870" y="530" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#64748B">GET /api/search</text>
+
+  <!-- Arrow 3->4 (left) -->
+  <line x1="740" y1="460" x2="690" y2="460" stroke="#8B5CF6" stroke-width="2" marker-end="url(#arrow)"/>
+
+  <!-- Step 4: 洞察 — bottom left -->
+  <rect x="410" y="360" width="260" height="200" rx="12" fill="#1E293B" stroke="#334155" stroke-width="1"/>
+  <rect x="410" y="360" width="260" height="4" rx="2" fill="#10B981"/>
+  <text x="540" y="405" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="26" font-weight="bold" fill="#10B981">📊 洞察</text>
+  <text x="540" y="442" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" fill="#F1F5F9">
+    <tspan x="540" dy="0">仪表板状态分布</tspan>
+    <tspan x="540" dy="24">时间线历史回顾</tspan>
+    <tspan x="540" dy="24">每周周报对比分析</tspan>
+  </text>
+  <text x="540" y="530" text-anchor="middle" font-family="Consolas, monospace" font-size="13" fill="#64748B">GET /api/stats</text>
+
+  <!-- Center node: AI -->
+  <circle cx="640" cy="420" r="40" fill="#0F172A" stroke="#3B82F6" stroke-width="2"/>
+  <text x="640" y="426" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="16" font-weight="bold" fill="#3B82F6">AI</text>
+
+  <text x="640" y="640" text-anchor="middle" font-family="'Noto Sans SC', Arial, sans-serif" font-size="17" fill="#94A3B8">书签不再是终点，而是知识的起点</text>
+  <text x="1220" y="690" text-anchor="end" font-family="Consolas, monospace" font-size="12" fill="#64748B">06 / 14</text>
+</svg>

@@ -1,0 +1,65 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="70%" cy="40%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.07"/>
+      <stop offset="100%" stop-color="#25221f" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#25221f"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.3">安全</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.3" stroke-width="1.5"/>
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#e8e4df">认证与安全</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#e8e4df" fill-opacity="0.50">双重认证保障安全 · API Key 开放集成 — 兼顾安全与可扩展</text>
+  </g>
+  <!-- Left column: Auth -->
+  <g id="col-auth">
+    <text x="80" y="205" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">认证体系</text>
+    <rect x="80" y="225" width="545" height="220" rx="12" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="80" y="225" width="545" height="220" rx="12" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/key" x="320" y="305" width="36" height="36" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="352" y="330" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.33">detail_login.png</text>
+    <text x="352" y="352" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#e8e4df" fill-opacity="0.15">GitHub OAuth 登录页</text>
+    <text x="80" y="485" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.38">GitHub OAuth 登录 · NextAuth v5 · 双重中间件（Session 优先 + API Key 回退）</text>
+  </g>
+  <!-- Right column: API Key -->
+  <g id="col-apikey">
+    <text x="655" y="205" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#e8e4df">API Key 管理</text>
+    <rect x="655" y="225" width="545" height="220" rx="12" fill="#c9866b" fill-opacity="0.03"/>
+    <rect x="655" y="225" width="545" height="220" rx="12" fill="none" stroke="#c9866b" stroke-opacity="0.2" stroke-width="1.5" stroke-dasharray="8,4"/>
+    <use data-icon="tabler-outline/key" x="895" y="305" width="36" height="36" fill="#c9866b" fill-opacity="0.38" stroke-width="2"/>
+    <text x="927" y="330" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#e8e4df" fill-opacity="0.33">detail_api_key.png</text>
+    <text x="927" y="352" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#e8e4df" fill-opacity="0.15">API Key 卡片 · 操作按钮</text>
+    <text x="655" y="485" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.38">mb_ 前缀 96 字符随机密钥 · SHA-256 哈希存储 · 仅生成时完整显示一次</text>
+  </g>
+  <!-- Security features below -->
+  <g id="sec-features">
+    <g id="sec-1">
+      <rect x="80" y="530" width="270" height="55" rx="8" fill="#c9866b" fill-opacity="0.04"/>
+      <text x="100" y="555" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#e8e4df" fill-opacity="0.3">双重中间件认证链</text>
+      <text x="100" y="573" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#e8e4df" fill-opacity="0.33">Session 优先 · API Key 回退</text>
+    </g>
+    <g id="sec-2">
+      <rect x="370" y="530" width="270" height="55" rx="8" fill="#c9866b" fill-opacity="0.04"/>
+      <text x="390" y="555" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#e8e4df" fill-opacity="0.3">显示 / 隐藏 / 复制</text>
+      <text x="390" y="573" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#e8e4df" fill-opacity="0.33">可随时查看（非首次）</text>
+    </g>
+    <g id="sec-3">
+      <rect x="660" y="530" width="270" height="55" rx="8" fill="#c9866b" fill-opacity="0.04"/>
+      <text x="680" y="555" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#e8e4df" fill-opacity="0.3">吊销 + 重新生成</text>
+      <text x="680" y="573" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#e8e4df" fill-opacity="0.33">密钥泄露即时止损</text>
+    </g>
+    <g id="sec-4">
+      <rect x="950" y="530" width="250" height="55" rx="8" fill="#c9866b" fill-opacity="0.04"/>
+      <text x="970" y="555" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#e8e4df" fill-opacity="0.3">SHA-256 哈希存储</text>
+      <text x="970" y="573" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#e8e4df" fill-opacity="0.33">明文永不落盘</text>
+    </g>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.33">23 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#e8e4df" fill-opacity="0.15">MarkBox · 认证与安全</text>
+  </g>
+</svg>

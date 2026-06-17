@@ -1,0 +1,68 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="30%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04" />
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0" />
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8" />
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)" />
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">视图</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5" />
+    <text x="80" y="115" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">仪表板统计</text>
+    <text x="80" y="148" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.40">Recharts 可视化 · 三层智能推荐 · 数据驱动的阅读洞察</text>
+  </g>
+  <g id="placeholder-stats">
+    <path fill="#c9866b" fill-opacity="0.03" d="M92,180 H1188 A12,12 0 0 1 1200,192 V438 A12,12 0 0 1 1188,450 H92 A12,12 0 0 1 80,438 V192 A12,12 0 0 1 92,180 Z" />
+    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M92,180 H1188 A12,12 0 0 1 1200,192 V438 A12,12 0 0 1 1188,450 H92 A12,12 0 0 1 80,438 V192 A12,12 0 0 1 92,180 Z" />
+    
+  <g transform="translate(600.0, 275.0) scale(1.6666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M3 13a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -6" />
+    <path d="M15 9a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v10a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -10" />
+    <path d="M9 5a1 1 0 0 1 1 -1h4a1 1 0 0 1 1 1v14a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1l0 -14" />
+    <path d="M4 20h14" />
+  </g>
+    <text x="640" y="340" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.33">detail_stats_chart.png</text>
+    <text x="640" y="363" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">饼图 + 柱状图 + 词云特写</text>
+  </g>
+  <g id="features">
+    <g id="feat-chart">
+      <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M90,480 H420 A10,10 0 0 1 430,490 V620 A10,10 0 0 1 420,630 H90 A10,10 0 0 1 80,620 V490 A10,10 0 0 1 90,480 Z" />
+      
+  <g transform="translate(110.0, 515.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M10 3.2a9 9 0 1 0 10.8 10.8a1 1 0 0 0 -1 -1h-6.8a2 2 0 0 1 -2 -2v-7a.9 .9 0 0 0 -1 -.8" />
+    <path d="M15 3.5a9 9 0 0 1 5.5 5.5h-4.5a1 1 0 0 1 -1 -1v-4.5" />
+  </g>
+      <text x="150" y="532" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">阅读状态饼图</text>
+      <text x="110" y="565" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.40">待读/在读/已读/归档分布 · 内容类型柱状图 · CSS 词云标签频率</text>
+    </g>
+    <g id="feat-recommend">
+      <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M465,480 H815 A10,10 0 0 1 825,490 V620 A10,10 0 0 1 815,630 H465 A10,10 0 0 1 455,620 V490 A10,10 0 0 1 465,480 Z" />
+      
+  <g transform="translate(485.0, 515.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6" />
+  </g>
+      <text x="525" y="532" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">三层智能推荐</text>
+      <text font-size="13" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="485" y="565">继续深入 · 拓展边界 · 重温旧藏</text><text font-size="13" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="485" y="587">标签共现(毫秒级) + Embedding 语义精排</text></g>
+    <g id="feat-track">
+      <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" d="M860,480 H1190 A10,10 0 0 1 1200,490 V620 A10,10 0 0 1 1190,630 H860 A10,10 0 0 1 850,620 V490 A10,10 0 0 1 860,480 Z" />
+      
+  <g transform="translate(880.0, 515.0)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M4 16l6 -7l5 5l5 -6" />
+    <path d="M14 14a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+    <path d="M9 9a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+    <path d="M3 16a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+    <path d="M19 8a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+  </g>
+      <text x="920" y="532" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">追踪迷你图</text>
+      <text x="880" y="565" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.40">TrackingSparkline Canvas 迷你折线图 · GitHub Star 热度追踪</text>
+    </g>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">14 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 仪表板统计</text>
+  </g>
+</svg>
