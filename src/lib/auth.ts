@@ -103,7 +103,7 @@ export const authConfig: NextAuthConfig = {
     },
     async jwt({ token, user, account }) {
       // On first sign-in, persist the user id and isAdmin into the JWT
-      if (user) {
+      if (user?.id) {
         token.id = user.id;
         token.isAdmin = await isAdmin(user.id);
       }
