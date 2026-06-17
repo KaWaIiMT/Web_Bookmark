@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback, useRef } from "react";
+import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { Search, Inbox, Brain, Menu, LogOut, Settings, LogIn, Shield } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -88,6 +88,21 @@ export default function Home() {
     setSidebarOpen(false);
   }, [guardAuth]);
 
+  // Wrap filter changes so isSwitching flips in the SAME render frame as the filter.
+  // This prevents an empty-state flash when optimistic client-side filter yields 0 results.
+  const handleStatusFilter = useCallback((status: string | null) => {
+    if (!isFirstLoadRef.current) setIsSwitching(true);
+    setActiveStatus(status);
+  }, []);
+  const handleCategoryFilter = useCallback((categoryId: string | null) => {
+    if (!isFirstLoadRef.current) setIsSwitching(true);
+    setActiveCategory(categoryId);
+  }, []);
+  const handleCollectionFilter = useCallback((collectionId: string | null) => {
+    if (!isFirstLoadRef.current) setIsSwitching(true);
+    setActiveCollection(collectionId);
+  }, []);
+
   const fetchBookmarks = useCallback(async (signal: AbortSignal, showLoading: boolean) => {
     if (showLoading) setLoading(true);
     try {
@@ -138,6 +153,17 @@ export default function Home() {
       if (!controller.signal.aborted) controller.abort();
     };
   }, [fetchBookmarks, isReady, activeView, debouncedQuery]);
+
+  // Optimistic client-side filter: apply activeStatus/activeCategory immediately
+  // on the current bookmarks array so the UI responds instantly to filter clicks.
+  // The API fetch still runs in the background for fresh data.
+  const displayedBookmarks = useMemo(() => {
+    let result = bookmarks;
+    if (activeStatus) result = result.filter((b) => b.status === activeStatus);
+    if (activeCategory) result = result.filter((b) => b.categoryId === activeCategory);
+    // Note: activeCollection can't be filtered client-side (need collection membership data)
+    return result;
+  }, [bookmarks, activeStatus, activeCategory]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const refreshBookmarks = useCallback(() => {
@@ -244,9 +270,9 @@ export default function Home() {
           activeStatus={activeStatus}
           activeCategory={activeCategory}
           activeCollection={activeCollection}
-          onStatusChange={setActiveStatus}
-          onCategoryChange={setActiveCategory}
-          onCollectionClick={setActiveCollection}
+          onStatusChange={handleStatusFilter}
+          onCategoryChange={handleCategoryFilter}
+          onCollectionClick={handleCollectionFilter}
           onAddClick={handleShowSidebarAdd}
           onAddSmartClick={() => {
             if (guardAuth()) return;
@@ -264,9 +290,9 @@ export default function Home() {
               activeStatus={activeStatus}
               activeCategory={activeCategory}
               activeCollection={activeCollection}
-              onStatusChange={(s) => { setActiveStatus(s); setSidebarOpen(false); }}
-              onCategoryChange={(c) => { setActiveCategory(c); setSidebarOpen(false); }}
-              onCollectionClick={(c) => { setActiveCollection(c); setSidebarOpen(false); }}
+              onStatusChange={(s) => { handleStatusFilter(s); setSidebarOpen(false); }}
+              onCategoryChange={(c) => { handleCategoryFilter(c); setSidebarOpen(false); }}
+              onCollectionClick={(c) => { handleCollectionFilter(c); setSidebarOpen(false); }}
               onAddClick={handleShowSidebarAdd}
             />
           </div>
@@ -394,7 +420,7 @@ export default function Home() {
                     </div>
                   ))}
                 </div>
-              ) : bookmarks.length === 0 ? (
+              ) : displayedBookmarks.length === 0 && !isSwitching ? (
                 <div className="flex flex-col items-center justify-center h-full text-center py-20">
                   <div className="h-20 w-20 rounded-3xl bg-[var(--card)] flex items-center justify-center mb-5">
                     <Inbox className="h-10 w-10 text-[var(--foreground)]/10" />
@@ -412,14 +438,37 @@ export default function Home() {
                     添加第一个书签
                   </Button>
                 </div>
+              ) : displayedBookmarks.length === 0 && isSwitching ? (
+                /* Optimistic filter returned empty — show subtle pulse on old cards while API fetches */
+                <div className="opacity-40 transition-opacity duration-150">
+                  {activeView === "gallery" ? (
+                    <MasonryGallery
+                      bookmarks={bookmarks}
+                      onCardClick={handleCardClick}
+                    />
+                  ) : (
+                    <SortableBookmarkGrid
+                      bookmarks={bookmarks}
+                      onStatusChange={handleStatusChange}
+                      onDelete={(id) => {
+                        const target = bookmarks.find((b) => b.id === id);
+                        if (target) setDeleteTarget(target);
+                      }}
+                      onEdit={handleEdit}
+                      onReorder={handleReorder}
+                      onCardClick={handleCardClick}
+                      onShare={handleShare}
+                    />
+                  )}
+                </div>
               ) : activeView === "gallery" ? (
                 <MasonryGallery
-                  bookmarks={bookmarks}
+                  bookmarks={displayedBookmarks}
                   onCardClick={handleCardClick}
                 />
               ) : (
                 <SortableBookmarkGrid
-                  bookmarks={bookmarks}
+                  bookmarks={displayedBookmarks}
                   onStatusChange={handleStatusChange}
                   onDelete={(id) => {
                     const target = bookmarks.find((b) => b.id === id);
