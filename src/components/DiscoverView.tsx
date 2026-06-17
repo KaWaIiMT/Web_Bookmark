@@ -40,12 +40,13 @@ export function DiscoverView({ onCardClick }: DiscoverViewProps) {
         <div className="inline-flex items-center gap-2 mb-2 px-4 py-1.5 rounded-full bg-[var(--accent)]/10">
           <Compass className="h-4 w-4 text-[var(--accent)]" />
           <span className="text-[13px] font-medium text-[var(--accent)] font-sans">发现</span>
+          <span className="text-[10px] text-amber-500 font-sans ml-1">🚧 施工中</span>
         </div>
         <h2 className="text-[20px] font-semibold text-[var(--foreground)] font-display">
           探索你的知识边界
         </h2>
         <p className="text-[13px] text-[var(--muted-foreground)] mt-1 font-sans">
-          基于你的收藏习惯，发现新的精彩内容
+          目前推荐均来源于你的本地收藏，智能跨域发现即将上线
         </p>
       </div>
 
