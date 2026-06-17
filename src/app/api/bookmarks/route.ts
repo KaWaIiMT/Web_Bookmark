@@ -144,27 +144,30 @@ export async function POST(req: NextRequest) {
       },
     });
 
-    // Step 6: Fire-and-forget archive (async, don't block the response)
-    const bookmarkId = bookmark.id;
-    const bookmarkUrl = url;
-    prisma.bookmark
-      .update({ where: { id: bookmarkId, userId }, data: { archiveStatus: "pending" } })
-      .then(() => archivePage(bookmarkUrl))
-      .then(({ html, text }) =>
-        prisma.bookmark.update({
-          where: { id: bookmarkId, userId },
-          data: { archiveHtml: html, archiveText: text, archivedAt: new Date(), archiveStatus: "success" },
-        })
-      )
-      .catch((e) => {
-        const msg = e instanceof Error ? e.message : "unknown";
-        prisma.bookmark
-          .update({
+    // Step 6: Archive — only for articles (text-heavy content worth saving offline)
+    const ct = contentType;
+    if (ct === "article") {
+      const bookmarkId = bookmark.id;
+      const bookmarkUrl = url;
+      prisma.bookmark
+        .update({ where: { id: bookmarkId, userId }, data: { archiveStatus: "pending" } })
+        .then(() => archivePage(bookmarkUrl))
+        .then(({ html, text }) =>
+          prisma.bookmark.update({
             where: { id: bookmarkId, userId },
-            data: { archiveStatus: `failed: ${msg.slice(0, 200)}` },
+            data: { archiveHtml: html, archiveText: text, archivedAt: new Date(), archiveStatus: "success" },
           })
-          .catch(() => {}); // swallow — can't do much if this also fails
-      });
+        )
+        .catch((e) => {
+          const msg = e instanceof Error ? e.message : "unknown";
+          prisma.bookmark
+            .update({
+              where: { id: bookmarkId, userId },
+              data: { archiveStatus: `failed: ${msg.slice(0, 200)}` },
+            })
+            .catch(() => {});
+        });
+    }
 
     return NextResponse.json(bookmark, { status: 201 });
   } catch (err) {
