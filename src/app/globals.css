@@ -137,3 +137,10 @@ body::before {
   -webkit-backdrop-filter: blur(16px) saturate(140%);
   border: 1px solid var(--border);
 }
+
+/* Loading bar animation for filter switching */
+@keyframes loadingBar {
+  0% { transform: translateX(-100%); }
+  50% { transform: translateX(200%); }
+  100% { transform: translateX(400%); }
+}

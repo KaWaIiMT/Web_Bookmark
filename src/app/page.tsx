@@ -440,16 +440,31 @@ export default function Home() {
                 </div>
               ) : displayedBookmarks.length === 0 && isSwitching ? (
                 /* Optimistic filter returned 0 — current data has no matches for new filter.
-                   Show a few skeleton cards while API fetches the right data. */
-                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
-                  {Array.from({ length: 4 }).map((_, i) => (
-                    <div key={i} className="space-y-3 p-1">
-                      <Skeleton className="aspect-[2.2/1] rounded-2xl bg-[var(--skeleton)]" />
-                      <Skeleton className="h-4 w-3/4 rounded-lg bg-[var(--skeleton)]" />
-                      <Skeleton className="h-3 w-full rounded-lg bg-[var(--skeleton)]" />
-                      <Skeleton className="h-3 w-1/2 rounded-lg bg-[var(--skeleton)]" />
-                    </div>
-                  ))}
+                   Show old bookmarks with a loading pulse so the user doesn't see blank/skeleton. */
+                <div className="relative animate-pulse">
+                  {/* Subtle loading bar at top */}
+                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-[var(--accent)]/40 z-10 rounded-full overflow-hidden">
+                    <div className="h-full w-1/3 bg-[var(--accent)] rounded-full animate-[loadingBar_1.2s_ease-in-out_infinite]" />
+                  </div>
+                  {activeView === "gallery" ? (
+                    <MasonryGallery
+                      bookmarks={bookmarks}
+                      onCardClick={handleCardClick}
+                    />
+                  ) : (
+                    <SortableBookmarkGrid
+                      bookmarks={bookmarks}
+                      onStatusChange={handleStatusChange}
+                      onDelete={(id) => {
+                        const target = bookmarks.find((b) => b.id === id);
+                        if (target) setDeleteTarget(target);
+                      }}
+                      onEdit={handleEdit}
+                      onReorder={handleReorder}
+                      onCardClick={handleCardClick}
+                      onShare={handleShare}
+                    />
+                  )}
                 </div>
               ) : activeView === "gallery" ? (
                 <MasonryGallery
