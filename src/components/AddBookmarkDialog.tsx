@@ -65,9 +65,24 @@ export function AddBookmarkDialog({
     }
   }, [open, editBookmark]);
 
+  const isValidHttpUrl = (urlString: string): boolean => {
+    try {
+      const u = new URL(urlString.trim());
+      return u.protocol === "http:" || u.protocol === "https:";
+    } catch {
+      return false;
+    }
+  };
+
   const handleSubmit = async () => {
     if (!url.trim()) return;
     setError("");
+
+    // Validate URL format before proceeding
+    if (!isValidHttpUrl(url.trim())) {
+      setError("请输入有效的 HTTP/HTTPS 链接");
+      return;
+    }
 
     // Step 0: Quick duplicate check before proceeding
     try {
@@ -180,6 +195,12 @@ export function AddBookmarkDialog({
     if (!url.trim()) return;
     setError("");
 
+    // Validate URL format
+    if (!isValidHttpUrl(url.trim())) {
+      setError("请输入有效的 HTTP/HTTPS 链接");
+      return;
+    }
+
     // Quick duplicate check
     try {
       const dupRes = await fetch(`/api/bookmarks?url=${encodeURIComponent(url.trim())}&limit=1`);
@@ -196,27 +217,27 @@ export function AddBookmarkDialog({
     // Close dialog immediately
     reset();
     onOpenChange(false);
-    toast.loading("正在收藏...", { duration: 2000 });
 
-    try {
-      const res = await fetch("/api/bookmarks", {
+    toast.promise(
+      fetch("/api/bookmarks", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ url: url.trim() }),
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        toast.error(err.error || "收藏失败");
-        return;
+      }).then(async (res) => {
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || "收藏失败");
+        }
+        window.dispatchEvent(new CustomEvent("bookmark-created"));
+        onCreated();
+        return res;
+      }),
+      {
+        loading: "正在收藏...",
+        success: "书签已收藏，AI 正在后台整理",
+        error: (err) => err instanceof Error ? err.message : "收藏失败，请重试",
       }
-
-      window.dispatchEvent(new CustomEvent("bookmark-created"));
-      onCreated();
-      toast.success("书签已收藏，AI 正在后台整理");
-    } catch {
-      toast.error("收藏失败，请重试");
-    }
+    );
   };
 
   const reset = () => {

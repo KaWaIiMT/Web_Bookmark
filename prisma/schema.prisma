@@ -19,6 +19,7 @@ model User {
   bookmarks     Bookmark[]
   collections   Collection[]
   tags          Tag[]
+  categories    Category[]
   learningPaths LearningPath[]
   apiKeys       ApiKey[]
   annotations   Annotation[]
@@ -124,12 +125,16 @@ model BookmarkTag {
 model Category {
   id        String     @id @default(cuid())
   name      String
-  slug      String     @unique
+  slug      String
+  userId    String
+  user      User       @relation(fields: [userId], references: [id], onDelete: Cascade)
   parentId  String?
   parent    Category?  @relation("CategoryTree", fields: [parentId], references: [id])
   children  Category[] @relation("CategoryTree")
   order     Int        @default(0)
   bookmarks Bookmark[]
+
+  @@unique([userId, slug])
 }
 
 model Collection {

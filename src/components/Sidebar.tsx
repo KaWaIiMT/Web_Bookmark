@@ -255,14 +255,14 @@ export function Sidebar({
   );
 
   const fetchCategories = () => {
-    fetch("/api/categories")
+    fetch("/api/categories", { credentials: "include" })
       .then((r) => r.json())
       .then((d) => setCategories(d.data || []))
       .catch(() => {});
   };
 
   const fetchCollections = () => {
-    fetch("/api/collections")
+    fetch("/api/collections", { credentials: "include" })
       .then((r) => r.json())
       .then((d) => setCollections(d.data || []))
       .catch(() => {});

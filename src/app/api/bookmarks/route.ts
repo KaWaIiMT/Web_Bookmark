@@ -99,9 +99,9 @@ export async function POST(req: NextRequest) {
       const topCategory = aiCategory.split(">")[0].trim();
       const catSlug = topCategory.toLowerCase().replace(/\s+/g, "-");
       const category = await prisma.category.upsert({
-        where: { slug: catSlug },
+        where: { userId_slug: { userId, slug: catSlug } },
         update: {},
-        create: { name: topCategory, slug: catSlug, order: 0 },
+        create: { name: topCategory, slug: catSlug, order: 0, userId },
       });
       categoryId = category.id;
     }

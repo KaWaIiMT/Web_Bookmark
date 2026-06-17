@@ -1972,6 +1972,7 @@ export const CategoryScalarFieldEnum = {
   id: 'id',
   name: 'name',
   slug: 'slug',
+  userId: 'userId',
   parentId: 'parentId',
   order: 'order'
 } as const

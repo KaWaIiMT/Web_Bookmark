@@ -1,19 +1,25 @@
 import { NextRequest, NextResponse } from "next/server";
 import { prisma } from "@/lib/prisma";
+import { getUserIdFromRequest } from "@/lib/auth-helpers";
 
 export async function POST(req: NextRequest) {
   try {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) {
+      return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+    }
+
     const { orderedIds } = await req.json();
 
     if (!Array.isArray(orderedIds)) {
       return NextResponse.json({ error: "orderedIds must be an array" }, { status: 400 });
     }
 
-    // Update order for each category in a transaction
+    // Only reorder the user's own categories
     await prisma.$transaction(
       orderedIds.map((id: string, index: number) =>
         prisma.category.update({
-          where: { id },
+          where: { id, userId },
           data: { order: index },
         })
       )
