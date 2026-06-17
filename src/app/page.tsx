@@ -45,6 +45,8 @@ export default function Home() {
   const [bookmarks, setBookmarks] = useState<BookmarkData[]>([]);
   const [loading, setLoading] = useState(true);
   const [isFirstLoad, setIsFirstLoad] = useState(true);
+  // Track if we're transitioning filters — skip skeleton, keep old cards
+  const [isSwitching, setIsSwitching] = useState(false);
   const [activeStatus, setActiveStatus] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -97,18 +99,20 @@ export default function Home() {
       if (!signal.aborted) {
         // Swap atomically — no flash of empty cards
         setBookmarks(data.data || []);
+        if (isSwitching) setIsSwitching(false);
       }
     } catch (err) {
       if (signal.aborted) return;
       if (err instanceof DOMException && err.name === "AbortError") return;
       // Don't clear existing bookmarks on error — keep stale UI
+      if (isSwitching) setIsSwitching(false);
     } finally {
       if (!signal.aborted) {
         setLoading(false);
         setIsFirstLoad(false);
       }
     }
-  }, [activeStatus, activeCategory, activeCollection, searchQuery]);
+  }, [activeStatus, activeCategory, activeCollection, searchQuery, isSwitching, isFirstLoad]);
 
   // Debounced search — only fetch after 300ms idle
   const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -123,6 +127,8 @@ export default function Home() {
       setLoading(false);
       return;
     }
+    // Only show loading skeleton on first load; on filter switches keep old cards
+    if (!isFirstLoad) setIsSwitching(true);
     const controller = new AbortController();
     fetchBookmarks(controller.signal, isFirstLoad);
     return () => {
@@ -374,7 +380,7 @@ export default function Home() {
           {/* Grid & Gallery: use bookmarks data */}
           {(activeView === "grid" || activeView === "gallery") && (
             <>
-              {loading ? (
+              {loading && !isSwitching ? (
                 <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
                   {Array.from({ length: 8 }).map((_, i) => (
                     <div key={i} className="space-y-3 p-1">
