@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect, useCallback, useRef } from "react";
 import { useSession, signOut } from "next-auth/react";
 import { Search, Inbox, Brain, Menu, LogOut, Settings, LogIn, Shield } from "lucide-react";
 import { Input } from "@/components/ui/input";
@@ -47,6 +47,12 @@ export default function Home() {
   const [isFirstLoad, setIsFirstLoad] = useState(true);
   // Track if we're transitioning filters — skip skeleton, keep old cards
   const [isSwitching, setIsSwitching] = useState(false);
+  // Refs so fetchBookmarks can read latest values without re-creating the callback
+  const isSwitchingRef = useRef(isSwitching);
+  const isFirstLoadRef = useRef(isFirstLoad);
+  // Keep refs in sync without triggering fetchBookmarks recreation
+  useEffect(() => { isSwitchingRef.current = isSwitching; }, [isSwitching]);
+  useEffect(() => { isFirstLoadRef.current = isFirstLoad; }, [isFirstLoad]);
   const [activeStatus, setActiveStatus] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
@@ -89,7 +95,6 @@ export default function Home() {
       if (activeStatus) params.set("status", activeStatus);
       if (activeCategory) params.set("categoryId", activeCategory);
       if (activeCollection) params.set("collectionId", activeCollection);
-      // Debounce: only send search query after 250ms idle (handled by caller)
       if (searchQuery) params.set("q", searchQuery);
       params.set("limit", "100");
 
@@ -97,22 +102,20 @@ export default function Home() {
       if (signal.aborted) return;
       const data = (await res.json()) as PaginatedResponse<BookmarkData>;
       if (!signal.aborted) {
-        // Swap atomically — no flash of empty cards
         setBookmarks(data.data || []);
-        if (isSwitching) setIsSwitching(false);
+        if (isSwitchingRef.current) setIsSwitching(false);
       }
     } catch (err) {
       if (signal.aborted) return;
       if (err instanceof DOMException && err.name === "AbortError") return;
-      // Don't clear existing bookmarks on error — keep stale UI
-      if (isSwitching) setIsSwitching(false);
+      if (isSwitchingRef.current) setIsSwitching(false);
     } finally {
       if (!signal.aborted) {
         setLoading(false);
-        setIsFirstLoad(false);
+        if (isFirstLoadRef.current) setIsFirstLoad(false);
       }
     }
-  }, [activeStatus, activeCategory, activeCollection, searchQuery, isSwitching, isFirstLoad]);
+  }, [activeStatus, activeCategory, activeCollection, searchQuery]);
 
   // Debounced search — only fetch after 300ms idle
   const [debouncedQuery, setDebouncedQuery] = useState("");
@@ -134,7 +137,7 @@ export default function Home() {
     return () => {
       if (!controller.signal.aborted) controller.abort();
     };
-  }, [fetchBookmarks, isReady, activeView, activeStatus, activeCategory, activeCollection, debouncedQuery]);
+  }, [fetchBookmarks, isReady, activeView, debouncedQuery]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const refreshBookmarks = useCallback(() => {

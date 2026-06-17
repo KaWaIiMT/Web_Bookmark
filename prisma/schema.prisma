@@ -99,6 +99,10 @@ model Bookmark {
   updatedAt   DateTime            @updatedAt
   readAt      DateTime?
   order       Int                 @default(0)
+
+  @@index([userId, status])
+  @@index([userId, categoryId])
+  @@index([userId, order, createdAt])
 }
 
 model Tag {
