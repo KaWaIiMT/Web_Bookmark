@@ -439,27 +439,17 @@ export default function Home() {
                   </Button>
                 </div>
               ) : displayedBookmarks.length === 0 && isSwitching ? (
-                /* Optimistic filter returned empty — show subtle pulse on old cards while API fetches */
-                <div className="opacity-40 transition-opacity duration-150">
-                  {activeView === "gallery" ? (
-                    <MasonryGallery
-                      bookmarks={bookmarks}
-                      onCardClick={handleCardClick}
-                    />
-                  ) : (
-                    <SortableBookmarkGrid
-                      bookmarks={bookmarks}
-                      onStatusChange={handleStatusChange}
-                      onDelete={(id) => {
-                        const target = bookmarks.find((b) => b.id === id);
-                        if (target) setDeleteTarget(target);
-                      }}
-                      onEdit={handleEdit}
-                      onReorder={handleReorder}
-                      onCardClick={handleCardClick}
-                      onShare={handleShare}
-                    />
-                  )}
+                /* Optimistic filter returned 0 — current data has no matches for new filter.
+                   Show a few skeleton cards while API fetches the right data. */
+                <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4">
+                  {Array.from({ length: 4 }).map((_, i) => (
+                    <div key={i} className="space-y-3 p-1">
+                      <Skeleton className="aspect-[2.2/1] rounded-2xl bg-[var(--skeleton)]" />
+                      <Skeleton className="h-4 w-3/4 rounded-lg bg-[var(--skeleton)]" />
+                      <Skeleton className="h-3 w-full rounded-lg bg-[var(--skeleton)]" />
+                      <Skeleton className="h-3 w-1/2 rounded-lg bg-[var(--skeleton)]" />
+                    </div>
+                  ))}
                 </div>
               ) : activeView === "gallery" ? (
                 <MasonryGallery
