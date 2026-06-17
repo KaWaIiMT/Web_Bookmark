@@ -24,6 +24,18 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ error: "URL is required" }, { status: 400 });
     }
 
+    // Step 0: Duplicate check (server-side, prevents double-submit race)
+    const existingBookmark = await prisma.bookmark.findFirst({
+      where: { url, userId },
+      select: { id: true },
+    });
+    if (existingBookmark) {
+      return NextResponse.json(
+        { error: "你已经收藏过这个网页了" },
+        { status: 409 }
+      );
+    }
+
     // Step 1: Extract metadata
     let title = "";
     let description = "";
@@ -136,11 +148,11 @@ export async function POST(req: NextRequest) {
     const bookmarkId = bookmark.id;
     const bookmarkUrl = url;
     prisma.bookmark
-      .update({ where: { id: bookmarkId }, data: { archiveStatus: "pending" } })
+      .update({ where: { id: bookmarkId, userId }, data: { archiveStatus: "pending" } })
       .then(() => archivePage(bookmarkUrl))
       .then(({ html, text }) =>
         prisma.bookmark.update({
-          where: { id: bookmarkId },
+          where: { id: bookmarkId, userId },
           data: { archiveHtml: html, archiveText: text, archivedAt: new Date(), archiveStatus: "success" },
         })
       )
@@ -148,7 +160,7 @@ export async function POST(req: NextRequest) {
         const msg = e instanceof Error ? e.message : "unknown";
         prisma.bookmark
           .update({
-            where: { id: bookmarkId },
+            where: { id: bookmarkId, userId },
             data: { archiveStatus: `failed: ${msg.slice(0, 200)}` },
           })
           .catch(() => {}); // swallow — can't do much if this also fails

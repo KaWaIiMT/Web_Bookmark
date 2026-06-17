@@ -151,6 +151,7 @@ export default function Home() {
       toast.success("书签已删除");
       setDeleteTarget(null);
       refreshBookmarks();
+      window.dispatchEvent(new CustomEvent("bookmark-deleted"));
     } catch {
       toast.error("删除失败，请重试");
     }

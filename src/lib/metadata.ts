@@ -32,34 +32,46 @@ async function fetchBilibiliMeta(url: string): Promise<{
   }
 
   try {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), 8000);
-    const res = await fetch(apiUrl, {
-      headers: {
-        "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36",
-        Referer: "https://www.bilibili.com/",
-      },
-      signal: controller.signal,
-    });
-    clearTimeout(timeout);
+    for (let retry = 0; retry < 3; retry++) {
+      if (retry > 0) {
+        // Exponential backoff: 500ms, 1500ms
+        await new Promise((r) => setTimeout(r, 500 * Math.pow(3, retry - 1)));
+        console.log(`[Bilibili] Retry ${retry + 1}/3 for ${bvidMatch?.[1] || aidMatch?.[1]}`);
+      }
+      const controller = new AbortController();
+      const timeout = setTimeout(() => controller.abort(), 8000);
+      const res = await fetch(apiUrl, {
+        headers: {
+          "User-Agent": "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36",
+          Referer: "https://www.bilibili.com/",
+          "Accept-Language": "zh-CN,zh;q=0.9",
+        },
+        signal: controller.signal,
+      });
+      clearTimeout(timeout);
 
-    if (!res.ok) return null;
-    const json = await res.json();
-    if (json.code !== 0 || !json.data) return null;
-
-    const d = json.data;
-    const rawPic = d.pic || "";
-    return {
-      title: d.title || "",
-      description: (d.desc || "").slice(0, 500),
-      coverImage: rawPic.replace(/^http:\/\//, "https://"),
-      specificFields: {
-        author: d.owner?.name || "",
-        duration: d.duration ? formatBilibiliDuration(d.duration) : "",
-        viewCount: String(d.stat?.view || ""),
-        danmaku: String(d.stat?.danmaku || ""),
-      },
-    };
+      if (res.ok) {
+        const json = await res.json();
+        if (json.code === 0 && json.data) {
+          const d = json.data;
+          const rawPic = d.pic || "";
+          return {
+            title: d.title || "",
+            description: (d.desc || "").slice(0, 500),
+            coverImage: rawPic.replace(/^http:\/\//, "https://"),
+            specificFields: {
+              author: d.owner?.name || "",
+              duration: d.duration ? formatBilibiliDuration(d.duration) : "",
+              viewCount: String(d.stat?.view || ""),
+              danmaku: String(d.stat?.danmaku || ""),
+            },
+          };
+        }
+        // If code !== 0, don't retry — invalid bvid/aid
+        if (json.code !== 0) break;
+      }
+    }
+    return null;
   } catch {
     return null;
   }

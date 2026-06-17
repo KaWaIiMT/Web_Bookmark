@@ -276,7 +276,11 @@ export function Sidebar({
       fetchCollections();
     };
     window.addEventListener("bookmark-created", handler);
-    return () => window.removeEventListener("bookmark-created", handler);
+    window.addEventListener("bookmark-deleted", handler);
+    return () => {
+      window.removeEventListener("bookmark-created", handler);
+      window.removeEventListener("bookmark-deleted", handler);
+    };
   }, []);
 
   const handleCreateCollection = async () => {
