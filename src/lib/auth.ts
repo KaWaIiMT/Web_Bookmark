@@ -23,6 +23,12 @@ if (proxyUrl && !process.env.VERCEL) {
 
 export const authConfig: NextAuthConfig = {
   adapter: PrismaAdapter(prisma),
+  session: {
+    // Use JWT strategy so that both Credentials and OAuth providers
+    // share the same session mechanism. The database adapter is still
+    // used for account linking and user persistence.
+    strategy: "jwt",
+  },
   providers: [
     GitHub({
       clientId: process.env.AUTH_GITHUB_ID,
@@ -95,13 +101,26 @@ export const authConfig: NextAuthConfig = {
       }
       return true;
     },
-    async session({ session, user }) {
-      if (session.user) {
-        session.user.id = user.id;
-        session.user.name = user.name;
-        session.user.image = user.image;
-        session.user.email = user.email || "";
-        session.user.isAdmin = await isAdmin(user.id);
+    async jwt({ token, user, account }) {
+      // On first sign-in, persist the user id and isAdmin into the JWT
+      if (user) {
+        token.id = user.id;
+        token.isAdmin = await isAdmin(user.id);
+      }
+      // On subsequent requests, re-check isAdmin from database
+      // (so admin status changes take effect without re-login)
+      if (token.id && (!user || account)) {
+        token.isAdmin = await isAdmin(token.id as string);
+      }
+      return token;
+    },
+    async session({ session, token }) {
+      if (session.user && token) {
+        session.user.id = token.id as string;
+        session.user.name = token.name as string;
+        session.user.image = token.picture as string;
+        session.user.email = (token.email as string) || "";
+        session.user.isAdmin = token.isAdmin as boolean;
       }
       return session;
     },

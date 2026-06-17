@@ -54,8 +54,3 @@ export const registerLimiter = createRateLimiter({
   intervalMs: 60 * 60 * 1000, // 1 hour
   maxRequests: 3,
 });
-
-export const resendVerificationLimiter = createRateLimiter({
-  intervalMs: 2 * 60 * 1000, // 2 minutes
-  maxRequests: 1,
-});
