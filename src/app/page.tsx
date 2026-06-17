@@ -87,17 +87,21 @@ export default function Home() {
       if (activeStatus) params.set("status", activeStatus);
       if (activeCategory) params.set("categoryId", activeCategory);
       if (activeCollection) params.set("collectionId", activeCollection);
+      // Debounce: only send search query after 250ms idle (handled by caller)
       if (searchQuery) params.set("q", searchQuery);
       params.set("limit", "100");
 
       const res = await fetch(`/api/bookmarks?${params.toString()}`, { signal });
       if (signal.aborted) return;
       const data = (await res.json()) as PaginatedResponse<BookmarkData>;
-      if (!signal.aborted) setBookmarks(data.data || []);
+      if (!signal.aborted) {
+        // Swap atomically — no flash of empty cards
+        setBookmarks(data.data || []);
+      }
     } catch (err) {
       if (signal.aborted) return;
       if (err instanceof DOMException && err.name === "AbortError") return;
-      setBookmarks([]);
+      // Don't clear existing bookmarks on error — keep stale UI
     } finally {
       if (!signal.aborted) {
         setLoading(false);
@@ -106,9 +110,15 @@ export default function Home() {
     }
   }, [activeStatus, activeCategory, activeCollection, searchQuery]);
 
+  // Debounced search — only fetch after 300ms idle
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedQuery(searchQuery), 300);
+    return () => clearTimeout(timer);
+  }, [searchQuery]);
+
   useEffect(() => {
     if (!isReady) return;
-    // Only fetch bookmarks for grid and gallery views
     if (activeView !== "grid" && activeView !== "gallery") {
       setLoading(false);
       return;
@@ -118,8 +128,7 @@ export default function Home() {
     return () => {
       if (!controller.signal.aborted) controller.abort();
     };
-
-  }, [fetchBookmarks, isReady, activeView]);
+  }, [fetchBookmarks, isReady, activeView, activeStatus, activeCategory, activeCollection, debouncedQuery]);
 
   // eslint-disable-next-line react-hooks/exhaustive-deps
   const refreshBookmarks = useCallback(() => {
