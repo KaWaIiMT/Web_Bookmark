@@ -3,7 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
+    "predev": "prisma generate && node prisma/migrate.mjs",
     "dev": "next dev",
+    "prebuild": "prisma generate && node prisma/migrate.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "eslint"
