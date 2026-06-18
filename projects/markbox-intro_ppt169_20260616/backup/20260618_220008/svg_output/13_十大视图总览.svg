@@ -1,0 +1,72 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="50%" cy="50%" r="45%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="50" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">视图</text>
+    <line x1="80" y1="63" x2="130" y2="63" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5"/>
+    <text x="80" y="110" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">十大功能视图</text>
+    <text x="640" y="110" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.40">同一个书签库，十种视角 — 每种视角解决一种「我想看什么」的需求</text>
+  </g>
+  <g id="view-grid"><rect x="80" y="145" width="350" height="100" rx="10" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/bookmarks" x="105" y="170" width="22" height="22" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="140" y="185" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">Grid · 网格视图</text>
+    <text x="105" y="215" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">传统卡片网格/列表模式，快速浏览所有书签</text>
+  </g>
+  <g id="view-gallery"><rect x="450" y="145" width="350" height="100" rx="10" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/eye" x="475" y="170" width="22" height="22" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="510" y="185" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">Gallery · 画廊视图</text>
+    <text x="475" y="215" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">CSS Columns 瀑布流，适合图片型书签浏览</text>
+  </g>
+  <g id="view-discover"><rect x="820" y="145" width="380" height="100" rx="10" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/globe" x="845" y="170" width="22" height="22" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="880" y="185" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">Discover · 发现页</text>
+    <text x="845" y="215" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">跨领域/最新收录/每日精选三模式</text>
+  </g>
+  <g id="view-dashboard"><rect x="80" y="265" width="350" height="100" rx="10" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/layout-dashboard" x="105" y="290" width="22" height="22" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="140" y="305" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">Dashboard · 仪表板</text>
+    <text x="105" y="335" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">Recharts 饼图/柱状图 + 词云 + 三层推荐</text>
+  </g>
+  <g id="view-timeline"><rect x="450" y="265" width="350" height="100" rx="10" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/timeline" x="475" y="290" width="22" height="22" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="510" y="305" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">Timeline · 时间线</text>
+    <text x="475" y="335" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">按月分组垂直时间线，motion 交错入场</text>
+  </g>
+  <g id="view-compare"><rect x="820" y="265" width="380" height="100" rx="10" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/git-compare" x="845" y="290" width="22" height="22" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="880" y="305" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">Compare · 横向对比</text>
+    <text x="845" y="335" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">2-5 篇书签 AI 五维对比，雷达图+矩阵表</text>
+  </g>
+  <g id="view-path"><rect x="80" y="385" width="350" height="100" rx="10" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/puzzle" x="105" y="410" width="22" height="22" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="140" y="425" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">Learning Path · 学习路径</text>
+    <text x="105" y="455" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">结构化学习计划 + 进度 + 笔记 + 导出</text>
+  </g>
+  <g id="view-weekly"><rect x="450" y="385" width="350" height="100" rx="10" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/chart-bar" x="475" y="410" width="22" height="22" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="510" y="425" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">Weekly · 周报</text>
+    <text x="475" y="455" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">本周 vs 上周对比 · Top 标签 · 增长趋势</text>
+  </g>
+  <g id="view-graph"><rect x="820" y="385" width="380" height="100" rx="10" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/graph" x="845" y="410" width="22" height="22" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="880" y="425" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">Knowledge Graph · 知识图谱</text>
+    <text x="845" y="455" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">力导向图 + 三层交互 + 时间轴播放 + 截图导出</text>
+  </g>
+  <g id="view-activity"><rect x="340" y="505" width="600" height="100" rx="10" fill="#c9866b" fill-opacity="0.04"/>
+    <use data-icon="tabler-outline/chart-pie" x="560" y="530" width="22" height="22" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="600" y="545" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="17" font-weight="600" fill="#2D2A26">Activity · 活动日志</text>
+    <text x="560" y="575" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">书签收藏/阅读/归档操作记录，追踪用户知识消费行为</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">13 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 十大视图总览</text>
+  </g>
+</svg>

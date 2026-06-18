@@ -1,0 +1,20 @@
+No,Filename,Width,Height,AspectRatio,PixelAspectRatio,RatioSource,UsageCount,DisplayRatioVariants,AssetKind,SvgRenderable,PptxNativeSupported,SizeKB,Category,ImageArea_SxS,TextArea_SxS
+1,detail_api_key.png,984,495,1.99,1.99,pixel,1,,bitmap,True,True,476.1,Wide landscape,812x408,328x600
+2,detail_context_menu.png,568,207,2.74,2.74,pixel,1,,bitmap,True,True,129.7,Ultra-wide,1160x423,1160x157
+3,detail_dragdrop.png,912,625,1.46,1.46,pixel,1,,bitmap,True,True,656.3,Standard landscape,812x556,328x600
+4,detail_extension_popup.png,390,506,0.77,0.77,pixel,1,,bitmap,True,True,26.4,Portrait,462x600,678x600
+5,detail_graph_timeline.png,286,58,4.93,4.93,pixel,1,,bitmap,True,True,17.9,Ultra-wide,1160x235,1160x345
+6,detail_login.png,655,847,0.77,0.77,pixel,1,,bitmap,True,True,532.2,Portrait,464x600,676x600
+7,detail_share.png,747,1021,0.73,0.73,pixel,1,,bitmap,True,True,815.0,Portrait,439x600,701x600
+8,detail_stats_chart.png,970,1026,0.95,0.95,pixel,1,,bitmap,True,True,938.3,Near square,567x600,573x600
+9,detail_status_badges.png,384,116,3.31,3.31,pixel,1,,bitmap,True,True,56.1,Ultra-wide,1160x350,1160x230
+10,detail_summary.png,397,405,0.98,0.98,pixel,1,,bitmap,True,True,214.8,Near square,588x600,552x600
+11,detail_tags.png,100,30,3.33,3.33,pixel,1,,bitmap,True,True,3.8,Ultra-wide,1160x348,1160x232
+12,detail_url_input.png,525,822,0.64,0.64,pixel,1,,bitmap,True,True,596.4,Portrait,383x600,757x600
+13,detail_weekly.png,709,503,1.41,1.41,pixel,1,,bitmap,True,True,351.6,Standard landscape,846x600,294x600
+14,full_admin.png,1924,667,2.88,2.88,pixel,1,,bitmap,True,True,207.0,Ultra-wide,1160x402,1160x178
+15,full_dashboard.png,2558,1274,2.01,2.01,pixel,1,,bitmap,True,True,3259.9,Ultra-wide,812x404,328x600
+16,full_gallery.png,2299,888,2.59,2.59,pixel,1,,bitmap,True,True,2248.8,Ultra-wide,812x314,328x600
+17,full_grid.png,2286,1196,1.91,1.91,pixel,1,,bitmap,True,True,2828.2,Wide landscape,812x425,328x600
+18,full_knowledge_graph.png,1122,909,1.23,1.23,pixel,1,,bitmap,True,True,967.6,Standard landscape,741x600,399x600
+19,full_timeline.png,833,1166,0.71,0.71,pixel,1,,bitmap,True,True,1027.0,Portrait,429x600,711x600

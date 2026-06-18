@@ -1,0 +1,47 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="85%" cy="30%" r="50%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">问题</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5"/>
+  </g>
+  <g id="left-headline">
+    <text x="80" y="200" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="48" font-weight="700" fill="#2D2A26">书签的困境</text>
+    <text x="80" y="320" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" fill="#2D2A26" fill-opacity="0.45">
+      <tspan x="80" dy="0">收藏从未停止</tspan>
+      <tspan x="80" dy="36">整理从未开始</tspan>
+    </text>
+    <text x="80" y="430" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.32">信息过载时代，传统书签管理已经失效</text>
+    <line x1="80" y1="470" x2="480" y2="470" stroke="#c9866b" stroke-opacity="0.18" stroke-width="0.5"/>
+  </g>
+  <g id="card-pain-1">
+    <rect x="620" y="140" width="580" height="140" rx="12" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/search" x="650" y="178" width="28" height="28" fill="#c9866b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="695" y="196" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#2D2A26">收藏 500+ 链接，想找的永远找不到</text>
+    <text x="695" y="229" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.45">缺乏智能分类和高效搜索，浏览器默认书签栏杂乱无章</text>
+  </g>
+  <g id="card-pain-2">
+    <rect x="620" y="300" width="580" height="140" rx="12" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/eye" x="650" y="338" width="28" height="28" fill="#b76e4b" fill-opacity="0.55" stroke-width="2"/>
+    <text x="695" y="356" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#2D2A26">看到好文章就存，存完再也不看</text>
+    <text x="695" y="389" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.45">缺乏阅读追踪和回顾机制，书签沦为一串沉默的链接</text>
+  </g>
+  <g id="card-pain-3">
+    <rect x="620" y="460" width="580" height="140" rx="12" fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1"/>
+    <use data-icon="tabler-outline/graph" x="650" y="498" width="28" height="28" fill="#d4a574" fill-opacity="0.55" stroke-width="2"/>
+    <text x="695" y="516" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="20" font-weight="600" fill="#2D2A26">知识散落各处，无法形成体系</text>
+    <text x="695" y="549" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.45">孤立的链接之间没有关联，无法进行深度阅读和知识结构化</text>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">02 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 书签的困境</text>
+  </g>
+</svg>

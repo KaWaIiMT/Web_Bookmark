@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="70%" cy="30%" r="60%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04"/>
+      <stop offset="50%" stop-color="#d4a574" stop-opacity="0.01"/>
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="titleGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c9866b"/>
+      <stop offset="100%" stop-color="#b76e4b"/>
+    </linearGradient>
+    <linearGradient id="underlineGrad" x1="0%" y1="0%" x2="100%" y2="0%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0"/>
+      <stop offset="35%" stop-color="#c9866b" stop-opacity="0.6"/>
+      <stop offset="65%" stop-color="#c9866b" stop-opacity="0.6"/>
+      <stop offset="100%" stop-color="#c9866b" stop-opacity="0"/>
+    </linearGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="decor-top">
+    <circle cx="1050" cy="130" r="200" fill="#c9866b" fill-opacity="0.03"/>
+    <circle cx="1050" cy="130" r="130" fill="none" stroke="#c9866b" stroke-opacity="0.10" stroke-width="1"/>
+    <circle cx="1050" cy="130" r="65" fill="none" stroke="#d4a574" stroke-opacity="0.06" stroke-width="0.5"/>
+  </g>
+  <g id="decor-bottom-left">
+    <line x1="80" y1="650" x2="300" y2="650" stroke="#c9866b" stroke-opacity="0.14" stroke-width="0.5"/>
+    <line x1="80" y1="660" x2="210" y2="660" stroke="#d4a574" stroke-opacity="0.08" stroke-width="0.5"/>
+  </g>
+  <g id="cover-title">
+    <text x="640" y="310" text-anchor="middle" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="72" font-weight="700" fill="url(#titleGrad)">MarkBox</text>
+    <rect x="435" y="335" width="410" height="2" rx="1" fill="url(#underlineGrad)"/>
+  </g>
+  <g id="cover-subtitle">
+    <text x="640" y="400" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="28" font-weight="400" fill="#2D2A26" fill-opacity="0.45">AI 智能书签管理器</text>
+  </g>
+  <g id="cover-tagline">
+    <text x="640" y="545" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" fill="#2D2A26" fill-opacity="0.28">粘贴链接 · AI 理解 · 知识沉淀</text>
+  </g>
+  <g id="cover-icons">
+    <use data-icon="tabler-outline/bookmark" x="612" y="570" width="20" height="20" fill="#c9866b" fill-opacity="0.50" stroke-width="2"/>
+    <use data-icon="tabler-outline/sparkles" x="648" y="570" width="20" height="20" fill="#c9866b" fill-opacity="0.50" stroke-width="2"/>
+  </g>
+  <g id="cover-footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">01 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 项目路演</text>
+  </g>
+</svg>

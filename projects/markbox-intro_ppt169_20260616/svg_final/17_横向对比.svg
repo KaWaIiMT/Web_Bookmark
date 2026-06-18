@@ -15,33 +15,85 @@
     <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">横向对比</text>
     <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.40">选 2-5 篇书签 → AI 五维度深度对比 → 雷达图 + 矩阵表格分析</text>
   </g>
-  <g id="col-compare">
-    <text x="80" y="205" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">对比结果视图</text>
-    <path fill="#c9866b" fill-opacity="0.03" d="M92,225 H613 A12,12 0 0 1 625,237 V553 A12,12 0 0 1 613,565 H92 A12,12 0 0 1 80,553 V237 A12,12 0 0 1 92,225 Z" />
-    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M92,225 H613 A12,12 0 0 1 625,237 V553 A12,12 0 0 1 613,565 H92 A12,12 0 0 1 80,553 V237 A12,12 0 0 1 92,225 Z" />
+  <g id="visual-compare">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.06" stroke-width="1" d="M92,225 H613 A12,12 0 0 1 625,237 V553 A12,12 0 0 1 613,565 H92 A12,12 0 0 1 80,553 V237 A12,12 0 0 1 92,225 Z" />
     
-  <g transform="translate(320.0, 360.0) scale(1.6666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
-    <path d="M4 6a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-    <path d="M16 18a2 2 0 1 0 4 0a2 2 0 1 0 -4 0" />
-    <path d="M11 6h5a2 2 0 0 1 2 2v8" />
-    <path d="M14 9l-3 -3l3 -3" />
-    <path d="M13 18h-5a2 2 0 0 1 -2 -2v-8" />
-    <path d="M10 15l3 3l-3 3" />
-  </g>
-    <text x="352" y="390" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.33">full_compare.png</text>
-    <text x="352" y="412" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">全页对比视图</text>
-  </g>
-  <g id="col-radar">
-    <text x="655" y="205" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">雷达图特写</text>
-    <path fill="#c9866b" fill-opacity="0.03" d="M667,225 H1188 A12,12 0 0 1 1200,237 V553 A12,12 0 0 1 1188,565 H667 A12,12 0 0 1 655,553 V237 A12,12 0 0 1 667,225 Z" />
-    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M667,225 H1188 A12,12 0 0 1 1200,237 V553 A12,12 0 0 1 1188,565 H667 A12,12 0 0 1 655,553 V237 A12,12 0 0 1 667,225 Z" />
+    <path fill="#F2F0ED" d="M92,225 H613 A12,12 0 0 1 625,237 V249 A12,12 0 0 1 613,261 H92 A12,12 0 0 1 80,249 V237 A12,12 0 0 1 92,225 Z" />
+    <rect x="80" y="249" width="545" height="12" fill="#F2F0ED" />
+    <text x="150" y="248" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#2D2A26">维度</text>
+    <text x="285" y="248" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#2D2A26">书签 A</text>
+    <text x="425" y="248" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#2D2A26">书签 B</text>
     
-  <g transform="translate(895.0, 360.0) scale(1.6666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
-    <path d="M10 3.2a9 9 0 1 0 10.8 10.8a1 1 0 0 0 -1 -1h-6.8a2 2 0 0 1 -2 -2v-7a.9 .9 0 0 0 -1 -.8" />
-    <path d="M15 3.5a9 9 0 0 1 5.5 5.5h-4.5a1 1 0 0 1 -1 -1v-4.5" />
+    <text x="115" y="295" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26">内容深度</text>
+    <path fill="#c9866b" fill-opacity="0.15" d="M247,283 H323 A7,7 0 0 1 330,290 V290 A7,7 0 0 1 323,297 H247 A7,7 0 0 1 240,290 V290 A7,7 0 0 1 247,283 Z" />
+    <text x="285" y="294" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" font-weight="600" fill="#c9866b">高 · 85%</text>
+    <path fill="#d4a574" fill-opacity="0.12" d="M387,283 H463 A7,7 0 0 1 470,290 V290 A7,7 0 0 1 463,297 H387 A7,7 0 0 1 380,290 V290 A7,7 0 0 1 387,283 Z" />
+    <text x="425" y="294" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.45">中 · 62%</text>
+    
+    <text x="115" y="332" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26">实用性</text>
+    <path fill="#c9866b" fill-opacity="0.15" d="M247,320 H323 A7,7 0 0 1 330,327 V327 A7,7 0 0 1 323,334 H247 A7,7 0 0 1 240,327 V327 A7,7 0 0 1 247,320 Z" />
+    <text x="285" y="331" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" font-weight="600" fill="#c9866b">高 · 90%</text>
+    <path fill="#c9866b" fill-opacity="0.15" d="M387,320 H463 A7,7 0 0 1 470,327 V327 A7,7 0 0 1 463,334 H387 A7,7 0 0 1 380,327 V327 A7,7 0 0 1 387,320 Z" />
+    <text x="425" y="331" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" font-weight="600" fill="#c9866b">高 · 88%</text>
+    
+    <text x="115" y="369" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26">时效性</text>
+    <path fill="#F59E0B" fill-opacity="0.12" d="M247,357 H323 A7,7 0 0 1 330,364 V364 A7,7 0 0 1 323,371 H247 A7,7 0 0 1 240,364 V364 A7,7 0 0 1 247,357 Z" />
+    <text x="285" y="368" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.45">中 · 55%</text>
+    <path fill="#c9866b" fill-opacity="0.15" d="M387,357 H463 A7,7 0 0 1 470,364 V364 A7,7 0 0 1 463,371 H387 A7,7 0 0 1 380,364 V364 A7,7 0 0 1 387,357 Z" />
+    <text x="425" y="368" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" font-weight="600" fill="#c9866b">高 · 92%</text>
+    
+    <text x="115" y="406" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26">可读性</text>
+    <path fill="#10B981" fill-opacity="0.12" d="M247,394 H323 A7,7 0 0 1 330,401 V401 A7,7 0 0 1 323,408 H247 A7,7 0 0 1 240,401 V401 A7,7 0 0 1 247,394 Z" />
+    <text x="285" y="405" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" font-weight="600" fill="#10B981">优 · 95%</text>
+    <path fill="#10B981" fill-opacity="0.12" d="M387,394 H463 A7,7 0 0 1 470,401 V401 A7,7 0 0 1 463,408 H387 A7,7 0 0 1 380,401 V401 A7,7 0 0 1 387,394 Z" />
+    <text x="425" y="405" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" font-weight="600" fill="#10B981">优 · 91%</text>
+    
+    <text x="115" y="443" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26">独特性</text>
+    <path fill="#d4a574" fill-opacity="0.12" d="M247,431 H323 A7,7 0 0 1 330,438 V438 A7,7 0 0 1 323,445 H247 A7,7 0 0 1 240,438 V438 A7,7 0 0 1 247,431 Z" />
+    <text x="285" y="442" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.45">中 · 70%</text>
+    <path fill="#10B981" fill-opacity="0.12" d="M387,431 H463 A7,7 0 0 1 470,438 V438 A7,7 0 0 1 463,445 H387 A7,7 0 0 1 380,438 V438 A7,7 0 0 1 387,431 Z" />
+    <text x="425" y="442" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" font-weight="600" fill="#10B981">优 · 97%</text>
+    
+    <path fill="#c9866b" fill-opacity="0.04" d="M108,475 H597 A8,8 0 0 1 605,483 V537 A8,8 0 0 1 597,545 H108 A8,8 0 0 1 100,537 V483 A8,8 0 0 1 108,475 Z" />
+    
+  <g transform="translate(115.0, 495.0) scale(0.5833333333333334)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6" />
   </g>
-    <text x="927" y="390" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.33">detail_radar.png</text>
-    <text x="927" y="412" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">五维度雷达图特写</text>
+    <text x="135" y="500" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#c9866b" fill-opacity="0.45">AI 评语</text>
+    <text x="115" y="520" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.35">B 内容更新、独特性更突出，适合深入学习；A 内容覆盖面广，适合快速入门</text>
+  </g>
+  <g id="visual-radar">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.06" stroke-width="1" d="M667,225 H1188 A12,12 0 0 1 1200,237 V553 A12,12 0 0 1 1188,565 H667 A12,12 0 0 1 655,553 V237 A12,12 0 0 1 667,225 Z" />
+    <text x="927" y="260" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600" fill="#2D2A26">五维度雷达对比</text>
+    
+    <g transform="translate(927, 415)">
+      
+      <polygon points="0,-120 114,-37 70,97 -70,97 -114,-37" fill="none" stroke="#2D2A26" stroke-opacity="0.06" stroke-width="1" />
+      <polygon points="0,-90 86,-28 53,73 -53,73 -86,-28" fill="none" stroke="#2D2A26" stroke-opacity="0.06" stroke-width="1" />
+      <polygon points="0,-60 57,-19 35,49 -35,49 -57,-19" fill="none" stroke="#2D2A26" stroke-opacity="0.08" stroke-width="1" />
+      <polygon points="0,-30 29,-9 18,24 -18,24 -29,-9" fill="none" stroke="#2D2A26" stroke-opacity="0.10" stroke-width="1" />
+      
+      <line x1="0" y1="0" x2="0" y2="-120" stroke="#2D2A26" stroke-opacity="0.10" stroke-width="0.8" />
+      <line x1="0" y1="0" x2="114" y2="-37" stroke="#2D2A26" stroke-opacity="0.10" stroke-width="0.8" />
+      <line x1="0" y1="0" x2="70" y2="97" stroke="#2D2A26" stroke-opacity="0.10" stroke-width="0.8" />
+      <line x1="0" y1="0" x2="-70" y2="97" stroke="#2D2A26" stroke-opacity="0.10" stroke-width="0.8" />
+      <line x1="0" y1="0" x2="-114" y2="-37" stroke="#2D2A26" stroke-opacity="0.10" stroke-width="0.8" />
+      
+      <polygon points="0,-100 95,-31 58,81 -70,97 -95,-31" fill="#c9866b" fill-opacity="0.12" stroke="#c9866b" stroke-opacity="0.40" stroke-width="1.5" />
+      
+      <polygon points="0,-85 105,-34 65,88 -40,65 -80,-28" fill="#d4a574" fill-opacity="0.08" stroke="#d4a574" stroke-opacity="0.30" stroke-width="1.5" />
+      
+      <text x="0" y="-132" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.35">深度</text>
+      <text x="130" y="-40" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.35">实用</text>
+      <text x="82" y="110" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.35">时效</text>
+      <text x="-82" y="110" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.35">可读</text>
+      <text x="-130" y="-40" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.35">独特</text>
+      
+      <circle cx="-40" cy="130" r="4" fill="#c9866b" fill-opacity="0.40" />
+      <text x="-30" y="134" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.35">书签 A</text>
+      <circle cx="30" cy="130" r="4" fill="#d4a574" fill-opacity="0.30" />
+      <text x="40" y="134" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.35">书签 B</text>
+    </g>
   </g>
   <g id="features">
     <g id="feat-1">

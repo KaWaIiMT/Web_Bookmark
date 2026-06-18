@@ -28,7 +28,7 @@
     <path d="M13 18l-.397 .534a5.068 5.068 0 0 1 -7.127 0a4.972 4.972 0 0 1 0 -7.071l.524 -.463" />
   </g>
     <text x="280" y="465" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="600" fill="#2D2A26">粘贴链接</text>
-    <text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="280" y="500">复制 URL 一键丢入</text><text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="280" y="524">自动提取标题/封面/元数据</text></g>
+    <text fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle" fill-opacity="0.40" font-size="14" x="280" y="500">复制 URL 一键丢入</text><text fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle" fill-opacity="0.40" font-size="14" x="280" y="524">自动提取标题/封面/元数据</text></g>
   <g id="arrow-1">
     <line x1="430" y1="470" x2="480" y2="470" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" />
     <polygon points="476,464 488,470 476,476" fill="#c9866b" fill-opacity="0.30" />
@@ -46,7 +46,7 @@
     <path d="M5 9.3v-2.8a3.5 3.5 0 0 1 7 0v10" />
   </g>
     <text x="640" y="465" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="600" fill="#2D2A26">AI 自动理解</text>
-    <text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="640" y="500">DeepSeek V4 Flash 驱动</text><text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="640" y="524">智能标签 + 分类 + 摘要</text></g>
+    <text fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle" fill-opacity="0.40" font-size="14" x="640" y="500">DeepSeek V4 Flash 驱动</text><text fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle" fill-opacity="0.40" font-size="14" x="640" y="524">智能标签 + 分类 + 摘要</text></g>
   <g id="arrow-2">
     <line x1="790" y1="470" x2="840" y2="470" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" />
     <polygon points="836,464 848,470 836,476" fill="#c9866b" fill-opacity="0.30" />
@@ -60,7 +60,7 @@
     <path d="M7 14l3 -3l2 2l3 -3l2 2" />
   </g>
     <text x="1000" y="465" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="22" font-weight="600" fill="#2D2A26">知识网络生长</text>
-    <text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="1000" y="500">十个视图多维度呈现</text><text font-size="14" text-anchor="middle" fill-opacity="0.40" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="1000" y="524">发现关联 · 对比分析 · 知识图谱</text></g>
+    <text fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle" fill-opacity="0.40" font-size="14" x="1000" y="500">十个视图多维度呈现</text><text fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" text-anchor="middle" fill-opacity="0.40" font-size="14" x="1000" y="524">发现关联 · 对比分析 · 知识图谱</text></g>
   <g id="footer">
     <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">03 / 25</text>
     <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 解决方案</text>

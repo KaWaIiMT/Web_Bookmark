@@ -14,6 +14,6 @@ markbox-extension/.output/
 markbox-extension/.wxt/
 markbox-extension/node_modules/
 .vercel
-/auth
-/help
+auth
+help
 .agents/

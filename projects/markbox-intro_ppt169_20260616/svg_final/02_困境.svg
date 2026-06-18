@@ -15,7 +15,7 @@
   </g>
   <g id="left-headline">
     <text x="80" y="200" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="48" font-weight="700" fill="#2D2A26">书签的困境</text>
-    <text font-size="22" fill-opacity="0.45" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="80" y="320">收藏从未停止</text><text font-size="22" fill-opacity="0.45" fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" x="80" y="356">整理从未开始</text><text x="80" y="430" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.32">信息过载时代，传统书签管理已经失效</text>
+    <text fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" fill-opacity="0.45" font-size="22" x="80" y="320">收藏从未停止</text><text fill="#2D2A26" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" fill-opacity="0.45" font-size="22" x="80" y="356">整理从未开始</text><text x="80" y="430" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.32">信息过载时代，传统书签管理已经失效</text>
     <line x1="80" y1="470" x2="480" y2="470" stroke="#c9866b" stroke-opacity="0.18" stroke-width="0.5" />
   </g>
   <g id="card-pain-1">

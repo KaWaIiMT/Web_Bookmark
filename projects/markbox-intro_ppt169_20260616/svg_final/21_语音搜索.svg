@@ -57,18 +57,76 @@
       <text x="120" y="570" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">"上次那个讲 React hooks 的视频" → 语义搜索召回相关书签</text>
     </g>
   </g>
-  <g id="placeholder-voice">
-    <path fill="#c9866b" fill-opacity="0.03" d="M652,190 H1188 A12,12 0 0 1 1200,202 V628 A12,12 0 0 1 1188,640 H652 A12,12 0 0 1 640,628 V202 A12,12 0 0 1 652,190 Z" />
-    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M652,190 H1188 A12,12 0 0 1 1200,202 V628 A12,12 0 0 1 1188,640 H652 A12,12 0 0 1 640,628 V202 A12,12 0 0 1 652,190 Z" />
+  <g id="visual-voice">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.06" stroke-width="1" d="M652,190 H1188 A12,12 0 0 1 1200,202 V628 A12,12 0 0 1 1188,640 H652 A12,12 0 0 1 640,628 V202 A12,12 0 0 1 652,190 Z" />
     
-  <g transform="translate(880.0, 380.0) scale(1.6666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path fill="#F2F0ED" d="M731,215 H1109 A21,21 0 0 1 1130,236 V236 A21,21 0 0 1 1109,257 H731 A21,21 0 0 1 710,236 V236 A21,21 0 0 1 731,215 Z" />
+    
+  <g transform="translate(730.0, 226.0) scale(0.75)" fill="none" stroke="#2D2A26" stroke-width="2">
+    <path d="M3 10a7 7 0 1 0 14 0a7 7 0 1 0 -14 0" />
+    <path d="M21 21l-6 -6" />
+  </g>
+    <text x="758" y="240" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.28">上次那个讲 React hooks 的视频</text>
+    
+    <circle cx="1150" cy="236" r="22" fill="#c9866b" fill-opacity="0.10" stroke="#c9866b" stroke-opacity="0.30" stroke-width="2" />
+    
+  <g transform="translate(1138.0, 224.0)" fill="none" stroke="#c9866b" stroke-width="2.5">
     <path d="M9 5a3 3 0 0 1 3 -3a3 3 0 0 1 3 3v5a3 3 0 0 1 -3 3a3 3 0 0 1 -3 -3l0 -5" />
     <path d="M5 10a7 7 0 0 0 14 0" />
     <path d="M8 21l8 0" />
     <path d="M12 17l0 4" />
   </g>
-    <text x="920" y="405" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.33">detail_voice.png</text>
-    <text x="920" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">语音搜索脉冲动画 + 识别文字</text>
+    
+    <circle cx="920" cy="340" r="80" fill="none" stroke="#c9866b" stroke-opacity="0.04" stroke-width="1.5" />
+    <circle cx="920" cy="340" r="56" fill="none" stroke="#c9866b" stroke-opacity="0.08" stroke-width="1.5" />
+    <circle cx="920" cy="340" r="36" fill="none" stroke="#c9866b" stroke-opacity="0.14" stroke-width="2" />
+    
+    <circle cx="920" cy="340" r="26" fill="#c9866b" fill-opacity="0.12" stroke="#c9866b" stroke-opacity="0.35" stroke-width="2.5" />
+    
+  <g transform="translate(906.0, 326.0) scale(1.1666666666666667)" fill="none" stroke="#c9866b" stroke-width="2.5">
+    <path d="M9 5a3 3 0 0 1 3 -3a3 3 0 0 1 3 3v5a3 3 0 0 1 -3 3a3 3 0 0 1 -3 -3l0 -5" />
+    <path d="M5 10a7 7 0 0 0 14 0" />
+    <path d="M8 21l8 0" />
+    <path d="M12 17l0 4" />
+  </g>
+    
+    <g transform="translate(820, 420)">
+      <path fill="#c9866b" fill-opacity="0.25" d="M3,0 H3 A3,3 0 0 1 6,3 V9 A3,3 0 0 1 3,12 H3 A3,3 0 0 1 0,9 V3 A3,3 0 0 1 3,0 Z" />
+      <path fill="#c9866b" fill-opacity="0.35" d="M15,-6 H15 A3,3 0 0 1 18,-3 V15 A3,3 0 0 1 15,18 H15 A3,3 0 0 1 12,15 V-3 A3,3 0 0 1 15,-6 Z" />
+      <path fill="#c9866b" fill-opacity="0.50" d="M27,-14 H27 A3,3 0 0 1 30,-11 V23 A3,3 0 0 1 27,26 H27 A3,3 0 0 1 24,23 V-11 A3,3 0 0 1 27,-14 Z" />
+      <path fill="#c9866b" fill-opacity="0.60" d="M39,-20 H39 A3,3 0 0 1 42,-17 V29 A3,3 0 0 1 39,32 H39 A3,3 0 0 1 36,29 V-17 A3,3 0 0 1 39,-20 Z" />
+      <path fill="#c9866b" fill-opacity="0.55" d="M51,-22 H51 A3,3 0 0 1 54,-19 V31 A3,3 0 0 1 51,34 H51 A3,3 0 0 1 48,31 V-19 A3,3 0 0 1 51,-22 Z" />
+      <path fill="#c9866b" fill-opacity="0.45" d="M63,-18 H63 A3,3 0 0 1 66,-15 V27 A3,3 0 0 1 63,30 H63 A3,3 0 0 1 60,27 V-15 A3,3 0 0 1 63,-18 Z" />
+      <path fill="#c9866b" fill-opacity="0.30" d="M75,-10 H75 A3,3 0 0 1 78,-7 V19 A3,3 0 0 1 75,22 H75 A3,3 0 0 1 72,19 V-7 A3,3 0 0 1 75,-10 Z" />
+      <path fill="#c9866b" fill-opacity="0.40" d="M87,-12 H87 A3,3 0 0 1 90,-9 V21 A3,3 0 0 1 87,24 H87 A3,3 0 0 1 84,21 V-9 A3,3 0 0 1 87,-12 Z" />
+      <path fill="#c9866b" fill-opacity="0.50" d="M99,-16 H99 A3,3 0 0 1 102,-13 V25 A3,3 0 0 1 99,28 H99 A3,3 0 0 1 96,25 V-13 A3,3 0 0 1 99,-16 Z" />
+      <path fill="#c9866b" fill-opacity="0.65" d="M111,-24 H111 A3,3 0 0 1 114,-21 V33 A3,3 0 0 1 111,36 H111 A3,3 0 0 1 108,33 V-21 A3,3 0 0 1 111,-24 Z" />
+      <path fill="#c9866b" fill-opacity="0.50" d="M123,-18 H123 A3,3 0 0 1 126,-15 V27 A3,3 0 0 1 123,30 H123 A3,3 0 0 1 120,27 V-15 A3,3 0 0 1 123,-18 Z" />
+      <path fill="#c9866b" fill-opacity="0.35" d="M135,-10 H135 A3,3 0 0 1 138,-7 V19 A3,3 0 0 1 135,22 H135 A3,3 0 0 1 132,19 V-7 A3,3 0 0 1 135,-10 Z" />
+      <path fill="#c9866b" fill-opacity="0.25" d="M147,-4 H147 A3,3 0 0 1 150,-1 V13 A3,3 0 0 1 147,16 H147 A3,3 0 0 1 144,13 V-1 A3,3 0 0 1 147,-4 Z" />
+      <path fill="#c9866b" fill-opacity="0.18" d="M159,0 H159 A3,3 0 0 1 162,3 V9 A3,3 0 0 1 159,12 H159 A3,3 0 0 1 156,9 V3 A3,3 0 0 1 159,0 Z" />
+    </g>
+    
+    <path fill="#c9866b" fill-opacity="0.03" d="M718,528 H1122 A8,8 0 0 1 1130,536 V595 A8,8 0 0 1 1122,603 H718 A8,8 0 0 1 710,595 V536 A8,8 0 0 1 718,528 Z" />
+    
+  <g transform="translate(730.0, 553.0) scale(0.5833333333333334)" fill="none" stroke="#10B981" stroke-width="2">
+    <path d="M5 12l5 5l10 -10" />
+  </g>
+    <text x="752" y="557" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.28">Web Speech API · Chrome 原生支持中文</text>
+    
+  <g transform="translate(730.0, 576.0) scale(0.5833333333333334)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M6 21l15 -15l-3 -3l-15 15l3 3" />
+    <path d="M15 6l3 3" />
+    <path d="M9 3a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+    <path d="M19 13a2 2 0 0 0 2 2a2 2 0 0 0 -2 2a2 2 0 0 0 -2 -2a2 2 0 0 0 2 -2" />
+  </g>
+    <text x="752" y="580" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.28">识别完成后自动填入搜索框 · 支持语义搜索</text>
+    
+  <g transform="translate(730.0, 599.0) scale(0.5833333333333334)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M10 3.2a9 9 0 1 0 10.8 10.8a1 1 0 0 0 -1 -1h-6.8a2 2 0 0 1 -2 -2v-7a.9 .9 0 0 0 -1 -.8" />
+    <path d="M15 3.5a9 9 0 0 1 5.5 5.5h-4.5a1 1 0 0 1 -1 -1v-4.5" />
+  </g>
+    <text x="752" y="603" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.28">CSS 脉冲动画指示器 · 边说边显示识别文字</text>
   </g>
   <g id="footer">
     <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">21 / 25</text>

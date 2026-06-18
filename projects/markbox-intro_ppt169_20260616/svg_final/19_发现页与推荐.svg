@@ -58,18 +58,50 @@
       <text x="120" y="560" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">继续深入 · 拓展边界 · 重温旧藏 — 三维度智能推荐卡片</text>
     </g>
   </g>
-  <g id="placeholder-discover">
-    <path fill="#c9866b" fill-opacity="0.03" d="M652,190 H1188 A12,12 0 0 1 1200,202 V628 A12,12 0 0 1 1188,640 H652 A12,12 0 0 1 640,628 V202 A12,12 0 0 1 652,190 Z" />
-    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M652,190 H1188 A12,12 0 0 1 1200,202 V628 A12,12 0 0 1 1188,640 H652 A12,12 0 0 1 640,628 V202 A12,12 0 0 1 652,190 Z" />
+  <g id="visual-recommend">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.06" stroke-width="1" d="M652,190 H1188 A12,12 0 0 1 1200,202 V628 A12,12 0 0 1 1188,640 H652 A12,12 0 0 1 640,628 V202 A12,12 0 0 1 652,190 Z" />
     
-  <g transform="translate(880.0, 380.0) scale(1.6666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
-    <path d="M7 9a4 4 0 1 0 8 0a4 4 0 0 0 -8 0" />
-    <path d="M5.75 15a8.015 8.015 0 1 0 9.25 -13" />
-    <path d="M11 17v4" />
-    <path d="M7 21h8" />
+    <path fill="#d4a574" fill-opacity="0.04" stroke="#d4a574" stroke-opacity="0.12" stroke-width="1" d="M690,210 H1150 A10,10 0 0 1 1160,220 V300 A10,10 0 0 1 1150,310 H690 A10,10 0 0 1 680,300 V220 A10,10 0 0 1 690,210 Z" />
+    <text x="705" y="238" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#d4a574">LAYER 3 · Dashboard 个性化</text>
+    <text x="705" y="260" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26">继续深入 · 拓展边界 · 重温旧藏</text>
+    <text x="705" y="285" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.28">三维度卡片推荐 · 每周自动刷新</text>
+    
+  <g transform="translate(1110.0, 250.0) scale(0.9166666666666666)" fill="none" stroke="#d4a574" stroke-width="2">
+    <path d="M5 4h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M5 16h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
+    <path d="M15 12h4a1 1 0 0 1 1 1v6a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-6a1 1 0 0 1 1 -1" />
+    <path d="M15 4h4a1 1 0 0 1 1 1v2a1 1 0 0 1 -1 1h-4a1 1 0 0 1 -1 -1v-2a1 1 0 0 1 1 -1" />
   </g>
-    <text x="920" y="405" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.33">detail_discover.png</text>
-    <text x="920" y="428" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">发现页 · 推荐卡片视图</text>
+    
+    <line x1="920" y1="310" x2="920" y2="330" stroke="#2D2A26" stroke-opacity="0.12" stroke-width="1.5" />
+    <polygon points="916,326 920,333 924,326" fill="#2D2A26" fill-opacity="0.12" />
+    
+    <path fill="#c9866b" fill-opacity="0.05" stroke="#c9866b" stroke-opacity="0.18" stroke-width="1.5" d="M700,335 H1140 A10,10 0 0 1 1150,345 V415 A10,10 0 0 1 1140,425 H700 A10,10 0 0 1 690,415 V345 A10,10 0 0 1 700,335 Z" />
+    <text x="715" y="362" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#c9866b">LAYER 2 · 语义向量精排</text>
+    <text x="715" y="384" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26">DeepSeek Embedding · 余弦相似度</text>
+    <text x="715" y="407" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.28">标签 40% + 语义 60% 混合评分</text>
+    
+  <g transform="translate(1115.0, 357.0) scale(0.8333333333333334)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M4 6a8 3 0 1 0 16 0a8 3 0 1 0 -16 0" />
+    <path d="M4 6v6a8 3 0 0 0 16 0v-6" />
+    <path d="M4 12v6a8 3 0 0 0 16 0v-6" />
+  </g>
+    
+    <line x1="920" y1="425" x2="920" y2="445" stroke="#2D2A26" stroke-opacity="0.12" stroke-width="1.5" />
+    <polygon points="916,441 920,448 924,441" fill="#2D2A26" fill-opacity="0.12" />
+    
+    <path fill="#b76e4b" fill-opacity="0.06" stroke="#b76e4b" stroke-opacity="0.22" stroke-width="2" d="M720,450 H1120 A10,10 0 0 1 1130,460 V520 A10,10 0 0 1 1120,530 H720 A10,10 0 0 1 710,520 V460 A10,10 0 0 1 720,450 Z" />
+    <text x="735" y="478" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" font-weight="600" fill="#b76e4b">LAYER 1 · 标签共现匹配 (核心)</text>
+    <text x="735" y="500" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26">Jaccard 相似度 · 免 AI · 毫秒级 · 同分类降级</text>
+    
+  <g transform="translate(1085.0, 466.0) scale(0.9166666666666666)" fill="none" stroke="#b76e4b" stroke-width="2.5">
+    <path d="M6.5 7.5a1 1 0 1 0 2 0a1 1 0 1 0 -2 0" />
+    <path d="M3 6v5.172a2 2 0 0 0 .586 1.414l7.71 7.71a2.41 2.41 0 0 0 3.408 0l5.592 -5.592a2.41 2.41 0 0 0 0 -3.408l-7.71 -7.71a2 2 0 0 0 -1.414 -.586h-5.172a3 3 0 0 0 -3 3" />
+  </g>
+    
+    <path fill="#c9866b" fill-opacity="0.03" d="M698,555 H1162 A8,8 0 0 1 1170,563 V602 A8,8 0 0 1 1162,610 H698 A8,8 0 0 1 690,602 V563 A8,8 0 0 1 698,555 Z" />
+    <text x="710" y="578" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.28">三模式发现页：跨领域探索 · 最新收录 · 每日精选</text>
+    <text x="710" y="598" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.28">冷启动降级策略：免 AI 共现 → AI 精排 → 热度兜底</text>
   </g>
   <g id="footer">
     <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">19 / 25</text>

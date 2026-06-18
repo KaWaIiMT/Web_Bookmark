@@ -1,0 +1,50 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1280 720" width="1280" height="720">
+  <defs>
+    <radialGradient id="bgGlow" cx="30%" cy="50%" r="40%">
+      <stop offset="0%" stop-color="#c9866b" stop-opacity="0.04"/>
+      <stop offset="100%" stop-color="#FAFAF8" stop-opacity="0"/>
+    </radialGradient>
+  </defs>
+  <g id="bg-layer">
+    <rect x="0" y="0" width="1280" height="720" fill="#FAFAF8"/>
+    <rect x="0" y="0" width="1280" height="720" fill="url(#bgGlow)"/>
+  </g>
+  <g id="header">
+    <text x="80" y="55" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.28">基座</text>
+    <line x1="80" y1="68" x2="130" y2="68" stroke="#c9866b" stroke-opacity="0.35" stroke-width="1.5"/>
+    <text x="80" y="120" font-family="'Playfair Display', 'Noto Serif SC', Georgia, serif" font-size="36" font-weight="700" fill="#2D2A26">添加书签</text>
+    <text x="80" y="153" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="15" fill="#2D2A26" fill-opacity="0.40">粘贴 URL → 元数据自动提取 → AI 分类 → 一键入库</text>
+  </g>
+  <g id="left-steps">
+    <g id="step-extract">
+      <circle cx="110" cy="230" r="18" fill="#c9866b" fill-opacity="0.10"/>
+      <text x="110" y="236" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#c9866b">1</text>
+      <text x="145" y="237" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">元数据提取</text>
+      <text x="145" y="262" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">cheerio 抓取 OG / JSON-LD / meta 标签，毫秒级响应</text>
+    </g>
+    <g id="step-ai">
+      <circle cx="110" cy="340" r="18" fill="#c9866b" fill-opacity="0.10"/>
+      <text x="110" y="346" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#c9866b">2</text>
+      <text x="145" y="347" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">AI 智能分析</text>
+      <text x="145" y="372" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">DeepSeek V4 Flash 自动生成标签 + 分类路径 + 摘要</text>
+    </g>
+    <g id="step-preview">
+      <circle cx="110" cy="450" r="18" fill="#c9866b" fill-opacity="0.10"/>
+      <text x="110" y="456" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" font-weight="700" fill="#c9866b">3</text>
+      <text x="145" y="457" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="18" font-weight="600" fill="#2D2A26">确认入库</text>
+      <text x="145" y="482" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">预览卡片（封面 + 标签 + 摘要）→ 用户可编辑修改 → 确认收藏</text>
+    </g>
+    <rect x="80" y="540" width="510" height="90" rx="8" fill="#c9866b" fill-opacity="0.04"/>
+    <text x="105" y="565" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#c9866b" fill-opacity="0.50">域名智能识别</text>
+    <text x="105" y="590" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.35">B 站视频 (UP主/播放量) · GitHub (Star/Fork/语言) · 知乎 · 博客园 · 通用网页</text>
+    <text x="105" y="612" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.22">元数据提取引擎：cheerio OG 提取 + B站 API 降级</text>
+  </g>
+  <g id="image-url-input">
+    <rect x="640" y="200" width="560" height="420" rx="12" fill="#F2F0ED"/>
+    <image href="../images/screenshots/detail_url_input.png" x="640" y="200" width="560" height="420" rx="12" preserveAspectRatio="xMidYMid slice"/>
+  </g>
+  <g id="footer">
+    <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">06 / 25</text>
+    <text x="80" y="690" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">MarkBox · 添加书签</text>
+  </g>
+</svg>

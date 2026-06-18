@@ -56,15 +56,60 @@
       <text x="120" y="585" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" fill="#2D2A26" fill-opacity="0.40">侧边栏点击分类即可过滤，快速找到目标书签</text>
     </g>
   </g>
-  <g id="placeholder-category">
-    <path fill="#c9866b" fill-opacity="0.03" d="M652,190 H1188 A12,12 0 0 1 1200,202 V618 A12,12 0 0 1 1188,630 H652 A12,12 0 0 1 640,618 V202 A12,12 0 0 1 652,190 Z" />
-    <path fill="none" stroke="#c9866b" stroke-opacity="0.30" stroke-width="1.5" stroke-dasharray="8,4" d="M652,190 H1188 A12,12 0 0 1 1200,202 V618 A12,12 0 0 1 1188,630 H652 A12,12 0 0 1 640,618 V202 A12,12 0 0 1 652,190 Z" />
+  <g id="visual-classification">
+    <path fill="#FFFFFF" stroke="#2D2A26" stroke-opacity="0.06" stroke-width="1" d="M652,190 H1188 A12,12 0 0 1 1200,202 V618 A12,12 0 0 1 1188,630 H652 A12,12 0 0 1 640,618 V202 A12,12 0 0 1 652,190 Z" />
     
-  <g transform="translate(880.0, 375.0) scale(1.6666666666666667)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path fill="#c9866b" fill-opacity="0.08" d="M836,205 H1004 A16,16 0 0 1 1020,221 V221 A16,16 0 0 1 1004,237 H836 A16,16 0 0 1 820,221 V221 A16,16 0 0 1 836,205 Z" />
+    
+  <g transform="translate(840.0, 211.0) scale(0.6666666666666666)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M16 18a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m0 -12a2 2 0 0 1 2 2a2 2 0 0 1 2 -2a2 2 0 0 1 -2 -2a2 2 0 0 1 -2 2m-7 12a6 6 0 0 1 6 -6a6 6 0 0 1 -6 -6a6 6 0 0 1 -6 6a6 6 0 0 1 6 6" />
+  </g>
+    <text x="862" y="225" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#c9866b">AI 自动路径推断</text>
+    
+    <path fill="#F2F0ED" d="M748,270 H912 A8,8 0 0 1 920,278 V300 A8,8 0 0 1 912,308 H748 A8,8 0 0 1 740,300 V278 A8,8 0 0 1 748,270 Z" />
+    
+  <g transform="translate(755.0, 279.0) scale(0.75)" fill="none" stroke="#c9866b" stroke-width="2">
     <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
   </g>
-    <text x="920" y="400" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="16" fill="#2D2A26" fill-opacity="0.33">detail_category_suggest.png</text>
-    <text x="920" y="423" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.18">AI 分类路径建议下拉</text>
+    <text x="780" y="293" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="14" font-weight="600" fill="#2D2A26">技术学习</text>
+    
+    <line x1="830" y1="308" x2="830" y2="330" stroke="#2D2A26" stroke-opacity="0.15" stroke-width="1.5" />
+    
+    <path fill="#F2F0ED" d="M668,335 H812 A8,8 0 0 1 820,343 V363 A8,8 0 0 1 812,371 H668 A8,8 0 0 1 660,363 V343 A8,8 0 0 1 668,335 Z" />
+    
+  <g transform="translate(673.0, 344.0) scale(0.6666666666666666)" fill="none" stroke="#b76e4b" stroke-width="2">
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+  </g>
+    <text x="740" y="357" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2D2A26">前端</text>
+    <path fill="#F2F0ED" d="M848,335 H992 A8,8 0 0 1 1000,343 V363 A8,8 0 0 1 992,371 H848 A8,8 0 0 1 840,363 V343 A8,8 0 0 1 848,335 Z" />
+    
+  <g transform="translate(853.0, 344.0) scale(0.6666666666666666)" fill="none" stroke="#b76e4b" stroke-width="2">
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+  </g>
+    <text x="920" y="357" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" font-weight="600" fill="#2D2A26">后端</text>
+    
+    <line x1="740" y1="330" x2="740" y2="335" stroke="#2D2A26" stroke-opacity="0.15" stroke-width="1.5" />
+    <line x1="920" y1="330" x2="920" y2="335" stroke="#2D2A26" stroke-opacity="0.15" stroke-width="1.5" />
+    <line x1="740" y1="320" x2="830" y2="330" stroke="#2D2A26" stroke-opacity="0.15" stroke-width="1.5" />
+    <line x1="830" y1="330" x2="920" y2="320" stroke="#2D2A26" stroke-opacity="0.15" stroke-width="1.5" />
+    
+    <line x1="740" y1="371" x2="740" y2="395" stroke="#2D2A26" stroke-opacity="0.15" stroke-width="1.5" />
+    <path fill="#c9866b" fill-opacity="0.06" stroke="#c9866b" stroke-opacity="0.20" stroke-width="1" stroke-dasharray="4,3" d="M668,400 H812 A8,8 0 0 1 820,408 V426 A8,8 0 0 1 812,434 H668 A8,8 0 0 1 660,426 V408 A8,8 0 0 1 668,400 Z" />
+    
+  <g transform="translate(673.0, 409.0) scale(0.625)" fill="none" stroke="#c9866b" stroke-width="2">
+    <path d="M5 4h4l3 3h7a2 2 0 0 1 2 2v8a2 2 0 0 1 -2 2h-14a2 2 0 0 1 -2 -2v-11a2 2 0 0 1 2 -2" />
+  </g>
+    <text x="740" y="421" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#c9866b">React</text>
+    <text x="740" y="450" text-anchor="middle" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="11" fill="#2D2A26" fill-opacity="0.22">← AI 建议路径</text>
+    
+    <path fill="#c9866b" fill-opacity="0.03" d="M848,420 H1172 A8,8 0 0 1 1180,428 V492 A8,8 0 0 1 1172,500 H848 A8,8 0 0 1 840,492 V428 A8,8 0 0 1 848,420 Z" />
+    <text x="860" y="445" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.35">用户可确认 / 修改 / 新建分类</text>
+    <text x="860" y="468" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.35">支持无限嵌套子分类 · dnd-kit 拖拽排序</text>
+    <text x="860" y="491" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="12" fill="#2D2A26" fill-opacity="0.35">侧边栏点击过滤 · 右键菜单管理</text>
+    
+    <circle cx="1010" y="555" r="3" fill="#c9866b" fill-opacity="0.20" />
+    <circle cx="1025" y="565" r="4" fill="#d4a574" fill-opacity="0.15" />
+    <circle cx="1038" y="560" r="2" fill="#c9866b" fill-opacity="0.22" />
   </g>
   <g id="footer">
     <text x="1200" y="690" text-anchor="end" font-family="'Noto Sans SC', 'PingFang SC', 'Microsoft YaHei', sans-serif" font-size="13" fill="#2D2A26" fill-opacity="0.28">11 / 25</text>
