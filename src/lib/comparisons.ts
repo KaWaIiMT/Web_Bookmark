@@ -52,7 +52,7 @@ export async function analyzeComparison(
   }
 
   const { OpenAI } = await import("openai");
-  const client = new OpenAI({ apiKey: DEEPSEEK_API_KEY, baseURL: DEEPSEEK_BASE_URL });
+  const client = new OpenAI({ apiKey: DEEPSEEK_API_KEY, baseURL: DEEPSEEK_BASE_URL, timeout: 55000 });
 
   const labels = bookmarks.map((_, i) => String.fromCharCode(65 + i)); // A, B, C, D, E
   const articles = bookmarks
