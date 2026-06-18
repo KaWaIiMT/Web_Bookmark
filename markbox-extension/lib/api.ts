@@ -1,9 +1,10 @@
 import type { BookmarkData, AICategorizeOutput, ExtractedMetadata } from "./types";
+import { getApiKey } from "./storage";
 
 /**
  * API client for MarkBox backend.
  * Uses the production URL by default (ccjproject.top).
- * Auth is handled via session cookie — no API key needed.
+ * Auth: tries session cookie first; falls back to API key Bearer token.
  */
 const BASE_URL = "https://ccjproject.top";
 
@@ -14,9 +15,20 @@ class ApiClient {
   ): Promise<T> {
     const url = `${BASE_URL}${path}`;
 
+    const headers: Record<string, string> = {
+      "Content-Type": "application/json",
+      ...((options.headers as Record<string, string>) || {}),
+    };
+
+    // Try API key auth as fallback for environments where cookies don't work
+    const apiKey = await getApiKey();
+    if (apiKey && !headers["Authorization"]) {
+      headers["Authorization"] = `Bearer ${apiKey}`;
+    }
+
     const res = await fetch(url, {
       ...options,
-      headers: { "Content-Type": "application/json", ...options.headers },
+      headers,
       credentials: "include",
     });
 

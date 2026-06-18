@@ -1,5 +1,6 @@
 import { useState, useEffect, type ReactNode } from "react";
-import { LogIn, ExternalLink } from "lucide-react";
+import { LogIn, Key, Loader2, AlertCircle } from "lucide-react";
+import { setApiKey, getApiKey } from "@/lib/storage";
 
 interface AuthGuardProps {
   children: ReactNode;
@@ -7,6 +8,9 @@ interface AuthGuardProps {
 
 export function AuthGuard({ children }: AuthGuardProps) {
   const [state, setState] = useState<"checking" | "authenticated" | "not_logged_in">("checking");
+  const [apiKeyInput, setApiKeyInput] = useState("");
+  const [apiKeyLoading, setApiKeyLoading] = useState(false);
+  const [apiKeyError, setApiKeyError] = useState("");
 
   useEffect(() => {
     checkAuth();
@@ -14,21 +18,66 @@ export function AuthGuard({ children }: AuthGuardProps) {
 
   async function checkAuth() {
     try {
-      const res = await fetch("https://ccjproject.top/api/auth/session", {
+      // 1. Try session cookie first
+      const sessionRes = await fetch("https://ccjproject.top/api/auth/session", {
         credentials: "include",
       });
-      if (!res.ok) {
-        setState("not_logged_in");
-        return;
+      if (sessionRes.ok) {
+        const session = await sessionRes.json();
+        if (session?.user) {
+          setState("authenticated");
+          return;
+        }
       }
-      const session = await res.json();
-      if (session?.user) {
-        setState("authenticated");
-      } else {
-        setState("not_logged_in");
+
+      // 2. Try stored API key
+      const storedKey = await getApiKey();
+      if (storedKey) {
+        const valid = await verifyApiKey(storedKey);
+        if (valid) {
+          setState("authenticated");
+          return;
+        }
+        // Key is invalid — clear it so user isn't stuck
+        const { clearApiKey } = await import("@/lib/storage");
+        await clearApiKey();
       }
     } catch {
-      setState("not_logged_in");
+      // fall through
+    }
+    setState("not_logged_in");
+  }
+
+  async function verifyApiKey(key: string): Promise<boolean> {
+    try {
+      const res = await fetch("https://ccjproject.top/api/settings/api-keys", {
+        headers: { Authorization: `Bearer ${key}` },
+      });
+      return res.ok;
+    } catch {
+      return false;
+    }
+  }
+
+  async function handleUseApiKey() {
+    const key = apiKeyInput.trim();
+    if (!key) return;
+
+    setApiKeyLoading(true);
+    setApiKeyError("");
+
+    try {
+      const valid = await verifyApiKey(key);
+      if (valid) {
+        await setApiKey(key);
+        setState("authenticated");
+      } else {
+        setApiKeyError("API Key 无效，请检查后重试");
+      }
+    } catch {
+      setApiKeyError("验证失败，请检查网络连接");
+    } finally {
+      setApiKeyLoading(false);
     }
   }
 
@@ -67,8 +116,54 @@ export function AuthGuard({ children }: AuthGuardProps) {
           用 GitHub 登录
         </button>
 
+        {/* API Key divider */}
+        <div className="flex items-center gap-3 w-full">
+          <div className="flex-1 h-px bg-[var(--border)]" />
+          <span className="text-[11px] text-[var(--foreground)]/25 font-sans">或</span>
+          <div className="flex-1 h-px bg-[var(--border)]" />
+        </div>
+
+        {/* API Key input */}
+        <div className="w-full space-y-2">
+          <label className="text-[11px] text-[var(--muted-foreground)] font-sans flex items-center gap-1">
+            <Key className="h-3 w-3" />
+            使用 API Key
+          </label>
+          <div className="flex gap-2">
+            <input
+              type="password"
+              value={apiKeyInput}
+              onChange={(e) => {
+                setApiKeyInput(e.target.value);
+                setApiKeyError("");
+              }}
+              onKeyDown={(e) => e.key === "Enter" && handleUseApiKey()}
+              placeholder="mb_xxxxxxxx..."
+              className="flex-1 h-10 px-3 rounded-xl bg-[var(--input)] border border-[var(--border)] text-[13px] font-mono text-[var(--foreground)] outline-none focus:ring-2 focus:ring-[var(--accent)]/10 placeholder:text-[11px]"
+            />
+            <button
+              onClick={handleUseApiKey}
+              disabled={apiKeyLoading || !apiKeyInput.trim()}
+              className="px-4 h-10 rounded-xl bg-[var(--accent)] text-[var(--accent-foreground)] text-[13px] font-medium font-sans transition-all hover:opacity-90 active:scale-[0.98] cursor-pointer disabled:opacity-40 flex items-center gap-1.5 shrink-0"
+            >
+              {apiKeyLoading ? (
+                <Loader2 className="h-3.5 w-3.5 animate-spin" />
+              ) : (
+                <Key className="h-3.5 w-3.5" />
+              )}
+              验证
+            </button>
+          </div>
+          {apiKeyError && (
+            <p className="text-[11px] text-red-400 font-sans flex items-center gap-1">
+              <AlertCircle className="h-3 w-3 shrink-0" />
+              {apiKeyError}
+            </p>
+          )}
+        </div>
+
         <p className="text-[11px] text-[var(--foreground)]/25 text-center leading-relaxed font-sans">
-          登录后返回此页面即可开始使用
+          在主站设置页生成 API Key 后粘贴到此处
         </p>
       </div>
     );

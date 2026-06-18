@@ -15,42 +15,73 @@ async function main() {
   });
 
   try {
-    // Check if Category table exists
+    // Check if Category table exists (indicates this is not a fresh deploy)
     const tables = await client.execute(
       "SELECT name FROM sqlite_master WHERE type='table' AND name='Category'"
     );
-    if (tables.rows.length === 0) {
-      console.log("[migrate] Category table not yet created — nothing to migrate ✅");
-      return;
-    }
-
-    // ── Category: ensure userId column exists ──
-    const catInfo = await client.execute("PRAGMA table_info('Category')");
-    const catCols = new Set(catInfo.rows.map((r) => String(r[1])));
-
-    if (!catCols.has("userId")) {
-      console.log(`[migrate] Category.userId missing (table has ${catCols.size} cols) — fixing...`);
-
-      // Old global categories belong to no user → delete them
-      const countRow = await client.execute("SELECT COUNT(*) as cnt FROM Category");
-      const cnt = countRow.rows[0].cnt;
-      console.log(`[migrate] Removing ${cnt} orphaned global categories`);
-      await client.execute("DELETE FROM Category");
-
-      // Add column with a temp default so ALTER doesn't fail, then Prisma will pick up
-      await client.execute(
-        "ALTER TABLE Category ADD COLUMN userId TEXT NOT NULL DEFAULT 'pending'"
-      );
-      console.log("[migrate] userId column added ✅");
+    const isFresh = tables.rows.length === 0;
+    if (isFresh) {
+      console.log("[migrate] Category table not yet created — fresh deploy, Prisma will handle ✅");
     } else {
-      console.log("[migrate] Category ✅ (has userId)");
+      // ── Category: ensure userId column exists ──
+      const catInfo = await client.execute("PRAGMA table_info('Category')");
+      const catCols = new Set(catInfo.rows.map((r) => String(r[1])));
+
+      if (!catCols.has("userId")) {
+        console.log(`[migrate] Category.userId missing (table has ${catCols.size} cols) — fixing...`);
+
+        // Old global categories belong to no user → delete them
+        const countRow = await client.execute("SELECT COUNT(*) as cnt FROM Category");
+        const cnt = countRow.rows[0].cnt;
+        console.log(`[migrate] Removing ${cnt} orphaned global categories`);
+        await client.execute("DELETE FROM Category");
+
+        await client.execute(
+          "ALTER TABLE Category ADD COLUMN userId TEXT NOT NULL DEFAULT 'pending'"
+        );
+        console.log("[migrate] userId column added ✅");
+      } else {
+        console.log("[migrate] Category ✅ (has userId)");
+      }
     }
 
-    // ── Future migrations go here ──
-    // Pattern:
-    // if (!catCols.has("newField")) {
-    //   await client.execute("ALTER TABLE Category ADD COLUMN newField ...");
-    // }
+    // ── ApiKey: ensure table exists (only if User table already exists — not a fresh deploy) ──
+    const userTables = await client.execute(
+      "SELECT name FROM sqlite_master WHERE type='table' AND name='User'"
+    );
+    if (userTables.rows.length > 0) {
+      const apiKeyTables = await client.execute(
+        "SELECT name FROM sqlite_master WHERE type='table' AND name='ApiKey'"
+      );
+      if (apiKeyTables.rows.length === 0) {
+        console.log("[migrate] ApiKey table missing — creating...");
+        await client.execute(`
+          CREATE TABLE ApiKey (
+            id TEXT PRIMARY KEY NOT NULL,
+            name TEXT NOT NULL,
+            key TEXT NOT NULL UNIQUE,
+            encryptedKey TEXT,
+            userId TEXT NOT NULL REFERENCES User(id) ON DELETE CASCADE,
+            lastUsedAt TEXT,
+            createdAt TEXT NOT NULL DEFAULT (datetime('now'))
+          )
+        `);
+        console.log("[migrate] ApiKey table created ✅");
+      } else {
+        // Check if encryptedKey column exists
+        const keyInfo = await client.execute("PRAGMA table_info('ApiKey')");
+        const keyCols = new Set(keyInfo.rows.map((r) => String(r[1])));
+        if (!keyCols.has("encryptedKey")) {
+          console.log("[migrate] ApiKey.encryptedKey missing — adding...");
+          await client.execute("ALTER TABLE ApiKey ADD COLUMN encryptedKey TEXT");
+          console.log("[migrate] ApiKey.encryptedKey added ✅");
+        } else {
+          console.log("[migrate] ApiKey ✅ (has encryptedKey)");
+        }
+      }
+    } else {
+      console.log("[migrate] User table not yet created — skipping ApiKey migration (Prisma will handle fresh deploy) ✅");
+    }
 
     console.log("[migrate] Done ✅");
   } finally {

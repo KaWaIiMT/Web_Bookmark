@@ -25,8 +25,8 @@ export async function GET(req: NextRequest) {
         },
         orderBy: { createdAt: "desc" },
       });
-    } catch {
-      // Column doesn't exist yet — fall back to basic fields
+    } catch (e) {
+      console.warn("encryptedKey column not available, falling back to basic fields:", e);
       keys = await prisma.apiKey.findMany({
         where: { userId },
         select: {
@@ -40,13 +40,25 @@ export async function GET(req: NextRequest) {
     }
 
     return NextResponse.json({
-      data: keys.map((k: any) => ({
-        id: k.id,
-        name: k.name,
-        lastUsedAt: k.lastUsedAt,
-        createdAt: k.createdAt,
-        keyPreview: k.encryptedKey ? maskApiKey(decryptApiKey(k.encryptedKey)) : "****",
-      })),
+      data: keys.map((k: any) => {
+        let keyPreview = "****";
+        if (k.encryptedKey) {
+          try {
+            keyPreview = maskApiKey(decryptApiKey(k.encryptedKey));
+          } catch (e) {
+            // One corrupted key should not hide all others
+            console.error(`Failed to decrypt apiKey ${k.id}:`, e);
+            keyPreview = "**** (解密失败)";
+          }
+        }
+        return {
+          id: k.id,
+          name: k.name,
+          lastUsedAt: k.lastUsedAt,
+          createdAt: k.createdAt,
+          keyPreview,
+        };
+      }),
     });
   } catch (err) {
     console.error("GET /api/settings/api-keys error:", err);
@@ -84,8 +96,12 @@ export async function POST(req: NextRequest) {
         },
       });
     } catch (e: any) {
-      if (e?.code === "P2022" || (e?.message && e.message.includes("encryptedKey"))) {
-        // Column doesn't exist — create without encrypted key
+      // P2022 = column doesn't exist; also catch any "Unknown field" or missing-column errors
+      if (
+        e?.code === "P2022" ||
+        (e?.message && (e.message.includes("encryptedKey") || e.message.includes("Unknown field")))
+      ) {
+        console.warn("encryptedKey column not available, creating API key without it");
         apiKey = await prisma.apiKey.create({
           data: {
             name,
@@ -94,6 +110,7 @@ export async function POST(req: NextRequest) {
           },
         });
       } else {
+        console.error("Failed to create API key in database:", e);
         throw e;
       }
     }

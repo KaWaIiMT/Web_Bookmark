@@ -32,7 +32,27 @@ export async function getUserIdFromRequest(req: Request): Promise<string | null>
   return null;
 }
 
-const ENCRYPTION_KEY = (process.env.API_KEY_ENCRYPTION_KEY || process.env.AUTH_SECRET || "fallback-encryption-key-32chrs").slice(0, 32).padEnd(32, "0");
+// IMPORTANT: API_KEY_ENCRYPTION_KEY must be set explicitly in production.
+// Falling back to AUTH_SECRET is dangerous — if the auth secret is regenerated,
+// all existing API keys become un-decryptable.
+const ENCRYPTION_KEY = (() => {
+  if (process.env.API_KEY_ENCRYPTION_KEY) {
+    return process.env.API_KEY_ENCRYPTION_KEY.slice(0, 32).padEnd(32, "0");
+  }
+  if (process.env.AUTH_SECRET) {
+    console.warn(
+      "[auth-helpers] API_KEY_ENCRYPTION_KEY not set — falling back to AUTH_SECRET. " +
+      "If AUTH_SECRET changes, all existing API keys will become unreadable. " +
+      "Set API_KEY_ENCRYPTION_KEY in your environment variables."
+    );
+    return process.env.AUTH_SECRET.slice(0, 32).padEnd(32, "0");
+  }
+  console.error(
+    "[auth-helpers] Neither API_KEY_ENCRYPTION_KEY nor AUTH_SECRET is set. " +
+    "Using hardcoded fallback — API keys will NOT persist across restarts."
+  );
+  return "fallback-encryption-key-32chrs";
+})();
 const ENCRYPTION_IV = Buffer.from(createHash("sha256").update("markbox-iv").digest()).subarray(0, 16);
 
 function encrypt(text: string): string {

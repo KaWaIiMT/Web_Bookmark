@@ -38,10 +38,18 @@ export async function GET(
 
     const encrypted = (apiKey as any).encryptedKey;
     if (!encrypted) {
-      return NextResponse.json({ error: "This key was created before the encryption feature. Please generate a new key." }, { status: 400 });
+      return NextResponse.json({ error: "此密钥是在加密功能之前创建的。请生成一个新密钥。" }, { status: 400 });
     }
 
-    return NextResponse.json({ key: decryptApiKey(encrypted) });
+    try {
+      return NextResponse.json({ key: decryptApiKey(encrypted) });
+    } catch (e) {
+      console.error(`Failed to decrypt apiKey ${id}:`, e);
+      return NextResponse.json(
+        { error: "此密钥无法解密（加密密钥可能已变更）。请生成一个新密钥。" },
+        { status: 400 }
+      );
+    }
   } catch (err) {
     console.error("GET /api/settings/api-keys/[id] error:", err);
     return NextResponse.json({ error: "Failed to reveal API key" }, { status: 500 });
