@@ -132,11 +132,20 @@ export default function Home() {
     }
   }, [activeStatus, activeCategory, activeCollection, searchQuery]);
 
-  // Debounced search — only fetch after 300ms idle
+  // Debounced search — fetch after 300ms idle; Enter key triggers immediately
   const [debouncedQuery, setDebouncedQuery] = useState("");
+  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
+  const triggerSearch = useCallback((query: string) => {
+    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
+    if (!isFirstLoadRef.current) setIsSwitching(true);
+    setDebouncedQuery(query);
+  }, []);
   useEffect(() => {
-    const timer = setTimeout(() => setDebouncedQuery(searchQuery), 300);
-    return () => clearTimeout(timer);
+    debounceTimerRef.current = setTimeout(() => {
+      if (!isFirstLoadRef.current) setIsSwitching(true);
+      setDebouncedQuery(searchQuery);
+    }, 300);
+    return () => { if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current); };
   }, [searchQuery]);
 
   useEffect(() => {
@@ -324,6 +333,7 @@ export default function Home() {
               placeholder={searchQuery ? undefined : "搜索书签..."}
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
+              onKeyDown={(e) => { if (e.key === "Enter") triggerSearch(searchQuery); }}
               className="pl-10 pr-10 h-9 rounded-xl bg-[var(--input)] border-0 focus:bg-[var(--card)] focus:ring-2 focus:ring-[var(--accent)]/10 text-[13px] font-sans placeholder:text-[var(--foreground)]/20"
             />
             <div className="absolute right-2.5 top-1/2 -translate-y-1/2">
