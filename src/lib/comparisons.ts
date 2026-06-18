@@ -51,7 +51,7 @@ export async function analyzeComparison(
     throw new Error("DEEPSEEK_API_KEY is not configured");
   }
 
-  const { OpenAI } = await import("openai");
+  const { default: OpenAI } = await import("openai");
   const client = new OpenAI({ apiKey: DEEPSEEK_API_KEY, baseURL: DEEPSEEK_BASE_URL, timeout: 55000 });
 
   const labels = bookmarks.map((_, i) => String.fromCharCode(65 + i)); // A, B, C, D, E
