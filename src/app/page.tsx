@@ -699,6 +699,7 @@ export default function Home() {
         onOpenChange={setAddDialogOpen}
         onCreated={refreshBookmarks}
         editBookmark={editBookmark}
+        collections={collections.map(c => ({ id: c.id, name: c.name }))}
       />
 
       {/* Delete Confirmation */}

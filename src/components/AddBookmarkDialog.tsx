@@ -23,6 +23,7 @@ interface AddBookmarkDialogProps {
   onOpenChange: (open: boolean) => void;
   onCreated: () => void;
   editBookmark?: BookmarkData | null;
+  collections?: { id: string; name: string }[];
 }
 
 type Step = "input" | "extracting" | "categorizing" | "preview" | "saving" | "done";
@@ -32,6 +33,7 @@ export function AddBookmarkDialog({
   onOpenChange,
   onCreated,
   editBookmark,
+  collections,
 }: AddBookmarkDialogProps) {
   const [url, setUrl] = useState(editBookmark?.url || "");
   const [step, setStep] = useState<Step>("input");
@@ -40,6 +42,7 @@ export function AddBookmarkDialog({
   const [error, setError] = useState("");
   const [customTitle, setCustomTitle] = useState("");
   const [customDescription, setCustomDescription] = useState("");
+  const [selectedColIds, setSelectedColIds] = useState<Set<string>>(new Set());
 
   // Sync editBookmark prop into local state when dialog opens
   useEffect(() => {
@@ -177,7 +180,20 @@ export function AddBookmarkDialog({
           throw new Error(err.error || "保存失败");
         }
 
+        const created = await res.json();
+        // Add to selected collections
+        for (const colId of selectedColIds) {
+          fetch(`/api/collections/${colId}/bookmarks`, {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({ bookmarkId: created.id }),
+          }).catch(() => {});
+        }
+
         window.dispatchEvent(new CustomEvent("bookmark-created"));
+        if (selectedColIds.size > 0) {
+          window.dispatchEvent(new CustomEvent("collection-bookmark-added"));
+        }
       }
 
       onCreated();
@@ -248,6 +264,7 @@ export function AddBookmarkDialog({
     setError("");
     setCustomTitle("");
     setCustomDescription("");
+    setSelectedColIds(new Set());
   };
 
   const contentTypeLabels: Record<string, string> = {
@@ -414,6 +431,37 @@ export function AddBookmarkDialog({
                         {aiResult.summary}
                       </p>
                     )}
+                  </div>
+                )}
+
+                {/* Collections selector */}
+                {collections && collections.length > 0 && (
+                  <div className="bg-[var(--muted)] rounded-xl p-4 space-y-2">
+                    <p className="text-[11px] font-medium text-[var(--foreground)]/40 font-sans">
+                      📂 添加到收藏夹
+                    </p>
+                    <div className="flex flex-wrap gap-1.5">
+                      {collections.map((col) => {
+                        const sel = selectedColIds.has(col.id);
+                        return (
+                          <button
+                            key={col.id}
+                            onClick={() => setSelectedColIds((prev) => {
+                              const n = new Set(prev);
+                              if (n.has(col.id)) n.delete(col.id); else n.add(col.id);
+                              return n;
+                            })}
+                            className={`text-[11px] px-2.5 py-1 rounded-lg transition-all font-sans ${
+                              sel
+                                ? "bg-[var(--accent)]/10 border border-[var(--accent)]/30 text-[var(--accent)]"
+                                : "bg-[var(--card)] border border-transparent text-[var(--foreground)]/40 hover:text-[var(--foreground)]/60"
+                            }`}
+                          >
+                            {col.name}
+                          </button>
+                        );
+                      })}
+                    </div>
                   </div>
                 )}
 
