@@ -1,7 +1,8 @@
 /* Ch02 — core-collection · .cc- · LARGE */
 .cc-stage{position:absolute;inset:0;overflow:hidden;background:var(--shell)}
-.cc-scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--stage-pad-y) var(--stage-pad-x);background:var(--shell)}
-.cc-scene--cards{gap:32px}.cc-scene--status{background:var(--surface);gap:44px}.cc-scene--recap{background:var(--surface);gap:40px}
+.cc-scene{position:absolute;inset:0;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:var(--stage-pad-y) var(--stage-pad-x);background:var(--shell);gap:28px}
+.cc-scene--with-video{justify-content:flex-start;padding-top:64px;gap:20px}
+.cc-scene--cards{gap:20px}.cc-scene--status{background:var(--surface);gap:28px}.cc-scene--recap{background:var(--surface);gap:40px}
 .cc-app-shell{width:1300px;height:740px;background:var(--surface);border-radius:28px;box-shadow:var(--card-shadow);display:flex;overflow:hidden}
 .cc-sidebar{width:260px;background:var(--surface-3);padding:32px 20px;display:flex;flex-direction:column;gap:8px;flex-shrink:0}
 .cc-sb-item{font-family:var(--font-body);font-size:18px;color:var(--text-2);padding:10px 16px;border-radius:10px;display:flex;justify-content:space-between;align-items:center}
