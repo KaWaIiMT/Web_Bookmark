@@ -749,6 +749,9 @@ export default function Home() {
           setReaderBookmark(bookmark);
           setReaderOpen(true);
         }}
+        collections={collections.map(c => ({ id: c.id, name: c.name }))}
+        onAddToCollection={handleAddToCollection}
+        onRemoveFromCollection={handleRemoveFromCollection}
       />
 
       {/* Reader View — full-screen reading mode */}

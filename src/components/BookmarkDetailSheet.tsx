@@ -39,6 +39,9 @@ interface BookmarkDetailSheetProps {
   onSelectBookmark?: (id: string) => void;
   onStartTracking?: (id: string) => void;
   onRead?: (bookmark: BookmarkData) => void;
+  collections?: { id: string; name: string }[];
+  onAddToCollection?: (bookmarkId: string, collectionId: string) => void;
+  onRemoveFromCollection?: (bookmarkId: string, collectionId: string) => void;
 }
 
 export function BookmarkDetailSheet({
@@ -52,6 +55,9 @@ export function BookmarkDetailSheet({
   onSelectBookmark,
   onStartTracking,
   onRead,
+  collections,
+  onAddToCollection,
+  onRemoveFromCollection,
 }: BookmarkDetailSheetProps) {
   const [activeTab, setActiveTab] = useState<DetailTab>("preview");
   const [archive, setArchive] = useState<ArchiveData | null>(null);
@@ -383,6 +389,26 @@ export function BookmarkDetailSheet({
                         {bookmark.tags.map(({ tag }) => (
                           <Badge key={tag.id} variant="secondary" className="text-[11px] px-2.5 py-1 rounded-lg bg-[var(--card)] border-0 text-[var(--foreground)]/45 font-normal font-sans">
                             {tag.name}
+                          </Badge>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+
+                  {/* Collections */}
+                  {collections && collections.length > 0 && (
+                    <div>
+                      <p className="text-[10px] font-medium text-[var(--foreground)]/25 uppercase tracking-widest mb-2 font-sans">收藏夹</p>
+                      <div className="flex flex-wrap gap-1.5">
+                        {collections.map((col) => (
+                          <Badge key={col.id} variant="secondary" className="text-[11px] px-2.5 py-1 rounded-lg bg-[var(--accent)]/5 border border-[var(--accent)]/20 text-[var(--foreground)]/55 font-normal font-sans flex items-center gap-1">
+                            {col.name}
+                            <button
+                              onClick={(e) => { e.stopPropagation(); onRemoveFromCollection?.(bookmark!.id, col.id); }}
+                              className="ml-0.5 hover:text-red-400 transition-colors"
+                            >
+                              <X className="h-3 w-3" />
+                            </button>
                           </Badge>
                         ))}
                       </div>
