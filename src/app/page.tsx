@@ -32,8 +32,9 @@ import { ActivityView } from "@/components/ActivityView";
 import { KnowledgeGraphView } from "@/components/KnowledgeGraphView";
 import { ReaderView } from "@/components/ReaderView";
 import { VoiceSearch } from "@/components/VoiceSearch";
+import { BatchActionBar } from "@/components/BatchActionBar";
 import { useRouter } from "next/navigation";
-import type { BookmarkData, PaginatedResponse, ViewType } from "@/lib/types";
+import type { BookmarkData, PaginatedResponse, ViewType, CollectionData } from "@/lib/types";
 
 export default function Home() {
   const { data: session, status } = useSession();
@@ -87,6 +88,139 @@ export default function Home() {
     setAddDialogOpen(true);
     setSidebarOpen(false);
   }, [guardAuth]);
+
+  // Multi-select state
+  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
+  // Collections state (lifted from Sidebar for sharing)
+  const [collections, setCollections] = useState<Pick<CollectionData, "id" | "name" | "slug" | "isPublic" | "_count">[]>([]);
+
+  // Fetch collections for multi-use
+  const fetchCollections = useCallback(() => {
+    fetch("/api/collections", { credentials: "include" })
+      .then((r) => r.json())
+      .then((d) => setCollections(d.data || []))
+      .catch(() => {});
+  }, []);
+
+  useEffect(() => {
+    fetchCollections();
+    const handler = () => fetchCollections();
+    window.addEventListener("bookmark-created", handler);
+    window.addEventListener("bookmark-deleted", handler);
+    window.addEventListener("collection-bookmark-added", handler);
+    window.addEventListener("collection-bookmark-removed", handler);
+    window.addEventListener("collection-updated", handler);
+    return () => {
+      window.removeEventListener("bookmark-created", handler);
+      window.removeEventListener("bookmark-deleted", handler);
+      window.removeEventListener("collection-bookmark-added", handler);
+      window.removeEventListener("collection-bookmark-removed", handler);
+      window.removeEventListener("collection-updated", handler);
+    };
+  }, [fetchCollections]);
+
+  const handleToggleSelect = useCallback((id: string) => {
+    setSelectedIds((prev) => {
+      const next = new Set(prev);
+      if (next.has(id)) next.delete(id);
+      else next.add(id);
+      return next;
+    });
+  }, []);
+
+  const handleClearSelection = useCallback(() => setSelectedIds(new Set()), []);
+
+  // Batch operations
+  const handleBatchAddToCollection = useCallback(async (collectionId: string) => {
+    if (guardAuth()) return;
+    const ids = [...selectedIds];
+    let success = 0;
+    for (const bookmarkId of ids) {
+      try {
+        const res = await fetch(`/api/collections/${collectionId}/bookmarks`, {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ bookmarkId }),
+        });
+        if (res.ok) success++;
+      } catch {}
+    }
+    toast.success(`已将 ${success}/${ids.length} 篇加入收藏夹`);
+    setSelectedIds(new Set());
+    fetchCollections();
+    window.dispatchEvent(new CustomEvent("collection-bookmark-added"));
+  }, [guardAuth, selectedIds, fetchCollections]);
+
+  const handleBatchStatusChange = useCallback(async (status: string) => {
+    if (guardAuth()) return;
+    const ids = [...selectedIds];
+    let success = 0;
+    for (const id of ids) {
+      try {
+        const res = await fetch(`/api/bookmarks/${id}`, {
+          method: "PATCH",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify({ status }),
+        });
+        if (res.ok) success++;
+      } catch {}
+    }
+    toast.success(`已将 ${success}/${ids.length} 篇改为「${status === "unread" ? "待读" : status === "reading" ? "在读" : status === "read" ? "已读" : "归档"}」`);
+    setSelectedIds(new Set());
+    refreshBookmarks();
+  }, [guardAuth, selectedIds]);
+
+  const handleBatchDelete = useCallback(async () => {
+    if (guardAuth()) return;
+    const ids = [...selectedIds];
+    let success = 0;
+    for (const id of ids) {
+      try {
+        const res = await fetch(`/api/bookmarks/${id}`, { method: "DELETE" });
+        if (res.ok) success++;
+      } catch {}
+    }
+    toast.success(`已删除 ${success}/${ids.length} 篇书签`);
+    setSelectedIds(new Set());
+    refreshBookmarks();
+    window.dispatchEvent(new CustomEvent("bookmark-deleted"));
+  }, [guardAuth, selectedIds]);
+
+  // Add/remove single bookmark to/from collection
+  const handleAddToCollection = useCallback(async (bookmarkId: string, collectionId: string) => {
+    if (guardAuth()) return;
+    try {
+      const res = await fetch(`/api/collections/${collectionId}/bookmarks`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ bookmarkId }),
+      });
+      if (!res.ok) throw new Error();
+      toast.success("已添加到收藏夹");
+      fetchCollections();
+      window.dispatchEvent(new CustomEvent("collection-bookmark-added"));
+    } catch {
+      toast.error("添加失败");
+    }
+  }, [guardAuth, fetchCollections]);
+
+  const handleRemoveFromCollection = useCallback(async (bookmarkId: string, collectionId: string) => {
+    if (guardAuth()) return;
+    try {
+      const res = await fetch(`/api/collections/${collectionId}/bookmarks`, {
+        method: "DELETE",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ bookmarkId }),
+      });
+      if (!res.ok) throw new Error();
+      toast.success("已从收藏夹移除");
+      fetchCollections();
+      if (activeCollection === collectionId) refreshBookmarks();
+      window.dispatchEvent(new CustomEvent("collection-bookmark-removed"));
+    } catch {
+      toast.error("移除失败");
+    }
+  }, [guardAuth, activeCollection, fetchCollections]);
 
   // Wrap filter changes so isSwitching flips in the SAME render frame as the filter.
   // This prevents an empty-state flash when optimistic client-side filter yields 0 results.
@@ -163,6 +297,11 @@ export default function Home() {
     };
   }, [fetchBookmarks, isReady, activeView, debouncedQuery]);
 
+  // eslint-disable-next-line react-hooks/exhaustive-deps
+  const refreshBookmarks = useCallback(() => {
+    fetchBookmarks(new AbortController().signal, false);
+  }, [fetchBookmarks]);
+
   // Optimistic client-side filter: apply activeStatus/activeCategory immediately
   // on the current bookmarks array so the UI responds instantly to filter clicks.
   // The API fetch still runs in the background for fresh data.
@@ -173,11 +312,6 @@ export default function Home() {
     // Note: activeCollection can't be filtered client-side (need collection membership data)
     return result;
   }, [bookmarks, activeStatus, activeCategory]);
-
-  // eslint-disable-next-line react-hooks/exhaustive-deps
-  const refreshBookmarks = useCallback(() => {
-    fetchBookmarks(new AbortController().signal, false);
-  }, [fetchBookmarks]);
 
   const handleStatusChange = async (id: string, status: string) => {
     if (guardAuth()) return;
@@ -283,6 +417,7 @@ export default function Home() {
           onCategoryChange={handleCategoryFilter}
           onCollectionClick={handleCollectionFilter}
           onAddClick={handleShowSidebarAdd}
+          collections={collections}
           onAddSmartClick={() => {
             if (guardAuth()) return;
             setShowSmartCreator(true);
@@ -303,6 +438,7 @@ export default function Home() {
               onCategoryChange={(c) => { handleCategoryFilter(c); setSidebarOpen(false); }}
               onCollectionClick={(c) => { handleCollectionFilter(c); setSidebarOpen(false); }}
               onAddClick={handleShowSidebarAdd}
+              collections={collections}
             />
           </div>
         </div>
@@ -478,12 +614,16 @@ export default function Home() {
                 </div>
               ) : activeView === "gallery" ? (
                 <MasonryGallery
-                  bookmarks={displayedBookmarks}
+                  bookmarks={displayedBookmarks as BookmarkData[]}
+                  selectedIds={selectedIds}
+                  onToggleSelect={handleToggleSelect}
                   onCardClick={handleCardClick}
                 />
               ) : (
                 <SortableBookmarkGrid
-                  bookmarks={displayedBookmarks}
+                  bookmarks={displayedBookmarks as BookmarkData[]}
+                  selectedIds={selectedIds}
+                  onToggleSelect={handleToggleSelect}
                   onStatusChange={handleStatusChange}
                   onDelete={(id) => {
                     const target = bookmarks.find((b) => b.id === id);
@@ -493,6 +633,9 @@ export default function Home() {
                   onReorder={handleReorder}
                   onCardClick={handleCardClick}
                   onShare={handleShare}
+                  collections={collections}
+                  onAddToCollection={handleAddToCollection}
+                  onRemoveFromCollection={handleRemoveFromCollection}
                 />
               )}
             </>

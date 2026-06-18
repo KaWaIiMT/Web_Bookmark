@@ -71,3 +71,34 @@ export async function POST(
     return NextResponse.json({ error: "Internal server error" }, { status: 500 });
   }
 }
+
+// Remove bookmark from collection
+export async function DELETE(
+  req: NextRequest,
+  { params }: { params: Promise<{ id: string }> }
+) {
+  try {
+    const userId = await getUserIdFromRequest(req);
+    if (!userId) return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
+
+    const { id } = await params;
+    const { bookmarkId } = await req.json();
+
+    if (!bookmarkId) return NextResponse.json({ error: "bookmarkId required" }, { status: 400 });
+
+    // Verify collection ownership
+    const collection = await prisma.collection.findUnique({ where: { id } });
+    if (!collection || collection.userId !== userId) {
+      return NextResponse.json({ error: "Collection not found" }, { status: 404 });
+    }
+
+    await prisma.collectionBookmark.delete({
+      where: { collectionId_bookmarkId: { collectionId: id, bookmarkId } },
+    });
+
+    return NextResponse.json({ ok: true });
+  } catch (err) {
+    console.error("Remove from collection error:", err);
+    return NextResponse.json({ error: "Internal server error" }, { status: 500 });
+  }
+}

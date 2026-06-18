@@ -8,6 +8,8 @@ import { resolveImageUrl } from "@/lib/utils";
 interface MasonryGalleryProps {
   bookmarks: BookmarkData[];
   onCardClick: (bookmark: BookmarkData, element: HTMLElement) => void;
+  selectedIds?: Set<string>;
+  onToggleSelect?: (id: string) => void;
 }
 
 export function MasonryGallery({ bookmarks, onCardClick }: MasonryGalleryProps) {

@@ -29,6 +29,11 @@ interface SortableBookmarkGridProps {
   onReorder: (orderedIds: string[]) => void;
   onCardClick: (bookmark: BookmarkData, element: HTMLElement) => void;
   onShare?: (id: string) => void;
+  selectedIds?: Set<string>;
+  onToggleSelect?: (id: string) => void;
+  collections?: { id: string; name: string }[];
+  onAddToCollection?: (bookmarkId: string, collectionId: string) => void;
+  onRemoveFromCollection?: (bookmarkId: string, collectionId: string) => void;
 }
 
 function SortableCard({

@@ -30,5 +30,5 @@
     ".next/dev/types/**/*.ts",
     "**/*.mts"
   ],
-  "exclude": ["node_modules", "markbox-extension"]
+  "exclude": ["node_modules", "markbox-extension", "my-video", "my-video_2", "garden-skills-main"]
 }

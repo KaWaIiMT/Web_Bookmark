@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import {
   DndContext,
   closestCenter,
@@ -61,9 +61,10 @@ interface SidebarProps {
   onStatusChange: (status: string | null) => void;
   onCategoryChange: (categoryId: string | null) => void;
   onAddClick: () => void;
-  onCollectionClick?: (collectionId: string) => void;
+  onCollectionClick?: (collectionId: string | null) => void;
   activeCollection?: string | null;
   onAddSmartClick?: () => void;
+  collections?: { id: string; name: string; slug: string; isPublic?: boolean; _count?: { bookmarks: number } }[];
 }
 
 const STATUS_OPTIONS = [
@@ -213,13 +214,15 @@ export function Sidebar({
   onCollectionClick,
   activeCollection,
   onAddSmartClick,
+  collections: propsCollections,
 }: SidebarProps) {
   const [categories, setCategories] = useState<CategoryData[]>([]);
-  const [collections, setCollections] = useState<CollectionData[]>([]);
   const [newColName, setNewColName] = useState("");
   const [addingCol, setAddingCol] = useState(false);
   const [draggingId, setDraggingId] = useState<string | null>(null);
   const [pinnedIds, setPinnedIds] = useState<Set<string>>(new Set());
+
+  const collections = propsCollections ?? [];
 
   // Load pinned state from localStorage
   useEffect(() => {
@@ -261,12 +264,12 @@ export function Sidebar({
       .catch(() => {});
   };
 
-  const fetchCollections = () => {
+  const fetchCollections = useCallback(() => {
     fetch("/api/collections", { credentials: "include" })
       .then((r) => r.json())
-      .then((d) => setCollections(d.data || []))
+      .then((d) => { /* skip - managed by parent */ })
       .catch(() => {});
-  };
+  }, []);
 
   useEffect(() => {
     fetchCategories();
@@ -277,9 +280,15 @@ export function Sidebar({
     };
     window.addEventListener("bookmark-created", handler);
     window.addEventListener("bookmark-deleted", handler);
+    window.addEventListener("collection-bookmark-added", handler);
+    window.addEventListener("collection-bookmark-removed", handler);
+    window.addEventListener("collection-updated", handler);
     return () => {
       window.removeEventListener("bookmark-created", handler);
       window.removeEventListener("bookmark-deleted", handler);
+      window.removeEventListener("collection-bookmark-added", handler);
+      window.removeEventListener("collection-bookmark-removed", handler);
+      window.removeEventListener("collection-updated", handler);
     };
   }, []);
 
@@ -364,6 +373,35 @@ export function Sidebar({
     }
   };
 
+  const handleRenameCollection = async (id: string, name: string) => {
+    try {
+      const res = await fetch(`/api/collections/${id}`, {
+        method: "PATCH",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ name }),
+      });
+      if (!res.ok) throw new Error();
+      toast.success("收藏夹已重命名");
+      fetchCollections();
+      window.dispatchEvent(new CustomEvent("collection-updated"));
+    } catch {
+      toast.error("重命名失败");
+    }
+  };
+
+  const handleDeleteCollection = async (id: string) => {
+    try {
+      const res = await fetch(`/api/collections/${id}`, { method: "DELETE" });
+      if (!res.ok) throw new Error();
+      toast.success("收藏夹已删除");
+      if (activeCollection === id) onCollectionClick?.(null);
+      fetchCollections();
+      window.dispatchEvent(new CustomEvent("collection-updated"));
+    } catch {
+      toast.error("删除失败");
+    }
+  };
+
   return (
     <aside className="w-60 shrink-0 flex flex-col h-full bg-[var(--sidebar)] backdrop-blur-xl border-r border-[var(--sidebar-border)]">
       {/* Logo area */}
@@ -426,20 +464,48 @@ export function Sidebar({
               </div>
             )}
             {collections.map((col) => (
-              <button
-                key={col.id}
-                onClick={() => onCollectionClick?.(col.id)}
-                className={cn(
-                  "w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] transition-all duration-200",
-                  activeCollection === col.id
-                    ? "bg-[var(--sidebar-item)] text-[var(--foreground)] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
-                    : "text-[var(--foreground)]/45 hover:bg-[var(--sidebar-item-hover)] hover:text-[var(--foreground)]/65"
-                )}
-              >
-                <Folder className="h-3.5 w-3.5 opacity-50 shrink-0" />
-                <span className="truncate flex-1 text-left">{col.name}</span>
-                <span className="text-[10px] text-[var(--foreground)]/20 shrink-0">{col._count.bookmarks}</span>
-              </button>
+              <ContextMenu key={col.id}>
+                <ContextMenuTrigger className="block w-full">
+                  <button
+                    onClick={() => onCollectionClick?.(col.id)}
+                    className={cn(
+                      "w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] transition-all duration-200",
+                      activeCollection === col.id
+                        ? "bg-[var(--sidebar-item)] text-[var(--foreground)] font-medium shadow-[0_1px_3px_rgba(0,0,0,0.03)]"
+                        : "text-[var(--foreground)]/45 hover:bg-[var(--sidebar-item-hover)] hover:text-[var(--foreground)]/65"
+                    )}
+                  >
+                    <Folder className="h-3.5 w-3.5 opacity-50 shrink-0" />
+                    <span className="truncate flex-1 text-left">{col.name}</span>
+                    <span className="text-[10px] text-[var(--foreground)]/20 shrink-0">{col._count?.bookmarks ?? 0}</span>
+                  </button>
+                </ContextMenuTrigger>
+                <ContextMenuContent className="w-44 rounded-2xl border border-[var(--border)] shadow-[0_12px_40px_rgba(0,0,0,0.08)] bg-[var(--popover)] backdrop-blur-xl p-1.5">
+                  <ContextMenuItem
+                    onClick={() => {
+                      const name = prompt("编辑收藏夹名称", col.name);
+                      if (name && name.trim() && name.trim() !== col.name) {
+                        handleRenameCollection(col.id, name.trim());
+                      }
+                    }}
+                    className="text-[13px] rounded-xl cursor-pointer font-sans"
+                  >
+                    <Pencil className="h-3.5 w-3.5 mr-2.5 opacity-50" />
+                    重命名
+                  </ContextMenuItem>
+                  <ContextMenuItem
+                    onClick={() => {
+                      if (confirm(`确定删除「${col.name}」收藏夹？书签不会删除，只是取消关联。`)) {
+                        handleDeleteCollection(col.id);
+                      }
+                    }}
+                    className="text-[13px] rounded-xl text-red-400 hover:text-red-500 cursor-pointer font-sans"
+                  >
+                    <Trash2 className="h-3.5 w-3.5 mr-2.5" />
+                    删除收藏夹
+                  </ContextMenuItem>
+                </ContextMenuContent>
+              </ContextMenu>
             ))}
           </div>
 
@@ -451,7 +517,7 @@ export function Sidebar({
               状态
             </p>
             <button
-              onClick={() => { onStatusChange(null); if (onCollectionClick) onCollectionClick("" as any); }}
+              onClick={() => { onStatusChange(null); if (onCollectionClick) onCollectionClick(null); }}
               className={cn(
                 "w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] transition-all duration-200",
                 !activeStatus && !activeCollection
@@ -468,7 +534,7 @@ export function Sidebar({
               return (
                 <button
                   key={opt.value}
-                  onClick={() => { onStatusChange(opt.value); if (onCollectionClick) onCollectionClick("" as any); }}
+                  onClick={() => { onStatusChange(opt.value); if (onCollectionClick) onCollectionClick(null); }}
                   className={cn(
                     "w-full flex items-center gap-2.5 px-3 py-2 rounded-xl text-[13px] transition-all duration-200",
                     isActive

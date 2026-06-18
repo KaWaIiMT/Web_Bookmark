@@ -50,6 +50,14 @@ export interface CategoryData {
   order: number;
 }
 
+export interface CollectionData {
+  id: string;
+  name: string;
+  slug: string;
+  isPublic?: boolean;
+  _count?: { bookmarks: number };
+}
+
 export interface ExtractedMetadata {
   title: string;
   description: string;
