@@ -1,0 +1,9 @@
+fix: show fallback avatar for email users, remove GitHub-specific labels
+
+- Main page header: show generic user icon when no avatar (email-only users)
+- Main page header: show email prefix as display name when name is null
+- guardAuth toast: "ÇëÏÈµÇÂ¼ GitHub ÕËºÅ" ¡ú "ÇëÏÈµÇÂ¼ÕËºÅ"
+- Settings page: badge shows "ÓÊÏäµÇÂ¼" instead of "GitHub"
+- Settings page: "ÇĞ»»ÕËºÅ" button ¡ú "¹ØÁª GitHub" with callbackUrl /settings
+
+Co-Authored-By: Claude Opus 4.8 (1M context) <noreply@anthropic.com>

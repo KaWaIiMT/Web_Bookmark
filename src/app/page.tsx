@@ -762,6 +762,18 @@ export default function Home() {
         open={readerOpen}
         onClose={() => setReaderOpen(false)}
       />
+
+      {/* Batch action bar — appears when cards are selected */}
+      {selectedIds.size > 0 && (
+        <BatchActionBar
+          selectedCount={selectedIds.size}
+          collections={collections.map((c) => ({ id: c.id, name: c.name }))}
+          onAddToCollection={handleBatchAddToCollection}
+          onChangeStatus={handleBatchStatusChange}
+          onDelete={handleBatchDelete}
+          onClearSelection={handleClearSelection}
+        />
+      )}
     </div>
   );
 }
