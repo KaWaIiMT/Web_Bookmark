@@ -1,17 +1,24 @@
 /* ─────────────────────────────────────────────────────────────────────
- * animations.css — generic, theme-agnostic motion vocabulary.
- *
- * All durations / easings come from the active theme's tokens.
+ * animations.css — rich cinematic motion vocabulary.
  * ───────────────────────────────────────────────────────────────────── */
 
-/* MaskReveal — clip-path text wipe (left → right) */
+/* ── Scene-level cross-fade on step change ── */
+.scene > * {
+  animation: scene-in 0.45s var(--ease-quart) both;
+}
+@keyframes scene-in {
+  from { opacity: 0; transform: scale(0.97); }
+  to   { opacity: 1; transform: scale(1); }
+}
+
+/* ── MaskReveal — clip-path text wipe ── */
 .mask-reveal {
   clip-path: inset(0 100% 0 0);
   transition: clip-path 700ms var(--ease-quart);
 }
 .mask-reveal.in { clip-path: inset(0 0 0 0); }
 
-/* Hairline rule grow — scaleX from 0 → 1, transform-origin: left */
+/* ── Rule grow ── */
 .rule-grow {
   transform: scaleX(0);
   transform-origin: left;
@@ -19,38 +26,99 @@
 }
 .rule-grow.in { transform: scaleX(1); }
 
-/* Generic vertical rise + opacity (small UI labels, captions) */
+/* ── Keyframe library ── */
 @keyframes rise-in {
-  from { opacity: 0; transform: translateY(14px); }
+  from { opacity: 0; transform: translateY(24px); }
   to   { opacity: 1; transform: translateY(0); }
 }
 
-/* Scale-in with overshoot (use for stamp / badge / accent moment) */
+@keyframes slide-left {
+  from { opacity: 0; transform: translateX(60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-right {
+  from { opacity: 0; transform: translateX(-60px); }
+  to   { opacity: 1; transform: translateX(0); }
+}
+
+@keyframes slide-up {
+  from { opacity: 0; transform: translateY(60px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes scale-in {
-  0%   { opacity: 0; transform: scale(0.8); }
+  0%   { opacity: 0; transform: scale(0.7); }
   60%  { opacity: 1; transform: scale(1.04); }
   100% { opacity: 1; transform: scale(1); }
 }
 
-/* Pop with overshoot ease (more spring) */
 @keyframes pop-in {
-  0%   { opacity: 0; transform: scale(0.6) rotate(-2deg); }
+  0%   { opacity: 0; transform: scale(0.5) rotate(-3deg); }
   100% { opacity: 1; transform: scale(1) rotate(0); }
 }
 
-/* Caret blink (bounded — for use INSIDE a sized animation) */
+@keyframes pop-bounce {
+  0%   { opacity: 0; transform: scale(0.3); }
+  50%  { opacity: 1; transform: scale(1.12); }
+  70%  { transform: scale(0.95); }
+  100% { opacity: 1; transform: scale(1); }
+}
+
+@keyframes blur-in {
+  from { opacity: 0; filter: blur(18px); transform: scale(1.04); }
+  to   { opacity: 1; filter: blur(0); transform: scale(1); }
+}
+
+@keyframes wipe-down {
+  from { opacity: 0; clip-path: inset(0 0 100% 0); }
+  to   { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+@keyframes wipe-right {
+  from { opacity: 0; clip-path: inset(0 100% 0 0); }
+  to   { opacity: 1; clip-path: inset(0 0 0 0); }
+}
+
+@keyframes glow-pulse {
+  0%, 100% { box-shadow: 0 0 0 0 var(--accent-glow); }
+  50%      { box-shadow: 0 0 30px var(--accent-glow); }
+}
+
+@keyframes float-drift {
+  0%, 100% { transform: translateY(0); }
+  50%      { transform: translateY(-10px); }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to   { transform: rotate(360deg); }
+}
+
+@keyframes number-count {
+  from { opacity: 0; transform: translateY(20px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
 @keyframes caret-blink {
   50% { opacity: 0; }
 }
 
-/* Slow-pulse halo (rings, notifications) */
 @keyframes pulse-halo {
   0%   { opacity: 0.6; transform: scale(0.9); }
-  70%  { opacity: 0;   transform: scale(1.6); }
-  100% { opacity: 0;   transform: scale(1.6); }
+  70%  { opacity: 0;   transform: scale(1.8); }
+  100% { opacity: 0;   transform: scale(1.8); }
 }
 
-/* Letter stagger (use with .letter-stagger > .letter, set --i: 0..n) */
+/* ── Stagger helpers ── */
+.stagger-1 { animation-delay: 0.08s !important; }
+.stagger-2 { animation-delay: 0.16s !important; }
+.stagger-3 { animation-delay: 0.24s !important; }
+.stagger-4 { animation-delay: 0.32s !important; }
+.stagger-5 { animation-delay: 0.40s !important; }
+.stagger-6 { animation-delay: 0.48s !important; }
+
+/* ── Letter stagger ── */
 .letter-stagger > .letter {
   display: inline-block;
   opacity: 0;
@@ -61,3 +129,15 @@
 @keyframes letter-rise {
   to { opacity: 1; transform: translateY(0) scale(1); }
 }
+
+/* ── Animate class shortcuts (chapters can use these directly) ── */
+.anim-rise   { animation: rise-in 0.5s var(--ease-quart) both; }
+.anim-slide-l { animation: slide-left 0.5s var(--ease-quart) both; }
+.anim-slide-r { animation: slide-right 0.5s var(--ease-quart) both; }
+.anim-slide-up { animation: slide-up 0.5s var(--ease-quart) both; }
+.anim-scale  { animation: scale-in 0.5s var(--ease-overshoot) both; }
+.anim-pop    { animation: pop-bounce 0.55s var(--ease-overshoot) both; }
+.anim-blur   { animation: blur-in 0.6s var(--ease-quart) both; }
+.anim-wipe-d { animation: wipe-down 0.5s var(--ease-expo) both; }
+.anim-float  { animation: float-drift 4s ease-in-out infinite; }
+.anim-glow   { animation: glow-pulse 2.4s ease-in-out infinite; }

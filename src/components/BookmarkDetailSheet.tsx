@@ -596,9 +596,37 @@ export function BookmarkDetailSheet({
 
             {/* Bottom actions */}
             <div className="p-4 border-t border-[var(--border)] flex gap-2 shrink-0 bg-[var(--background)]/80 backdrop-blur-xl">
+              <DropdownMenu>
+                <DropdownMenuTrigger>
+                  <Button
+                    variant="outline"
+                    disabled={addingToPath}
+                    className="rounded-xl text-[13px] border-[var(--border)] bg-[var(--card)] hover:bg-[var(--muted)] text-[var(--foreground)] font-sans h-10 px-3"
+                    title="加入学习路径"
+                  >
+                    <Plus className="h-3.5 w-3.5" />
+                  </Button>
+                </DropdownMenuTrigger>
+                <DropdownMenuContent className="w-44 rounded-2xl border border-[var(--border)] bg-[var(--popover)] backdrop-blur-xl p-1.5">
+                  {learningPaths.length === 0 ? (
+                    <DropdownMenuItem disabled className="text-[12px] font-sans">
+                      暂无学习路径
+                    </DropdownMenuItem>
+                  ) : (
+                    learningPaths.map((lp) => (
+                      <DropdownMenuItem
+                        key={lp.id}
+                        onClick={() => handleAddToPath(lp.id)}
+                        className="text-[13px] rounded-xl cursor-pointer font-sans"
+                      >
+                        {lp.title}
+                      </DropdownMenuItem>
+                    ))
+                  )}
+                </DropdownMenuContent>
+              </DropdownMenu>
               <Button
                 variant="outline"
-                onClick={() => window.open(bookmark.url, "_blank")}
                 className="flex-1 rounded-xl text-[13px] border-[var(--border)] bg-[var(--card)] hover:bg-[var(--muted)] text-[var(--foreground)] font-sans h-10"
               >
                 <ExternalLink className="h-3.5 w-3.5 mr-1.5 opacity-50" />
