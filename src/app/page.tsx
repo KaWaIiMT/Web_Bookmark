@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useCallback, useRef, useMemo } from "react";
 import { useSession, signOut } from "next-auth/react";
-import { Search, Inbox, Brain, Menu, LogOut, Settings, LogIn, Shield } from "lucide-react";
+import { Search, Inbox, Brain, Menu, LogOut, Settings, LogIn, Shield, Loader2 } from "lucide-react";
 import { Input } from "@/components/ui/input";
 import { Skeleton } from "@/components/ui/skeleton";
 import {
@@ -57,7 +57,7 @@ export default function Home() {
   const [activeStatus, setActiveStatus] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  // Debounced search — fetch after 300ms idle; Enter key triggers immediately
+  // Debounced search — fetch after 150ms idle; Enter key bypasses debounce
   const [debouncedQuery, setDebouncedQuery] = useState("");
   const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [addDialogOpen, setAddDialogOpen] = useState(false);
@@ -269,17 +269,18 @@ export default function Home() {
     }
   }, [activeStatus, activeCategory, activeCollection, debouncedQuery]);
 
-  // Debounced search — fetch after 300ms idle; Enter key triggers immediately
+  // Debounced search — fetch after 500ms idle; Enter key bypasses debounce
   const triggerSearch = useCallback((query: string) => {
     if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
     if (!isFirstLoadRef.current) setIsSwitching(true);
     setSearchQuery(query);
+    setDebouncedQuery(query); // Immediately trigger search, bypass debounce
   }, []);
   useEffect(() => {
     debounceTimerRef.current = setTimeout(() => {
       if (!isFirstLoadRef.current) setIsSwitching(true);
       setDebouncedQuery(searchQuery);
-    }, 300);
+    }, 500);
     return () => { if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current); };
   }, [searchQuery]);
 
@@ -305,14 +306,26 @@ export default function Home() {
 
   // Optimistic client-side filter: apply activeStatus/activeCategory immediately
   // on the current bookmarks array so the UI responds instantly to filter clicks.
-  // The API fetch still runs in the background for fresh data.
+  // Search uses searchQuery (instant feedback while typing); API uses debouncedQuery.
   const displayedBookmarks = useMemo(() => {
     let result = bookmarks;
     if (activeStatus) result = result.filter((b) => b.status === activeStatus);
     if (activeCategory) result = result.filter((b) => b.categoryId === activeCategory);
+    // Instant client-side search for typing feedback (server fetch runs separately)
+    if (searchQuery) {
+      const q = searchQuery.toLowerCase();
+      result = result.filter((b) =>
+        b.title.toLowerCase().includes(q) ||
+        b.description?.toLowerCase().includes(q) ||
+        b.aiSummary?.toLowerCase().includes(q) ||
+        b.siteName?.toLowerCase().includes(q) ||
+        b.url?.toLowerCase().includes(q) ||
+        b.tags?.some((t: any) => t.tag?.name?.toLowerCase().includes(q))
+      );
+    }
     // Note: activeCollection can't be filtered client-side (need collection membership data)
     return result;
-  }, [bookmarks, activeStatus, activeCategory]);
+  }, [bookmarks, activeStatus, activeCategory, searchQuery]);
 
   const handleStatusChange = async (id: string, status: string) => {
     if (guardAuth()) return;
@@ -465,7 +478,13 @@ export default function Home() {
 
           {/* Search — collapsible on mobile */}
           <div className="flex-1 sm:max-w-md relative min-w-0 hidden sm:block">
-            <Search className="absolute left-3.5 top-1/2 -translate-y-1/2 h-4 w-4 text-[var(--foreground)]/15" />
+            <button
+              onClick={() => triggerSearch(searchQuery)}
+              className="absolute left-3.5 top-1/2 -translate-y-1/2 p-0.5 rounded-md text-[var(--foreground)]/20 hover:text-[var(--accent)] hover:bg-[var(--accent)]/5 transition-all"
+              title="搜索"
+            >
+              <Search className="h-4 w-4" />
+            </button>
             <Input
               placeholder={searchQuery ? undefined : "搜索书签..."}
               value={searchQuery}
@@ -552,7 +571,17 @@ export default function Home() {
         </header>
 
         {/* View content */}
-        <div className="flex-1 overflow-y-auto p-5">
+        <div className="flex-1 overflow-y-auto p-5 relative">
+          {/* Loading overlay — spinner centered over content during transitions */}
+          {isSwitching && (
+            <div className="absolute inset-0 z-10 flex items-center justify-center bg-[var(--background)]/60 backdrop-blur-sm transition-opacity duration-200">
+              <div className="flex flex-col items-center gap-3">
+                <Loader2 className="h-8 w-8 text-[var(--accent)] animate-spin" />
+                <span className="text-[13px] text-[var(--muted-foreground)] font-sans">加载中...</span>
+              </div>
+            </div>
+          )}
+
           {/* Grid & Gallery: use bookmarks data */}
           {(activeView === "grid" || activeView === "gallery") && (
             <>
@@ -586,13 +615,8 @@ export default function Home() {
                   </Button>
                 </div>
               ) : displayedBookmarks.length === 0 && isSwitching ? (
-                /* Optimistic filter returned 0 — current data has no matches for new filter.
-                   Show old bookmarks with a loading pulse so the user doesn't see blank/skeleton. */
-                <div className="relative animate-pulse">
-                  {/* Subtle loading bar at top */}
-                  <div className="absolute top-0 left-0 right-0 h-0.5 bg-[var(--accent)]/40 z-10 rounded-full overflow-hidden">
-                    <div className="h-full w-1/3 bg-[var(--accent)] rounded-full animate-[loadingBar_1.2s_ease-in-out_infinite]" />
-                  </div>
+                /* Optimistic filter returned 0 — show old bookmarks underneath spinner overlay */
+                <div>
                   {activeView === "gallery" ? (
                     <MasonryGallery
                       bookmarks={bookmarks}

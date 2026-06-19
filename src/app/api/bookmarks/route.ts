@@ -209,6 +209,8 @@ export async function GET(req: NextRequest) {
         { title: { contains: search } },
         { description: { contains: search } },
         { aiSummary: { contains: search } },
+        { siteName: { contains: search } },
+        { url: { contains: search } },
         { tags: { some: { tag: { name: { contains: search } } } } },
       ];
     }
