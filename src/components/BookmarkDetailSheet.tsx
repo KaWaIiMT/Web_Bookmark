@@ -1,11 +1,17 @@
 "use client";
 
 import { useState, useEffect, useCallback } from "react";
-import { ExternalLink, Trash2, Share2, TrendingUp, Clock, BookOpen, CheckCircle2, Archive, MapPin, Calendar, X, FileArchive, Eye, Network, Loader2, AlertTriangle, RefreshCw, BookOpenText } from "lucide-react";
+import { ExternalLink, Trash2, Share2, TrendingUp, Clock, BookOpen, CheckCircle2, Archive, MapPin, Calendar, X, FileArchive, Eye, Network, Loader2, AlertTriangle, RefreshCw, BookOpenText, Plus } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Separator } from "@/components/ui/separator";
+import {
+  DropdownMenu,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuTrigger,
+} from "@/components/ui/dropdown-menu";
 import { RelatedBookmarks } from "@/components/RelatedBookmarks";
 import { toast } from "sonner";
 import { cn, resolveImageUrl } from "@/lib/utils";
@@ -65,7 +71,35 @@ export function BookmarkDetailSheet({
   const [urlDead, setUrlDead] = useState(false);
   const [urlChecking, setUrlChecking] = useState(false);
 
-  // Reset state when bookmark changes
+  // Learning paths for quick-add
+  const [learningPaths, setLearningPaths] = useState<{ id: string; title: string }[]>([]);
+  const [addingToPath, setAddingToPath] = useState(false);
+
+  useEffect(() => {
+    if (!open || !bookmark) return;
+    fetch("/api/learning-paths")
+      .then((r) => r.json())
+      .then((d) => setLearningPaths(d.data || []))
+      .catch(() => {});
+  }, [open, bookmark?.id]);
+
+  const handleAddToPath = async (pathId: string) => {
+    if (!bookmark) return;
+    setAddingToPath(true);
+    try {
+      const res = await fetch(`/api/learning-paths/${pathId}/items`, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ bookmarkId: bookmark.id }),
+      });
+      if (!res.ok) throw new Error();
+      toast.success("已加入学习路径");
+    } catch {
+      toast.error("加入失败");
+    } finally {
+      setAddingToPath(false);
+    }
+  };
   useEffect(() => {
     setActiveTab("preview");
     setArchive(null);
