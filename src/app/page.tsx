@@ -57,9 +57,8 @@ export default function Home() {
   const [activeStatus, setActiveStatus] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
-  // Debounced search — fetch after 150ms idle; Enter key bypasses debounce
+  // Search only on Enter or button click, not on typing
   const [debouncedQuery, setDebouncedQuery] = useState("");
-  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [editBookmark, setEditBookmark] = useState<BookmarkData | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<BookmarkData | null>(null);
@@ -269,20 +268,13 @@ export default function Home() {
     }
   }, [activeStatus, activeCategory, activeCollection, debouncedQuery]);
 
-  // Debounced search — fetch after 500ms idle; Enter key bypasses debounce
+  // Search triggered by Enter key or button click
   const triggerSearch = useCallback((query: string) => {
-    if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
     if (!isFirstLoadRef.current) setIsSwitching(true);
     setSearchQuery(query);
-    setDebouncedQuery(query); // Immediately trigger search, bypass debounce
+    setDebouncedQuery(query);
   }, []);
-  useEffect(() => {
-    debounceTimerRef.current = setTimeout(() => {
-      if (!isFirstLoadRef.current) setIsSwitching(true);
-      setDebouncedQuery(searchQuery);
-    }, 500);
-    return () => { if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current); };
-  }, [searchQuery]);
+
 
   useEffect(() => {
     if (!isReady) return;
@@ -306,13 +298,12 @@ export default function Home() {
 
   // Optimistic client-side filter: apply activeStatus/activeCategory immediately
   // on the current bookmarks array so the UI responds instantly to filter clicks.
-  // Search uses searchQuery (instant feedback while typing); API uses debouncedQuery.
+  // Client-side filter matches server-side search: only on deliberate trigger
   const displayedBookmarks = useMemo(() => {
     let result = bookmarks;
     if (activeStatus) result = result.filter((b) => b.status === activeStatus);
     if (activeCategory) result = result.filter((b) => b.categoryId === activeCategory);
-    // Instant client-side search for typing feedback (server fetch runs separately)
-    if (searchQuery) {
+    if (debouncedQuery) {
       const q = searchQuery.toLowerCase();
       result = result.filter((b) =>
         b.title.toLowerCase().includes(q) ||
@@ -325,7 +316,7 @@ export default function Home() {
     }
     // Note: activeCollection can't be filtered client-side (need collection membership data)
     return result;
-  }, [bookmarks, activeStatus, activeCategory, searchQuery]);
+  }, [bookmarks, activeStatus, activeCategory, debouncedQuery]);
 
   const handleStatusChange = async (id: string, status: string) => {
     if (guardAuth()) return;
