@@ -69,10 +69,7 @@ export function CompareView({ onBack }: CompareViewProps) {
 
     const ids = [...selectedIds];
     setSelectedIds([]);
-    setView("history");
     setAnalyzing(true);
-
-    toast.loading(`正在对比 ${ids.length} 篇文章...`, { id: "compare-bg", duration: 120_000 });
 
     try {
       // Step 1: get the API key from the server
@@ -117,11 +114,11 @@ export function CompareView({ onBack }: CompareViewProps) {
         setTitle(`${ids.length} 篇文章的对比分析`);
       }
 
-      toast.success("对比分析完成", { id: "compare-bg" });
+      toast.success("对比分析完成");
       fetchHistory();
     } catch (err: any) {
       const msg = err.name === "AbortError" ? "对比超时（2分钟），请尝试减少文章数量" : "对比分析失败，请重试";
-      toast.error(msg, { id: "compare-bg" });
+      toast.error(msg);
     } finally {
       setAnalyzing(false);
     }
@@ -255,8 +252,27 @@ export function CompareView({ onBack }: CompareViewProps) {
         </>
       )}
 
+      {/* Analyzing state — fullscreen loader, blocks interaction */}
+      {analyzing && (
+        <div className="flex flex-col items-center justify-center py-32 gap-6">
+          <motion.div
+            animate={{ scale: [1, 1.12, 1], opacity: [0.4, 1, 0.4] }}
+            transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            className="h-16 w-16 rounded-2xl bg-[var(--accent)]/10 flex items-center justify-center"
+          >
+            <Sparkles className="h-8 w-8 text-[var(--accent)]" />
+          </motion.div>
+          <p className="text-[15px] font-semibold text-[var(--foreground)] font-display">
+            AI 正在分析对比...
+          </p>
+          <p className="text-[12px] text-[var(--muted-foreground)] font-sans -mt-3">
+            前端直连 DeepSeek，可能需要 30-60 秒，请耐心等待
+          </p>
+        </div>
+      )}
+
       {/* Selection view */}
-      {!result && view === "select" && (
+      {!result && !analyzing && view === "select" && (
         <div className="space-y-4">
           {loadingBookmarks ? (
             <div className="flex items-center justify-center py-20"><div className="h-8 w-8 rounded-full border-2 border-[var(--accent)]/30 border-t-[var(--accent)] animate-spin" /></div>
