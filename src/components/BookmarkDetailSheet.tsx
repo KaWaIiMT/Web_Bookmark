@@ -627,6 +627,7 @@ export function BookmarkDetailSheet({
               </DropdownMenu>
               <Button
                 variant="outline"
+                onClick={() => window.open(bookmark.url, "_blank")}
                 className="flex-1 rounded-xl text-[13px] border-[var(--border)] bg-[var(--card)] hover:bg-[var(--muted)] text-[var(--foreground)] font-sans h-10"
               >
                 <ExternalLink className="h-3.5 w-3.5 mr-1.5 opacity-50" />
