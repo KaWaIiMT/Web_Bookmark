@@ -57,6 +57,9 @@ export default function Home() {
   const [activeStatus, setActiveStatus] = useState<string | null>(null);
   const [activeCategory, setActiveCategory] = useState<string | null>(null);
   const [searchQuery, setSearchQuery] = useState("");
+  // Debounced search — fetch after 300ms idle; Enter key triggers immediately
+  const [debouncedQuery, setDebouncedQuery] = useState("");
+  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const [addDialogOpen, setAddDialogOpen] = useState(false);
   const [editBookmark, setEditBookmark] = useState<BookmarkData | null>(null);
   const [deleteTarget, setDeleteTarget] = useState<BookmarkData | null>(null);
@@ -244,7 +247,7 @@ export default function Home() {
       if (activeStatus) params.set("status", activeStatus);
       if (activeCategory) params.set("categoryId", activeCategory);
       if (activeCollection) params.set("collectionId", activeCollection);
-      if (searchQuery) params.set("q", searchQuery);
+      if (debouncedQuery) params.set("q", debouncedQuery);
       params.set("limit", "100");
 
       const res = await fetch(`/api/bookmarks?${params.toString()}`, { signal });
@@ -264,15 +267,13 @@ export default function Home() {
         if (isFirstLoadRef.current) setIsFirstLoad(false);
       }
     }
-  }, [activeStatus, activeCategory, activeCollection, searchQuery]);
+  }, [activeStatus, activeCategory, activeCollection, debouncedQuery]);
 
   // Debounced search — fetch after 300ms idle; Enter key triggers immediately
-  const [debouncedQuery, setDebouncedQuery] = useState("");
-  const debounceTimerRef = useRef<ReturnType<typeof setTimeout> | null>(null);
   const triggerSearch = useCallback((query: string) => {
     if (debounceTimerRef.current) clearTimeout(debounceTimerRef.current);
     if (!isFirstLoadRef.current) setIsSwitching(true);
-    setDebouncedQuery(query);
+    setSearchQuery(query);
   }, []);
   useEffect(() => {
     debounceTimerRef.current = setTimeout(() => {
