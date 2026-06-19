@@ -267,7 +267,12 @@ export function Sidebar({
   const fetchCollections = useCallback(() => {
     fetch("/api/collections", { credentials: "include" })
       .then((r) => r.json())
-      .then((d) => { /* skip - managed by parent */ })
+      .then((d) => {
+        if (d.data) {
+          // Notify parent so sidebar re-renders with fresh collection counts
+          window.dispatchEvent(new CustomEvent("collections-fetched", { detail: d.data }));
+        }
+      })
       .catch(() => {});
   }, []);
 

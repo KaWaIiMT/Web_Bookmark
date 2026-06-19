@@ -44,6 +44,11 @@ function SortableCard({
   isDragging,
   onCardClick,
   onShare,
+  selected,
+  onToggleSelect,
+  collections,
+  onAddToCollection,
+  onRemoveFromCollection,
 }: {
   bookmark: BookmarkData;
   onStatusChange: (id: string, status: string) => void;
@@ -52,6 +57,11 @@ function SortableCard({
   isDragging: boolean;
   onCardClick: (bookmark: BookmarkData, element: HTMLElement) => void;
   onShare?: (id: string) => void;
+  selected?: boolean;
+  onToggleSelect?: (id: string) => void;
+  collections?: { id: string; name: string }[];
+  onAddToCollection?: (bookmarkId: string, collectionId: string) => void;
+  onRemoveFromCollection?: (bookmarkId: string, collectionId: string) => void;
 }) {
   const cardRef = useRef<HTMLDivElement>(null);
   const { attributes, listeners, setNodeRef, transform, transition } =
@@ -131,6 +141,11 @@ function SortableCard({
             onDelete={onDelete}
             onEdit={onEdit}
             onShare={onShare}
+            selected={selected}
+            onToggleSelect={onToggleSelect}
+            collections={collections}
+            onAddToCollection={onAddToCollection}
+            onRemoveFromCollection={onRemoveFromCollection}
           />
         </div>
       </motion.div>
@@ -146,6 +161,11 @@ export function SortableBookmarkGrid({
   onReorder,
   onCardClick,
   onShare,
+  selectedIds,
+  onToggleSelect,
+  collections,
+  onAddToCollection,
+  onRemoveFromCollection,
 }: SortableBookmarkGridProps) {
   const [draggingId, setDraggingId] = useState<string | null>(null);
 
@@ -204,6 +224,11 @@ export function SortableBookmarkGrid({
               isDragging={draggingId === bookmark.id}
               onCardClick={onCardClick}
               onShare={onShare}
+              selected={selectedIds?.has(bookmark.id)}
+              onToggleSelect={onToggleSelect}
+              collections={collections}
+              onAddToCollection={onAddToCollection}
+              onRemoveFromCollection={onRemoveFromCollection}
             />
           ))}
         </div>

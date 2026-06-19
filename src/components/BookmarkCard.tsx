@@ -1,6 +1,6 @@
 "use client";
 
-import { ExternalLink, Eye, Star, User, Trash2, Pencil, Clock, BookOpen, CheckCircle2, Archive, Share2, FileArchive, Wifi, WifiOff, AlertTriangle } from "lucide-react";
+import { ExternalLink, Eye, Star, User, Trash2, Pencil, Clock, BookOpen, CheckCircle2, Archive, Share2, FileArchive, Wifi, WifiOff, AlertTriangle, Check, Folder } from "lucide-react";
 import { Badge } from "@/components/ui/badge";
 import { Card } from "@/components/ui/card";
 import {
@@ -60,16 +60,43 @@ interface BookmarkCardProps {
   onDelete: (id: string) => void;
   onEdit: (bookmark: BookmarkData) => void;
   onShare?: (id: string) => void;
+  // Multi-select
+  selected?: boolean;
+  onToggleSelect?: (id: string) => void;
+  // Collections (right-click menu)
+  collections?: { id: string; name: string }[];
+  onAddToCollection?: (bookmarkId: string, collectionId: string) => void;
+  onRemoveFromCollection?: (bookmarkId: string, collectionId: string) => void;
 }
 
-export function BookmarkCard({ bookmark, onStatusChange, onDelete, onEdit, onShare }: BookmarkCardProps) {
+export function BookmarkCard({ bookmark, onStatusChange, onDelete, onEdit, onShare, selected = false, onToggleSelect, collections, onAddToCollection, onRemoveFromCollection }: BookmarkCardProps) {
   const meta = parseMetadata(bookmark.metadata);
   const statusConf = STATUS_CONFIG[bookmark.status] || STATUS_CONFIG.unread;
 
   return (
     <ContextMenu>
       <ContextMenuTrigger>
-        <Card className="overflow-hidden transition-all duration-300 hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)] rounded-2xl border border-[var(--border)] bg-[var(--card)] backdrop-blur-sm group/card hover:-translate-y-0.5">
+        <Card className="overflow-hidden transition-all duration-300 hover:shadow-[0_8px_40px_rgba(0,0,0,0.06)] rounded-2xl border border-[var(--border)] bg-[var(--card)] backdrop-blur-sm group/card hover:-translate-y-0.5 relative">
+          {/* Multi-select checkbox — appears on hover or when selected */}
+          {onToggleSelect && (
+            <button
+              onClick={(e) => {
+                e.stopPropagation();
+                e.preventDefault();
+                onToggleSelect(bookmark.id);
+              }}
+              data-no-drag
+              className={cn(
+                "absolute top-3 left-3 z-20 w-5 h-5 rounded-md border-2 flex items-center justify-center transition-all duration-200",
+                selected
+                  ? "bg-[var(--accent)] border-[var(--accent)] text-white opacity-100 scale-100"
+                  : "border-[var(--border)]/60 bg-[var(--card)]/80 backdrop-blur-sm text-transparent opacity-0 group-hover/card:opacity-100 scale-90 group-hover/card:scale-100",
+              )}
+            >
+              {selected && <Check className="h-3 w-3" />}
+            </button>
+          )}
+
           {/* Cover Image */}
           {bookmark.coverImage && (
             <a
@@ -230,6 +257,41 @@ export function BookmarkCard({ bookmark, onStatusChange, onDelete, onEdit, onSha
 
       {/* Right-click context menu */}
       <ContextMenuContent className="w-52 rounded-2xl border border-[var(--border)] shadow-[0_12px_40px_rgba(0,0,0,0.08)] bg-[var(--popover)] backdrop-blur-xl p-1.5">
+        {/* Add to / remove from collections */}
+        {collections && collections.length > 0 && (
+          <>
+            <ContextMenuSub>
+              <ContextMenuSubTrigger className="text-[13px] rounded-xl font-sans">
+                <Folder className="h-3.5 w-3.5 mr-2.5 opacity-50" />
+                添加到收藏夹
+              </ContextMenuSubTrigger>
+              <ContextMenuSubContent className="w-44 rounded-2xl border border-[var(--border)] bg-[var(--popover)] backdrop-blur-xl p-1.5 max-h-56 overflow-y-auto">
+                {collections.map((col) => (
+                  <ContextMenuItem
+                    key={col.id}
+                    onClick={() => onAddToCollection?.(bookmark.id, col.id)}
+                    className="text-[13px] rounded-xl font-sans"
+                  >
+                    <Folder className="h-3.5 w-3.5 mr-2.5 opacity-50" />
+                    {col.name}
+                  </ContextMenuItem>
+                ))}
+              </ContextMenuSubContent>
+            </ContextMenuSub>
+            {onRemoveFromCollection && (
+              <ContextMenuItem
+                onClick={() => {
+                  window.dispatchEvent(new CustomEvent("request-remove-bookmark-from-collection", { detail: { bookmarkId: bookmark.id } }));
+                }}
+                className="text-[13px] rounded-xl font-sans"
+              >
+                <Folder className="h-3.5 w-3.5 mr-2.5 opacity-50" />
+                从收藏夹移除...
+              </ContextMenuItem>
+            )}
+            <ContextMenuSeparator className="bg-[var(--border)]" />
+          </>
+        )}
         <ContextMenuSub>
           <ContextMenuSubTrigger className="text-[13px] rounded-xl font-sans">
             更改状态

@@ -7,7 +7,8 @@ import { Button } from "@/components/ui/button";
 import { CompareRadar } from "@/components/CompareRadar";
 import { CompareMatrix } from "@/components/CompareMatrix";
 import { buildRadarData } from "@/lib/comparisons";
-import type { ComparisonResult } from "@/lib/comparisons";
+import { analyzeComparisonFromBrowser } from "@/lib/comparisons-client";
+import type { ComparisonResult } from "@/lib/comparisons-client";
 import { toast } from "sonner";
 
 interface CompareViewProps {
@@ -66,27 +67,61 @@ export function CompareView({ onBack }: CompareViewProps) {
   const handleCompare = async () => {
     if (selectedIds.length < 2) { toast.error("请至少选择 2 篇书签"); return; }
 
-    // Start analysis in background — switch to history view immediately
     const ids = [...selectedIds];
     setSelectedIds([]);
     setView("history");
-    toast.loading(`正在后台对比 ${ids.length} 篇文章...`, { id: "compare-bg", duration: 5000 });
-
     setAnalyzing(true);
+
+    toast.loading(`正在对比 ${ids.length} 篇文章...`, { id: "compare-bg", duration: 120_000 });
+
     try {
-      const res = await fetch("/api/comparisons", {
+      // Step 1: get the API key from the server
+      const keyRes = await fetch("/api/config/deepseek");
+      if (!keyRes.ok) throw new Error("无法获取 API 配置");
+      const { apiKey } = await keyRes.json();
+      if (!apiKey) throw new Error("API key not configured");
+
+      // Step 2: build bookmark payload from already-loaded data
+      const toCompare = bookmarks
+        .filter((b) => ids.includes(b.id))
+        .map((b) => ({
+          id: b.id,
+          title: b.title,
+          url: b.url,
+          description: null as string | null,
+          aiSummary: null as string | null,
+          siteName: b.siteName,
+          contentType: "article" as const,
+          tags: [] as string[],
+          createdAt: "",
+        }));
+
+      // Step 3: call DeepSeek directly from the browser (no Vercel timeout!)
+      const result = await analyzeComparisonFromBrowser(apiKey, toCompare);
+
+      // Step 4: save result to history on the server
+      const saveRes = await fetch("/api/comparisons", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ bookmarkIds: ids }),
+        body: JSON.stringify({ bookmarkIds: ids, result }),
       });
-      if (!res.ok) throw new Error(await res.text());
-      const data = await res.json();
-      setResult(data);
-      setTitle(`${data.bookmarks.length} 篇文章的对比分析`);
-      toast.success("对比分析完成，点击历史记录查看", { id: "compare-bg" });
-      fetchHistory(); // Refresh history list
-    } catch {
-      toast.error("对比分析失败，请重试", { id: "compare-bg" });
+
+      if (saveRes.ok) {
+        const savedData = await saveRes.json();
+        setResult(savedData);
+        setTitle(`${savedData.bookmarks?.length || ids.length} 篇文章的对比分析`);
+      } else {
+        // Even if save fails, show the result (just no history entry)
+        const bookmarksInfo = toCompare.map((b) => ({ id: b.id, title: b.title, url: b.url, favicon: null as string | null, siteName: b.siteName, coverImage: null as string | null }));
+        setResult({ ...result, bookmarks: bookmarksInfo });
+        setTitle(`${ids.length} 篇文章的对比分析`);
+      }
+
+      toast.success("对比分析完成", { id: "compare-bg" });
+      fetchHistory();
+    } catch (err: any) {
+      const msg = err.name === "AbortError" ? "对比超时（2分钟），请尝试减少文章数量" : "对比分析失败，请重试";
+      toast.error(msg, { id: "compare-bg" });
     } finally {
       setAnalyzing(false);
     }
@@ -229,7 +264,7 @@ export function CompareView({ onBack }: CompareViewProps) {
             <>
               <div className="flex items-center justify-between">
                 <p className="text-[13px] text-[var(--muted-foreground)] font-sans">
-                  已选 {selectedIds.length} 篇（选择 2-5 篇后点击对比，将在后台分析）
+                  已选 {selectedIds.length} 篇（选择 2-5 篇后点击对比，AI 分析可能需要 30-60 秒）
                 </p>
                 <Button
                   onClick={handleCompare}
