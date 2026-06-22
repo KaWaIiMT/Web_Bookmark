@@ -1,0 +1,433 @@
+% ============================================================
+%  软件工程课程实验报告
+%  Title: MarkBox 智能书签管理器的设计与实现
+%  Author: 高子阳 (1191230426)
+%  Class: 数媒2304
+%  Supervisor: 范超
+%  Institution: 数字媒体学院
+% ============================================================
+
+\documentclass[a4paper,12pt]{ctexart}
+
+% ---------- Packages ----------
+\usepackage{amsmath}
+\usepackage{graphicx}
+\usepackage{hyperref}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{algorithmic}
+\usepackage{booktabs}
+\usepackage{multirow}
+\usepackage{caption}
+\usepackage{subcaption}
+\usepackage{listings}
+\usepackage{xcolor}
+
+% Page geometry
+\geometry{left=2.5cm,right=2.5cm,top=2.5cm,bottom=2.5cm}
+
+% Header / Footer
+\pagestyle{fancy}
+\fancyhf{}
+\fancyhead[L]{MarkBox 智能书签管理器的设计与实现}
+\fancyhead[R]{高子阳 / 1191230426}
+\fancyfoot[C]{\thepage}
+\renewcommand{\headrulewidth}{0.4pt}
+\renewcommand{\footrulewidth}{0pt}
+
+% Code listing style
+\definecolor{codebg}{RGB}{245,245,248}
+\definecolor{codeframe}{RGB}{220,220,228}
+\lstset{
+  basicstyle=\ttfamily\small,
+  backgroundcolor=\color{codebg},
+  frame=single,
+  framerule=0.4pt,
+  rulecolor=\color{codeframe},
+  breaklines=true,
+  numbers=none,
+  showstringspaces=false,
+  tabsize=2,
+  aboveskip=6pt,
+  belowskip=6pt,
+  language={},
+  alsoletter={-},
+  literate={一}{--}1{二}{--}2{三}{--}3,
+}
+
+% Hyperlinks
+\hypersetup{
+  colorlinks=true,
+  linkcolor=blue!60!black,
+  citecolor=green!50!black,
+  urlcolor=blue!60!black,
+}
+
+% ---------- Title / Author ----------
+\title{{\bfseries MarkBox 智能书签管理器的设计与实现}}
+\author{
+  高子阳\ \ 1191230426 \\[4pt]
+  数媒2304班 \\[4pt]
+  指导教师：范超 \\[4pt]
+  数字媒体学院
+}
+\date{2026年6月}
+
+\begin{document}
+
+\maketitle
+\thispagestyle{fancy}
+
+% ============================================================
+%  ABSTRACT (Chinese)
+% ============================================================
+\begin{abstract}
+\noindent
+随着互联网信息规模的持续膨胀，个人知识管理面临挑战——传统的浏览器书签功能仅能提供简单的 URL 保存和文件夹分类，缺乏智能整理、多维检索与状态流转能力。本文设计并实现了 MarkBox 智能书签管理器，一款基于 Next.js 16 全栈框架构建的现代 Web 应用，集成了 AI 驱动的自动分类、多维语义搜索、拖拽排序与状态流转、浏览器扩展一键收藏、多视图可视化分析等十余项功能。
+
+系统采用 NextAuth v5 实现 OAuth 与凭证双通道认证，以 JWT 策略进行用户身份管理；数据层使用 Prisma 7 ORM 连接 Turso libSQL 边缘数据库，利用 SHA-256 哈希与 AES-256-CBC 加密保障 API Key 安全；前端采用 React 19 结合 @dnd-kit 实现拖拽交互，Recharts 绘制统计仪表盘，next-themes 提供三模式主题切换。浏览器扩展基于 Chrome Extension Manifest V3 规范开发，支持右键菜单收藏与弹出窗口预览。系统部署于 Vercel 平台，通过 Git 推送触发自动构建与持续交付，充分体现了现代 Web 工程中前后端分离、边缘计算、渐进增强的工程理念。本文从需求分析、系统架构、核心功能实现、测试部署等方面对项目进行了完整阐述。
+
+% KEYWORDS
+\vspace{6pt}
+\noindent{\bfseries 关键词：}智能书签管理；Next.js；全栈开发；OAuth 认证；浏览器扩展；数据可视化；拖拽排序
+\end{abstract}
+
+% ============================================================
+%  ABSTRACT (English)
+% ============================================================
+\begin{abstract}
+\noindent
+As the volume of internet information continues to expand exponentially, personal knowledge management faces significant challenges — traditional browser bookmarking provides only basic URL storage and folder-based categorization, lacking intelligent organization, multi-dimensional retrieval, and status workflow capabilities. This paper presents the design and implementation of MarkBox, an intelligent bookmark manager built as a modern web application using the Next.js 16 full-stack framework. MarkBox integrates over ten core features, including AI-driven automatic categorization, multi-field semantic search, drag-and-drop sorting with status transitions, one-click browser extension bookmarking, and multi-view visual analytics.
+
+The system employs NextAuth v5 for dual-channel OAuth and credential-based authentication with JWT strategy for user identity management. The data layer uses Prisma 7 ORM connected to Turso's libSQL edge database, with SHA-256 hashing and AES-256-CBC encryption to secure API keys. The frontend is built with React 19 and leverages @dnd-kit for drag-and-drop interaction, Recharts for statistical dashboards, and next-themes for three-mode theme switching. The browser extension conforms to the Chrome Extension Manifest V3 specification, supporting context-menu bookmarking and popup-based preview. The system is deployed on Vercel, with automatic builds and continuous delivery triggered by Git pushes — exemplifying modern web engineering principles of decoupled architecture, edge computing, and progressive enhancement. This paper provides a comprehensive exposition covering requirements analysis, system architecture, core feature implementation, testing, and deployment.
+
+\vspace{6pt}
+\noindent{\bfseries Keywords:} Intelligent bookmark management; Next.js; Full-stack development; OAuth authentication; Browser extension; Data visualization; Drag-and-drop sorting
+\end{abstract}
+
+\newpage
+
+% ============================================================
+%  1. 引言
+% ============================================================
+\section{引言}
+
+\subsection{研究背景与意义}
+
+互联网的指数级信息增长使个人知识管理成为当代计算机用户面临的重要课题。据统计，全球互联网用户平均每天访问超过 130 个网页，而传统浏览器内置的书签功能仅提供基本的 URL 保存和层级文件夹分类，存在以下明显不足：第一，书签数量超过数百条后，扁平化的文件夹层级难以满足高效检索的需求；第二，缺乏对书签内容的语义理解，用户无法通过模糊印象找到目标资源；第三，书签状态缺乏生命周期管理，大量"先存后看"的链接沦为信息坟场；第四，跨浏览器、跨设备的书签同步体验割裂。
+
+为解决上述痛点，本文提出 MarkBox 智能书签管理系统。MarkBox 以"收藏即整理"为核心理念，融合自然语言处理、拖拽交互设计、数据可视化等现代 Web 技术，构建一款从收藏入口到知识输出全链路覆盖的现代书签管理工具。
+
+\subsection{国内外研究现状}
+
+当前市场上的书签管理方案大致分为三类。第一类是以 Raindrop.io、Pocket 为代表的商业 SaaS 服务，它们提供了标签系统、全文搜索和移动端适配，但用户数据托管于第三方服务器，存在隐私隐患和订阅费用壁垒。第二类是以浏览器内置书签栏、Bookmark Sidebar 为代表的本地方案，数据隐私有保障但功能有限。第三类是开源社区中的自部署方案如 Shiori、Linkding，它们在部署灵活性上占优但缺乏智能分类和多维可视化能力。
+
+MarkBox 在定位上属于第三类的升级版——在保留自部署灵活性的同时，引入 AI 驱动的语义层和现代前端交互体验，弥补了现有方案在智能化方面的不足。
+
+\subsection{论文组织结构}
+
+本文共分为七章。第一章引言介绍研究背景、现状及本文工作。第二章需求分析从功能性与非功能性两个维度阐述系统要求。第三章系统设计描述总体架构、数据库模式与技术选型。第四章核心功能实现逐一详述十二项关键特性的技术方案。第五章测试与部署涵盖测试策略与生产环境部署流程。第六章对全文工作进行总结并展望后续方向。第七章列出参考文献。
+
+% ============================================================
+%  2. 需求分析
+% ============================================================
+\section{需求分析}
+
+\subsection{功能性需求}
+
+MarkBox 的十二项核心功能需求按用户角色与交互入口划分为三个层次。
+
+\subsubsection{用户认证与安全层}
+
+该层包含三项功能：(1) OAuth 登录与用户数据隔离，支持 GitHub OAuth 和邮箱密码两种认证方式，通过 JWT 策略实现跨请求的用户身份持续识别，所有数据操作以 userId 为隔离边界；(2) 注册与限流保护，提供前端表单校验、bcryptjs 12 轮加盐密码哈希存储、基于内存的 IP 级频率限制（注册 3 次/小时，登录 5 次/15 分钟）；(3) 管理面板，通过环境变量配置的 GitHub ID 白名单识别管理员身份，提供全局用户列表查看与任意用户书签详情穿透查询能力。
+
+\subsubsection{书签操作与组织层}
+
+该层包含四项功能：(4) 浏览器扩展一键收藏，在 Chrome 浏览器中通过右键菜单或工具栏图标触发，自动提取页面标题、描述、封面图等元数据并 POST 至用户账户；(5) 拖拽排序与状态流转，支持书签卡片的自由拖拽重排并持久化顺序，定义待读、在读、已读、归档四阶段状态机；(6) 收藏夹系统，用户可创建多个收藏夹，书签与收藏夹之间为多对多关联关系，支持右键快速添加/移出及批量操作栏；(7) 书签分享，为书签生成 UUID 分享令牌，未登录访客可通过渲染页面查看书签详情，分享页支持 Open Graph 元标签以适配社交媒体预览。
+
+\subsubsection{可视化与交互层}
+
+该层包含五项功能：(8) 多视图切换，提供网格、画廊、时间线、仪表盘、发现、周报、热度、知识图谱、对比、学习路径共计十种视图模式，各视图独立管理数据请求；(9) 全文搜索与语音输入，在标题、描述、AI 摘要、标签、站点名五个字段集上执行 OR 逻辑全文搜索，集成 Web Speech API 实现中文语音输入转文字；(10) 仪表盘统计，通过 Recharts 库渲染状态饼图、内容类型柱状图、本周趋势对比、标签词云及链接健康面板；(11) 移动端适配，通过汉堡菜单、响应式侧边栏、仅图标视图标签、可折叠搜索栏等策略保证移动设备使用体验；(12) 主题切换，基于 next-themes 实现浅色/深色/跟随系统三种模式，通过 CSS 变量统一管理颜色系统。
+
+\subsection{非功能性需求}
+
+系统在性能方面要求首屏加载时间不超过 3 秒，API 请求 P95 响应时间低于 500 毫秒。在安全性方面，所有认证令牌基于 JWT 机制，API Key 以 SHA-256 哈希形式存储，原始密钥仅以 AES-256-CBC 加密形式留存以便用户回看。在可维护性方面，项目代码托管于 GitHub，强制功能分支合并前的 Code Review，利用 Prisma 的自动迁移脚本在每次部署前检测并修复数据库 Schema 差异。在可扩展性方面，后端路由采用 Next.js App Router 的文件系统路由约定，每个 API 端点独立为模块，便于新增功能而无耦合风险。
+
+% [FIGURE: 系统功能结构图 — A diagram showing the three-layer functional architecture: 认证与安全层 (OAuth登录, 注册限流, 管理面板) → 书签操作与组织层 (浏览器扩展, 拖拽排序, 收藏夹, 分享) → 可视化与交互层 (多视图, 搜索, 仪表盘, 移动端, 主题)]
+
+% ============================================================
+%  3. 系统设计
+% ============================================================
+\section{系统设计}
+
+\subsection{总体架构}
+
+MarkBox 采用"全栈单体 + 浏览器扩展"的复合架构。Web 端基于 Next.js 16 App Router 构建，以 React Server Components 实现服务端渲染与客户端交互的混合渲染策略。数据层使用 Prisma 7 ORM 抽象，物理存储部署于 Turso 平台的 libSQL（SQLite 兼容）边缘数据库，通过 @prisma/adapter-libsql 适配器实现连接。认证层抽象为 NextAuth v5 中间件，支持 GitHub OAuth Provider 和 Credentials Provider 双通道。浏览器扩展独立构建于 WXT 框架之上，遵循 Chrome Extension Manifest V3 规范，以 API Key 认证方式与 Web 后端通信。
+
+系统的运行时架构可抽象为四层：展示层（React 19 组件树 + Tailwind CSS 样式系统）、逻辑层（Next.js API Route Handlers + Server Actions）、数据访问层（Prisma Client + libSQL 适配器）、持久层（Turso libSQL 数据库实例）。跨层依赖方向严格自上而下，通过接口抽象避免循环依赖。
+
+% [FIGURE: 系统总体架构图 — A layered architecture diagram showing: 展示层 (React 19 + Tailwind CSS + shadcn/ui) → 逻辑层 (Next.js App Router API Handlers + NextAuth v5) → 数据访问层 (Prisma 7 Client + @prisma/adapter-libsql) → 持久层 (Turso libSQL Edge Database)]
+
+\subsection{数据库设计}
+
+数据库模型共包含十七个实体表，核心关系如下：User 表主键 id 由 cuid() 生成，存储 OAuth 与 Credentials 两种来源的用户信息；Account 表以 (provider, providerAccountId) 为复合唯一约束存储 OAuth 账户关联；Bookmark 表为系统核心实体，包含 url、title、description、aiSummary、status（枚举四状态）、shareToken、embedding 等字段，通过 userId 外键关联用户；Tag 表以 (userId, slug) 为复合唯一约束存储用户自定义标签，与 Bookmark 通过 BookmarkTag 联结表形成多对多关系；Collection 表存储用户收藏夹元信息，与 Bookmark 同样通过 CollectionBookmark 联结表实现多对多；ApiKey 表存储 key（SHA-256 哈希）和 encryptedKey（AES-256-CBC 密文），支持密钥回显和吊销；此外还有 Category（分类）、LearningPath（学习路径）、Annotation（批注）、Comparison（对比）、HotnessTracker（热度追踪）等扩展功能的实体表。
+
+所有涉及用户数据的查询均在 WHERE 子句中附加 userId 过滤条件，从数据库层面确保数据隔离，避免跨用户信息泄露。Bookmark 表的复合索引 (userId, status)、 (userId, categoryId)、(userId, order, createdAt) 保证了常用筛选和排序场景的查询性能。
+
+% [FIGURE: 数据库 ER 图 — An entity-relationship diagram showing core tables: User (1→N) Bookmark, User (1→N) Collection, Bookmark (N↔M) Collection via CollectionBookmark, Bookmark (N↔M) Tag via BookmarkTag, User (1→N) ApiKey, User (1→N) Category]
+
+\subsection{技术选型}
+
+表~\ref{tab:tech-stack} 汇总了项目核心技术栈及其选型理由。
+
+\begin{table}[htbp]
+\centering
+\caption{MarkBox 技术栈选型}\label{tab:tech-stack}
+\begin{tabular}{@{}lll@{}}
+\toprule
+\textbf{层次} & \textbf{技术} & \textbf{选型理由} \\
+\midrule
+运行时 & Node.js 20+ & 支持 ESM、Crypto API、异步并发 \\
+前端框架 & React 19 & Server Components、Actions、并发渲染 \\
+全栈框架 & Next.js 16 & App Router、API Routes、ISR、Middleware \\
+语言 & TypeScript & 编译时类型检查，降低运行时错误概率 \\
+ORM & Prisma 7 & 类型安全的查询构建器，支持 libSQL 适配器 \\
+数据库 & Turso (libSQL) & 边缘部署、低延迟、SQLite 兼容、免费额度 \\
+认证 & NextAuth v5 & 内建 OAuth Provider、JWT 策略、Session 管理 \\
+样式 & Tailwind CSS + shadcn/ui & 原子化 CSS + 无头组件，构建速度快 \\
+拖拽 & @dnd-kit & 现代化 DnD 库，支持 Pointer/Touch Sensor \\
+图表 & Recharts & React 原生声明式图表，支持 Pie/Bar/Line \\
+动画 & Motion (Framer) & 声明式 Spring 动画，拖拽反馈自然 \\
+加密 & bcryptjs + Node crypto & 密码哈希 + AES-256-CBC 对称加密 \\
+\bottomrule
+\end{tabular}
+\end{table}
+
+% ============================================================
+%  4. 核心功能实现
+% ============================================================
+
+\section{核心功能实现}
+
+本章逐一详述高子阳负责的十二项功能的技术实现细节。
+
+\subsection{OAuth 登录与用户数据隔离}
+
+MarkBox 的认证体系构建于 NextAuth v5 之上，同步启用 GitHub OAuth Provider 和 Credentials Provider 两个认证通道。GitHub Provider 通过环境变量 AUTH\_GITHUB\_ID 与 AUTH\_GITHUB\_SECRET 配置 OAuth App 凭证，authorization 参数中设置 prompt: "consent" 以确保用户每次授权时明确确认。Credentials Provider 接收邮箱和密码两个字段，在 authorize 回调中对邮箱进行 trim().toLowerCase() 归一化后查询数据库，通过 bcryptjs.compare 验证密码匹配性。
+
+核心架构决策在于 Session 策略选用 JWT 而非 Database Session。这一决策使得 OAuth 登录和邮箱密码登录共用同一套 JWT token 机制，无需在服务端维护 Session 表的状态同步。JWT 回调在用户首次登录时将 userId 和 isAdmin 标志写入 token payload，后续每次请求通过 session 回调将 token 中的 id、isAdmin 映射至 session.user 供前端组件消费。
+
+用户数据隔离的核心实现在于 getUserIdFromRequest 函数，该函数采用双通道策略：首先尝试从 NextAuth session 提取用户 ID（适用于 Web 端同源请求），若失败则解析 Authorization 头部的 Bearer token——对 token 执行 SHA-256 哈希后在 ApiKey 表中查找匹配记录，找到则返回对应的 userId 并异步更新 lastUsedAt 时间戳。所有 /api/* 路由的 Handler 在处理业务逻辑前均调用此函数获取 userId，并将 userId 作为 Prisma 查询的 WHERE 条件前缀，从根源上杜绝了跨用户数据访问。
+
+% [FIGURE: 认证流程时序图 — A sequence diagram showing: Browser → NextAuth (/api/auth/*) → GitHub OAuth Server → Callback → JWT Token Generation → Session Storage → Protected API Request with JWT → getUserIdFromRequest → Database Query with userId filter]
+
+\subsection{浏览器扩展一键收藏}
+
+浏览器扩展基于 WXT 框架和 React 19 构建，输出格式为 Chrome Extension Manifest V3。扩展由三个核心模块构成：Content Script 负责注入目标页面 DOM 并提取元数据（标题、描述、封面图 URL、网站图标、内容类型）；Popup 作为用户交互界面，以 React 组件树渲染收藏预览卡片；Background Service Worker 处理右键菜单注册和快捷键监听。
+
+Content Script 在 manifest 中声明 matches: ["<all\_urls>"]，但通过运行时判断排除 chrome://、chrome-extension://、about:、edge:// 等受保护页面，避免注入异常。Popup 的生命周期分为五步：加载态（Skeleton 占位）→ 元数据提取（通过 browser.tabs.sendMessage 向 Content Script 发送 EXTRACT\_METADATA 消息）→ 重复检测（调用 /api/bookmarks?url= 查询是否已收藏）→ AI 分类（调用 /api/ai/categorize 获取标签和分类建议）→ 确认保存。若 AI 服务不可用，扩展降级到仅保存链接的简化模式，不阻塞核心收藏流程。
+
+认证方案采用 API Key 机制：用户在 Web 端设置页面生成以 "mb\_" 为前缀的 48 字节随机密钥，扩展通过 chrome.storage.local 持久化存储该密钥，每次 API 调用在 Authorization 头部附 Bearer {apiKey}。后端通过 SHA-256 哈希比对验证，密钥原文经 AES-256-CBC 加密存储以便用户在设置页回显。此方案避免了在扩展中实现完整 OAuth 流程的复杂性，同时保证了与 Web 端同一套用户数据隔离体系的无缝对接。
+
+% [FIGURE: Chrome扩展架构图 — A diagram showing: Popup UI (React) → Background Service Worker (context menu registration, keyboard shortcut Cmd+Shift+D) → Content Script (DOM metadata extraction) → API Key Bearer auth → MarkBox Backend API (SHA-256 hash verification)]
+
+\subsection{拖拽排序与状态流转}
+
+书签卡片的拖拽排序功能基于 @dnd-kit 库实现。@dnd-kit 是 dnd-kit 的官方继任者，采用 PointerSensor 传感器并配置 activationConstraint: \{ distance: 2 \}，即指针移动超过 2 像素后才激活拖拽，有效避免误触。SortableContext 以 rectSortingStrategy 提供矩形网格排序策略，使用 CSS.Transform.toString 将 @dnd-kit 的内部 transform 值转为 CSS transform 字符串。
+
+交互反馈层分为两层：外层由 @dnd-kit 的 setNodeRef 管理位置和布局属性，内层由 Motion (Framer Motion) 处理视觉弹性动画。被拖拽卡片执行 scale(1.06) + rotate(-0.6deg) + 增强阴影的 Spring 动画（stiffness: 420, damping: 28, mass: 0.6），释放时播放拖放音效。卡片内部通过 onPointerDownCapture 事件委托，对 button、a 标签及 [data-no-drag] 属性元素调用 stopPropagation 阻止拖拽冒泡，确保状态按钮、链接等可交互元素正常工作。
+
+排序持久化采用 Optimistic Update + Rollback 模式。前端在 dragEnd 事件中立即根据旧索引和新索引重排本地数组，同步调用 /api/bookmarks/reorder 接口提交 orderedIds 数组。后端在事务中批量更新各书签的 order 字段。若接口返回失败，前端回滚至服务器返回的最新数据（refreshBookmarks），并通过 sonner toast 提示用户"排序失败"。此模式保证了拖拽操作在视觉上的即时效性，同时以最终一致性模型容忍短暂的网络异常。
+
+状态流转定义了 unread（待读）→ reading（在读）→ read（已读）→ archived（归档）的四阶段状态机。每个书签卡片通过下拉菜单暴露当前状态允许的变迁目标，用户选择后通过 PATCH /api/bookmarks/[id] 接口更新数据库 status 字段。侧边栏以四种颜色（琥珀金、赤陶棕、鼠尾草绿、中性灰）区分四状态，点击状态标签触发服务端筛选查询。
+
+% [FIGURE: 拖拽排序与状态流转交互图 — A diagram showing: Drag gesture → PointerSensor activation (distance: 2px) → Motion spring animation (scale 1.06, rotate -0.6°) → dragEnd reorder array → optimistic UI update → POST /api/bookmarks/reorder → success/rollback; and Status flow: unread (amber) → reading (brown) → read (green) → archived (gray)]
+
+\subsection{收藏夹系统}
+
+收藏夹系统提供完整的 CRUD API：GET /api/collections 列出用户所有收藏夹（含 _count.bookmarks 子查询获取书签数），POST /api/collections 创建收藏夹（自动根据 name 生成 slug），PATCH /api/collections/[id] 重命名，DELETE /api/collections/[id] 删除收藏夹（书签不级联删除，仅解除关联）。
+
+书签与收藏夹的多对多关系通过 CollectionBookmark 联结表实现，该表以 (collectionId, bookmarkId) 为复合主键，附加 addedAt 时间戳。加入收藏夹的 API 为 POST /api/collections/[collectionId]/bookmarks，接收 bookmarkId 参数；移除则为 DELETE 同路径。前端在 BookmarkCard 组件的右键菜单中动态渲染用户所有收藏夹列表，已加入的收藏夹以勾选标记标识，点击即可切换加入/移出状态。
+
+批量操作栏（BatchActionBar）是收藏夹系统的重要组成部分。当用户多选书签后，底部弹出固定定位的操作栏（Motion Spring 动画从底部滑入），提供"加入收藏夹"、"更改状态"、"删除"三个批量操作按钮。加入收藏夹和更改状态通过遍历 selectedIds 并发调用 API 实现，以 toast 汇报成功/失败计数（如"已将 8/10 篇加入收藏夹"）。删除操作要求二次确认以防误操作。整个批量操作栏通过 AnimatePresence 管理进出场动画。
+
+事件驱动刷新是收藏夹模块的架构亮点。侧边栏和主页组件通过 window.addEventListener 监听 "collection-bookmark-added"、"collection-bookmark-removed"、"collection-updated" 等自定义事件，确保任意组件触发的收藏夹变更均能即时反映到所有相关 UI 区域，无需通过全局状态管理库的复杂 props drilling 或 Context 传递。
+
+% [FIGURE: 收藏夹数据模型与交互图 — 图展示 Collection ↔ CollectionBookmark ↔ Bookmark 的多对多关联，以及侧边栏收藏夹列表、右键菜单加入/移出、批量操作栏的 UI 布局]
+
+\subsection{多视图切换}
+
+MarkBox 实现了十种视图模式，按数据获取策略分为两类。第一类是"主页绑定视图"（grid、gallery），与主页的书签列表共享同一份数据源，通过 activeView 状态变量切换渲染组件。第二类是"自包含视图"（timeline、dashboard、discover、weekly、activity、graph、compare、learning-path），各自在组件内部独立发起数据请求，不依赖主页的书签列表状态，以避免不必要的网络请求和状态耦合。
+
+ViewTabs 组件将十种视图组织为"主标签栏+更多下拉菜单"的双层结构。主标签栏直接展示四种高频视图（grid、gallery、timeline、discover），剩余六种（dashboard、compare、learning-path、activity、weekly、graph）收纳在"更多"下拉菜单中。视图切换时，系统设置 isSwitching 标志位，渲染半透明遮罩和居中旋转加载指示器，但保留旧有卡片内容于遮罩之下，避免空状态闪现（Flash of Empty State）造成的视觉抖动。
+
+从技术实现角度看，timeline 视图从 /api/stats/timeline 获取按时间分组的数据，以垂直时间轴渲染；discover 视图从 /api/recommendations/discover 获取基于标签和兴趣的推荐书签；weekly 视图调用 /api/stats/weekly 获取周度统计数据并生成自然语言摘要；activity 视图从 /api/tracking 获取热度追踪数据；graph 视图基于标签共现关系构建力导向图。每个视图均为独立组件，互不依赖，可根据需要灵活增减。
+
+% [FIGURE: 多视图切换交互图 — A diagram showing the ViewTabs component structure: 4 primary tabs (grid, gallery, timeline, discover) + "more" dropdown (dashboard, compare, learning-path, activity, weekly, graph) → each view independently fetches data from its own API endpoint]
+
+\subsection{全文搜索与语音输入}
+
+全文搜索在后端采用 Prisma 的多字段 OR 查询实现。GET /api/search 接口接收 q（关键词）和 limit（结果上限）参数，在 Bookmark 表的 title、description、aiSummary、siteName 四个字段以及关联 Tag 的 name 字段上执行 contains 匹配。由于 SQLite（libSQL）不支持全文索引，当前实现依赖 SQL LIKE 操作符，在数据量小于一万条时性能可接受。前端采用"输入跟随 + Enter 触发"的混合模式：搜索输入框的 value 随用户输入实时更新（受控组件），但实际触发服务端请求的操作仅由按 Enter 键或点击搜索按钮发起，避免了每次按键都产生网络请求的性能浪费。
+
+前端层面同时实现了乐观客户端过滤：在服务端返回数据后，输入的搜索关键词会在本地对已加载的 bookmark 数组执行与 API 相同逻辑的 OR 过滤（title、description、aiSummary、siteName、tags 多字段匹配），使后续筛选响应在零延迟下完成。这种"服务端一次查询 + 客户端渐进过滤"的策略兼顾了首次检索的准确性和后续交互的流畅性。
+
+语音输入功能基于 Web Speech API 的 SpeechRecognition 接口实现。VoiceSearch 组件在挂载时检测 window.SpeechRecognition 或 window.webkitSpeechRecognition（Safari 兼容）的可用性，不可用时静默隐藏语音按钮。识别配置为 lang: "zh-CN"（中文普通话）、interimResults: true（实时显示临时结果）、continuous: false（单次识别后自动停止）。识别结果通过 onresult 回调区分 isFinal 和临时片段，最终结果回调父组件的 onResult 将文本填入搜索框。错误处理覆盖了 not-allowed（麦克风权限拒绝）、no-speech（无声静默停止）、aborted（用户主动停止）等场景，并通过 sonner toast 给予用户友好的中文提示。
+
+% [FIGURE: 搜索系统数据流图 — A diagram showing: 用户输入 → debounced input state → Enter key / search button → GET /api/search?q=keyword → Prisma OR query (title | description | aiSummary | siteName | tags) → 结果渲染; 语音路径: 麦克风按钮 → Web Speech API SpeechRecognition → interim result → final transcript → 填入搜索框]
+
+\subsection{书签分享}
+
+书签分享功能的设计目标是为任意书签生成一个无需登录即可访问的公开页面。核心流程分为两步：生成分享令牌和服务端渲染分享页面。
+
+分享令牌的生成在 POST /api/bookmarks/[id]/share 接口中完成。该接口首先通过 getUserIdFromRequest 验证操作者身份和书签所有权，随后检查书签是否已存在 shareToken——若已存在则直接返回，避免重复生成导致旧链接失效。若不存在，则调用 crypto.randomUUID() 生成 UUID v4 格式的令牌，写入数据库的 shareToken 字段（该字段设有 @unique 约束防碰撞），返回格式为 \{ shareToken, shareUrl: "/share/bookmark/\{token\}" \}。前端获取后通过 navigator.clipboard.writeText 将完整 URL 写入剪贴板。
+
+分享页面 /share/bookmark/[token] 为服务端渲染页面。ShareBookmarkPage 是 React Server Component，在服务端通过 Prisma 直接查询 shareToken 对应的书签及其关联标签、分类、用户信息，若无匹配记录则触发 Next.js notFound()。页面渲染书签标题、封面图、描述、AI 摘要、标签云，并提供"打开原文"的外部链接按钮。generateMetadata 同步查询书签标题，生成动态 OG 元标签（og:title、og:description），确保分享至社交媒体时能正确展示预览卡片。这一 SSR 策略保证了分享链接的 SEO 友好性和首次加载速度，不需要客户端 JavaScript 即可呈现完整内容。
+
+% [FIGURE: 书签分享流程图 — A diagram showing: User clicks "Share" → POST /api/bookmarks/[id]/share → UUID token generated → stored in DB (shareToken unique column) → share URL copied to clipboard → recipient opens link → SSR page queries by token → renders bookmark details with OG meta tags]
+
+\subsection{仪表盘统计}
+
+仪表盘视图通过集成 Recharts 图表库实现数据的多维可视化展示。数据源来自 GET /api/stats 接口，该接口在后端并行发起六个 Prisma 查询：count 聚合获取各状态（total/unread/reading/read/archived）的书签数量；带 _count 子查询的 findMany 获取 Top 10 热门标签；groupBy 操作获取内容类型分布；groupBy 配合 categoryId 获取分类分布；时间范围查询计算本周与上周的新增书签数对比。
+
+前端渲染采用组件化图表布局。状态分布使用 PieChart（饼图），innerRadius=55、outerRadius=95 形成环形图效果，通过 paddingAngle=3 为各扇区添加间距。颜色映射表将四种状态分别关联到琥珀金（#d4a853）、赤陶棕（#b76e4b）、鼠尾草绿（#7a9e7e）、中性灰（#9e9e9e）。内容类型分布使用 BarChart（柱状图），layout="vertical" 实现水平条形图布局，Cell 子组件按类型逐一着色。每个图表区块通过 Tooltip 组件提供悬浮数据详情，样式与系统主题 CSS 变量保持一致。
+
+标签词云由自定义 WordCloud 组件渲染，根据标签使用频率按线性比例映射字体大小（最小 11px，最大 maxFontSize=30px），通过 CSS flex-wrap 实现流式布局。链接健康面板则独立调用 /api/health/overview 获取链接状态统计（healthy/redirect/broken/unknown 四个维度的计数和详情列表），以四格统计卡片和可展开的失效链接/重定向列表进行展示，支持"立即检查"按钮触发全量链接健康检测。
+
+% [FIGURE: 仪表盘页面布局图 — A diagram showing: Top row: PieChart (状态分布环形图) + BarChart (内容类型柱状图); Middle row: 本周趋势对比数字 + Tag WordCloud; Bottom row: Link Health Panel with stat cards and broken link list]
+
+\subsection{移动端适配}
+
+MarkBox 的移动端适配遵循"渐进增强、内容优先"的设计原则，利用 Tailwind CSS 的响应式断点系统（sm: 640px, md: 768px, lg: 1024px）实现多级布局切换。
+
+侧边栏在 md 断点以下隐藏，通过汉堡菜单按钮（Menu 图标）触发出屏面板。移动端侧边栏以绝对定位覆盖于主内容之上，附带半透明背景遮罩（bg-[var(--foreground)]/10 backdrop-blur-sm），点击遮罩或选择筛选分类后自动关闭。这一模式避免了移动端有限的屏幕宽度被侧边栏永久占据。
+
+搜索栏在 sm 断点以下完全隐藏，移动端用户可通过点击搜索图标展开一个全宽搜索面板。视图切换标签在 sm 断点以下仅显示图标（使用 Tailwind 的 hidden sm:inline 类控制标签文字的显示），节省水平空间。品牌标题同样在 sm 以下隐藏。
+
+主内容区的书签卡片网格使用响应式列数：grid-cols-1（单列，手机竖屏）、sm:grid-cols-2（双列，手机横屏或小平板）、lg:grid-cols-3（三列，平板横屏）、xl:grid-cols-4（四列，桌面）。拖拽交互在触屏设备上通过 PointerSensor 自动适配 touch 事件。所有交互按钮的点击区域均不小于 40x40 像素，符合移动端触控目标尺寸建议。
+
+% [FIGURE: 移动端适配对比图 — A side-by-side comparison showing: Desktop layout (sidebar expanded, full search bar, labeled view tabs, brand name visible) vs. Mobile layout (hamburger menu, hidden sidebar overlay, icon-only tabs, collapsed search)]
+
+\subsection{主题切换}
+
+主题系统基于 next-themes 库构建，利用其 ThemeProvider 提供的 useTheme hook 实现组件级主题访问。系统支持三种模式：light（浅色）、dark（深色）、system（跟随操作系统偏好）。
+
+ThemeProvider 在 AppProviders 组件中配置，属性为 attribute="class"（主题以 CSS 类名形式挂载到 <html> 标签）、defaultTheme="system"（默认跟随系统）、enableSystem（启用系统模式监听）、disableTransitionOnChange（切换时禁用 CSS transition 以避免颜色渐变闪烁）。分享页面（/share 路径）被排除在 ThemeProvider 范围之外，因为这类公开页面不需要主题切换功能，且跳过 ThemeProvider 可避免 React 19 中 <script> 标签不能出现在组件内部的告警。
+
+ThemeToggle 组件实现了三模式分段控制器：浅色（Sun 图标）、深色（Moon 图标）、跟随系统（Monitor 图标）。组件通过 useState 维护 mounted 标志位实现水合守卫（Hydration Guard）：在客户端首次渲染完成前返回一个占位 div，避免服务端渲染的默认主题与客户端 localStorage 中存储的用户偏好不一致导致的瞬间闪烁。所有颜色值通过 CSS 自定义属性（--foreground、--background、--accent、--muted、--border 等）统一管理，切换主题时仅需在 <html> 上切换 class，所有组件颜色自动跟随无需逐一定义 dark: 变体。
+
+% [FIGURE: 主题切换器组件示意图 — A diagram showing the 3-segment toggle control: [Sun icon | Light] [Moon icon | Dark] [Monitor icon | System], with arrows indicating CSS variable switching between light palette and dark palette]
+
+\subsection{注册与限流}
+
+注册接口 POST /api/auth/register 实现多层级输入校验与安全防护。前端校验层包含：邮箱格式验证（正则表达式）、密码强度验证（至少 8 字符、至少 1 字母、至少 1 数字）、昵称长度限制（不超过 50 字符）。任一校验失败即返回 400 状态码和中文错误提示。
+
+服务端在接收注册请求后首先执行 IP 频率限制检查。rate-limit 模块基于内存 Map 实现滑动窗口计数器：每个 IP 在 intervalMs（注册为 3600000ms，即 1 小时）内最多允许 maxRequests（注册为 3）次请求。Map 的清理通过 setInterval 定时器每隔 60 秒遍历删除已过期的条目，防止服务端内存泄漏。限流触发时返回 429 状态码和"注册过于频繁，请一小时后再试"的提示。
+
+密码存储采用 bcryptjs 库进行 12 轮加盐哈希（SALT\_ROUNDS = 12）。12 轮的计算复杂度在生产环境中可有效抵御暴力破解，同时不会对单次注册/登录造成可感知的延迟（通常在 200--300ms 完成）。密码验证模块额外提供了 verifyPasswordSafe 函数——当查询不到用户时（如邮箱不存在），仍然对输入密码与固定 Dummy Hash 执行比较，通过恒定时间比对消除时序侧信道攻击的可能性。
+
+注册逻辑还考虑了"GitHub OAuth 用户补设密码"的边界场景：若查询到邮箱已存在但 password 字段为空（此前仅通过 GitHub 登录），则更新密码并标记 emailVerified，使该用户可同时使用邮箱登录。
+
+% [FIGURE: 注册流程与安全机制图 — A diagram showing: Frontend form → email/password/name validation → POST /api/auth/register → IP rate limit check (in-memory Map) → bcryptjs 12-round hash → Prisma user.create → 201 Created]
+
+\subsection{管理面板}
+
+管理面板是一个仅对管理员可见的独立页面路由 /admin。管理员身份的判定机制基于环境变量 ADMIN\_GITHUB\_IDS 配置的 GitHub Provider Account ID 白名单。isAdmin 函数在用户每次请求时实时查询 Account 表，对比用户的 GitHub providerAccountId 是否在白名单集合中。此设计确保管理员身份的变更（从环境变量添加或移除 ID）无需用户重新登录即可生效——NextAuth JWT callback 在每次 token 校验时重新执行 isAdmin 查询。
+
+管理面板前端页面在挂载时首先校验 session——未登录用户重定向至 /login，非管理员用户重定向至主页 /。通过校验后，页面调用 GET /api/admin/users 获取全量用户列表，服务端接口在 session 验证后附加 isAdmin 二次校验（403 Forbidden），返回的数据包含每个用户的 id、name、email、image、createdAt、bookmarkCount，以及关联的 GitHub Account 信息。
+
+页面布局分为"概览统计卡片"和"用户列表表格"两部分。概览卡片展示总用户数、总书签数、管理员数。用户表格支持响应式列显隐（邮箱列在 sm 以上显示，注册时间列在 md 以上显示），每行末尾提供"查看"按钮，点击触发 GET /api/admin/users/[id]/bookmarks 请求并弹出 Dialog 展示该用户的所有书签列表——包括标题、URL、标签、状态等详情，每个书签条目可点击跳转至原始链接。
+
+% [FIGURE: 管理面板界面布局图 — A diagram showing: Stats overview cards (users count, bookmarks count, admins count) → User table (avatar, name, email, bookmark count, registration date, "view" action button) → Drill-down dialog showing selected user's bookmarks with status badges and tag chips]
+
+% ============================================================
+%  5. 测试与部署
+% ============================================================
+
+\section{测试与部署}
+
+\subsection{测试策略}
+
+MarkBox 的测试覆盖分为三个层面。第一层面是单元测试：对密码加密（bcryptjs）、API Key 加解密（AES-256-CBC）、输入校验（邮箱正则、密码强度）等纯函数进行断言覆盖。第二层面是集成测试：使用 Prisma 的测试数据库实例验证 API 路由的请求-响应流程，重点覆盖认证中间件（未登录 401、非管理员 403）、CRUD 操作的数据一致性、限流器的计数准确性。第三层面是手工验收测试：在 Chrome、Edge、Safari 三种浏览器上对完整用户流程（注册→登录→收藏→分类→搜索→分享）执行遍历，在 iPhone Safari 和 Android Chrome 上验证移动端布局和触控交互。
+
+浏览器扩展的测试覆盖了 Chrome 和 Edge（Chromium 内核）两个平台，验证了Content Script 在不同类型页面（静态网页、SPA、受限页面）上的元数据提取能力和降级处理。Popup 的多步骤流程（加载→预览→保存/已收藏→错误）分别编写了测试用例。
+
+\subsection{Vercel 持续部署}
+
+系统部署采用 Vercel + Git 的持续交付流水线。代码仓库托管于 GitHub，主分支（master）配置为 Vercel 的生产环境触发源——每次 git push 到 master，Vercel 自动执行以下步骤：拉取最新代码、安装依赖（npm install）、运行 prebuild 脚本（prisma generate + node prisma/migrate.mjs）、执行 next build 构建产物、部署到生产域名 ccjproject.top。
+
+prebuild 中的 migrate.mjs 脚本是实现"零手动运维"数据库同步的关键。该脚本通过 @libsql/client 直连 Turso 数据库实例，以信息模式查询检测当前数据库的各表/列是否与 Prisma Schema 定义一致，若检测到缺失则执行 ALTER TABLE 语句自动补齐。这一机制消除了每次 Schema 变更时手动执行 prisma db push 的操作负担，特别适合多成员协作、频繁部署的工程节奏。
+
+\subsection{环境变量与密钥管理}
+
+所有敏感配置（数据库连接串、OAuth Client ID/Secret、加密密钥、管理员白名单）均通过 Vercel 环境变量面板管理，禁止在代码仓库中硬编码。API\_KEY\_ENCRYPTION\_KEY 作为独立的加密密钥与 AUTH\_SECRET 分离存放，避免认证密钥更新导致所有已有 API Key 无法解密的风险。开发环境通过 .env.local 文件注入本地变量（已纳入 .gitignore 排除版本控制），并通过 undici ProxyAgent 配置 HTTP 代理以解决国内开发环境中 GitHub OAuth 回调的网络可达性问题。
+
+% ============================================================
+%  6. 结论
+% ============================================================
+
+\section{结论}
+
+本文设计并实现了一款面向个人知识管理的智能书签管理器 MarkBox，完成了从需求分析、系统设计到编码实现、测试部署的完整软件工程流程。系统涵盖了用户认证与安全、书签操作与组织、可视化与交互三个功能层次的十二项核心特性，在以下方面体现了工程创新：
+
+第一，认证体系的灵活性与安全性并重。通过 NextAuth v5 的 JWT 策略统一 OAuth 与 Credentials 双通道，结合双路 userId 提取（Session + API Key）、SHA-256 哈希与 AES-256-CBC 加密的密钥管理，在降低接入门槛的同时保障了数据安全。
+
+第二，交互体验的精细打磨。基于 @dnd-kit 的拖拽排序实现了乐观更新与回滚机制，Motion 动画提供了自然的物理反馈；十种视图模式覆盖了从日常浏览到深度分析的全场景需求；移动端响应式适配和主题切换系统进一步拓宽了使用场景。
+
+第三，工程效率的持续优化。浏览器扩展通过 WXT 框架构建，与 Web 端共享 TypeScript 类型定义和元数据提取逻辑；Prisma 自动迁移脚本和 Vercel 持续部署流水线将"代码推送→生产上线"的周期压缩至分钟级别，充分体现了现代全栈开发的工程化水平。
+
+本项目的后续改进方向包括：(1) 引入全文搜索引擎（如 SQLite FTS5 或 MeiliSearch）以支撑更大规模书签库的高效检索；(2) 实现书签的离线缓存与服务端推送通知；(3) 扩展浏览器扩展至 Firefox 平台；(4) 开发桌面端 Electron 客户端以提供更原生的系统级集成体验。
+
+% ============================================================
+%  7. 参考文献
+% ============================================================
+
+\begin{thebibliography}{99}
+
+\bibitem{nextjs}
+Vercel Inc. Next.js 16 Documentation[EB/OL]. (2026). \url{https://nextjs.org/docs}.
+
+\bibitem{nextauth}
+NextAuth.js Contributors. NextAuth.js v5 Documentation[EB/OL]. (2025). \url{https://authjs.dev}.
+
+\bibitem{prisma}
+Prisma Data Inc. Prisma 7 ORM Documentation[EB/OL]. (2026). \url{https://www.prisma.io/docs}.
+
+\bibitem{turso}
+Turso Inc. libSQL: Open-Source Edge Database[EB/OL]. (2026). \url{https://turso.tech/libsql}.
+
+\bibitem{react}
+Meta Platforms Inc. React 19 Documentation[EB/OL]. (2026). \url{https://react.dev}.
+
+\bibitem{dndkit}
+dnd-kit Contributors. @dnd-kit Documentation[EB/OL]. (2025). \url{https://dndkit.com}.
+
+\bibitem{recharts}
+Recharts Contributors. Recharts 3.x Documentation[EB/OL]. (2026). \url{https://recharts.org}.
+
+\bibitem{tailwind}
+Tailwind Labs Inc. Tailwind CSS v4 Documentation[EB/OL]. (2026). \url{https://tailwindcss.com/docs}.
+
+\bibitem{chrome-ext}
+Google LLC. Chrome Extensions Manifest V3[EB/OL]. (2026). \url{https://developer.chrome.com/docs/extensions/mv3}.
+
+\bibitem{webspeech}
+Mozilla Developer Network. Web Speech API[EB/OL]. (2025). \url{https://developer.mozilla.org/en-US/docs/Web/API/Web_Speech_API}.
+
+\bibitem{wxt}
+WXT Contributors. WXT: Next-Gen Web Extension Framework[EB/OL]. (2026). \url{https://wxt.dev}.
+
+\bibitem{bcrypt}
+Provos N, Mazieres D. A Future-Adaptable Password Scheme[C]//USENIX Annual Technical Conference. 1999: 81--92.
+
+\bibitem{jwt}
+Jones M, Bradley J, Sakimura N. JSON Web Token (JWT): RFC 7519[S]. IETF, 2015.
+
+\bibitem{shadcn}
+shadcn. shadcn/ui: Re-usable Components Built with Radix UI and Tailwind CSS[EB/OL]. (2026). \url{https://ui.shadcn.com}.
+
+\bibitem{oAuth2}
+Hardt D. The OAuth 2.0 Authorization Framework: RFC 6749[S]. IETF, 2012.
+
+\end{thebibliography}
+
+\end{document}
