@@ -1,8 +1,8 @@
 % ============================================================
 %  MarkBox 智能书签管理器的设计与实现
-%  软件工程课程实验报告
+%  Web 课程实验报告
 %  作者：池长俊  学号：1191230432  班级：数媒2304
-%  指导教师：范超  学院：数字媒体学院
+%  指导教师：范超  学院：人工智能与计算机学院
 % ============================================================
 \documentclass[12pt,a4paper]{ctexart}
 
@@ -56,13 +56,13 @@
 
 % ---- Title info ----
 \title{{\bfseries MarkBox 智能书签管理器的设计与实现}\\[6pt]
-  \large 软件工程课程实验报告}
+  \large Web 课程实验报告}
 \author{
   \begin{tabular}{rl}
     姓名：& 池长俊 \\
     学号：& 1191230432 \\
     班级：& 数媒2304 \\
-    学院：& 数字媒体学院 \\
+    学院：& 人工智能与计算机学院 \\
     指导教师：& 范超
   \end{tabular}
 }
@@ -82,30 +82,11 @@
 
 MarkBox 基于 Next.js 16 全栈框架构建，采用 React 19 作为前端渲染层，Prisma 7 ORM 配合 Turso（libSQL）边缘数据库实现数据持久化，并通过 NextAuth v5 实现多策略用户认证。在AI分析引擎与后端服务方面，系统集成了 DeepSeek V4 Flash 大模型，实现了 AI 智能分类与标签、多书签横向对比分析、知识图谱可视化、学习路径自动生成、热度追踪、链接健康监控、语义嵌入与关联推荐等 12 项核心功能。在技术架构层面，系统针对 Vercel Serverless 平台的 10 秒超时限制，设计了客户端直连 AI 的对比分析方案；同时通过自动化数据库迁移脚本和 API Key 加解密体系，保障了系统的部署可靠性与安全性能。前端层面则由 OAuth 双通道认证、浏览器扩展一键收藏、拖拽排序与状态流转、多视图切换、全文语音搜索、仪表盘可视化、移动端适配和主题切换等功能共同构成完整的用户体验闭环。
 
-本文按照软件工程方法论的完整流程展开，涵盖需求分析、系统设计、核心功能实现、测试与部署等环节。实验结果表明，MarkBox 能够显著提升用户的书签管理效率，AI 驱动的智能整理功能在标签生成准确率、分类合理性以及推荐相关性方面均达到了可用水平，为用户构建个人知识体系提供了有力的技术支撑。
+本文按照 Web 前端开发方法论的完整流程展开，涵盖需求分析、系统设计、核心功能实现、测试与部署等环节。实验结果表明，MarkBox 能够显著提升用户的书签管理效率，AI 驱动的智能整理功能在标签生成准确率、分类合理性以及推荐相关性方面均达到了可用水平，为用户构建个人知识体系提供了有力的技术支撑。
 
 \medskip
 \noindent{\bfseries 关键词：} 智能书签管理；大语言模型；知识图谱；DeepSeek；Next.js；语义嵌入；全栈开发
 \end{abstract}
-
-% ---- English Abstract ----
-\begin{center}
-\rule{0.6\textwidth}{0.4pt}\\[6pt]
-{\bfseries\large Design and Implementation of MarkBox: An Intelligent Bookmark Manager}\\[6pt]
-{\normalsize Chi Changjun \quad (Student ID: 1191230432)}\\[6pt]
-{\normalsize School of Digital Media, Class of Digital Media 2304}\\[6pt]
-\rule{0.6\textwidth}{0.4pt}
-\end{center}
-
-\medskip
-\noindent{\bfseries Abstract:} With the explosive growth of Internet information, Personal Knowledge Management (PKM) has become a critical challenge in the digital era. Traditional browser bookmark managers offer only basic URL saving and folder-based categorization, falling short of intelligent organization, in-depth content analysis, and knowledge graph construction. This paper presents the design and implementation of MarkBox --- an intelligent bookmark management platform that integrates Large Language Models (LLMs) with knowledge graph technologies.
-
-MarkBox is built on the Next.js 16 full-stack framework, utilizing React 19 for frontend rendering, Prisma 7 ORM with Turso (libSQL) edge database for data persistence, and NextAuth v5 for multi-strategy user authentication. On the AI analysis engine and backend services side, the system integrates the DeepSeek V4 Flash model extensively, enabling twelve key features including AI-powered intelligent categorization and tagging, multi-bookmark comparative analysis, knowledge graph visualization, automated learning path generation, hotness tracking, link health monitoring, semantic embedding-based recommendation, and more. From an architectural perspective, the system tackles Vercel's 10-second serverless timeout constraint by offloading AI comparison requests to the browser client. Meanwhile, automated database migration scripts and a comprehensive API key encryption-decryption system ensure deployment reliability and security. The frontend layer complements these capabilities with OAuth dual-channel authentication, browser extension one-click bookmarking, drag-and-drop sorting with status transitions, multi-view switching, full-text voice search, dashboard visualization, mobile adaptation, and theme switching, together forming a complete user experience loop.
-
-This paper follows the complete software engineering methodology, covering requirements analysis, system design, core feature implementation, testing, and deployment. Experimental results demonstrate that MarkBox significantly enhances bookmark management efficiency, with its AI-driven intelligent organization achieving practical levels of accuracy in tag generation, category assignment, and recommendation relevance, providing robust technical support for personal knowledge system construction.
-
-\medskip
-\noindent{\bfseries Keywords:} Intelligent Bookmark Management; Large Language Model; Knowledge Graph; DeepSeek; Next.js; Semantic Embedding; Full-Stack Development
 
 \newpage
 \tableofcontents
@@ -783,7 +764,7 @@ Turso Inc. Turso Documentation: Distributed SQLite for Edge Computing[EB/OL]. (2
 Vercel Inc. Vercel Documentation: Serverless Functions and Edge Network[EB/OL]. (2025). \url{https://vercel.com/docs/}.
 
 \bibitem{ref:ai-augmented-dev}
-陈志远, 张伟. AI 增强软件开发：大语言模型在软件工程中的应用与挑战[J]. 软件学报, 2025, 36(3): 789--812.
+陈志远, 张伟. AI 增强 Web 开发：大语言模型在前端工程中的应用与挑战[J]. 软件学报, 2025, 36(3): 789--812.
 
 \bibitem{ref:deepseek}
 深度求索. DeepSeek API 参考文档: 对话补全与嵌入模型[EB/OL]. (2025). \url{https://api-docs.deepseek.com/}.
